@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'BysMax Blog',
   author: 'bysmax',
   headerTitle: 'BysMax',
-  description: 'Al blog de bysmax para el mundo',
+  description: 'El blog de bysmax para el mundo',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://blog.bysmax.com',
