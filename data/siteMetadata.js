@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'Al blog de bysmax para el mundo',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://blog.bysmax.com/',
+  siteUrl: 'https://blog.bysmax.com',
   siteRepo: 'https://github.com/emmanuelh-dev/bysmax-blog/',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
