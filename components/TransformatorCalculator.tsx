@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/Input'
+import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 
@@ -46,12 +46,11 @@ const TransformatorCalculator = () => {
             <CardTitle>Calculadora</CardTitle>
             <Label htmlFor="voltageout" >
               Voltaje de salida
-              <Input type="number" onChange={handleChangeOut} placeholder="0" value={voltageOut}/>
+              <Input type="number" onChange={handleChangeOut} placeholder="0" value={voltageOut} />
             </Label>
-
             <Label htmlFor="voltagein">
               Voltaje de entrada
-              <Input type="number" onChange={handleChangeIn} placeholder="0" value={voltageIn}/>
+              <Input type="number" onChange={handleChangeIn} placeholder="0" value={voltageIn} />
             </Label>
           </CardContent>
           <CardFooter>
