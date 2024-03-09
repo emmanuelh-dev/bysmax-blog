@@ -6,41 +6,48 @@ draft: false
 authors: ['emmanuelhdev']
 summary: 'Retomando uno de los tutoriales más importantes del canal, hoy lo traemos a la web para tenerlo de referencia y hacer tu vida más sencilla.'
 ---
-
-# Cómo Configurar un Transformador en Proteus
-
-Como pudiste leer en la descripción, este tutorial es, de lejos, uno de los más populares del canal. Tan así que lo mantenemos actualizado constantemente y, como es costumbre, este contenido estará disponible en el canal y en el blog, siempre de código abierto y disponible para todos. [Aquí puedes encontrar el video original](https://www.youtube.com/watch?v=-zuWamKP6l8)
-
-<TOCInline toc={props.toc} exclude="Cómo Configurar un Transformador en Proteus" />
-
 ## Configurando el Circuito Reductor:
 
-Nuestra fórmula básica para el circuito reductor es:
+La fórmula es:
 
-$$
-V_p^2 = V_s \times N^2
-$$
+\[ V_p^2 = V_s \times N^2 \]
 
 Donde:
+- \( V_p \) es el voltaje de la entrada.
+- \( V_s \) es el voltaje de salida deseado.
+- \( N \) es la relación de transformación.
 
-- $$ V_p $$ es el voltaje de la entrada.
-- $$ V_s $$ es el voltaje de salida deseado.
-- $$ N $$ es la relación de transformación.
+### Ejemplo Práctico:
 
-Tomemos un ejemplo práctico. Si tenemos una entrada de 220V y queremos obtener 12V en la salida:
+Si tenemos una entrada (\( V_p \)) de 220V y queremos obtener una salida (\( V_s \)) de 12V:
 
-$$
-12^2 = 220 \times N^2
-$$
+\[ 12^2 = 220 \times N^2 \]
 
-Utilizando la calculadora de Windows, ingresamos los valores y obtenemos la relación de transformación $$(N)$$. Es fundamental mantener precisión decimal, por que un error en esta parte, puede significar no llegar al valor correcto.
+Resolviendo para \( N \):
+
+\[ N = \sqrt{\frac{12^2}{220}} \]
+
+\[ N \approx 0.654 \]
+
 ## Configurando el Circuito Elevador:
 
-Ahora, si queremos obtener 12V utilizando la misma fórmula, ingresamos:
+La fórmula es:
 
-$$
-12^2 = \frac{220}{N}^2 \times 1
-$$
+\[ V_s^2 = \frac{V_p^2}{N^2} \]
 
-Aquí, $$N$$ sigue siendo la relación de transformación. Al igual que antes, ingresamos los valores en la calculadora, prestando atención a los decimales. `Queda pendiente completar los ejemplos`.
+Donde:
+- \( V_s \) es el voltaje de salida deseado.
+- \( N \) es la relación de transformación.
+
+### Ejemplo Práctico:
+
+Si queremos obtener una salida (\( V_s \)) de 12V utilizando la misma fórmula:
+
+\[ 12^2 = \frac{220^2}{N^2} \]
+
+Resolviendo para \( N \):
+
+\[ N = \sqrt{\frac{220^2}{12^2}} \]
+
+\[ N \approx 3.83 \]
 
