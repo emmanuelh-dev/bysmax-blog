@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import { Label } from '../components/ui/label'
-import { Input } from '../components/ui/Input'
-import { Button } from '../components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 
 const TransformatorCalculator = () => {
