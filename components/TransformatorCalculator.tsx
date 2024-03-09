@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Label } from '../components/ui/label'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 
 const TransformatorCalculator = () => {
   const [voltageIn, setVoltageIn] = useState(220)
@@ -44,8 +44,10 @@ const TransformatorCalculator = () => {
         <Card>
           <CardContent>
             <CardTitle>Calculadora</CardTitle>
-            <Input type="number" onChange={handleChangeOut} placeholder="0" />
-            <Label htmlFor="voltageout">Voltaje de salida</Label>
+            <Label htmlFor="voltageout">
+              Voltaje de salida
+              <Input type="number" onChange={handleChangeOut} placeholder="0" />
+            </Label>
 
             <Label htmlFor="voltagein">
               Voltaje de entrada
@@ -63,49 +65,14 @@ const TransformatorCalculator = () => {
       <Card>
         <CardContent>
           <CardTitle>Resultados</CardTitle>
-          <span className="font-bold">
-            Impedancia del bobinado primario: <br />
-          </span>
+          <div className="font-bold">Impedancia del bobinado primario:</div>
           {reducirVoltage(voltageIn, voltageOut)}
-          <Button
-            className="px-2"
-            onClick={() => copyToClipboard(reducirVoltage(voltageIn, voltageOut))}
-          >
-            <div className="hover:text-blue-600 dark:text-white" aria-label={'copy text'} />
-          </Button>
-          <span className="font-bold">
-            Impedancia del bobinado secundario: <br />
-          </span>
+          <div className="font-bold">Impedancia del bobinado secundario:</div>
           {elevarVoltage(voltageIn, voltageOut)}
-          <button
-            className="px-2"
-            onClick={() => copyToClipboard(elevarVoltage(voltageIn, voltageOut))}
-          >
-            <div
-              className="hover:text-blue-600 dark:text-white"
-              size={24}
-              aria-label={'copy text'}
-            />
-          </button>
-          <span className="font-bold">
-            Factor de acoplamiento sencillo: <br />
-          </span>
+          <div className="font-bold">Factor de acoplamiento sencillo:</div>
           {couplingFactorSimple(voltageIn, voltageOut)}
-          <button
-            className="px-2"
-            onClick={() => copyToClipboard(couplingFactorSimple(voltageIn, voltageOut))}
-          >
-            <div className="hover:text-blue-600 dark:text-white" aria-label={'copy text'}>
-              copu
-            </div>
-          </button>
-          ={' '}
-          <h3>
-            <span className="font-bold">
-              Factor de acoplamiento: <br />
-            </span>
-            {couplingFactor(voltageIn, voltageOut)}
-          </h3>
+          <div className="font-bold">Factor de acoplamiento:</div>
+          {couplingFactor(voltageIn, voltageOut)}
         </CardContent>
       </Card>
     </div>
