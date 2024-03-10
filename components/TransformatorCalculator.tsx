@@ -44,7 +44,7 @@ const TransformatorCalculator = () => {
         <Card>
           <CardContent>
             <CardTitle>Calculadora</CardTitle>
-            <Label htmlFor="voltageout" >
+            <Label htmlFor="voltageout">
               Voltaje de salida
               <Input type="number" onChange={handleChangeOut} placeholder="0" value={voltageOut} />
             </Label>
