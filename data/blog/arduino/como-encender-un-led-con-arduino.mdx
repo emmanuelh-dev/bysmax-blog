@@ -1,5 +1,5 @@
 ---
-title: Cómo Encender un LED con Arduino Uno
+title: Cómo Hacer Parpadear un led Con Arduino 1
 date: '2024-03-04'
 tags: ['electronica', 'arduino']
 draft: false
@@ -7,9 +7,11 @@ authors: ['emmanuelhdev']
 summary: '¡Bienvenidos al nuevo blog de bysmax!'
 ---
 
-# Cómo Encender un LED con Arduino Uno
+# Cómo Hacer Parpadear un led Con Arduino 1
 
-En esta emocionante serie que hemos creado para acompañarte en tu trayectoria como entusiasta de la electrónica, nos sumergiremos en un proyecto fundamental y tremendamente útil. Esta propuesta básica te permitirá dar tus primeros pasos en el fascinante universo de la electrónica.
+En esta emocionante serie que hemos creado para acompañarte en tu trayectoria como entusiasta de la electrónica, nos sumergiremos en un proyecto fundamental y tremendamente útil.
+
+Esta propuesta básica te permitirá dar tus primeros pasos en el fascinante universo de la electrónica.
 
 ## Materiales Necesarios
 
@@ -28,20 +30,28 @@ En esta emocionante serie que hemos creado para acompañarte en tu trayectoria c
 Utilizaremos el lenguaje de programación Arduino, basado en C/C++, para controlar el LED. Asegúrate de tener el entorno de desarrollo de Arduino instalado.
 
 ```arduino
+// Definir el pin del LED
+const int pinLed = 13;
+
 void setup() {
-  // Configura el pin 13 como salida
-  pinMode(13, OUTPUT);
+  // Configurar el pin del LED como salida
+  pinMode(pinLed, OUTPUT);
 }
 
 void loop() {
-  // Enciende el LED
-  digitalWrite(13, HIGH);
-  delay(1000); // Espera 1 segundo
+  // Encender el LED
+  digitalWrite(pinLed, HIGH);
 
-  // Apaga el LED
-  digitalWrite(13, LOW);
-  delay(1000); // Espera 1 segundo
+  // Esperar 1 segundo
+  delay(1000);
+
+  // Apagar el LED
+  digitalWrite(pinLed, LOW);
+
+  // Esperar 1 segundo
+  delay(1000);
 }
+
 ```
 
 Este sencillo programa enciende y apaga el LED conectado al pin 13 con intervalos de un segundo. Puedes personalizar el código según tus necesidades.
@@ -54,4 +64,11 @@ Este sencillo programa enciende y apaga el LED conectado al pin 13 con intervalo
 4. Selecciona tu placa y puerto en las opciones del entorno.
 5. Haz clic en "Subir" para cargar el programa en el Arduino.
 
-¡Y listo! Ahora deberías ver cómo tu LED parpadea de acuerdo con el programa que has cargado. Este proyecto básico es solo el punto de partida, y puedes ampliar tus habilidades con Arduino explorando más funciones y sensores. Puedes incluso añadir un botón que encienda y apague el LED cuando se presiona. ¡Disfruta explorando el fascinante mundo de la electrónica y la programación! Estaremos siguiéndote de cerca; solo tienes que buscar la etiqueta "Arduino" para encontrar tutoriales y documentación. ¡Diviértete!
+¡Y listo! Ahora deberías ver cómo tu LED parpadea de acuerdo con el programa que has cargado. Este proyecto básico es solo el punto de partida, y puedes ampliar tus habilidades con Arduino explorando más funciones y sensores.
+
+Puedes incluso añadir un botón que Agreue funcionamiento extra.
+
+¡Disfruta explorando el fascinante mundo de la electrónica y la programación! Estaremos siguiéndote de cerca; solo tienes que buscar la etiqueta "Arduino" para encontrar tutoriales y documentación. ¡Diviértete!
+
+En esta foto no se muestra como funciona, pero en el video de youtube si, si gustas darle un ojo.
+![Maple](/static/images/arduino/1.jpg)
