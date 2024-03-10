@@ -4,11 +4,38 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { FaCopy } from 'react-icons/fa'
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+export function CopyCard({ text, value }) {
+  function copyToClipboard(text: any) {
+    const textToCopy = text.toString()
+    navigator.clipboard.writeText(textToCopy)
+  }
+
+  return (
+    <div>
+      <div className="font-bold">{text}</div>
+      <span>{value}</span>
+      <Button variant="outline" size="icon" onClick={() => copyToClipboard(value)}>
+        <FaCopy className="h-4 w-4" />
+      </Button>
+    </div>
+  )
+}
 
 const TransformatorCalculator = () => {
+  const [salida, setSalida] = useState('apple')
   const [voltageIn, setVoltageIn] = useState(220)
   const [voltageOut, setVoltageOut] = useState(12)
-
   const handleChangeIn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVoltageIn(Number(e.target.value))
   }
@@ -16,10 +43,6 @@ const TransformatorCalculator = () => {
     setVoltageOut(Number(e.target.value))
   }
 
-  function copyToClipboard(text: any) {
-    const textToCopy = text.toString()
-    navigator.clipboard.writeText(textToCopy)
-  }
   function reducirVoltage(voltageIn: number, voltageOut: number) {
     return Math.pow(voltageIn / voltageOut, 2)
   }
@@ -44,6 +67,24 @@ const TransformatorCalculator = () => {
         <Card>
           <CardContent>
             <CardTitle>Calculadora</CardTitle>
+            <Select
+              value={salida}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalida(e.target.value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <Label htmlFor="voltageout">
               Voltaje de salida
               <Input type="number" onChange={handleChangeOut} placeholder="0" value={voltageOut} />
@@ -53,25 +94,28 @@ const TransformatorCalculator = () => {
               <Input type="number" onChange={handleChangeIn} placeholder="0" value={voltageIn} />
             </Label>
           </CardContent>
-          <CardFooter>
-            <Button type="submit" value="Calcular" className="w-full">
-              Calcular
-            </Button>
-          </CardFooter>
         </Card>
       </div>
 
       <Card>
         <CardContent>
           <CardTitle>Resultados</CardTitle>
-          <div className="font-bold">Impedancia del bobinado primario:</div>
-          {reducirVoltage(voltageIn, voltageOut)}
-          <div className="font-bold">Impedancia del bobinado secundario:</div>
-          {elevarVoltage(voltageIn, voltageOut)}
-          <div className="font-bold">Factor de acoplamiento sencillo:</div>
-          {couplingFactorSimple(voltageIn, voltageOut)}
-          <div className="font-bold">Factor de acoplamiento:</div>
-          {couplingFactor(voltageIn, voltageOut)}
+          <CopyCard
+            value={reducirVoltage(voltageIn, voltageOut)}
+            text={'Impedancia del bobinado primario:'}
+          />
+          <CopyCard
+            value={elevarVoltage(voltageIn, voltageOut)}
+            text={'Impedancia del bobinado secundario:'}
+          />
+          <CopyCard
+            value={couplingFactorSimple(voltageIn, voltageOut)}
+            text={'Factor de acoplamiento sencillo:'}
+          />
+          <CopyCard
+            value={couplingFactor(voltageIn, voltageOut)}
+            text={'Factor de acoplamiento:'}
+          />
         </CardContent>
       </Card>
     </div>
