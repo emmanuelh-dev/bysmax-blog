@@ -9,4 +9,59 @@ summary: 'Calculadora para configurar transformadores en Proteus'
 
 <TransformatorCalculator />
 
+# Cómo Configurar un Transformador en Proteus
+
+En esta entrada, exploraremos la configuración de un transformador en Proteus, pero antes de sumergirnos en la configuración práctica, es crucial comprender sus fundamentos y su funcionamiento.
+
+Aunque el transformador pueda parecer algo sencillo, comprender su funcionamiento te proporcionará la base necesaria para trabajar eficientemente con él. Existen dos fórmulas esenciales: una para la reducción de voltaje, que te ayuda a convertir 220 voltios a 12, y otra para la elevación, que facilita la conversión de 110 a 220.
+
+## Configuración del Circuito Reductor:
+
+La fórmula que rige este proceso es:
+
+\[ V_p^2 = V_s \times N^2 \]
+
+Donde:
+
+- \( V_p \) es el voltaje de entrada.
+- \( V_s \) es el voltaje de salida deseado.
+- \( N \) es la relación de transformación.
+
+Comprender y aplicar esta fórmula es esencial para lograr una configuración efectiva del circuito reductor en Proteus. ¡Sigamos explorando los detalles para aprovechar al máximo esta herramienta en tus proyectos!
+
+### Ejemplo Práctico:
+
+Si tenemos una entrada ($$ V_p $$) de 220V y queremos obtener una salida ($$ V_s $$) de 12V:
+
+$$ 12^2 = 220 \times N^2 $$
+
+Resolviendo para $$ N $$:
+
+$$ N = \sqrt{\frac{12^2}{220}} $$
+
+$$ N \approx 0.654 $$
+
+## Configurando el Circuito Elevador:
+
+La fórmula es:
+
+$$ V_s^2 = \frac{V_p^2}{N^2} $$
+
+Donde:
+
+- $$ V_s $$ es el voltaje de salida deseado.
+- $$ N $$ es la relación de transformación.
+
+### Ejemplo Práctico:
+
+Si queremos obtener una salida ($$ V_s $$) de 12V utilizando la misma fórmula:
+
+$$ 12^2 = \frac{220^2}{N^2} $$
+
+Resolviendo para $$ N $$:
+
+$$ N = \sqrt{\frac{220^2}{12^2}} $$
+
+$$ N \approx 3.83 $$
+
 Para poder usar esta característica
