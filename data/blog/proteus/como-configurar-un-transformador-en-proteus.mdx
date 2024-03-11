@@ -7,7 +7,9 @@ authors: ['emmanuelhdev']
 summary: 'Retomando uno de los tutoriales más importantes del canal, hoy lo traemos a la web para tenerlo de referencia y hacer tu vida más sencilla.'
 ---
 
-<TransformatorCalculator />
+<div class="mb-8">
+    <TransformatorCalculator />
+</div>
 
 # Cómo Configurar un Transformador en Proteus
 
@@ -26,14 +28,21 @@ summary: 'Retomando uno de los tutoriales más importantes del canal, hoy lo tra
 11. Aquí, $$ L_p $$ dividido por $$ L_s$$ es la relación de acoplamiento entre las bobinas primaria y secundaria, y $$ L_p$$ y $$ L_s$$ son las inductancias de las bobinas primaria y secundaria respectivamente. Este valor también se conoce como coeficiente de acoplamiento.
 
 Para una relación de 10 a 1, este transformador funciona como un transformador reductor, con una relación de acoplamiento de Sin embargo, en este caso, estamos asumiendo un transformador ideal sin pérdidas.
+
 Supongamos que queremos convertir 220 voltios de corriente alterna en 22 voltios de corriente alterna. Con estos valores, el factor de acoplamiento será 10. Ahora, pongamos el valor del factor de acoplamiento en la configuración del transformador.
 
 Conecta una fuente de voltaje de corriente alterna a un transformador. Luego, conecta la fuente de 220 voltios al lado primario del transformador y también conecta un voltímetro de corriente alterna al lado secundario.
+
 Haz doble clic en la fuente de voltaje de corriente alterna y configura la frecuencia en 50 hertzios y el voltaje en 311 voltios, que es el voltaje pico de 220 voltios RMS.
+
 Ahora, haz clic en el botón de reproducción de la simulación; verás que el voltaje de salida es de 22 voltios, reducido por un factor de 10.
+
 Ahora veamos las formas de onda de los voltajes del lado primario y secundario utilizando gráficos analógicos. Para ello, necesitamos conectar las sondas de voltaje al lado primario y secundario del transformador. Desde la barra lateral, selecciona el modo de sonda, conecta las sondas de voltaje de salida a ambos lados del transformador.
+
 Agrega un gráfico analógico para verificar las formas de onda del voltaje de salida.
+
 Luego, conecta las sondas de voltaje al gráfico analógico. Para verificar la forma de onda del voltaje de salida, haz clic derecho en el gráfico y realiza ajustes de tiempo de inicio y fin.
+
 Establece un límite de tiempo bajo, ya que un tiempo más alto llevará a una simulación más larga.
 
 Después, simula el gráfico. Como se puede ver en el gráfico, el voltaje de salida es menor que el voltaje de entrada.
