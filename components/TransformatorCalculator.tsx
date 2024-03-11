@@ -33,7 +33,6 @@ export function CopyCard({ text, value }) {
 }
 
 const TransformatorCalculator = () => {
-  const [salida, setSalida] = useState('apple')
   const [voltageIn, setVoltageIn] = useState(220)
   const [voltageOut, setVoltageOut] = useState(12)
   const handleChangeIn = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,25 +62,20 @@ const TransformatorCalculator = () => {
   }
   return (
     <div className="flex gap-4 max-sm:flex-col">
-      <div>
+      <div className="min-w-[20rem]">
         <Card>
           <CardContent>
             <CardTitle>Calculadora</CardTitle>
-            <Select
-              value={salida}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSalida(e.target.value)}
-            >
+            <Select>
               <SelectTrigger>
-                <SelectValue placeholder="Select a fruit" />
+                <SelectValue placeholder="Selecciona el tipo" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                  <SelectLabel>Selecciona el tipo de transformador</SelectLabel>
+                  <SelectItem value="sencillo">Sencillo</SelectItem>
+                  <SelectItem value="doble">Doble</SelectItem>
+                  <SelectItem value="Triple">Triple</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -97,7 +91,7 @@ const TransformatorCalculator = () => {
         </Card>
       </div>
 
-      <Card>
+      <Card className="w-full">
         <CardContent>
           <CardTitle>Resultados</CardTitle>
           <CopyCard
