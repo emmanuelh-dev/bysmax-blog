@@ -1,5 +1,7 @@
 import { TiSocialYoutube, TiSocialInstagram } from 'react-icons/ti'
 import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import { AiFillGithub } from "react-icons/ai";
+
 const LINKS = [
   {
     link: 'https://api.whatsapp.com/send/?phone=8126565700',
@@ -12,6 +14,12 @@ const LINKS = [
     nombre: 'Contacto',
     icon: <FaWhatsapp />,
     color: 'bg-[#00e676]',
+  },
+  {
+    link: '/',
+    nombre: 'Blog',
+    icon: <AiFillGithub />,
+    color: 'border-white border bg-black',
   },
   {
     link: 'https://www.youtube.com/@bysmax',
