@@ -1,6 +1,6 @@
 import { TiSocialYoutube, TiSocialInstagram } from 'react-icons/ti'
 import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub } from 'react-icons/ai'
 
 const LINKS = [
   {
@@ -55,7 +55,7 @@ function Page() {
             <a
               href={link.link}
               key={index}
-              target='_blank'
+              target="_blank"
               className={`flex items-center gap-2 rounded px-2 py-2 text-lg transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 ${link.color}`}
             >
               {link.icon}
@@ -68,4 +68,4 @@ function Page() {
   )
 }
 
-export default Page;
+export default Page
