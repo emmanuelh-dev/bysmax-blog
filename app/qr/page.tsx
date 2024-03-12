@@ -44,12 +44,12 @@ function Page() {
   return (
     <div>
       <div className="mx-auto max-w-lg p-6 text-white">
-        <div className="flex items-center justify-between py-4"></div>
+        {/* <div className="flex items-center justify-between py-4"></div>
         <div className="flex items-center justify-between py-4">
           <div>
-            <h1 className="text-4xl font-bold">¡Hola, soy Gomitas Pinpon!</h1>
+            <h1 className="text-4xl font-bold"></h1>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-4">
           {LINKS.map((link, index) => (
             <a
