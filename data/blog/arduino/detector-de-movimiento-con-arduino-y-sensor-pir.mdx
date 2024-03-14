@@ -79,12 +79,11 @@ void loop()
    digitalWrite(LEDPin, LOW);
  }
 }
+```
+
 Si quisiéramos ejecutar una acción una única vez al detectar movimiento, en lugar de todo el tiempo que la señal este activa, usaríamos el siguiente código.
 
-arduino
-
-
-Copy code
+```arduino
 const int LEDPin = 13;        // pin para el LED
 const int PIRPin = 2;         // pin de entrada (for PIR sensor)
 
@@ -120,5 +119,6 @@ void loop()
     }
   }
 }
+```
 Descarga el código
 Todo el código de esta entrada está disponible para su descarga en Github.
