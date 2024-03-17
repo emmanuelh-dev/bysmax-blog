@@ -7,118 +7,71 @@ authors: ['emmanuelh.dev']
 summary: 'Como hacer un detector de movimiento con Arduino y sensor PIR'
 ---
 
-Detector de movimiento con Arduino y sensor PIR
-===============================================
+# Detector de movimiento con Arduino y sensor PIR
+![Sensor Pir](/static/images/arduino/pir.jpg)
 
-¿Que es un sensor PIR?
-----------------------
+Que onda banda y bienvenidos a esta nueva entrada, en esta ocasión les traemos un circuito bastante sencillo con el sensor pir, un sensor de movimiento que es capaz de encender un led con el movimiento y también tiene un swich para apagarlo y encenderlo de forma manual si es que se requiere tenerlo fijo.
 
-Los sensores infrarrojos pasivos (PIR) son dispositivos para la detección de movimiento. Son baratos, pequeños, de baja potencia, y fáciles de usar. Por esta razón son frecuentemente usados en juguetes, aplicaciones domóticas o sistemas de seguridad.
+## Esquema eléctrico
 
-Los sensores PIR **se basan en la medición de la radiación infrarroja**. Todos los cuerpos (vivos o no) emiten una cierta cantidad de energía infrarroja, mayor cuanto mayor es su temperatura. Los dispositivos PIR disponen de un sensor piro eléctrico capaz de captar esta radiación y convertirla en una señal eléctrica.
+![Diagrama con sensor pir en proteus](/static/images/arduino/diagrama-proteus-sensor-pir.png)
 
-En realidad **cada sensor está dividido en dos campos** y se dispone de un circuito eléctrico que compensa ambas mediciones. Si ambos campos reciben la misma cantidad de infrarrojos la señal eléctrica resultante es nula. Por el contrario, si los dos campos realizan una medición diferente, se genera una señal eléctrica.
+## Código
+Este código es bastante sencillo y solo lo tienes que adaptar a tus necesidades, el sensor pir es una plataforma muy simple de trabajar y no requiere de mucho esfuerzo para hacerlo funcionar, sus opciones son muy amplias.
 
-De esta forma, si un objeto atraviesa uno de los campos se genera una señal eléctrica diferencial, que es captada por el sensor, y se emite una señal digital.
+```javascript
+const int LEDPin = 9;     // Pin PWM para controlar la intensidad de los LEDs
+const int PIRPin = 2;     // Pin para el sensor PIR de movimiento
+const int switchPin = 3;  // Pin para el interruptor manual
+const int LDRPin = A0;    // Pin para el sensor LDR de luz
 
-El otro elemento restante para que todo funcione es **la óptica del sensor**. Básicamente es una cúpula de plástico formada por lentes de fresnel, que divide el espacio en zonas, y enfoca la radiación infrarroja a cada uno de los campos del PIR.
-
-De esta manera, cada uno de los sensores capta un promedio de la radiación infrarroja del entorno. Cuando un objeto entra en el rango del sensor, alguna de las zonas marcadas por la óptica recibirá una cantidad distinta de radiación, que será captado por uno de los campos del sensor PIR, disparando la alarma.
-
-Precio
-------
-
-Los sensores PIR son dispositivos baratos. Podemos encontrar sensores PIR por 0,80€ en vendedores internacionales en Ebay o AliExpress.
-
-Esquema eléctrico
------------------
-
-Este es el esquema de patillaje de un sensor PIR.
-
-![Esquema de patillaje](esquema-patillaje.png)
-
-El esquema eléctrico que necesitamos es el siguiente.
-
-![Esquema eléctrico](esquema-electrico.png)
-
-Esquema montaje
----------------
-
-Mientras que el montaje en una protoboard sería el siguiente.
-
-![Esquema montaje](esquema-montaje.png)
-
-Ejemplo de código
------------------
-
-El código necesario para realizar la lectura es simple. Simplemente leemos la salida del PIR, y hacemos parpadear el LED mientras la señal esté activa.
-
-```arduino
-const int LEDPin= 13;
-const int PIRPin= 2;
-
-void setup()
-{
- pinMode(LEDPin, OUTPUT);
- pinMode(PIRPin, INPUT);
+void setup() {
+  pinMode(LEDPin, OUTPUT);    // Configura el pin LED como salida
+  pinMode(PIRPin, INPUT);     // Configura el pin PIR como entrada
+  pinMode(switchPin, INPUT);  // Configura el pin del interruptor como entrada
+  pinMode(LDRPin, INPUT);     // Configura el pin LDR como entrada
+  Serial.begin(9600);         // Establece la velocidad de baudios en 9600
 }
 
-void loop()
-{
- int value= digitalRead(PIRPin);
+void loop() {
 
- if (value == HIGH)
- {
-   digitalWrite(LEDPin, HIGH);
-   delay(50);
-   digitalWrite(LEDPin, LOW);
-   delay(50);
- }
- else
- {
-   digitalWrite(LEDPin, LOW);
- }
-}
-```
+  int pirValue = digitalRead(PIRPin);        // Lee el valor del sensor PIR
+  int switchValue = digitalRead(switchPin);  // Lee el valor del interruptor
+  int ldrValue = analogRead(LDRPin);         // Lee el valor del sensor LDR
 
-Si quisiéramos ejecutar una acción una única vez al detectar movimiento, en lugar de todo el tiempo que la señal este activa, usaríamos el siguiente código.
-
-```arduino
-const int LEDPin = 13;        // pin para el LED
-const int PIRPin = 2;         // pin de entrada (for PIR sensor)
-
-int pirState = LOW;           // de inicio no hay movimiento
-int val = 0;                  // estado del pin
-
-void setup() 
-{
-  pinMode(LEDPin, OUTPUT); 
-  pinMode(PIRPin, INPUT);
-  Serial.begin(9600);
-}
-
-void loop()
-{
-  val = digitalRead(PIRPin);
-  if (val == HIGH)   //si está activado
-  { 
-    digitalWrite(LEDPin, HIGH);  //LED ON
-    if (pirState == LOW)  //si previamente estaba apagado
-    {
-      Serial.println("Sensor activado");
-      pirState = HIGH;
-    }
-  } 
-  else   //si esta desactivado
-  {
-    digitalWrite(LEDPin, LOW); // LED OFF
-    if (pirState == HIGH)  //si previamente estaba encendido
-    {
-      Serial.println("Sensor parado");
-      pirState = LOW;
-    }
+  // Si el interruptor está encendido o el nivel de luz es bajo Y hay movimiento detectado
+  if ( pirValue == HIGH || (switchValue == HIGH || ldrValue < 500)) {
+    analogWrite(LEDPin, HIGH);  // Establece la intensidad de los LEDs
+  } else {
+    analogWrite(LEDPin, 0);  // Apaga los LEDs
   }
 }
 ```
-Descarga el código
-Todo el código de esta entrada está disponible para su descarga en Github.
+
+Con esto tu circuito debería funcionar perfectamente, recuerda que el límite está en tu imaginación y si puedes imaginarlo, puedes programarlo.
+
+![Sensor Pir](/static/images/arduino/arduino-pir.jpg)
+
+[Aqui](https://www.youtube.com/watch?v=rGAUDTKSLhQ) podras ver el video de YouTube, echale un ojo si te quedaron dudas. **Muchas gracias por leer.**
+
+## ¿Que es un sensor PIR?
+
+Los sensores infrarrojos pasivos (PIR) son dispositivos para la detección de movimiento.
+
+Son baratos, pequeños, de baja potencia, y fáciles de usar. Por esta razón son frecuentemente usados en juguetes, aplicaciones domóticas o sistemas de seguridad.
+
+Los sensores PIR se basan en la medición de la radiación infrarroja. Todos los cuerpos (vivos o no) emiten una cierta cantidad de energía infrarroja, mayor cuanto mayor es su temperatura. Los dispositivos PIR disponen de un sensor piroeléctrico capaz de captar esta radiación y convertirla en una señal eléctrica.
+
+En realidad cada sensor está dividido en dos campos y se dispone de un circuito eléctrico que compensa ambas mediciones. Si ambos campos reciben la misma cantidad de infrarrojos la señal eléctrica resultante es nula.
+
+Por el contrario, si los dos campos realizan una medición diferente, se genera una señal eléctrica.
+
+De esta forma, si un objeto atraviesa uno de los campos se genera una señal eléctrica diferencial, que es captada por el sensor, y se emite una señal digital.
+
+El otro elemento restante para que todo funcione es la óptica del sensor. Básicamente es una cúpula de plástico formada por lentes de fresnel, que divide el espacio en zonas, y enfoca la radiación infrarroja a cada uno de los campos del PIR.
+
+De esta manera, cada uno de los sensores capta un promedio de la radiación infrarroja del entorno. Cuando un objeto entra en el rango del sensor, alguna de las zonas marcadas por la óptica recibirá una cantidad distinta de radiación, que será captada por uno de los campos del sensor PIR, disparando la alarma.
+
+# Precio
+Los sensores PIR son dispositivos muy baratos. Podemos encontrar sensores PIR por 0,80€ en vendedores internacionales como Ebay o AliExpress.
+
