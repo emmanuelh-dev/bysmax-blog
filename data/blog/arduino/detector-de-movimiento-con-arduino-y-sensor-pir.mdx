@@ -1,0 +1,85 @@
+---
+title: Como hacer un detector de movimiento con Arduino y sensor PIR
+date: '2024-03-15'
+tags: ['arduino']
+draft: false
+authors: ['emmanuelh.dev']
+summary: 'Como hacer un detector de movimiento con Arduino y sensor PIR'
+---
+
+# Detector de movimiento con Arduino y sensor PIR
+![Sensor Pir](/static/images/arduino/pir.jpg)
+
+Que onda banda y bienvenidos a esta nueva entrada, en esta ocasión les traemos un circuito bastante sencillo con el sensor pir, un sensor de movimiento que es capaz de encender un led con el movimiento y también tiene un swich para apagarlo y encenderlo de forma manual si es que se requiere tenerlo fijo.
+
+## Esquema eléctrico
+
+![Diagrama con sensor pir en proteus](/static/images/arduino/diagrama-proteus-sensor-pir.png)
+
+## Código
+Este código es bastante sencillo y solo lo tienes que adaptar a tus necesidades, el sensor pir es una plataforma muy simple de trabajar y no requiere de mucho esfuerzo para hacerlo funcionar, sus opciones son muy amplias.
+
+```javascript
+const int LEDPin = 9;     // Pin PWM para controlar la intensidad de los LEDs
+const int PIRPin = 2;     // Pin para el sensor PIR de movimiento
+const int switchPin = 3;  // Pin para el interruptor manual
+const int LDRPin = A0;    // Pin para el sensor LDR de luz
+
+void setup() {
+  pinMode(LEDPin, OUTPUT);    // Configura el pin LED como salida
+  pinMode(PIRPin, INPUT);     // Configura el pin PIR como entrada
+  pinMode(switchPin, INPUT);  // Configura el pin del interruptor como entrada
+  pinMode(LDRPin, INPUT);     // Configura el pin LDR como entrada
+  Serial.begin(9600);         // Establece la velocidad de baudios en 9600
+}
+
+void loop() {
+
+  int pirValue = digitalRead(PIRPin);        // Lee el valor del sensor PIR
+  int switchValue = digitalRead(switchPin);  // Lee el valor del interruptor
+  int ldrValue = analogRead(LDRPin);         // Lee el valor del sensor LDR
+
+  // Si el interruptor está encendido o el nivel de luz es bajo Y hay movimiento detectado
+  if ( pirValue == HIGH || (switchValue == HIGH || ldrValue < 500)) {
+    analogWrite(LEDPin, HIGH);  // Establece la intensidad de los LEDs
+  } else {
+    analogWrite(LEDPin, 0);  // Apaga los LEDs
+  }
+}
+```
+
+Con esto tu circuito debería funcionar perfectamente, recuerda que el límite está en tu imaginación y si puedes imaginarlo, puedes programarlo.
+
+![Sensor Pir](/static/images/arduino/arduino-pir.jpg)
+
+[Aqui](https://www.youtube.com/watch?v=rGAUDTKSLhQ) podras ver el video de YouTube, echale un ojo si te quedaron dudas. **Muchas gracias por leer.**
+
+## ¿Qué es un sensor PIR?
+
+Los **sensores infrarrojos pasivos (PIR)** son dispositivos utilizados para la detección de movimiento. Son económicos, pequeños, de baja potencia y fáciles de usar. Por esta razón, se encuentran comúnmente en juguetes, aplicaciones domóticas y sistemas de seguridad.
+
+Son baratos, pequeños, de baja potencia, y fáciles de usar. Por esta razón son frecuentemente usados en juguetes, aplicaciones domóticas o sistemas de seguridad.
+
+Los sensores PIR se basan en la medición de la radiación infrarroja. Todos los cuerpos (vivos o no) emiten una cierta cantidad de energía infrarroja, mayor cuanto mayor es su temperatura. Los dispositivos PIR disponen de un sensor piroeléctrico capaz de captar esta radiación y convertirla en una señal eléctrica.
+
+En realidad cada sensor está dividido en dos campos y se dispone de un circuito eléctrico que compensa ambas mediciones. Si ambos campos reciben la misma cantidad de infrarrojos la señal eléctrica resultante es nula.
+
+Por el contrario, si los dos campos realizan una medición diferente, se genera una señal eléctrica.
+
+De esta forma, si un objeto atraviesa uno de los campos se genera una señal eléctrica diferencial, que es captada por el sensor, y se emite una señal digital.
+
+El otro elemento restante para que todo funcione es la óptica del sensor. Básicamente es una cúpula de plástico formada por lentes de fresnel, que divide el espacio en zonas, y enfoca la radiación infrarroja a cada uno de los campos del PIR.
+
+De esta manera, cada uno de los sensores capta un promedio de la radiación infrarroja del entorno. Cuando un objeto entra en el rango del sensor, alguna de las zonas marcadas por la óptica recibirá una cantidad distinta de radiación, que será captada por uno de los campos del sensor PIR, disparando la alarma.
+
+## Principio de funcionamiento
+
+1. **Radiación infrarroja**: Todos los objetos (vivos o no) emiten una cierta cantidad de energía infrarroja, que aumenta con la temperatura.
+2. **Sensor PIR**: El sensor PIR contiene un sensor piroeléctrico capaz de captar esta radiación y convertirla en una señal eléctrica.
+3. **Óptica del sensor**: La óptica del sensor, formada por lentes de fresnel, divide el espacio en zonas y enfoca la radiación infrarroja a cada uno de los campos del PIR.
+4. **Detección de movimiento**: Cuando un objeto entra en el rango del sensor, alguna de las zonas marcadas por la óptica recibirá una cantidad distinta de radiación, lo que activará uno de los campos del sensor PIR y disparará la alarma.
+Los sensores infrarrojos pasivos (PIR) son dispositivos para la detección de movimiento.
+
+## Precio
+Los sensores PIR son dispositivos muy baratos. Podemos encontrar sensores PIR por 0,80€ en vendedores internacionales como Ebay o AliExpress.
+
