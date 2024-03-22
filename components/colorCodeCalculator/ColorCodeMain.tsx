@@ -13,13 +13,13 @@ const ColorCodeMain = () => {
         </p>
       </CardHeader>
       <CardContent className="flex flex-col space-y-4">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center space-x-2">
-            <label className="text-sm" htmlFor="band1">
+            <label className="text-nowrap text-sm" htmlFor="band1">
               Banda 1
             </label>
             <Select>
-              <SelectTrigger className="w-[100px]">0</SelectTrigger>
+              <SelectTrigger className="w-full">0</SelectTrigger>
               <SelectContent>
                 <SelectItem value="0" className="bg-black text-white">
                   Negro
@@ -55,11 +55,11 @@ const ColorCodeMain = () => {
             </Select>
           </div>
           <div className="flex items-center space-x-2">
-            <label className="text-sm" htmlFor="band2">
+            <label className="text-nowrap text-sm" htmlFor="band2">
               Banda 2
             </label>
             <Select>
-              <SelectTrigger className="w-[100px]">0</SelectTrigger>
+              <SelectTrigger className="w-full">0</SelectTrigger>
               <SelectContent>
                 <SelectItem value="0" className="bg-black text-white">
                   Negro
@@ -95,11 +95,11 @@ const ColorCodeMain = () => {
             </Select>
           </div>
           <div className="flex items-center space-x-2">
-            <label className="text-sm" htmlFor="band3">
+            <label className="text-nowrap text-sm" htmlFor="band3">
               Banda 3
             </label>
             <Select>
-              <SelectTrigger className="w-[100px]">0</SelectTrigger>
+              <SelectTrigger className="w-full">0</SelectTrigger>
               <SelectContent>
                 <SelectItem value="0" className="bg-black text-white">
                   Negro
@@ -135,11 +135,11 @@ const ColorCodeMain = () => {
             </Select>
           </div>
           <div className="flex items-center space-x-2">
-            <label className="text-sm" htmlFor="band3">
+            <label className="text-nowrap text-sm" htmlFor="band3">
               Banda 4
             </label>
             <Select>
-              <SelectTrigger className="w-[100px]">0</SelectTrigger>
+              <SelectTrigger className="w-full">0</SelectTrigger>
               <SelectContent>
                 <SelectItem value="0" className="bg-black text-white">
                   Negro
@@ -178,11 +178,11 @@ const ColorCodeMain = () => {
 
         <div className="grid grid-cols-3 gap-4">
           <div className="flex items-center space-x-2">
-            <label className="text-sm" htmlFor="bandQuantity">
+            <label className="text-nowrap text-sm" htmlFor="bandQuantity">
               Cantidad de Bandas
             </label>
             <Select>
-              <SelectTrigger className="w-[100px]">4</SelectTrigger>
+              <SelectTrigger className="w-full">4</SelectTrigger>
               <SelectContent>
                 <SelectItem value="4">4</SelectItem>
                 <SelectItem value="5">5</SelectItem>
