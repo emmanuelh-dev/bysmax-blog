@@ -286,6 +286,9 @@ See [Next.js on Netlify](https://docs.netlify.com/integrations/frameworks/next-j
 - [How can I customize the `kbar` search?](/faq/customize-kbar-search.md)
 - [How do I deploy on Github pages?](/faq/github-pages-deployment.md)
 
+## Libreries and other components
+https://github.com/sjc17/Resistor-Color-Code-Calculator
+
 ## Support
 
 Using the template? Support this effort by giving a star on GitHub, sharing your own blog and giving a shoutout on Twitter or becoming a project [sponsor](https://github.com/sponsors/timlrx).
