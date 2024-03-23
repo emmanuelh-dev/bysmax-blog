@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardContent, CardHeader } from '../ui/card'
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Button } from '../ui/button'
 
 const ColorCodeMain = () => {
@@ -8,10 +8,8 @@ const ColorCodeMain = () => {
     <div className="flex gap-4 max-sm:flex-col">
       <Card className="w-full">
         <CardHeader>
-          <h2 className="text-lg font-medium">Calculadora de código de colores de resistencias</h2>
-          <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-            Ingrese los colores de las bandas de la resistencia
-          </p>
+          <CardTitle>Calculadora de código de colores de resistencias</CardTitle>
+          <CardDescription>Ingrese los colores de las bandas de la resistencia</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col space-y-4">
           <div className="flex flex-col gap-4">
@@ -20,8 +18,10 @@ const ColorCodeMain = () => {
                 Banda 1
               </label>
               <Select>
-                <SelectTrigger className="w-full">0</SelectTrigger>
-                <SelectContent>
+                <SelectTrigger className="w-full" id="first-band">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent position="popper">
                   <SelectItem value="0" className="bg-black text-white">
                     Negro
                   </SelectItem>
@@ -60,7 +60,9 @@ const ColorCodeMain = () => {
                 Banda 2
               </label>
               <Select>
-                <SelectTrigger className="w-full">0</SelectTrigger>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0" className="bg-black text-white">
                     Negro
@@ -100,7 +102,9 @@ const ColorCodeMain = () => {
                 Banda 3
               </label>
               <Select>
-                <SelectTrigger className="w-full">0</SelectTrigger>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0" className="bg-black text-white">
                     Negro
@@ -140,7 +144,9 @@ const ColorCodeMain = () => {
                 Banda 4
               </label>
               <Select value="1">
-                <SelectTrigger className="w-full">0</SelectTrigger>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0" className="bg-black text-white">
                     Negro
@@ -182,8 +188,10 @@ const ColorCodeMain = () => {
               <label className="text-nowrap text-sm" htmlFor="bandQuantity">
                 Cantidad de Bandas
               </label>
-              <Select>
-                <SelectTrigger className="w-full">4</SelectTrigger>
+              <Select defaultValue="4">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="4">4</SelectItem>
                   <SelectItem value="5">5</SelectItem>
