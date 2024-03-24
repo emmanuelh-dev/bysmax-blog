@@ -25,7 +25,6 @@ const ColorCodeMain = () => {
   }
   // Use effect to calculate the resistance
   useEffect(() => {
-    console.log(first, second, multiplier, tolerance, temperature)
     if (first && second && multiplier) {
       const resistance = +(+first + second) * +multiplier
       setResistance(resistance)
