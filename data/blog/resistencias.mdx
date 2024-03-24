@@ -6,31 +6,48 @@ draft: false
 authors: ['ale', 'emmanuelhdev']
 summary: 'Resistencias'
 ---
+
 # Calculadora para el código de colores de las resistencias
 
 <ColorCodeMain />
 
-## Cuales son las principales diferencias
-Las **resistencias** generalmente tienen entre **3 y 6 bandas de colores**. A continuación, te explico qué representan estas bandas:
+## Tipos de resistencias
 
 1. **Tres bandas (las más comunes)**:
+
    - La **primera y segunda banda** representan los **dos primeros dígitos** del **valor de resistencia**.
-   - La **tercera banda** indica el **multiplicador**, que es el número por el cual se multiplica el valor formado por los tres primeros dígitos²³.
+   - La **tercera banda** indica el **multiplicador**, que es el número por el cual se multiplica el valor formado por los tres primeros dígitos.
 
 2. **Cuatro bandas**:
-   - Las **primeras tres bandas** siguen representando los **dígitos significativos**.
-   - La **cuarta banda** (si está presente) indica la **tolerancia**²³.
 
-3. **Cinco o seis bandas**:
-   - Además de los valores anteriores, las **bandas adicionales** pueden representar el **coeficiente de temperatura** de la resistencia⁴.
-   - Los colores de estas bandas indican la tasa de cambio de resistencia con la temperatura. Por ejemplo:
-     - Marrón (100 ppm/°C)
-     - Rojo (50 ppm/°C)
-     - Naranja (15 ppm/°C)
-     - Amarillo (25 ppm/°C)
-     - Azul (10 ppm/°C)
-     - Violeta (5 ppm/°C)
-     - Gris (1 ppm/°C)⁴.
+   - Las **primeras tres bandas** siguen representando los **dígitos significativos**.
+   - La **cuarta banda** (si está presente) indica la **tolerancia**.
+
+3. **Cinco bandas**:
+
+   - **Primera banda**: Representa el **primer dígito** del valor de la resistencia.
+   - **Segunda banda**: Representa el **segundo dígito** del valor de la resistencia.
+   - **Tercera banda**: Indica el **multiplicador** (10^n). Por ejemplo, si ves las bandas marrón, negro y rojo, la resistencia tiene un valor cercano a **100 Ω**.
+   - **Cuarta banda**: Representa el **coeficiente de temperatura** (si está presente). Esta banda no afecta el valor de la resistencia, pero indica cómo cambia la resistencia con la temperatura.
+   - **Quinta banda**: Es la **tolerancia**. Por ejemplo, si ves una banda dorada, la tolerancia es del **5%**.
+
+4. **Seis bandas**:
+   - Las primeras cuatro bandas funcionan igual que en las de 5 bandas.
+   - **Quinta banda**: Representa el **coeficiente de temperatura**. Indica cómo varía la resistencia con la temperatura.
+   - **Sexta banda**: Es otra **tolerancia** adicional. En este caso, la tolerancia se expresa como un porcentaje más preciso.
+
+## Cuales son las principales diferencias
+
+**Resistencias de 4 y 3 bandas**:
+
+- En las resistencias de **4 bandas**, las tres primeras bandas representan los **dígitos significativos** del valor de la resistencia (los dos primeros dígitos y el multiplicador).
+- En las resistencias de **3 bandas**, solo hay tres bandas, y representan los **dos primeros dígitos** y el **multiplicador**.
+
+**Resistencias de 5 y 6 bandas**:
+
+- Las primeras cuatro bandas funcionan de manera similar a las de 4 bandas.
+- **Quinta banda**: En las resistencias de 5 bandas, esta banda indica la **tolerancia** (por ejemplo, si es del 5% o del 1%). En las resistencias de 6 bandas, la quinta banda representa el **coeficiente de temperatura**.
+- **Sexta banda**: Solo presente en las resistencias de **6 bandas**, esta banda también indica la **tolerancia**, pero con mayor precisión.
 
 ## ¿Qué son las Resistencias?
 

@@ -287,6 +287,7 @@ See [Next.js on Netlify](https://docs.netlify.com/integrations/frameworks/next-j
 - [How do I deploy on Github pages?](/faq/github-pages-deployment.md)
 
 ## Libreries and other components
+
 https://github.com/sjc17/Resistor-Color-Code-Calculator
 
 ## Support

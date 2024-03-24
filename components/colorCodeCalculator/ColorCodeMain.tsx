@@ -8,40 +8,32 @@ const ColorCodeMain = () => {
   // Use state for each band
   const [first, setfirst] = useState<string | null>(null)
   const [second, setsecond] = useState<string | null>(null)
-  const [third, setthird] = useState<string | null>(null)
-  const [fourth, setfourth] = useState<string | null>(null)
-  const [fifth, setfifth] = useState<string | null>(null)
-  const [sixt, setsixt] = useState<string | null>(null)
-
+  const [multiplier, setMultiplier] = useState<string | null>(null)
+  const [tolerance, setTolerance] = useState<string | null>(null)
+  const [temperature, setTemperature] = useState<string | null>(null)
   // Use state for the quantity of bands
   const [bands, setBands] = useState('3')
   const [resistance, setResistance] = useState<number | null>(null)
 
+  function handleBands(value: string) {
+    setfirst(null)
+    setsecond(null)
+    setMultiplier(null)
+    setTolerance(null)
+    setTemperature(null)
+    setBands(value)
+  }
   // Use effect to calculate the resistance
   useEffect(() => {
-    console.log(first, second, third, fourth, fifth)
-    if (bands === '3') {
-      if (first && second && third) {
-        const resistance = (+first + +second) * Math.pow(10, +third)
-        setResistance(resistance)
-        return
-      }
-    } else if (bands == '4') {
-      if (first && second && third && fourth) {
-        const resistance = (+first + +second) * Math.pow(10, +third)
-        setResistance(resistance)
-        return
-      }
-    } else if (bands == '5') {
-      if (first && second && third && fourth && fifth) {
-        const resistance = (+first + +second) * Math.pow(10, +third)
-        setResistance(resistance)
-        return
-      }
+    console.log(first, second, multiplier, tolerance, temperature)
+    if (first && second && multiplier) {
+      const resistance = +(+first + second) * +multiplier
+      setResistance(resistance)
+      return
     }
     setResistance(0)
     return
-  }, [first, second, third, fourth, fifth])
+  }, [first, second, multiplier, tolerance, temperature])
   return (
     <div className="flex gap-4 max-sm:flex-col">
       <Card className="w-full">
@@ -54,7 +46,7 @@ const ColorCodeMain = () => {
             <div className="flex items-center space-x-2">
               <Select onValueChange={(value) => setfirst(value)}>
                 <SelectTrigger className="w-full" id="first-band">
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder="Primera" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="0" className="bg-black text-white">
@@ -93,7 +85,7 @@ const ColorCodeMain = () => {
             <div className="flex items-center space-x-2">
               <Select onValueChange={(value) => setsecond(value)}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder="Segunda" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0" className="bg-black text-white">
@@ -130,40 +122,34 @@ const ColorCodeMain = () => {
               </Select>
             </div>
             <div className="flex items-center space-x-2">
-              <Select onValueChange={(value) => setthird(value)}>
+              <Select onValueChange={(value) => setMultiplier(value)}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder="Miltiplicador" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="0" className="bg-black text-white">
+                  <SelectItem value="1" className="bg-black text-white">
                     Negro
                   </SelectItem>
-                  <SelectItem value="1" className="bg-amber-950 text-white">
+                  <SelectItem value="10" className="bg-amber-950 text-white">
                     Marrón
                   </SelectItem>
-                  <SelectItem value="2" className="bg-red-500 text-white">
+                  <SelectItem value="100" className="bg-red-500 text-white">
                     Rojo
                   </SelectItem>
-                  <SelectItem value="3" className="bg-orange-500 text-white">
+                  <SelectItem value="1000" className="bg-orange-500 text-white">
                     Naranja
                   </SelectItem>
-                  <SelectItem value="4" className="bg-yellow-500 text-white">
+                  <SelectItem value="10000" className="bg-yellow-500 text-white">
                     Amarillo
                   </SelectItem>
-                  <SelectItem value="5" className="bg-green-500 text-white">
+                  <SelectItem value="100000" className="bg-green-500 text-white">
                     Verde
                   </SelectItem>
-                  <SelectItem value="6" className="bg-blue-500 text-white">
+                  <SelectItem value="1000000" className="bg-blue-500 text-white">
                     Azul
                   </SelectItem>
-                  <SelectItem value="7" className="bg-violet-500 text-white">
+                  <SelectItem value="10000000" className="bg-violet-500 text-white">
                     Violeta
-                  </SelectItem>
-                  <SelectItem value="8" className="bg-gray-500 text-white">
-                    Gris
-                  </SelectItem>
-                  <SelectItem value="9" className="bg-white text-black">
-                    Blanco
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -171,126 +157,74 @@ const ColorCodeMain = () => {
             {(bands == '4' || bands == '5' || bands == '6') && (
               <>
                 <div className="flex items-center space-x-2">
-                  <Select onValueChange={(value) => setfourth(value)}>
+                  <Select onValueChange={(value) => setTolerance(value)}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select" />
+                      <SelectValue placeholder="Tolerancia" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="0" className="bg-black text-white">
-                        Negro
-                      </SelectItem>
                       <SelectItem value="1" className="bg-amber-950 text-white">
                         Marrón
                       </SelectItem>
                       <SelectItem value="2" className="bg-red-500 text-white">
                         Rojo
                       </SelectItem>
-                      <SelectItem value="3" className="bg-orange-500 text-white">
-                        Naranja
-                      </SelectItem>
-                      <SelectItem value="4" className="bg-yellow-500 text-white">
-                        Amarillo
-                      </SelectItem>
-                      <SelectItem value="5" className="bg-green-500 text-white">
+                      <SelectItem value="0.5" className="bg-green-500 text-white">
                         Verde
                       </SelectItem>
-                      <SelectItem value="6" className="bg-blue-500 text-white">
+                      <SelectItem value="0.25" className="bg-blue-500 text-white">
                         Azul
                       </SelectItem>
-                      <SelectItem value="7" className="bg-violet-500 text-white">
+                      <SelectItem value="0.10" className="bg-violet-500 text-white">
                         Violeta
                       </SelectItem>
-                      <SelectItem value="8" className="bg-gray-500 text-white">
+                      <SelectItem value="0.05" className="bg-gray-500 text-white">
                         Gris
                       </SelectItem>
-                      <SelectItem value="9" className="bg-white text-black">
-                        Blanco
+                      <SelectItem
+                        value="10"
+                        className="bg-gradient-to-r from-neutral-600 via-neutral-100 to-neutral-600"
+                      >
+                        Plateado
+                      </SelectItem>
+                      <SelectItem
+                        value="5"
+                        className="bg-gradient-to-r from-amber-700 via-neutral-100 to-yellow-400"
+                      >
+                        Dorado
                       </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </>
             )}
-            {(bands == '5' || bands == '6') && (
+            {bands == '5' && (
               <>
                 <div className="flex items-center space-x-2">
-                  <Select onValueChange={(value) => setfifth(value)}>
+                  <Select onValueChange={(value) => setTemperature(value)}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="0" className="bg-black text-white">
-                        Negro
-                      </SelectItem>
-                      <SelectItem value="1" className="bg-amber-950 text-white">
+                      <SelectItem value="100" className="bg-amber-950 text-white">
                         Marrón
                       </SelectItem>
-                      <SelectItem value="2" className="bg-red-500 text-white">
+                      <SelectItem value="50" className="bg-red-500 text-white">
                         Rojo
                       </SelectItem>
-                      <SelectItem value="3" className="bg-orange-500 text-white">
+                      <SelectItem value="15" className="bg-orange-500 text-white">
                         Naranja
                       </SelectItem>
-                      <SelectItem value="4" className="bg-yellow-500 text-white">
+                      <SelectItem value="25" className="bg-yellow-500 text-white">
                         Amarillo
                       </SelectItem>
-                      <SelectItem value="5" className="bg-green-500 text-white">
-                        Verde
-                      </SelectItem>
-                      <SelectItem value="6" className="bg-blue-500 text-white">
+                      <SelectItem value="10" className="bg-blue-500 text-white">
                         Azul
                       </SelectItem>
-                      <SelectItem value="7" className="bg-violet-500 text-white">
+                      <SelectItem value="5" className="bg-violet-500 text-white">
                         Violeta
                       </SelectItem>
-                      <SelectItem value="8" className="bg-gray-500 text-white">
+                      <SelectItem value="1" className="bg-gray-500 text-white">
                         Gris
-                      </SelectItem>
-                      <SelectItem value="9" className="bg-white text-black">
-                        Blanco
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </>
-            )}
-            {bands == '6' && (
-              <>
-                <div className="flex items-center space-x-2">
-                  <Select onValueChange={(value) => setsixt(value)}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="0" className="bg-black text-white">
-                        Negro
-                      </SelectItem>
-                      <SelectItem value="1" className="bg-amber-950 text-white">
-                        Marrón
-                      </SelectItem>
-                      <SelectItem value="2" className="bg-red-500 text-white">
-                        Rojo
-                      </SelectItem>
-                      <SelectItem value="3" className="bg-orange-500 text-white">
-                        Naranja
-                      </SelectItem>
-                      <SelectItem value="4" className="bg-yellow-500 text-white">
-                        Amarillo
-                      </SelectItem>
-                      <SelectItem value="5" className="bg-green-500 text-white">
-                        Verde
-                      </SelectItem>
-                      <SelectItem value="6" className="bg-blue-500 text-white">
-                        Azul
-                      </SelectItem>
-                      <SelectItem value="7" className="bg-violet-500 text-white">
-                        Violeta
-                      </SelectItem>
-                      <SelectItem value="8" className="bg-gray-500 text-white">
-                        Gris
-                      </SelectItem>
-                      <SelectItem value="9" className="bg-white text-black">
-                        Blanco
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -303,7 +237,7 @@ const ColorCodeMain = () => {
               <label className="text-nowrap text-sm" htmlFor="bandQuantity">
                 Cantidad de Bandas
               </label>
-              <Select value={bands} onValueChange={(value) => setBands(value)}>
+              <Select value={bands} onValueChange={(value) => handleBands(value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -311,12 +245,10 @@ const ColorCodeMain = () => {
                   <SelectItem value="3">3</SelectItem>
                   <SelectItem value="4">4</SelectItem>
                   <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6">6</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
-          <Button size="sm">Calcular</Button>
         </CardContent>
       </Card>
       <Card className="w-full">
@@ -324,7 +256,14 @@ const ColorCodeMain = () => {
           <CardTitle>Resultado</CardTitle>
           <CardDescription>Esta calculadora esta en beta</CardDescription>
         </CardHeader>
-        <CardContent>{resistance} Ω</CardContent>
+        <CardContent>
+          <div>
+            <p>
+              {resistance} Ω {tolerance && <span>{tolerance} -+</span>}{' '}
+              {temperature && <span>{temperature} ppm/°C</span>}
+            </p>
+          </div>
+        </CardContent>
       </Card>
     </div>
   )
