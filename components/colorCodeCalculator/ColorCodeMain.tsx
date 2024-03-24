@@ -42,7 +42,7 @@ const ColorCodeMain = () => {
     }
     setResistance(0)
     return
-  }, [first, second, thirh, multiplier, tolerance, temperature])
+  }, [first, second, thirh, multiplier, tolerance, temperature, bands])
   return (
     <div className="flex gap-4 max-sm:flex-col">
       <Card className="w-full">
