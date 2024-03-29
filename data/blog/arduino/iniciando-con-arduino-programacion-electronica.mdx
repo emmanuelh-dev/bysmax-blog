@@ -6,3 +6,117 @@ draft: false
 authors: ['emmanuelhdev']
 summary: 'Guía Completa para Principiantes: Iniciando con Arduino y Programación Electrónica'
 ---
+# Iniciando con Arduino: Los Primeros Pasos
+
+Arduino es una plataforma de prototipado electrónico de código abierto que ha ganado popularidad debido a su facilidad de uso y versatilidad. Si estás interesado en adentrarte en el mundo de la electrónica y la programación, Arduino es un excelente punto de partida. En este blog, te guiaré a través de los conceptos básicos para empezar a programar con Arduino.
+
+## Declaración de Variables
+
+En Arduino, al igual que en otros lenguajes de programación, las variables se utilizan para almacenar datos. Antes de utilizar una variable, debemos declarar su tipo y nombre. Por ejemplo:
+
+```arduino
+int ledPin = 13; // Declaramos una variable de tipo entero (int) llamada ledPin y le asignamos el valor 13
+```
+
+## Funciones
+
+Las funciones en Arduino son bloques de código que realizan una tarea específica. Pueden aceptar parámetros y devolver valores. La función principal en Arduino es `setup()`, que se ejecuta una vez al inicio del programa. Otra función importante es `loop()`, que se ejecuta de forma continua después de que `setup()` haya terminado. Por ejemplo:
+
+```arduino
+void setup() {
+  // Código de configuración inicial
+}
+
+void loop() {
+  // Código que se ejecuta repetidamente
+}
+```
+
+## loop() y main()
+
+En Arduino, el ciclo principal de ejecución se encuentra dentro de la función `loop()`. Esta función se ejecuta continuamente después de que `setup()` ha completado su ejecución. Dentro de `loop()` es donde se colocan las instrucciones que deseamos que se ejecuten repetidamente, como leer sensores, controlar actuadores, etc.
+
+No es necesario declarar una función `main()` en Arduino, ya que el propio entorno de desarrollo de Arduino se encarga de generar el código principal que llama a `setup()` y `loop()`.
+
+## Ejemplo Simple
+
+Aquí tienes un ejemplo simple que enciende y apaga un LED conectado al pin 13 de la placa Arduino:
+
+```arduino
+int ledPin = 13;
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configuramos el pin como salida
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH); // Encendemos el LED
+  delay(1000); // Esperamos 1 segundo
+  digitalWrite(ledPin, LOW); // Apagamos el LED
+  delay(1000); // Esperamos 1 segundo
+}
+```
+
+Este código comienza declarando una variable `ledPin` y asignándole el valor 13, que es el pin donde está conectado el LED. En `setup()`, configuramos este pin como salida utilizando la función `pinMode()`. Luego, dentro de `loop()`, alternamos entre encender y apagar el LED con intervalos de un segundo utilizando las funciones `digitalWrite()` y `delay()`.
+
+## Creación de Funciones Dentro de loop()
+
+Dentro de la función `loop()` en Arduino, puedes definir tus propias funciones para organizar y modular tu código. Esto te permite dividir tu programa en bloques más pequeños y fáciles de entender.
+
+## Sintaxis para Crear una Función
+
+La sintaxis para crear una función en Arduino es similar a la de otros lenguajes de programación:
+
+```arduino
+tipo_de_retorno nombre_de_la_funcion(parametros) {
+  // Código de la función
+}
+```
+
+Por ejemplo, supongamos que queremos crear una función llamada `parpadearLED` que encienda y apague un LED con un cierto intervalo:
+
+```arduino
+void parpadearLED(int pinLED, int intervalo) {
+  digitalWrite(pinLED, HIGH); // Encendemos el LED
+  delay(intervalo); // Esperamos el tiempo especificado en el intervalo
+  digitalWrite(pinLED, LOW); // Apagamos el LED
+  delay(intervalo); // Esperamos el mismo tiempo antes de repetir el ciclo
+}
+```
+
+## Llamando a la Función desde loop()
+
+Una vez que has definido una función dentro de `loop()`, puedes llamarla en cualquier lugar dentro de `loop()` según sea necesario. Por ejemplo:
+
+```arduino
+void loop() {
+  parpadearLED(13, 1000); // Llamamos a la función parpadearLED con el pin 13 y un intervalo de 1 segundo
+}
+```
+
+En este ejemplo, estamos llamando a la función `parpadearLED` con el pin 13 (donde está conectado el LED) y un intervalo de 1000 milisegundos (1 segundo). Esto hará que el LED parpadee con un intervalo de 1 segundo.
+
+## Pasando Parámetros a una Función
+
+Puedes pasar parámetros a tus funciones en Arduino para hacerlas más versátiles y reutilizables. Los parámetros son valores que se pasan a la función cuando es llamada, y la función puede utilizar estos valores dentro de su código. Por ejemplo, en la función `parpadearLED` que definimos anteriormente, los parámetros son `pinLED` e `intervalo`. Cuando llamamos a esta función, podemos especificar los valores que queremos que tengan estos parámetros.
+```arduino
+int ledPin = 13;
+
+void setup() {
+  pinMode(ledPin, OUTPUT); // Configuramos el pin como salida
+}
+
+void loop() {
+  parpadearLED(); // Llamamos a la función parpadearLED
+}
+
+void parpadearLED() {
+  digitalWrite(ledPin, HIGH); // Encendemos el LED
+  delay(1000); // Esperamos 1 segundo
+  digitalWrite(ledPin, LOW); // Apagamos el LED
+  delay(1000); // Esperamos 1 segundo
+}
+```
+En este ejemplo, estamos llamando a la función `parpadearLED` con el pin 9 y un intervalo de 500 milisegundos (0.5 segundos). Esto hará que el LED conectado al pin 9 parpadee con un intervalo de medio segundo.
+
+Con esta información, ahora puedes crear y llamar tus propias funciones dentro de `loop()` en Arduino, así como pasarles parámetros para hacerlas más flexibles y útiles en tus proyectos. ¡Diviértete explorando y creando!
