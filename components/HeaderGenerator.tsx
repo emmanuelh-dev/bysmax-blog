@@ -79,7 +79,7 @@ summary: '${summary}'
       </Label>
       <div className="space-y-4">
         <Textarea rows={10} value={generateResult()} />
-        <Button className="w-full" onClick={handleCopyToClipboard}>
+        <Button className="w-full" onClick={() => handleCopyToClipboard(generateResult())}>
           Copiar
         </Button>
       </div>
