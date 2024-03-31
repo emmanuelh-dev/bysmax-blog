@@ -21,8 +21,7 @@ const HeaderGenerator = () => {
   }, [title])
 
   const generateResult = () => {
-    return `
----
+    return `---
 title: ${title}
 date: ${date}
 tags: [${tags
@@ -35,8 +34,7 @@ authors: [${authors
       .map((author) => `'${author.trim()}'`)
       .join(', ')}]
 summary: '${summary}'
----
-    `
+---`
   }
 
   const handleCopyToClipboard = ($text = '') => {
