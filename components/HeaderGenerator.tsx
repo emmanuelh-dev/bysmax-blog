@@ -52,7 +52,7 @@ summary: '${summary}'
   return (
     <div className="flex flex-col gap-4">
       <Label>
-        Ingresa el link de tu Repo y automaticamente te generara el link para crear un nuevo archivo.
+        Ingresa el link de tu Repo y te generara el link para crear un nuevo archivo.
         <Input value={siteRepo} onChange={(e) => setSiteRepo(e.target.value)} />
       </Label>
       <Label>
