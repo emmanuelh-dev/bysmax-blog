@@ -81,7 +81,10 @@ summary: '${summary}'
         </Label>
         <Label className="itesm-center flex gap-4">
           Borrador
-          <Checkbox checked={draft} onCheckedChange={(checked) => setDraft(checked)} />
+          <Checkbox
+            checked={draft}
+            onCheckedChange={(checked) => (checked === 'indeterminate' ? null : setDraft(checked))}
+          />
         </Label>
         <Label>
           Resumen
