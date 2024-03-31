@@ -1,11 +1,12 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { Button } from './ui/button'
+import { Button, buttonVariants } from './ui/button'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import dayjs from 'dayjs' // Cambiada la importación aquí
 import { Label } from './ui/label'
 import { Checkbox } from './ui/checkbox'
+import siteMetadata from '@/data/siteMetadata'
 
 const HeaderGenerator = () => {
   const [title, setTitle] = useState('')
@@ -16,6 +17,10 @@ const HeaderGenerator = () => {
   const [summary, setSummary] = useState('')
   const [fileName, setFileName] = useState('')
 
+  const newFileUrl = (path) => {
+    const content = encodeURIComponent(generateResult())
+    return `${siteMetadata.siteRepo}/new/main/data/blog?filename=${path}&value=${content}`
+  }
   useEffect(() => {
     setFileName(title.toLowerCase().replace(/ /g, '-') + '.mdx')
   }, [title])
@@ -77,9 +82,18 @@ summary: '${summary}'
       </Label>
       <div className="space-y-4">
         <Textarea rows={10} value={generateResult()} />
-        <Button className="w-full" onClick={() => handleCopyToClipboard(generateResult())}>
-          Copiar
-        </Button>
+        <div className="flex gap-4">
+          <Button className="w-full" onClick={() => handleCopyToClipboard(generateResult())}>
+            Copiar
+          </Button>
+          <a
+            href={newFileUrl(fileName)}
+            className={`w-full ${buttonVariants({ variant: 'default' })}`}
+            onClick={() => handleCopyToClipboard(generateResult())}
+          >
+            Crear
+          </a>
+        </div>
       </div>
     </div>
   )

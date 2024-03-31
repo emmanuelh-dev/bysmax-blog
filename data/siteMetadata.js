@@ -7,7 +7,7 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://blog.bysmax.com',
-  siteRepo: 'https://github.com/emmanuelh-dev/bysmax-blog/',
+  siteRepo: 'https://github.com/emmanuelh-dev/bysmax-blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
