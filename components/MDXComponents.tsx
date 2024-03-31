@@ -7,6 +7,8 @@ import CustomLink from './Link'
 import TableWrapper from './TableWrapper'
 import TransformatorCalculator from './TransformatorCalculator'
 import ColorCodeMain from './colorCodeCalculator/ColorCodeMain'
+import HeaderGenerator from './HeaderGenerator'
+
 export const components: MDXComponents = {
   Image,
   TOCInline,
@@ -16,4 +18,5 @@ export const components: MDXComponents = {
   BlogNewsletterForm,
   TransformatorCalculator,
   ColorCodeMain,
+  HeaderGenerator,
 }
