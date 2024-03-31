@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs' // Cambiada la importación aquí
 import { Label } from './ui/label'
 import { Checkbox } from './ui/checkbox'
 
@@ -39,8 +39,8 @@ summary: '${summary}'
     `
   }
 
-  const handleCopyToClipboard = () => {
-    const text = generateResult()
+  const handleCopyToClipboard = ($text = '') => {
+    const text = $text.length > 0 ? $text : generateResult()
     navigator.clipboard.writeText(text)
   }
 
@@ -67,7 +67,7 @@ summary: '${summary}'
       </Label>
       <Label className="itesm-center flex gap-4">
         Borrador
-        <Checkbox checked={draft} onCheckedChange={(checked) => setDraft(checked)} />
+        <Checkbox checked={draft} onCheckedChange={(checked) => setDraft(draft)} />
       </Label>
       <Label>
         Resumen
