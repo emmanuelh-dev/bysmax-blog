@@ -16,11 +16,13 @@ const HeaderGenerator = () => {
   const [authors, setAuthors] = useState('')
   const [summary, setSummary] = useState('')
   const [fileName, setFileName] = useState('')
+  const [siteRepo, setSiteRepo] = useState(siteMetadata.siteRepo)
 
   const newFileUrl = (path) => {
     const content = encodeURIComponent(generateResult())
-    return `${siteMetadata.siteRepo}/new/main/data/blog?filename=${path}&value=${content}`
+    return `${siteRepo}/new/main/data/blog?filename=${path}&value=${content}`
   }
+
   useEffect(() => {
     setFileName(title.toLowerCase().replace(/ /g, '-') + '.mdx')
   }, [title])
@@ -49,6 +51,10 @@ summary: '${summary}'
 
   return (
     <div className="flex flex-col gap-4">
+      <Label>
+        Ingresa el link de tu Repo y automaticamente te generara el link para crear un nuevo archivo.
+        <Input value={siteRepo} onChange={(e) => setSiteRepo(e.target.value)} />
+      </Label>
       <Label>
         Titulo
         <Input value={title} onChange={(e) => setTitle(e.target.value)} />
