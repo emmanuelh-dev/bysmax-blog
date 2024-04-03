@@ -23,9 +23,21 @@ const HeaderGenerator = () => {
     const content = encodeURIComponent(generateResult())
     return `${siteRepo}/new/main/data/blog?filename=${path}&value=${content}`
   }
-
   useEffect(() => {
-    setFileName(title.toLowerCase().replace(/ /g, '-') + '.mdx')
+    const normalizedTitle = title
+      // Eliminar acentos
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      // Reemplazar símbolos y caracteres especiales por guiones
+      .replace(/[^\w\s-]/g, '')
+      // Reemplazar espacios por guiones
+      .replace(/\s+/g, '-')
+      // Convertir todo a minúsculas
+      .toLowerCase()
+
+    const fileName = normalizedTitle + '.mdx'
+
+    setFileName(fileName)
   }, [title])
 
   const generateResult = () => {
