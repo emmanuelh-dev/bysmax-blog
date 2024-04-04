@@ -20,7 +20,7 @@ export default function BlogPage() {
         <div>
           <div className="space-y-4 divide-y py-6">
             {authors.map((author) => (
-              <article className="flex flex-col space-y-2 xl:space-y-0" key={author.name}>
+              <article className="flex flex-col space-y-2 py-4 xl:space-y-0" key={author.name}>
                 <div className="space-y-3">
                   <div>
                     <h2 className="text-2xl font-bold leading-8 tracking-tight">
