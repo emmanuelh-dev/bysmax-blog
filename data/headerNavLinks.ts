@@ -7,7 +7,7 @@ const headerNavLinks = [
   { href: '/blog', title: 'Blog' },
   { href: '/tags', title: 'Tags' },
   { href: '/projects', title: 'Proyectos' },
-  { href: '/about', title: 'Sobre Nosotros' },
+  { href: '/author', title: 'Sobre Nosotros' },
   { href: '/blog/generador-de-cabeceras-para-tailwind-nextjs-starter-blog', title: 'Crear nuevo' },
 ]
 
