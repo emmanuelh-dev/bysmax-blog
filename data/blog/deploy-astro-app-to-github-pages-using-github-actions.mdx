@@ -1,0 +1,58 @@
+Aquí está la traducción al español del documento:
+
+---
+título: 'Desplegar una aplicación Astro en GitHub Pages utilizando GitHub Actions'
+fecha: 2024-04-18
+etiquetas: ['']
+borrador: falso
+autores: ['']
+resumen: ''
+---
+
+Desplegar tu sitio Astro en GitHub Pages
+========================================
+
+Puedes utilizar [GitHub Pages](https://pages.github.com/) para alojar un sitio web Astro directamente desde un repositorio en [GitHub.com](https://github.com/).
+
+Puedes desplegar un sitio Astro en GitHub Pages utilizando [GitHub Actions](https://github.com/features/actions) para construir y desplegar tu sitio automáticamente. Para hacer esto, tu código fuente debe estar alojado en GitHub.
+
+Astro mantiene la acción oficial `withastro/action` para desplegar tu proyecto con muy poca configuración. Sigue las instrucciones a continuación para desplegar tu sitio Astro en GitHub Pages, y consulta el [README del paquete](https://github.com/withastro/action) si necesitas más información.
+
+Configurar Astro para GitHub Pages
+----------------------------------
+
+### Desplegar a una URL `github.io`
+
+Establece las opciones [`site`](https://docs.astro.build/en/reference/configuration-reference/#site) y [`base`](https://docs.astro.build/en/reference/configuration-reference/#base) en `astro.config.mjs`.
+
+    import { defineConfig } from 'astro/config'export default defineConfig({  site: 'https://astronaut.github.io',  base: 'my-repo',})
+
+El valor para `site` debe ser uno de los siguientes:
+
+*   La siguiente URL basada en tu nombre de usuario: `https://<username>.github.io`
+*   La URL aleatoria generada automáticamente para una [página privada de una Organización de GitHub](https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site): `https://<random-string>.pages.github.io/`
+
+Un valor para `base` puede ser requerido para que Astro trate el nombre de tu repositorio (por ejemplo `/my-repo`) como la raíz de tu sitio web.
+
+El valor para `base` debe ser el nombre de tu repositorio comenzando con una barra diagonal, por ejemplo `/my-blog`. Esto es para que Astro entienda que la raíz de tu sitio web es `/my-repo`, en lugar de la ruta por defecto `/`.
+
+### Usar GitHub Pages con un dominio personalizado
+
+Para configurar Astro para usar GitHub Pages con un dominio personalizado, establece tu dominio como el valor para `site`. No establecer un valor para `base`:
+
+    import { defineConfig } from 'astro/config'export default defineConfig({  site: 'https://example.com',})
+
+Configurar una Acción de GitHub
+-------------------------------
+
+1. Crea un nuevo archivo en tu proyecto en `.github/workflows/deploy.yml` y pega el YAML a continuación.
+
+       nombre: Desplegar en GitHub Pageson:  # Activa el flujo de trabajo cada vez que haces push a la rama `main`  # ¿Usas un nombre de rama diferente? Reemplaza `main` con el nombre de tu rama  push:    branches: [ main ]  # Te permite ejecutar este flujo de trabajo manualmente desde la pestaña Actions en GitHub.  workflow_dispatch:# Permite que este trabajo clone el repositorio y cree un despliegue de páginapermissions:  contents: read  pages: write  id-token: writejobs:  build:    runs-on: ubuntu-latest    steps:      - name: Checkout your repository using git        uses: actions/checkout@v4      - name: Install, build, and upload your site        uses: withastro/action@v2        # with:          # path: . # La ubicación raíz de tu proyecto Astro dentro del repositorio. (opcional)          # node-version: 20 # La versión específica de Node que debe usarse para construir tu sitio. Por defecto es 20. (opcional)          # package-manager: pnpm@latest # El gestor de paquetes de Node que debe usarse para instalar dependencias y construir tu sitio. Se detecta automáticamente en base a tu archivo de bloqueo. (opcional)  deploy:    needs: build    runs-on: ubuntu-latest    environment:      name: github-pages      url: ${{ steps.deployment.outputs.page_url }}    steps:      - name: Deploy to GitHub Pages        id: deployment        uses: actions/deploy-pages@v4
+
+2. En GitHub, ve a la pestaña **Settings** de tu repositorio y encuentra la sección **Pages** de la configuración.
+
+3. Elige **GitHub Actions** como el **Source** de tu sitio.
+
+4. Confirma el nuevo archivo de flujo de trabajo y súbelo a GitHub.
+
+¡Tu sitio ahora debería estar publicado! Cuando hagas cambios en el repositorio de tu proyecto Astro, la Acción de GitHub los desplegará automáticamente por ti.
