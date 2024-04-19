@@ -10,6 +10,12 @@ const LINKS = [
     color: 'bg-[#00e676]',
   },
   {
+    link: 'https://chat.whatsapp.com/FiwJR2D70w17JPUOoJvdKY',
+    nombre: 'Grupo de WhatsApp',
+    icon: <FaWhatsapp />,
+    color: 'bg-[#00e676]',
+  },
+  {
     link: 'https://api.whatsapp.com/send/?phone=8111913676',
     nombre: 'Contacto',
     icon: <FaWhatsapp />,
@@ -19,24 +25,6 @@ const LINKS = [
     link: '/',
     nombre: 'Blog',
     icon: <AiFillGithub />,
-    color: 'border-white border bg-black',
-  },
-  {
-    link: 'https://www.youtube.com/@bysmax',
-    nombre: 'YouTube',
-    icon: <TiSocialYoutube />,
-    color: 'bg-red-600',
-  },
-  {
-    link: 'https://www.instagram.com/emmanuelh.dev',
-    nombre: 'Instagram',
-    icon: <TiSocialInstagram />,
-    color: 'bg-gradient-to-r from-[#fb7c22] to-[#DA0FAC]',
-  },
-  {
-    link: 'https://www.tiktok.com/@emmanuelh.dev',
-    nombre: 'TikTok',
-    icon: <FaTiktok />,
     color: 'border-white border bg-black',
   },
 ]
