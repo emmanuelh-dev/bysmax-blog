@@ -69,11 +69,24 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
   const author = allAuthors.find((p) => p.slug === slug) as Authors
   const mainContent = coreContent(author)
+  const posts = allCoreContent(sortPosts(allBlogs))
 
   return (
     <>
       <AuthorLayout content={mainContent}>
         <MDXLayoutRenderer code={author.body.code} />
+        <div>
+          <h2>Posts</h2>
+          <ul>
+            {posts
+              .filter((post) => post.authors?.includes(author.slug))
+              .map((post) => (
+                <li key={post.slug}>
+                  <a href={`/blog/${post.slug}`}>{post.title}</a>
+                </li>
+              ))}
+          </ul>
+        </div>
       </AuthorLayout>
     </>
   )
