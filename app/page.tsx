@@ -1,12 +1,21 @@
+import { allBlogs } from 'contentlayer/generated'
 import Image from 'next/image'
 import Link from 'next/link'
+import Main from './Main'
+
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 
 export default async function Page() {
   const images = ['/static/notes/01.png', '/static/notes/02.png']
+
   function getRandom() {
     return Math.floor(Math.random() * images.length)
   }
+
   const image = images[getRandom()]
+  const sortedPosts = sortPosts(allBlogs)
+  const posts = allCoreContent(sortedPosts)
+
   return (
     <div>
       <div className="flex w-full items-center justify-between max-sm:flex-col-reverse max-sm:font-semibold">
@@ -35,6 +44,7 @@ export default async function Page() {
         </div>
         <Image alt="" width="400" height="400" decoding="async" data-nimg="1" src={image} />
       </div>
+      <Main posts={posts} />
     </div>
   )
 }
