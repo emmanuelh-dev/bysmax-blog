@@ -1,9 +1,10 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'BysMax Blog',
+  title: 'BysMax',
   author: 'bysmax',
   headerTitle: 'BysMax',
-  description: 'El blog de bysmax para el mundo',
+  description:
+    'Accede a tutoriales detallados, guías prácticas y proyectos innovadores que te ayudarán a dominar la electrónica y la tecnología',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://blog.bysmax.com',

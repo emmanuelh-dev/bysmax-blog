@@ -17,51 +17,46 @@ En el ámbito de una pequeña despensa, es esencial contar con una aplicación q
 A continuación, te presento una solución en Java que te permitirá calcular los sueldos de los empleados según su categoría en la despensa:
 
 ```java
+/*Consigna del Ejercicio
+* Una pequeña despensa desea calcular los sueldos de sus empleados. Los puestos de los mismos pueden tener 3 categorías: 1- repositor, 2-cajero y 3-supervisor.
+*
+* Los repositores cobran $15.890 + un bono de 10%.
+* Los cajeros cobran $25.630,89 fijos.
+* Los supervisores cobran $35.560,20 en bruto al cual se les descuenta un 11% de jubilación.
+* Se necesita una aplicación que, dependiendo el tipo de empleado del que se trate, calcule y muestre en pantalla el correspondiente sueldo.
+*/
+
 import java.util.Scanner;
 
 public class SueldoDeEmpleados {
-    public static void main(String[] args) {
-        double sueldo = 0;
+  public static void main(String[] args) {
 
-        System.out.println("Consigna del Ejercicio:");
-        System.out.println("Una pequeña despensa desea calcular los sueldos de sus empleados.");
-        System.out.println("Los puestos pueden tener 3 categorías:");
-        System.out.println("1- Repositor");
-        System.out.println("2- Cajero");
-        System.out.println("3- Supervisor");
-        System.out.println();
-        System.out.println("Detalles de los Sueldos:");
-        System.out.println("- Los repositores cobran $15,890 + un bono de 10%.");
-        System.out.println("- Los cajeros cobran $25,630.89 fijos.");
-        System.out.println("- Los supervisores cobran $35,560.20 en bruto, con un descuento del 11% por jubilación.");
-        System.out.println();
+    double sueldo = 0;
 
-        Scanner scanner = new Scanner(System.in);
+    System.out.println("Ingresa el tipo de empleado");
+    System.out.println("1: Repositor");
+    System.out.println("2: Cajero");
+    System.out.println("3: Supervisor");
 
-        System.out.println("Ingresa el tipo de empleado:");
-        System.out.println("1: Repositor");
-        System.out.println("2: Cajero");
-        System.out.println("3: Supervisor");
+    Scanner scanner = new Scanner (System.in);
 
-        int categoria = scanner.nextInt();
+    int categoria = scanner.nextInt();
 
-        if (categoria == 1) {
-            // Sueldo del repositor: base + bono del 10%
-            sueldo = 15890 + (15890 * 0.10);
-        } else if (categoria == 2) {
-            // Sueldo fijo del cajero
-            sueldo = 25630.89;
-        } else if (categoria == 3) {
-            // Sueldo bruto del supervisor - descuento de jubilación
-            sueldo = 35560.20 - (35560.20 * 0.11);
-        } else {
-            System.out.println("La categoría que ingresaste no existe.");
-            return; // Salir del programa si la categoría es inválida
-        }
-
-        System.out.println("El sueldo de la persona es de: $" + sueldo);
+    if(categoria == 1){
+      sueldo = 15890 + (15.890*0.10);
     }
+    else if(categoria == 2) {
+      sueldo = 25630.89;
+    }
+    else if(categoria == 3){
+      sueldo = 35560.20 - (35560.20 * 0.11);
+    } else {
+      System.out.println("La categoria que ingresaste no existe");
+    }
+    System.out.println("El sueldo de la persona es de: " + sueldo);
+  }
 }
+
 ```
 
 ### Descripción del Problema
