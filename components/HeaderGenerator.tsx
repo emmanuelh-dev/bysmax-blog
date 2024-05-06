@@ -25,6 +25,7 @@ const HeaderGenerator = () => {
   }
   useEffect(() => {
     const normalizedTitle = title
+      .trim()
       // Eliminar acentos
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -42,7 +43,7 @@ const HeaderGenerator = () => {
 
   const generateResult = () => {
     return `---
-title: '${title}'
+title: ${title}
 date: ${date}
 tags: [${tags
       .split(',')
@@ -53,7 +54,7 @@ authors: [${authors
       .split(',')
       .map((author) => `'${author.trim()}'`)
       .join(', ')}]
-summary: '${summary}'
+summary: ${summary}
 ---`
   }
 

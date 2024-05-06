@@ -17,7 +17,6 @@ function ServicesPage() {
     currentPage: pageNumber,
     totalPages: Math.ceil(services.length / POSTS_PER_PAGE),
   }
-  console.log(services)
   return (
     <div>
       <div className="pb-6 pt-6">
