@@ -7,19 +7,10 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
 import { allAuthors, allServicios } from 'contentlayer/generated'
 import type { Authors, Blog, Servicios } from 'contentlayer/generated'
-import PostSimple from '@/layouts/PostSimple'
-import PostLayout from '@/layouts/PostLayout'
-import PostBanner from '@/layouts/PostBanner'
+import ServicesLayout from '@/layouts/ServicesLayout'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
-
-const defaultLayout = 'PostLayout'
-const layouts = {
-  PostSimple,
-  PostLayout,
-  PostBanner,
-}
 
 export async function generateMetadata({
   params,
@@ -87,8 +78,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const mainContent = coreContent(post)
 
   return (
-    <div className="prose mx-auto">
+    <ServicesLayout className="prose mx-auto" content={post}>
       <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-    </div>
+    </ServicesLayout>
   )
 }
