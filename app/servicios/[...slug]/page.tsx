@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const mainContent = coreContent(post)
 
   return (
-    <ServicesLayout className="prose mx-auto" content={post}>
+    <ServicesLayout>
       <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
     </ServicesLayout>
   )
