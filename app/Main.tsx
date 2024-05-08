@@ -22,18 +22,18 @@ export default function Home({ posts }) {
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags, images } = post
+            const { slug, date, title, summary, tags, cover } = post
             console.log(post.structuredData)
             return (
               <li key={slug} className="py-12">
                 <article className="h-full flex-1">
                   <div className="block w-full lg:col-span-2">
-                    {images ? (
+                    {cover ? (
                       <Image
                         className="aspect-[384/246] h-full bg-center object-cover"
                         width={600}
                         height={400}
-                        src={images[0]}
+                        src={cover}
                         alt="The Time Traveler's Notebook"
                       />
                     ) : (
@@ -43,9 +43,11 @@ export default function Home({ posts }) {
                   <div className="-mt-20 flex w-full flex-col items-start justify-between p-4">
                     <div className="flex h-full w-full flex-col justify-between text-balance p-4">
                       <div>
-                        <Link className="font-medium uppercase" href={`/blog/${slug}`}>
-                          {title}
-                        </Link>
+                        <div className="bg-black/50 p-2 text-white">
+                          <Link className="font-medium uppercase" href={`/blog/${slug}`}>
+                            {title}
+                          </Link>
+                        </div>
                         <p className="mt-6 line-clamp-2 text-sm text-slate-600">{summary}</p>
                       </div>
                       <div className="mt-1 inline-flex items-center space-x-1">
