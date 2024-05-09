@@ -1,0 +1,53 @@
+---
+title: Como crear un Contador Ascendente/Descendente 00-99 con el IC 74190
+date: 2024-05-09
+tags: ['proteus', 'circuito']
+draft: false
+authors: ['emmanuelhdev', 'ale']
+summary:  Bienvenidos todos a este nuevo blog y en esta entrada les queremos compartir como hacer un contador de 00-99 con el IC 74190.
+cover: /static/images/crear-un-contador-ascendentedescendente-00-99-con-el-ic-74190.png
+---
+
+## Como crear un Contador Ascendente/Descendente 00-99 con el IC 74190
+
+![Imagen del circuito en proteus](/static/images/crear-un-contador-ascendentedescendente-00-99-con-el-ic-74190.png)
+
+En este tutorial, aprenderemos cómo construir un contador ascendente/descendente de 00 a 99 utilizando el IC 74190 junto con otros componentes electrónicos. A continuación, detallamos los componentes necesarios y la explicación del circuito.
+
+Aqui puedes decargar el archivo de proteus y tambien el esquematico. [https://drive.google.com/drive/folders/1DMUL-zCscu0oUnFwAHWGWNVCF6_EPEr4?usp=sharing](https://drive.google.com/drive/folders/1DMUL-zCscu0oUnFwAHWGWNVCF6_EPEr4?usp=sharing)
+
+### Componentes Utilizados:
+- 2 IC7447: Decodificadores de BCD a siete segmentos para visualizar los números en los displays.
+- 2 IC 74190: Contadores ascendentes/descendentes que serán el corazón de nuestro proyecto.
+- 2 Displays de 7 segmentos de ánodo común: Para mostrar los números del contador.
+- 3 Resistencias de 10kΩ: Para establecer los niveles de voltaje adecuados.
+- 3 Push buttons/Switches: Para controlar la dirección del conteo y el reinicio del contador.
+- 4 Resistencias de 330Ω: Para limitar la corriente a los displays y protegerlos.
+
+### Detalles Adicionales:
+Aunque no se muestra directamente en Proteus, este circuito utiliza una señal de reloj que puede generarse con un circuito temporizador 555, proporcionando la frecuencia necesaria para el conteo.
+
+### Explicación del Circuito:
+
+1. **Funciones de los Botones**:
+   - El primer botón pausa el contador.
+   - El segundo botón carga un valor predeterminado (por ejemplo, 35).
+   - El tercer botón cambia la dirección del contador entre ascendente y descendente.
+
+2. **Funcionamiento del IC 74190**:
+   - El IC 74190 es un contador ascendente/descendente con capacidad para contar hasta 99.
+   - Se utiliza para realizar el conteo y controlar la dirección del mismo según la configuración de los botones.
+
+3. **Uso del IC 7447**:
+   - El IC 7447 decodifica la salida binaria del IC 74190 en señales adecuadas para los displays de siete segmentos.
+   - Permite mostrar los números del contador en los displays conectados.
+
+4. **Configuración del Circuito**:
+   - Conectar los pines de los botones a las entradas adecuadas para controlar las funciones (pausa, carga de valor predeterminado, cambio de dirección).
+   - Configurar las resistencias para limitar la corriente hacia los displays y establecer los niveles de voltaje según las especificaciones de los componentes.
+
+5. **Ejemplo de Carga de Valor**:
+   - Utilizar los primeros cuatro pines del IC 74190 (D0 a D3) para cargar un valor inicial.
+   - Por ejemplo, configurar D0 y D2 en alto (1) y D1 y D3 en bajo (0) puede cargar el valor 5 en el contador.
+
+Este circuito es una excelente manera de aprender sobre contadores digitales y decodificadores de siete segmentos. La combinación del IC 74190 y el IC 7447 ofrece una solución eficaz para crear un contador de dos dígitos que puede contar en ambas direcciones y mostrar los resultados en displays de siete segmentos.
