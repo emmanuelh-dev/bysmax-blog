@@ -17,18 +17,7 @@ function ServicesPage() {
     currentPage: pageNumber,
     totalPages: Math.ceil(services.length / POSTS_PER_PAGE),
   }
-  return (
-    <div>
-      <div className="pb-6 pt-6">
-        <h1 className="text-5xl font-bold">Servicios</h1>
-        <p className="text-gray-400">
-          En nuestra empresa ofrecemos una amplia gama de servicios diseñados para cubrir tus
-          necesidades:
-        </p>
-        <Main posts={services} title="Servicios" service />
-      </div>
-    </div>
-  )
+  return <Main posts={services} title="Servicios" service />
 }
 
 export default ServicesPage
