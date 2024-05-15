@@ -54,7 +54,7 @@ authors: [${authors
       .split(',')
       .map((author) => `'${author.trim()}'`)
       .join(', ')}]
-summary: ${summary}
+summary: ${summary.replace(/:/g, '').trim()}
 ---`
   }
 
