@@ -4,6 +4,7 @@ import { allAuthors, allBlogs } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
 import Link from 'next/link'
 import Image from 'next/image'
+import siteMetadata from '@/data/siteMetadata'
 
 const POSTS_PER_PAGE = 5
 
@@ -63,21 +64,34 @@ export default function BlogPage() {
             ))}
           </div>
         </div>
-        <div className="mt-10 text-center">
-          <h2 className="text-3xl font-bold">¿Te gustaría ser un contributor?</h2>
+        <section className="mt-10">
+          <h2 className="py-8 text-5xl font-bold">Nuestro Blog es de Código Abierto</h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Estamos buscando apasionados por la escritura para unirse a nuestro equipo. Si estás
-            interesado,{' '}
-            <Link href="/contact" className="text-blue-500 hover:underline">
-              contáctanos
+            Nos enorgullece que nuestro blog sea completamente de código abierto. Esto significa que
+            cualquier persona puede contribuir modificando el contenido existente o agregando nuevas
+            entradas. Si deseas colaborar, simplemente haz un{' '}
+            <Link href={siteMetadata.siteRepo} className="text-primary-500 hover:underline">
+              fork en GitHub
             </Link>{' '}
-            o mandanos un{' '}
-            <Link href="mailto:info@bysmax.com" className="text-blue-500 hover:underline">
-              correo
-            </Link>{' '}
-            y cuéntanos sobre ti.
+            y envíanos un pull request con tus cambios. ¡Estamos emocionados de ver lo que puedes
+            aportar!
           </p>
-        </div>
+        </section>
+        <section className="mt-10">
+          <h2 className="py-8 text-5xl font-bold">¿Tienes alguna idea o sugerencia?</h2>
+          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+            Nos encantaría escucharte. Si tienes alguna idea o sugerencia para mejorar nuestro blog,
+            no dudes en compartirla con nosotros. Puedes enviarnos un{' '}
+            <Link href="/contact" className="text-primary-500 hover:underline">
+              mensaje a través del formulario de contacto
+            </Link>{' '}
+            o mandarnos un{' '}
+            <Link href="mailto:info@bysmax.com" className="text-primary-500 hover:underline">
+              correo electrónico
+            </Link>
+            . ¡Tu opinión es muy valiosa para nosotros!
+          </p>
+        </section>
       </div>
     </div>
   )
