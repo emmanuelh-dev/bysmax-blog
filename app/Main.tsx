@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 const MAX_DISPLAY = 6
 
-export default function Home({ posts, title, service = false }) {
+export default function Home({ posts, title, service = false, curso = false }) {
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -46,14 +46,14 @@ export default function Home({ posts, title, service = false }) {
                         <div className="bg-black/50 p-2 text-white">
                           <Link
                             className="font-medium uppercase"
-                            href={`/${service ? 'servicios' : 'blog'}/${slug}`}
+                            href={`/${service ? 'servicios' : curso ? 'cursos' : 'blog'}/${slug}`}
                           >
                             {title}
                           </Link>
                         </div>
                         <p className="mt-6 line-clamp-2 text-sm text-slate-600">{summary}</p>
                       </div>
-                      {!service && (
+                      {!service && !curso && (
                         <div className="mt-1 inline-flex items-center space-x-1">
                           {authors.map((author) => (
                             <p

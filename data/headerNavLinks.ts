@@ -4,6 +4,7 @@ const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog` // Change if you
 
 const headerNavLinks = [
   { href: '/servicios', title: 'Servicios' },
+  { href: '/cursos', title: 'Cursos' },
   { href: '/blog', title: 'Blog' },
   { href: '/tags', title: 'Tags' },
   { href: '/projects', title: 'Proyectos' },
