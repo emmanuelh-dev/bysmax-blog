@@ -1,0 +1,69 @@
+---
+title: 'Solución al error al iniciar el servidor de desarrollo Error: listen EACCES: permission denied ::1:5173'
+date: '2024-01-26'
+tags: ['español', 'features']
+draft: false
+authors: ['emmanuelhdev']
+summary: 'Error: listen EACCES: permission denied ::1:5173'
+---
+
+Si obtienes este error al ejecutar el comando:
+
+```bash
+npm run dev
+```
+
+El problema es bastante común, pero la solución es sencilla. A continuación, te proporciono los pasos para resolverlo.
+
+## Mensaje de error:
+
+```bash
+Error: listen EACCES: permission denied ::1:5173
+    at Server.setupListenHandle [as _listen2] (node:net:1855:21)
+    at listenInCluster (node:net:1920:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (node:net:2075:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:109:8)
+```
+
+## Pasos para solucionar el error:
+
+1. Identifica el proceso que está ocupando el puerto. En este caso, se encontró que el proceso Java estaba utilizando el puerto.
+
+   ```bash
+   # Encuentra el proceso que utiliza el puerto 5173
+   lsof -i :5173
+   ```
+
+2. Detén el proceso que está utilizando el puerto.
+
+   ```bash
+   # Detén el proceso utilizando el PID obtenido del paso anterior
+   kill -9 <PID_DEL_PROCESO>
+   ```
+
+3. Vuelve a ejecutar el comando para iniciar el servidor de desarrollo.
+
+   ```bash
+   npm run dev
+   ```
+
+Con estos pasos, deberías poder reiniciar el servidor de desarrollo sin problemas.
+
+## Resultado esperado:
+
+Después de seguir los pasos anteriores, deberías ver un resultado similar al siguiente:
+
+```bash
+> dev
+> vite
+
+  VITE v5.0.12  listo en 213 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host para exponer
+  ➜  presiona h + enter para mostrar la ayuda
+
+  LARAVEL v10.42.0  plugin v1.0.1
+
+  ➜  APP_URL: http://localhost
+```

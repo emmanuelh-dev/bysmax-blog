@@ -1,0 +1,109 @@
+---
+title: 'How to Deploy Laravel and MVC Projects on Domcloud: Step-by-Step Guide'
+date: 2024-04-03
+tags: ['Laravel', 'MVC', 'Domcloud', 'Deployment', 'Hosting']
+draft: false
+authors: ['emmanuelhdev']
+summary: 'Learn how to easily and quickly deploy your Laravel and MVC projects on the Domcloud hosting platform. This detailed guide walks you through the process step-by-step with screenshots.'
+---
+
+# Deploying a Laravel or PHP Project on DomCloud
+
+## Introduction
+
+As you may know, there are guides that use the DomCloud service to deploy up to 3 projects for free. Additionally, DomCloud offers the option to upgrade your account to 6 projects for just $1.5 per month.
+
+This guide assumes that you already have your project on GitHub. If you don't know how to do that, we recommend reviewing the following guides:
+
+- [Deploy PHP Project on DomCloud](https://blogjc.vercel.app/post/php-domcloud)
+- [Deploy on DomCloud](https://blogjc.vercel.app/post/domcloud)
+
+## Deployment Process
+
+### 1. Access DomCloud
+
+Go to [https://domcloud.co/](https://domcloud.co/) and create an account if you don't have one yet, by connecting with your GitHub or Google account.
+
+### 2. Add a New Website
+
+Once inside, click on the **+Add a website** button and then on **"No, I want to start from scratch"**.
+
+### 3. Configure the Project
+
+A page will appear where you should delete the default content in the "features" section and paste one of the following scripts, depending on your project:
+
+#### Script for Laravel
+
+```
+source: <YourRepository>
+features:
+  - mysql
+  - ssl
+  - ssl always
+nginx:
+  root: public_html/public
+  fastcgi: on
+  locations:
+    - match: /
+      try_files: $uri $uri/ /index.php$is_args$args
+    - match: ~ \.[^\/]+(?<!\.php)$
+      try_files: $uri =404
+commands:
+  - cp .env.example .env
+  - sed -i "s/DB_HOST=127.0.0.1/DB_HOST=localhost/g" .env
+  - sed -ri "s/DB_DATABASE=.*/DB_DATABASE=${DATABASE}/g" .env
+  - sed -ri "s/DB_USERNAME=.*/DB_USERNAME=${USERNAME}/g" .env
+  - sed -ri "s/DB_PASSWORD=.*/DB_PASSWORD=${PASSWORD}/g" .env
+  - sed -ri "s/APP_URL=.*/APP_URL=http:\/\/${DOMAIN}/g" .env
+  - composer install
+  - php artisan migrate:fresh || true
+  - php artisan key:generate
+  - php artisan storage:link
+```
+
+#### Script for Laravel with Livewire v3.0
+
+```
+source: <YourRepository>
+features:
+  - mysql
+  - ssl
+  - ssl always
+nginx:
+  root: public_html/public
+  fastcgi: on
+  locations:
+    - match: /
+      try_files: $uri $uri/ /index.php$is_args$args
+    - match: ~ \.[^\/]+(?<!\.php)$
+      try_files: $uri =404
+commands:
+  - cp .env.example .env
+  - sed -i "s/DB_HOST=127.0.0.1/DB_HOST=localhost/g" .env
+  - sed -ri "s/DB_DATABASE=.*/DB_DATABASE=${DATABASE}/g" .env
+  - sed -ri "s/DB_USERNAME=.*/DB_USERNAME=${USERNAME}/g" .env
+  - sed -ri "s/DB_PASSWORD=.*/DB_PASSWORD=${PASSWORD}/g" .env
+  - sed -ri "s/APP_URL=.*/APP_URL=http:\/\/${DOMAIN}/g" .env
+  - composer install
+  - php artisan migrate:fresh || true
+  - php artisan key:generate
+  - php artisan storage:link
+  - php artisan livewire:publish
+  - cp -r vendor/livewire/livewire/dist public/livewire
+```
+
+Replace `<YourRepository>` with the URL of your GitHub repository.
+
+### 4. Configure the Username
+
+In the "Username" section, enter the name you want to give your project. Keep in mind that this name will be unique and will be part of the URL to display your project.
+
+### 5. Add the Website
+
+Click on the "Add a Website" button to start the deployment process.
+
+## Additional Configuration
+
+If your project is with Breeze for authentication or something with changes in your file `.env`, you will need to configure it, like an email service as [Mailtrap](https://mailtrap.io/) or [Brevo](https://www.brevo.com/). To do this, access Webmin from the "Manage" tab in DomCloud, find the `.env` file, and edit the email variables with your credentials.
+
+That's it! Your Laravel or PHP project should now be deployed and ready to use.
