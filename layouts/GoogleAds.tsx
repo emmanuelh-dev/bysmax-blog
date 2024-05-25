@@ -6,7 +6,7 @@ export default function GoogleAds() {
     <div>
       <ins
         className="adsbygoogle"
-        style={{ display: 'inline-block', width: 728, height: 90 }}
+        style={{ display: 'inline-block', width: 120, height: 728 }}
         data-ad-client="ca-pub-3646138644530578"
         data-ad-slot="6731750998"
         data-ad-format="auto"
