@@ -4,7 +4,7 @@ date: 2024-05-09
 tags: ['proteus', 'circuito']
 draft: false
 authors: ['emmanuelhdev', 'ale']
-summary:  Bienvenidos todos a este nuevo blog y en esta entrada les queremos compartir como hacer un contador de 00-99 con el IC 74190.
+summary: Bienvenidos todos a este nuevo blog y en esta entrada les queremos compartir como hacer un contador de 00-99 con el IC 74190.
 cover: /static/images/crear-un-contador-ascendentedescendente-00-99-con-el-ic-74190.png
 ---
 
@@ -35,28 +35,32 @@ Aqui pueder ver el video del circuito: https://www.youtube.com/watch?v=R_jP4Ch5Q
 - **1 cap 2.2uf**
 
 ## Detalles Adicionales:
+
 Aunque no se muestra directamente en Proteus, este circuito utiliza una señal de reloj que puede generarse con un circuito temporizador 555, proporcionando la frecuencia necesaria para el conteo.
 
 ## Explicación del Circuito:
 
 1. **Funciones de los Botones**:
+
    - El primer botón pausa el contador.
    - El segundo botón carga un valor predeterminado (por ejemplo, 35).
    - El tercer botón cambia la dirección del contador entre ascendente y descendente.
 
 2. **Funcionamiento del IC 74190**:
+
    - El IC 74190 es un contador ascendente/descendente con capacidad para contar hasta 99.
    - Se utiliza para realizar el conteo y controlar la dirección del mismo según la configuración de los botones.
 
 3. **Uso del IC 7447**:
+
    - El IC 7447 decodifica la salida binaria del IC 74190 en señales adecuadas para los displays de siete segmentos.
    - Permite mostrar los números del contador en los displays conectados.
 
 4. **Configuración del Circuito**:
+
    - Conectar los pines de los botones a las entradas adecuadas para controlar las funciones (pausa, carga de valor predeterminado, cambio de dirección).
    - Configurar las resistencias para limitar la corriente hacia los displays y establecer los niveles de voltaje según las especificaciones de los componentes.
 
 5. **Ejemplo de Carga de Valor**:
    - Utilizar los primeros cuatro pines del IC 74190 (D0 a D3) para cargar un valor inicial.
    - Por ejemplo, configurar D0 y D2 en alto (1) y D1 y D3 en bajo (0) puede cargar el valor 5 en el contador.
-
