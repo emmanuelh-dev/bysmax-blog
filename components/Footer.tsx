@@ -15,7 +15,7 @@ const Footer = () => {
     {
       title: 'Servicios',
       links: allServicios.map((s) => ({
-        href: `/servicios/${s.slug.toLowerCase()}`,
+        href: `/servicios/${s.slug}`,
         title: s.title,
       })),
     },
