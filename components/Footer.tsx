@@ -4,12 +4,27 @@ import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
+import { allServicios, allCursos } from 'contentlayer/generated'
 
 const Footer = () => {
   const footerLinks = [
     {
       title: 'Mantente actualizado',
       links: [...headerNavLinks],
+    },
+    {
+      title: 'Servicios',
+      links: allServicios.map((s) => ({
+        href: `/servicios/${s.slug.toLowerCase()}`,
+        title: s.title,
+      })),
+    },
+    {
+      title: 'Cursos',
+      links: allCursos.map((c) => ({
+        href: `/cursos/${c.slug}`,
+        title: c.title,
+      })),
     },
   ]
 
