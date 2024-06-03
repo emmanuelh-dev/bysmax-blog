@@ -122,7 +122,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   className="adsbygoogle"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
-                  data-ad-slot="6731750998"
+                  data-ad-slot="9734184827"
                   data-ad-format="auto"
                   data-full-width-responsive="true"
                 ></ins>
