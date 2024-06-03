@@ -174,6 +174,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   &larr; Back to the blog
                 </Link>
               </div>
+              <GoogleAds />
             </footer>
           </div>
         </div>
