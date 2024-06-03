@@ -3,8 +3,10 @@ import React, { useEffect } from 'react'
 
 export default function GoogleAds() {
   useEffect(() => {
-    if (window.adsbygoogle && window.adsbygoogle.push) {
-      window.adsbygoogle.push({})
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const adsbygoogle = (window as any).adsbygoogle
+    if (adsbygoogle && adsbygoogle.push) {
+      adsbygoogle.push({})
     }
   }, [])
 
