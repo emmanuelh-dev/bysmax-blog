@@ -1,7 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function GoogleAds() {
+  useEffect(() => {
+    if (window.adsbygoogle && window.adsbygoogle.push) {
+      window.adsbygoogle.push({})
+    }
+  }, [])
+
   return (
     <div>
       <ins
@@ -12,11 +18,6 @@ export default function GoogleAds() {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: '(window.adsbygoogle = window.adsbygoogle || []).push({});',
-        }}
-      />
     </div>
   )
 }
