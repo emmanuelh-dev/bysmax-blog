@@ -80,7 +80,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
         crossOrigin="anonymous"
-        strategy="lazyOnload"
       ></Script>
       <body className="bg-white text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
