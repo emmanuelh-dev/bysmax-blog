@@ -172,6 +172,14 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     )}
                   </div>
                 )}
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-3646138644530578"
+                  data-ad-slot="6731750998"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
@@ -182,14 +190,6 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   &larr; Back to the blog
                 </Link>
               </div>
-              <ins
-                className="adsbygoogle"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6731750998"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
             </footer>
           </div>
         </div>
