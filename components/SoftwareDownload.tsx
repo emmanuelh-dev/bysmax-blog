@@ -33,7 +33,7 @@ export default function SoftwareDownload({ mainImage, downloadLink, title, descr
           src={mainImage ?? '/placeholder.svg'}
           width="1270"
           height="300"
-          alt="Hero"
+          alt={description}
           className="mx-auto aspect-[1/1] overflow-hidden rounded object-cover"
         />
       </div>
