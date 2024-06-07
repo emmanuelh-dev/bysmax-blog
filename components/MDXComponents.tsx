@@ -8,7 +8,7 @@ import TableWrapper from './TableWrapper'
 import TransformatorCalculator from './TransformatorCalculator'
 import ColorCodeMain from './colorCodeCalculator/ColorCodeMain'
 import HeaderGenerator from './HeaderGenerator'
-
+import SoftwareDownload from './SoftwareDownload'
 export const components: MDXComponents = {
   Image,
   TOCInline,
@@ -19,4 +19,5 @@ export const components: MDXComponents = {
   TransformatorCalculator,
   ColorCodeMain,
   HeaderGenerator,
+  SoftwareDownload,
 }

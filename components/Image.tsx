@@ -23,7 +23,7 @@ const Image = ({ ...rest }: ImageProps) => {
   return (
     <div>
       <button className="relative cursor-pointer" onClick={openModal}>
-        <NextImage {...rest} className="h-auto w-full" />
+        <NextImage {...rest} className={'h-auto w-full' + rest.className} />
       </button>
 
       {/* Modal para mostrar la imagen a pantalla completa */}
