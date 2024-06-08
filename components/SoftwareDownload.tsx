@@ -1,10 +1,20 @@
 import Link from 'next/link'
 import Image from './Image'
+import { Card, CardContent } from '@/components/ui/card'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 
-export default function SoftwareDownload({ mainImage, downloadLink, title, description }) {
+export default function SoftwareDownload({ mainImage, downloadLink, title, description, gallery }) {
+  console.log(gallery)
+
   return (
     <main className="mb-10">
-      <div className="mx-auto grid gap-4 md:grid-cols-2">
+      <div className="mx-auto grid items-end gap-4 md:grid-cols-2">
         <div>
           <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
             {title}
@@ -20,13 +30,6 @@ export default function SoftwareDownload({ mainImage, downloadLink, title, descr
             >
               Descargar
             </a>
-            {/* <Link
-              href="#"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-              prefetch={false}
-            >
-              Más información
-            </Link> */}
           </div>
         </div>
         <Image
@@ -34,9 +37,40 @@ export default function SoftwareDownload({ mainImage, downloadLink, title, descr
           width="1270"
           height="300"
           alt={description}
-          className="mx-auto aspect-[1/1] overflow-hidden rounded object-cover"
+          className="mx-auto aspect-[4/2] overflow-hidden rounded object-cover"
         />
       </div>
+      <Gallery gallery={gallery} />
     </main>
+  )
+}
+
+function Gallery({ gallery }) {
+  if (!gallery) return null
+
+  return (
+    <Carousel className="my-10">
+      <CarouselContent className="-ml-1">
+        {gallery.map((image, index) => (
+          <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <Image
+                    src={image.src}
+                    alt={image.alt || `Gallery image ${index + 1}`}
+                    className="object-cover"
+                    width="1270"
+                    height="300"
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   )
 }
