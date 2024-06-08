@@ -52,7 +52,7 @@ function Gallery({ gallery }) {
     <Carousel className="my-10">
       <CarouselContent className="-ml-1">
         {gallery.map((image, index) => (
-          <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={index} className="pl-1 basis-10/12 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
