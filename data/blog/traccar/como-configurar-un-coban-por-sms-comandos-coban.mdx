@@ -1,0 +1,37 @@
+---
+title:  Cómo Configurar un Coban por SMS Comandos Coban
+date: 2024-06-12
+tags: ['traccar', 'coban']
+draft: false
+authors: ['default']
+summary: Te mostraremos cómo configurar tu Coban usando comandos por SMS
+---
+
+## COMANDOS SMS NECESARIOS PARA LA CONFIGURACIÓN POR SMS DEL DISPOSITIVOS GPS-COBAN/BAANOOL
+
+| ORDEN DEL COMANDO | COMANDO                       | EJEMPLO                                 | RESPUESTA     | FUNCIÓN                                                                       |
+|-------------------|-------------------------------|-----------------------------------------|---------------|--------------------------------------------------------------------------------|
+| 1                 | Begin123456                   | Begin 123456                            | begin ok!     | Resetear el equipo                                                            |
+| 2                 | dns123456 plataforma puerto   | dns123456 plataformagps.com 5001        | dns ok!       | Configurar de DNS plataforma a la cual reportará el dispositivo                |
+| 3                 | Apn123456 direccionapn        | Apn123456 internet.claro.com.ec         | APN ok!       | Configurar APN del chip                                                       |
+| 4                 | gprs123456                    | gprs123456                              | gprs ok!      | Activar señal gprs                                                            |
+| 5                 | Sleep123456 shock 030s060m***n| Sleep123456 shock 030s060m***n          |               | Configurar tiempo de reporte 30 segundos encendido o movimiento y 60 minutos en apagado o detenido |
+
+## COMANDOS OPCIONALES - COBAN/BAANOOL
+
+| COMANDO           | COMANDO DE EJEMPLO            | RESPUESTA           | FUNCIÓN                                               |
+|-------------------|-------------------------------|---------------------|--------------------------------------------------------|
+| Check123456       | Check123456                   |                     | Conocer el estado del dispositivo                      |
+| Imei123456        | Imei123456                    | 8694244545454       | Conocer el IMEI del equipo                             |
+| Monitor123456     | Monitor123456                 | Monitor ok!         | Activar función abrir el micrófono al llamar           |
+| Tracker123456     | Tracker123456                 | Tracker ok!         | Activar función de enviar ubicación al llamar          |
+| Position123456    | Position123456                |                     | Pedir ubicación actual del equipo por SMS              |
+| Sleep123456 on    | Sleep123456 on                | Sleep on!           | Activar el modo de ahorro de energía                   |
+| Sleep123456 off   | Sleep123456 off               | Sleep off!          | Desactivar el modo de ahorro de energía                |
+| Stop123456        | Stop123456                    |                     | Enviar la señal de bloqueo al motor                    |
+| Resume123456      | Resume123456                  |                     | Enviar la señal de desbloqueo al motor                 |
+| Arm123456         | Arm123456                     |                     | Enviar el armado de alarma al equipo                   |
+
+
+
+Con esto tu equipo quedaria listo para usar.
