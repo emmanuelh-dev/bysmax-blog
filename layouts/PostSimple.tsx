@@ -19,7 +19,7 @@ interface LayoutProps {
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
   const { path, slug, date, title, tags } = content
-  const filteredPosts = allBlogs.filter(post => post.tags.includes(tags[0]))
+  const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
   const posts = allCoreContent(filteredPosts)
   return (
     <SectionContainer>

@@ -13,8 +13,16 @@ Si estas buscando algo menos avanzado te recomendaria revisar esta entrada [Cóm
 
 Puedes encontrar el video guiado aquí [Cómo Personalizar Traccar Web](https://www.youtube.com/watch?v=S5N441XGW7M&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV).
 
-<div className="max-w-full max-h-[500px] w-[560px] h-[315px]">
-  <iframe className="w-full h-full" src="https://www.youtube-nocookie.com/embed/ZSVYhKHmXe8?si=FTduD5c48I5xT23j" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+<div className="h-[315px] max-h-[500px] w-[560px] max-w-full">
+  <iframe
+    className="h-full w-full"
+    src="https://www.youtube-nocookie.com/embed/ZSVYhKHmXe8?si=FTduD5c48I5xT23j"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
 </div>
 
 También te podría interesar [cómo actualizar Traccar en DigitalOcean](https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=2).
@@ -37,6 +45,7 @@ Los colores juegan un papel crucial en la apariencia de cualquier aplicación. A
 
 1. **Ubicar el Archivo de Estilos**: Abre el archivo `src/common/theme/palette.js`.
 2. **Modificar Colores**: Dentro de este archivo, encontrarás las variables que definen los colores principales de la aplicación. Por ejemplo:
+
    ```js
      primary: {
        main: "#0dd3ba",
@@ -71,6 +80,7 @@ Además de los colores y logos, puedes personalizar otros elementos de la interf
 ### Cambiar el Tamaño de los Elementos
 
 1. **Modificar Dimensiones**: En el archivo `theme.scss`, también puedes ajustar las dimensiones de los elementos clave. Por ejemplo:
+
    ```scss
    $header-height: 60px;
    $sidebar-width: 250px;
