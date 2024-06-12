@@ -9,7 +9,6 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Link from 'next/link'
-import GoogleAds from './GoogleAds'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -127,7 +126,6 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {/* Adds*/}
-                <GoogleAds />
                 <ins
                   className="adsbygoogle"
                   style={{ display: 'block' }}
