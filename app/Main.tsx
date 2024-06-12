@@ -55,7 +55,7 @@ export default function Home({ posts, title, service = false, curso = false }) {
                       </div>
                       {!service && !curso && (
                         <div className="mt-1 inline-flex items-center space-x-1">
-                          {authors.map((author) => (
+                          {authors && authors.map((author) => (
                             <p
                               className="text-xs font-medium text-gray-900 dark:text-gray-400"
                               key={author}
