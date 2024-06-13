@@ -74,6 +74,7 @@ const siteMetadata = {
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
+      inputPosition: 'top',
       // This corresponds to the `data-lang="en"` in giscus's configurations
       lang: 'es',
     },
