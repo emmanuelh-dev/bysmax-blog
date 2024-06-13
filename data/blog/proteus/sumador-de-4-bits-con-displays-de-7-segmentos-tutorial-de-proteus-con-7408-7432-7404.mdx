@@ -1,20 +1,16 @@
 ---
 title: Sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404
 date: 2024-05-16
-tags: ['proteus']
+tags: ['proteus', '7408', '7447', '7490']
 draft: false
 authors: ['emmanuelhdev', 'ale']
 summary: Bienvenido a nuestro tutorial interactivo donde te enseñaremos a construir un sumador de 4 bits utilizando displays de 7 segmentos en Proteus Si eres un entusiasta de la electrónica o un estudiante buscando profundizar tus conocimientos en circuitos digitales, este video es perfecto para ti.
 cover: /static/images/sumador-4-bits.png
 ---
 
-## Cómo Construir un Sumador de 4 Bits con Displays de 7 Segmentos en Proteus
+Que onda banda, bienvenidos a este nuevo tutorial para construir un sumador de 4 bits utilizando displays de 7 segmentos en Proteus!. Este tutorial lo trate de hacer lo más sencillo posible y si quieres ir directo al grano, puedes descargar el material más abajo.
 
-¡Bienvenido a nuestro tutorial interactivo donde te enseñaremos a construir un sumador de 4 bits utilizando displays de 7 segmentos en Proteus! Si eres un entusiasta de la electrónica o un estudiante buscando profundizar tus conocimientos en circuitos digitales, este video es perfecto para ti.
-
-![Sumador de 4 Bits con Displays de 7 Segmentos en Proteus](/static/images/sumador-4-bits.png)
-
-<TOCInline toc={props.toc} toHeading={4} />
+![Sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404](/static/images/sumador-4-bits.png)
 
 ## Materiales
 
@@ -24,30 +20,42 @@ https://drive.google.com/drive/folders/15vm5RnMBhR3c7m7_NNBq7Qb1luCpFRiP?usp=sha
 
 ### Video de YouTube
 
-[Sumador de 4 Bits con Displays de 7 Segmentos: Tutorial de Proteus con 7408, 7432, 7404](https://www.youtube.com/watch?v=G37Q7AQzHYY)
+<div className="h-[315px] max-h-[500px] lg:w-[560px] max-w-full">
+  <iframe
+    className="h-full w-full"
+    src="https://www.youtube-nocookie.com/embed/G37Q7AQzHYY?si=Kfl45tqHV7Y7fG_9"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
+</div>
 
-## ¿Qué Cubriremos en Este Tutorial?
+Un sumador es un circuito lógico que calcula la operación suma. En los computadores modernos se encuentra en lo que se denomina Unidad aritmética lógica (ALU). Generalmente realizan las operaciones aritméticas en código binario decimal o BCD exceso 3, por regla general los sumadores emplean el sistema binario. En los casos en los que se esté empleando un complemento a dos para representar números negativos el sumador se convertirá en un sumador- substractor (Adder-subtracter).
 
-1. **Fundamentos de los Sumadores y Cómo Funcionan**: Entenderás cómo los sumadores binarios combinan bits para realizar operaciones aritméticas.
-2. **Guía de Conexión de Circuitos Integrados**: Te mostraremos cómo conectar los IC 7408 (AND), 7432 (OR), y 7404 (NOT).
-3. **Configuración de Displays de 7 Segmentos con Decodificadores 7447**: Aprenderás a conectar y configurar estos componentes para visualizar los resultados de tu sumador.
-4. **Consejos Prácticos para la Depuración y Simulación en Proteus**: Técnicas y trucos para asegurarte de que tu circuito funcione correctamente.
+## Tipos de sumadores:
+
+- Half-adder.
+
+- Full-Adder.
+
+- Metodo Ripple
+
+- Carry-Look-Ahead.
+
+- Carry-select
 
 ## Materiales Necesarios
 
 Para este proyecto, necesitarás los siguientes componentes:
 
-- **Contador**:
-  - 4 x 7490
-- **Lectura en LEDs**:
-  - 13 x LEDs y resistencias de 220/330Ω
-- **Displays de 7 Segmentos**:
-  - 4 x 7447/7448
-  - 4 x Displays de 7 segmentos (ánodo común o cátodo común)
-- **Compuertas Lógicas**:
-  - 1 x 7408 (AND)
-- **Interacción Manual**:
-  - Botones pulsadores y resistencias de 10kΩ
+- 4 x 7490
+- 13 x LEDs y resistencias de 220/330Ω
+- 4 x 7447/7448
+- 4 x Displays de 7 segmentos (ánodo común o cátodo común)
+- 1 x 7408 (AND)
+- Botones pulsadores y resistencias de 10kΩ
 
 ## Paso a Paso: Construcción del Sumador de 4 Bits
 
@@ -76,8 +84,11 @@ Para este proyecto, necesitarás los siguientes componentes:
 
 ## Resultado Final
 
-Al completar este tutorial, tu sumador de 4 bits será capaz de contar y mostrar valores desde 0 hasta 15 en los displays de 7 segmentos. Cada número se visualizará correctamente gracias a la configuración de los decodificadores 7447, garantizando una transición suave y precisa entre los dígitos.
+
+![Sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404](/static/images/sumador-4-bits.png)
+
 
 ## Conclusión
 
-¡Y eso es todo por este tutorial! Esperamos que hayas disfrutado construyendo tu sumador de 4 bits y que hayas aprendido mucho sobre circuitos digitales y simulación en Proteus. No olvides darle like al video, suscribirte a nuestro canal y activar las notificaciones para más contenido educativo como este. ¡Hasta la próxima!
+
+Y eso sería todo. Espero te sea de ayuda y si notas algo mal puedes dejarlo en la sección de comentarios y con mucho gusto lo revisamos. Con este tutorial deberías poder contar desde 0 hasta 15 en los displays de 7 segmentos. Cada número se visualizará correctamente gracias a la configuración de los decodificadores 7447, garantizando una transición suave y precisa entre los dígitos.
