@@ -5,7 +5,7 @@ import { allBlogs, type Blog } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Main from '../app/Main'
@@ -22,7 +22,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
   const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
   const posts = allCoreContent(filteredPosts)
   return (
-    <SectionContainer>
+    <SectionContainerWithAds>
       <ScrollTopAndComment />
       <article>
         <div>
@@ -88,6 +88,6 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
         </div>
       </article>
       <Main posts={posts} title="Te podria interesar" />
-    </SectionContainer>
+    </SectionContainerWithAds>
   )
 }

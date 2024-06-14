@@ -4,7 +4,7 @@ import type { Blog, Authors } from 'contentlayer/generated'
 import { allBlogs } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -40,7 +40,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   const basePath = path.split('/')[0]
 
   return (
-    <SectionContainer>
+    <SectionContainerWithAds>
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
@@ -210,6 +210,6 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
         </div>
       </article>
       <Main posts={posts} title="Te podria interesar" />
-    </SectionContainer>
+    </SectionContainerWithAds>
   )
 }

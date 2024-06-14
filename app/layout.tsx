@@ -87,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
         crossOrigin="anonymous"
       ></Script>
-      <body className="bg-white text-black antialiased dark:bg-black dark:text-white">
+      <body className="overflow-x-hidden bg-white text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SpeedInsights />
