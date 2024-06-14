@@ -87,15 +87,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
         crossOrigin="anonymous"
       ></Script>
-      <script type="text/javascript">
-        {`
+      <Script
+        id="clarity"
+        dangerouslySetInnerHTML={{
+          __html: `
             (function(c,l,a,r,i,t,y){
               c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
             })(window, document, "clarity", "script", "ms0781vg0u");
-          `}
-      </script>
+          `,
+        }}
+      />
       <body className="overflow-x-hidden bg-white text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
