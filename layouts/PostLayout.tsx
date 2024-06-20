@@ -189,9 +189,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   &larr; Back to the blog
                 </Link>
               </div>
-              <div className="sticky top-0 mt-6">
+              <div className="sticky top-0 pt-10">
                 <ins
-                  className="adsbygoogle"
+                  className="adsbygoogle sticky top-10 mt-6"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="9734184827"
