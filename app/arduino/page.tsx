@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { allBlogs } from 'contentlayer/generated'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import Image from 'next/image'
 
 export default function page() {
   const tags = ['arduino']
@@ -15,6 +16,7 @@ export default function page() {
   const filteredPosts = allBlogs.filter((post) => tags.some((tag) => post.tags.includes(tag)))
 
   const posts = allCoreContent(sortPosts(filteredPosts))
+
   return (
     <main className="grid grid-cols-1 md:grid-cols-[300px_1fr]">
       <div className="sticky top-4 space-y-6">
@@ -79,7 +81,7 @@ export default function page() {
           ></ins>
         </div>
       </div>
-      <section className="space-y-8">
+      <section className="space-y-8 bg-white dark:bg-black">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <div
@@ -89,7 +91,7 @@ export default function page() {
               <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10" prefetch={false}>
                 <span className="sr-only">View Tutorial</span>
               </Link>
-              <img
+              <Image
                 src={post.cover ? post.cover : '/placeholder.svg'}
                 alt="Arduino Basics"
                 width={450}
