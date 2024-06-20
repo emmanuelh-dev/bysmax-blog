@@ -43,16 +43,16 @@ const HeaderGenerator = () => {
 
   const generateResult = () => {
     return `---
-title: ${title}
+title: "${title}"
 date: ${date}
 tags: [${tags
       .split(',')
-      .map((tag) => `'${tag.trim()}'`)
+      .map((tag) => `"${tag.trim()}"`)
       .join(', ')}]
-draft: ${draft}
+draft: "${draft}"
 authors: [${authors
       .split(',')
-      .map((author) => `'${author.trim()}'`)
+      .map((author) => `"${author.trim()}"`)
       .join(', ')}]
 summary: ${summary.replace(/:/g, '').trim()}
 ---`
