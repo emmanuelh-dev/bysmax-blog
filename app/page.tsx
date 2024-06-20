@@ -27,7 +27,7 @@ export default async function Page() {
           </h1>
           <p className="pt-2 text-lg text-gray-500 dark:text-gray-400">
             Accede a tutoriales detallados, guías prácticas y proyectos innovadores que te ayudarán
-            a dominar la electrónica y la tecnología.
+            a dominar el mundo de la electrónica.
           </p>
           <div className="flex gap-4">
             <Link
