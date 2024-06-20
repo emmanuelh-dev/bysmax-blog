@@ -27,13 +27,13 @@ export default function page() {
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Categories</h3>
           <div className="grid gap-2">
-            <Link href="#" className="text-muted-foreground hover:text-primary">
+            <Link href="/" className="text-muted-foreground hover:text-primary">
               Beginners
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
+            <Link href="/" className="text-muted-foreground hover:text-primary">
               Advanced Projects
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
+            <Link href="/" className="text-muted-foreground hover:text-primary">
               Tips and Tricks
             </Link>
           </div>
