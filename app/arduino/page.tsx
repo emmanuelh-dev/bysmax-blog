@@ -68,14 +68,16 @@ export default function page() {
             </Button>
           </form>
         </div>
-        <ins
-          className="adsbygoogle sticky top-10 mt-6"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-3646138644530578"
-          data-ad-slot="9734184827"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
+        <div className="sticky top-0 pt-10">
+          <ins
+            className="adsbygoogle sticky top-10 mt-6"
+            style={{ display: 'block' }}
+            data-ad-client="ca-pub-3646138644530578"
+            data-ad-slot="9734184827"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
       </div>
       <section className="space-y-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -94,7 +96,7 @@ export default function page() {
                 height={300}
                 className="h-48 w-full object-cover transition-opacity group-hover:opacity-50"
               />
-              <div className="bg-background p-4">
+              <div className="bg-white p-4 dark:bg-black">
                 <h3 className="text-xl font-bold">{post.title}</h3>
                 <p className="text-muted-foreground truncate text-sm">{post.summary}</p>
                 <div className="mt-2 flex items-center justify-between">
