@@ -9,6 +9,12 @@ import { Button } from '@/components/ui/button'
 import { allBlogs } from 'contentlayer/generated'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import Image from 'next/image'
+import { genPageMetadata } from 'app/seo'
+
+export const metadata = genPageMetadata({
+  title: 'Tutoriales de Arduino',
+  description: 'description',
+})
 
 export default function page() {
   const tags = ['arduino']
