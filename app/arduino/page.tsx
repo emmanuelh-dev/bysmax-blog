@@ -98,7 +98,7 @@ export default function page() {
                 <span className="sr-only">View Tutorial</span>
               </Link>
               <Image
-                src={post.cover ? post.cover : '/placeholder.svg'}
+                src={post.images ? post.images[0] : '/placeholder.svg'}
                 alt="Arduino Basics"
                 width={450}
                 height={300}

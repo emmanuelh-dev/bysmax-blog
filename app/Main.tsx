@@ -22,18 +22,18 @@ export default function Home({ posts, title, service = false, curso = false }) {
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags, cover, authors } = post
-            console.log(post)
+            const { slug, date, title, summary, tags, cover, authors, images } = post
+            console.log(images)
             return (
               <li key={slug} className="py-12">
                 <article className="h-full flex-1">
                   <div className="block w-full lg:col-span-2">
-                    {cover ? (
+                    {images ? (
                       <Image
                         className="aspect-[384/246] h-full bg-center object-cover"
                         width={600}
                         height={400}
-                        src={cover}
+                        src={images[0]}
                         alt="The Time Traveler's Notebook"
                       />
                     ) : (
