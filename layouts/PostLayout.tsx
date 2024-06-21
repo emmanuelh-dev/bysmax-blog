@@ -76,10 +76,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
+                  Revisar en X
                 </Link>
                 {` • `}
-                <Link href={editUrl(filePath)}>Edit on GitHub</Link>
+                <Link href={editUrl(filePath)}>Editar en Github</Link>
               </div>
               {siteMetadata.comments && (
                 <div

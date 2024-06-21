@@ -44,7 +44,7 @@ export default async function Page() {
             </Link>
           </div>
         </div>
-        <Image alt="" width="400" height="400" decoding="async" data-nimg="1" src={image} />
+        <Image alt="Sonrie" width="400" height="400" decoding="async" data-nimg="1" src={image} />
       </div>
       <Main posts={posts} title="Blog" />
       <Main posts={servicios} title="Servicios" service />
