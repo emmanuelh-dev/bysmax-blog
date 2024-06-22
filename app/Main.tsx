@@ -23,7 +23,6 @@ export default function Home({ posts, title, service = false, curso = false }) {
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags, cover, authors, images } = post
-            console.log(images)
             return (
               <li key={slug} className="py-12">
                 <article className="h-full flex-1">
