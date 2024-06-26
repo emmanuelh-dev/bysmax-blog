@@ -27,8 +27,9 @@ Antes de poder programar el sensor, debemos conectarlo correctamente a la placa 
 
 - VCC: Conectar al pin de 5V de Arduino.
 - GND: Conectar al pin GND de Arduino.
-- TRIG: Conectar al pin digital 9 de Arduino.
-- ECHO: Conectar al pin digital 10 de Arduino.
+- TRIG: Conectar al pin digital 13 de Arduino.
+- ECHO: Conectar al pin digital 12 de Arduino.
+- Simulación: https://www.tinkercad.com/things/96u33v3jOTb-conexion-del-sensor-ultrasonico-a-arduino
 
 ![Conexión del sensor ultrasónico HC-SR04](/static/images/arduino/hcsr04_diagram.webp)
 
@@ -37,8 +38,8 @@ Antes de poder programar el sensor, debemos conectarlo correctamente a la placa 
 Aquí tienes un ejemplo de código para empezar a trabajar con el sensor ultrasónico HC-SR04:
 
 ```cpp
-const int trigPin = 9;
-const int echoPin = 10;
+const int trigPin = 13;
+const int echoPin = 12;
 long duration;
 int distance;
 
