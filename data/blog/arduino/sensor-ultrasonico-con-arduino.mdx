@@ -1,0 +1,103 @@
+---
+title: Sensor Ultrasónico con Arduino
+date: 2024-06-26
+tags: ['arduino', 'sensores', 'ultrasonico']
+draft: false
+authors: ['emmanuelhdev']
+summary: El código utiliza una biblioteca de Arduino para definir las notas musicales y sus duraciones
+images: ['/static/images/arduino/robot.jpg']
+---
+
+El sensor ultrasónico es una herramienta muy versátil en el mundo de la electrónica y la robótica. Con Arduino, podemos utilizarlo para medir distancias, detectar objetos y evitar obstáculos en diversos proyectos. En esta guía, exploraremos cómo conectar y programar un sensor ultrasónico HC-SR04 con Arduino, además de mostrar algunos proyectos interesantes donde se puede aplicar.
+
+![Robot evitador de obstaculos en arduino](/static/images/arduino/robot.jpg)
+
+## ¿Qué es el Sensor Ultrasónico HC-SR04?
+
+El sensor ultrasónico HC-SR04 es un dispositivo que mide la distancia a un objeto utilizando ondas sonoras. Emite un pulso ultrasónico y mide el tiempo que tarda en reflejarse de vuelta desde un objeto. Este tiempo se convierte en una medida de distancia.
+
+![Funcionamiento del sensor ultrasónico HC-SR04](/static/images/arduino/hcsr04.webp)
+
+
+## Conexión del Sensor Ultrasónico a Arduino
+
+Antes de poder programar el sensor, debemos conectarlo correctamente a la placa Arduino. A continuación, se muestra un diagrama de conexión.
+
+**Diagrama de Conexión:**
+
+- VCC: Conectar al pin de 5V de Arduino.
+- GND: Conectar al pin GND de Arduino.
+- TRIG: Conectar al pin digital 9 de Arduino.
+- ECHO: Conectar al pin digital 10 de Arduino.
+
+![Conexión del sensor ultrasónico HC-SR04](/static/images/arduino/hcsr04_diagram.webp)
+
+### Código de Ejemplo
+
+Aquí tienes un ejemplo de código para empezar a trabajar con el sensor ultrasónico HC-SR04:
+
+```cpp
+const int trigPin = 9;
+const int echoPin = 10;
+long duration;
+int distance;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  delay(1000);
+}
+```
+
+## Cómo Funciona el Sensor Ultrasónico
+
+El sensor ultrasónico HC-SR04 funciona mediante la emisión de un pulso sonoro y la medición del tiempo que tarda en regresar. Este tiempo se convierte en distancia utilizando la fórmula:
+
+$$ Distancia = \frac{\text{Tiempo} \times 0.034}{2}$$
+
+El factor 0.034 es la velocidad del sonido en cm/µs. Dividimos por 2 porque el tiempo medido es el viaje de ida y vuelta del pulso sonoro.
+
+## Proyectos Comunes con el Sensor Ultrasónico y Arduino
+
+El sensor ultrasónico es popular en proyectos como robots evitadores de obstáculos, sistemas de estacionamiento, medidores de nivel de líquidos y más. Aquí exploramos algunos de estos proyectos y cómo implementar el sensor en cada uno.
+
+![Robot evitador de obstaculos en arduino](/static/images/arduino/robot.jpg)
+
+## Proyecto: Carrito que Evita Obstáculos
+
+Uno de los proyectos más comunes es el carrito que evita obstáculos. Con el sensor ultrasónico, el carrito puede detectar objetos en su camino y cambiar de dirección para evitar colisiones.
+
+**Pasos del proyecto:**
+
+1. Conectar el sensor ultrasónico al Arduino como se describió anteriormente.
+2. Añadir motores y ruedas al carrito, controlados por un controlador de motores.
+3. Programar el Arduino para mover el carrito hacia adelante y girar cuando se detecta un obstáculo.
+
+![Robot evitador de obstaculos en arduino](/static/images/arduino/robot.jpg)
+
+## Aplicaciones Avanzadas del Sensor Ultrasónico
+
+Más allá de evitar obstáculos, los sensores ultrasónicos pueden usarse en aplicaciones avanzadas como la creación de mapas tridimensionales, donde varios sensores se utilizan para escanear y mapear el entorno. Estos sistemas pueden regresar sobre sus pasos y evitar obstáculos de manera más sofisticada.
+
+## Solución de Problemas Comunes
+
+- **Mediciones erráticas**: Verifica las conexiones y asegúrate de que no haya interferencias eléctricas.
+- **Rango limitado**: Asegúrate de que no haya objetos demasiado cerca del sensor que puedan causar lecturas falsas.
+- **Problemas de alimentación**: Usa una fuente de alimentación estable para evitar

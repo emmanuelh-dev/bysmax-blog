@@ -49,7 +49,7 @@ tags: [${tags
       .split(',')
       .map((tag) => `"${tag.trim()}"`)
       .join(', ')}]
-draft: "${draft}"
+draft: ${draft}
 authors: [${authors
       .split(',')
       .map((author) => `"${author.trim()}"`)
