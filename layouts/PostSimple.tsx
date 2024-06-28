@@ -8,7 +8,7 @@ import PageTitle from '@/components/PageTitle'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import Main from '../app/Main'
+import Recommended from '../app/Recommended'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -87,7 +87,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           </div>
         </div>
       </article>
-      <Main posts={posts} title="Te podria interesar" />
+      <Recommended tags={tags} title="Te podria interesar" />
     </SectionContainerWithAds>
   )
 }

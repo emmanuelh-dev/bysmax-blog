@@ -14,7 +14,7 @@ const ContentSecurityPolicy = `
   media-src *.s3.amazonaws.com;
   connect-src *;
   font-src 'self' data:;
-  frame-src giscus.app https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com/ https://www.youtube-nocookie.com/ https://googleads.g.doubleclick.net;
+  frame-src giscus.app https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com/ https://www.youtube-nocookie.com/ www.youtube.com https://googleads.g.doubleclick.net;
 `
 
 const securityHeaders = [

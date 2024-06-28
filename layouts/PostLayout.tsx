@@ -76,10 +76,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
+                  Revisar en X
                 </Link>
                 {` • `}
-                <Link href={editUrl(filePath)}>Edit on GitHub</Link>
+                <Link href={editUrl(filePath)}>Editar en Github</Link>
               </div>
               {siteMetadata.comments && (
                 <div
@@ -189,9 +189,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   &larr; Back to the blog
                 </Link>
               </div>
-              <div className="sticky top-0 mt-6">
+              <div className="sticky top-0 pt-10">
                 <ins
-                  className="adsbygoogle"
+                  className="adsbygoogle sticky top-10 mt-6"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="9734184827"

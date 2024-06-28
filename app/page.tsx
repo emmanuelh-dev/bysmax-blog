@@ -27,7 +27,7 @@ export default async function Page() {
           </h1>
           <p className="pt-2 text-lg text-gray-500 dark:text-gray-400">
             Accede a tutoriales detallados, guías prácticas y proyectos innovadores que te ayudarán
-            a dominar la electrónica y la tecnología.
+            a dominar el mundo de la electrónica.
           </p>
           <div className="flex gap-4">
             <Link
@@ -44,7 +44,7 @@ export default async function Page() {
             </Link>
           </div>
         </div>
-        <Image alt="" width="400" height="400" decoding="async" data-nimg="1" src={image} />
+        <Image alt="Sonrie" width="400" height="400" decoding="async" data-nimg="1" src={image} />
       </div>
       <Main posts={posts} title="Blog" />
       <Main posts={servicios} title="Servicios" service />

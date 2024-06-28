@@ -10,8 +10,6 @@ import {
 } from '@/components/ui/carousel'
 
 export default function SoftwareDownload({ mainImage, downloadLink, title, description, gallery }) {
-  console.log(gallery)
-
   return (
     <main className="mb-10">
       <section className="w-full">

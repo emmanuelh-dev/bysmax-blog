@@ -12,9 +12,9 @@ export default function Home({ posts, title, service = false, curso = false }) {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
-          </h1>
+          </h2>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {/*siteMetadata.description*/}
           </p>
@@ -22,18 +22,17 @@ export default function Home({ posts, title, service = false, curso = false }) {
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags, cover, authors } = post
-            console.log(post)
+            const { slug, date, title, summary, tags, cover, authors, images } = post
             return (
               <li key={slug} className="py-12">
                 <article className="h-full flex-1">
                   <div className="block w-full lg:col-span-2">
-                    {cover ? (
+                    {images ? (
                       <Image
                         className="aspect-[384/246] h-full bg-center object-cover"
                         width={600}
                         height={400}
-                        src={cover}
+                        src={images[0]}
                         alt="The Time Traveler's Notebook"
                       />
                     ) : (
