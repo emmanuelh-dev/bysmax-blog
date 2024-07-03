@@ -27,15 +27,20 @@ const Image = ({ className, ...rest }: ImageProps) => {
       open={isModalOpen}
       onKeyDown={handleKeyDown}
     >
-      <button
-        className="absolute right-4 top-4 z-50 text-xl text-white"
-        onClick={closeModal}
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus
-      >
-        <IoClose className="size-20" />
-      </button>
-      <NextImage {...rest} className="max-h-[40rem] w-full object-contain" />
+      <div className="flex w-full flex-col items-center justify-center p-6">
+        <div className="flex w-full flex-col items-end justify-center p-6">
+          <button
+            className="inline-block text-left text-white"
+            onClick={closeModal}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+          >
+            <IoClose className="size-16" />
+          </button>
+        </div>
+
+        <NextImage {...rest} className="max-h-[40rem] w-auto object-contain" />
+      </div>
     </dialog>
   )
 
