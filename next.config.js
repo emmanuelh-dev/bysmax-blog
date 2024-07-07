@@ -7,16 +7,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com https://www.googletagmanager.com googletagmanager.com clarity.ms https://www.clarity.ms;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com googletagmanager.com https://www.googletagmanager.com clarity.ms https://www.clarity.ms;
   script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com googletagmanager.com https://www.googletagmanager.com clarity.ms https://www.clarity.ms;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
   connect-src *;
-  font-src 'self' data:;
-  frame-src giscus.app https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com/ https://www.youtube-nocookie.com/ www.youtube.com https://googleads.g.doubleclick.net;
+  font-src 'self' data: https://fonts.gstatic.com;
+  frame-src giscus.app https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://www.youtube-nocookie.com www.youtube.com;
 `
-
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
