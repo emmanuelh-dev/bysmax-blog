@@ -12,12 +12,12 @@ import Image from 'next/image'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({
-  title: 'Cursos de Arduino desde cero',
-  description: 'description',
+  title: 'Curso de Traccar desde Cero hasta Avanzado en español',
+  description: 'Curso de Traccar desde Cero hasta Avanzado en español',
 })
 
 export default function page() {
-  const tags = ['arduino']
+  const tags = ['traccar']
 
   const filteredPosts = allBlogs.filter((post) => tags.some((tag) => post.tags.includes(tag)))
 
@@ -27,9 +27,15 @@ export default function page() {
     <main className="grid grid-cols-1 md:grid-cols-[300px_1fr]">
       <div className="sticky top-4 space-y-6">
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold">Tutoriales de Arduino</h1>
+          <h1 className="text-2xl font-bold">
+            Curso de Traccar desde Cero hasta Avanzado en español
+          </h1>
           <p className="text-muted-foreground">
-            Tutoriales de Arduino: Aprende con Sensores, Servomotores y Proyectos Avanzados
+            Traccar es una plataforma de código abierto para el rastreo de vehículos mediante
+            dispositivos GPS. Este curso en español te guiará desde la configuración inicial de tu
+            propio servidor de rastreo hasta la gestión avanzada de dispositivos y la
+            personalización de la plataforma. Aprenderás a agregar dispositivos GPS, identificar
+            protocolos de conexión y configurar notificaciones, entre otras funcionalidades clave.
           </p>
         </div>
         <div className="space-y-2">
