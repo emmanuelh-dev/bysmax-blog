@@ -33,3 +33,13 @@ input:-webkit-autofill:focus {
 .katex-display {
   overflow: auto hidden;
 }
+
+.content-header-link {
+  margin-left: -24px;
+  padding-right: 4px;
+}
+
+.linkicon {
+  display: inline-block;
+  vertical-align: middle;
+}
