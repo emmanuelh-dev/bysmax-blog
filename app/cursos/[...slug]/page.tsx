@@ -11,7 +11,6 @@ import ServicesLayout from '@/layouts/ServicesLayout'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
-
 export async function generateMetadata({
   params,
 }: {
@@ -22,7 +21,6 @@ export async function generateMetadata({
   if (!post) {
     return
   }
-
   // const publishedAt = new Date(post.date).toISOString()
   // let imageList = [siteMetadata.socialBanner]
   // if (post.images) {
@@ -54,6 +52,9 @@ export async function generateMetadata({
   //     images: imageList,
   //   },
   // }
+  return {
+    title: post.title,
+  }
 }
 
 export const generateStaticParams = async () => {
