@@ -43,7 +43,7 @@ const nav = [
 
 export default function Navigation() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className='hidden lg:block'>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Hola!</NavigationMenuTrigger>
@@ -80,7 +80,7 @@ export default function Navigation() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         {nav.map((item) => (
-          <NavigationMenuItem>
+          <NavigationMenuItem key={item.title}>
             <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
