@@ -5,6 +5,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import Navigation from './NavigationMenu'
 
 const editUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
 
@@ -24,6 +25,8 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+          <Navigation />
+
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
