@@ -30,7 +30,7 @@ export const nav: Nav[] = [
       return {
         title: s.title,
         description: s.summary,
-        href: s.slug,
+        href: '/' + s.path,
       }
     }),
   },
@@ -39,7 +39,7 @@ export const nav: Nav[] = [
     links: courses.map((s) => {
       return {
         title: s.title,
-        href: s.slug,
+        href: '/' + s.path,
       }
     }),
   },
