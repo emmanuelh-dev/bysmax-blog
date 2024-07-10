@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from './Link'
-import headerNavLinks from '@/data/headerNavLinks'
+import headerNavLinks, { nav } from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -57,17 +57,39 @@ const MobileNav = () => {
           </button>
         </div>
         <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
-              <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={onToggleNav}
-              >
-                {link.title}
-              </Link>
-            </div>
-          ))}
+          <div className="space-y-6 px-12 py-4">
+            {headerNavLinks.map((link) => (
+              <div key={link.title}>
+                <Link
+                  href={link.href}
+                  className="tracking-widest text-gray-900 dark:text-gray-100"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </Link>
+              </div>
+            ))}
+            {nav.map((section) => (
+              <div key={section.title}>
+                <div className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
+                  {section.title}
+                </div>
+                <div className="space-y-6">
+                  {section.links.map((link) => (
+                    <div key={link.title}>
+                      <Link
+                        href={link.href}
+                        className="tracking-widest text-gray-900 dark:text-gray-100"
+                        onClick={onToggleNav}
+                      >
+                        {link.title}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </nav>
       </div>
     </>

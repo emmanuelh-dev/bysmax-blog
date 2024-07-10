@@ -13,43 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { allCoreContent } from 'pliny/utils/contentlayer'
-import { allCursos, allServicios } from 'contentlayer/generated'
-
-const services = allCoreContent(allServicios)
-const courses = allCoreContent(allCursos)
-
-interface Links {
-  title: string
-  description?: string
-  href: string
-}
-interface Nav {
-  title: string
-  links: Links[]
-}
-
-const nav: Nav[] = [
-  {
-    title: 'Servicios',
-    links: services.map((s) => {
-      return {
-        title: s.title,
-        description: s.summary,
-        href: s.slug,
-      }
-    }),
-  },
-  {
-    title: 'Cursos',
-    links: courses.map((s) => {
-      return {
-        title: s.title,
-        href: s.slug,
-      }
-    }),
-  },
-]
+import { nav } from '@/data/headerNavLinks'
 
 export default function Navigation() {
   return (
