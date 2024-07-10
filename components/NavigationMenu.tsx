@@ -19,7 +19,17 @@ import { allCursos, allServicios } from 'contentlayer/generated'
 const services = allCoreContent(allServicios)
 const courses = allCoreContent(allCursos)
 
-const nav = [
+interface Links {
+  title: string
+  description?: string
+  href: string
+}
+interface Nav {
+  title: string
+  links: Links[]
+}
+
+const nav: Nav[] = [
   {
     title: 'Servicios',
     links: services.map((s) => {
@@ -43,7 +53,7 @@ const nav = [
 
 export default function Navigation() {
   return (
-    <NavigationMenu className='hidden lg:block'>
+    <NavigationMenu className="hidden lg:block">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Hola!</NavigationMenuTrigger>
