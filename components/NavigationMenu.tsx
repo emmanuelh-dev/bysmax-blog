@@ -35,7 +35,6 @@ const nav = [
     links: courses.map((s) => {
       return {
         title: s.title,
-        description: s.summary,
         href: s.slug,
       }
     }),
@@ -87,7 +86,7 @@ export default function Navigation() {
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                 {item.links.map((item) => (
                   <ListItem key={item.title} title={item.title} href={item.href}>
-                    {item.description}
+                    {item.description && item.description}
                   </ListItem>
                 ))}
               </ul>
