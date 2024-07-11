@@ -28,7 +28,7 @@ export default function page() {
       <div className="sticky top-4 space-y-6">
         <div className="space-y-2">
           <h1 className="text-2xl font-bold">
-            Curso Gratuito de Traccar desde Cero hasta Avanzado en español
+            Tutoriales gratis de Traccar desde Cero hasta Avanzado en español
           </h1>
           <p className="text-muted-foreground">
             Traccar es una plataforma de código abierto para el rastreo de vehículos mediante
