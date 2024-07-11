@@ -118,7 +118,7 @@ const TEMARIO = [
         type: 'doc',
       },
       {
-        title: 'Balanceadores de carga',
+        title: 'Balanceadores de carga para Traccar',
         link: '/blog/traccar/traccar-filters-configuration-guide-optimizing-gps-tracking-with-xml-settings',
         type: 'doc',
       },
@@ -126,7 +126,7 @@ const TEMARIO = [
   },
   {
     title: 'Casos de Uso y Proyectos Avanzados',
-    show: true,
+    show: false,
     description: 'Flotas de vehículos, seguridad personal y laboral, proyectos finales',
     sectiones: [
       {
@@ -142,6 +142,23 @@ const TEMARIO = [
       {
         title: 'Proyectos finales',
         link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Teltonika y Traccar',
+    show: true,
+    description: 'Muestra la temperatura, rastreo en tiempo real y mucho más.',
+    sectiones: [
+      {
+        title: 'Configurar dispositivos BLE en equipos teltonika como el eye sensor',
+        link: '/blog/como-configurar-dispositivos-ble-en-equipos-teltonika-como-el-eye-sensor',
+        type: 'doc',
+      },
+      {
+        title: 'Configurar un gps de teltonika FMC920 con el Teltonika configurator para traccar',
+        link: '/blog/como-configurar-un-gps-de-teltonika-fmc920-con-el-teltonika-configurator-para-traccar',
         type: 'doc',
       },
     ],
