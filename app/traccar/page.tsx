@@ -5,7 +5,6 @@
  */
 import Link from 'next/link'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'
 import { genPageMetadata } from 'app/seo'
 import { cn } from 'lib/utils'
 import {
@@ -212,7 +211,7 @@ export default function page() {
                       <AccordionTrigger>
                         <div className="text-left">
                           <h3 className="text-lg font-bold">{item.title}</h3>
-                          <p className='text-neutral-400'>{item.description}</p>
+                          <p className="text-neutral-400">{item.description}</p>
                         </div>
                       </AccordionTrigger>
                       <AccordionContent className="px-4 py-3">
