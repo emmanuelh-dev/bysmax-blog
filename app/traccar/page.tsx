@@ -1,139 +1,271 @@
 /**
  * v0 by Vercel.
- * @see https://v0.dev/t/KbEKuFHoHV6
+ * @see https://v0.dev/t/2GmQ19JyunA
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { allBlogs } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import Image from 'next/image'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'
 import { genPageMetadata } from 'app/seo'
+import { cn } from 'lib/utils'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { BookText, Play } from 'lucide-react'
 
 export const metadata = genPageMetadata({
-  title: 'Curso de Traccar desde Cero hasta Avanzado en español',
-  description: 'Curso de Traccar desde Cero hasta Avanzado en español',
+  title: 'Curso Gratuito de Traccar desde Cero hasta Avanzado en español',
+  description:
+    'Este curso en español te guiará desde la configuración inicial de tu propio servidor de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.',
 })
 
+const TEMARIO = [
+  {
+    title: 'Introducción al Tracking y Traccar',
+    show: false,
+    description: 'Logística y funcionamiento de Traccar, instalación en VPS',
+    sectiones: [
+      {
+        title: 'Logística y funcionamiento de Traccar',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+      {
+        title: 'Instalación en VPS',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Instalacion y configuracion Básica de Traccar',
+    show: true,
+    description:
+      'Usuarios y dispositivos, mapas y geocercas, integraciones, alertas y notificaciones',
+    sectiones: [
+      {
+        title: 'Instalación de Traccar',
+        link: 'https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=2',
+        type: 'video',
+      },
+      {
+        title: 'Instalación de Traccar',
+        link: '/blog/como-instalar-traccar-en-ubuntu-en-digitalocean',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Agrega tu primer dispositivo a Traccar',
+    show: true,
+    description:
+      'Usuarios y dispositivos, mapas y geocercas, integraciones, alertas y notificaciones',
+    sectiones: [
+      {
+        title: 'Instalación de Traccar',
+        link: 'https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=2',
+        type: 'video',
+      },
+      {
+        title: 'Instalación de Traccar',
+        link: '/blog/como-instalar-traccar-en-ubuntu-en-digitalocean',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Personalización y branding de la plataforma Traccar WEB',
+    show: true,
+    description: 'Configuración avanzada, theming',
+    sectiones: [
+      {
+        title: 'Cómo Personalizar el branding de Traccar',
+        link: 'https://www.youtube.com/watch?v=7B9Y7OERjo8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=3',
+        type: 'video',
+      },
+      {
+        title: 'Cómo Personalizar el branding de Traccar',
+        link: '/blog/traccar/como-personalizar-la-aplicacion-web-de-traccar',
+        type: 'doc',
+      },
+      {
+        title: 'Cómo Personalizar la Aplicación Web de Traccar HTML React',
+        link: 'https://www.youtube.com/watch?v=S5N441XGW7M&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV',
+        type: 'video',
+      },
+      {
+        title: 'Cómo Personalizar la Aplicación Web de Traccar HTML React',
+        link: '/blog/traccar/como-personalizar-traccar-web',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Optimización y Mantenimiento de Traccar',
+    show: true,
+    description: 'Rendimiento, copias de seguridad, escalabilidad',
+    sectiones: [
+      {
+        title: 'Archivo de configuración de traccar',
+        link: '/blog/traccar/traccar-filters-configuration-guide-optimizing-gps-tracking-with-xml-settings',
+        type: 'doc',
+      },
+      {
+        title: 'Limpiar o eliminar el historial de Traccar',
+        link: '/blog/traccar/traccar-filters-configuration-guide-optimizing-gps-tracking-with-xml-settings',
+        type: 'doc',
+      },
+      {
+        title: 'Balanceadores de carga',
+        link: '/blog/traccar/traccar-filters-configuration-guide-optimizing-gps-tracking-with-xml-settings',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Casos de Uso y Proyectos Avanzados',
+    show: true,
+    description: 'Flotas de vehículos, seguridad personal y laboral, proyectos finales',
+    sectiones: [
+      {
+        title: 'Flotas de vehículos',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+      {
+        title: 'Seguridad personal y laboral',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+      {
+        title: 'Proyectos finales',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+    ],
+  },
+  {
+    title: 'Futuro del Tracking y Traccar',
+    show: false,
+    description: 'Tendencias en tracking, avances en GPS, sensores e IoT',
+    sectiones: [
+      {
+        title: 'Tendencias en tracking',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+      {
+        title: 'Avances en GPS y sensores',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+      {
+        title: 'Integración con IoT',
+        link: 'URL_DE_LA_section',
+        type: 'doc',
+      },
+    ],
+  },
+]
+
 export default function page() {
-  const tags = ['traccar']
-
-  const filteredPosts = allBlogs.filter((post) => tags.some((tag) => post.tags.includes(tag)))
-
-  const posts = allCoreContent(sortPosts(filteredPosts))
-
   return (
-    <main className="grid grid-cols-1 md:grid-cols-[300px_1fr]">
-      <div className="sticky top-4 space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold">
-            Curso de Traccar desde Cero hasta Avanzado en español
-          </h1>
-          <p className="text-muted-foreground">
-            Traccar es una plataforma de código abierto para el rastreo de vehículos mediante
-            dispositivos GPS. Este curso en español te guiará desde la configuración inicial de tu
-            propio servidor de rastreo hasta la gestión avanzada de dispositivos y la
-            personalización de la plataforma. Aprenderás a agregar dispositivos GPS, identificar
-            protocolos de conexión y configurar notificaciones, entre otras funcionalidades clave.
-          </p>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Categories</h3>
-          <div className="grid gap-2">
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Beginners
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Advanced Projects
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Tips and Tricks
-            </Link>
-          </div>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Tags</h3>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((c) => (
-              <Link
-                href={`tags/${c}`}
-                className="bg-muted text-muted-foreground hover:bg-muted/50 inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm"
-                prefetch={false}
-                key={c}
-              >
-                <TagIcon className="h-4 w-4" />
-                {c}
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Search</h3>
-          <form className="relative">
-            <Input type="search" placeholder="Busca tutoriales de arduino..." className="pr-10" />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2"
-            >
-              <SearchIcon className="h-5 w-5" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </form>
-        </div>
-        <div className="sticky top-0 pt-10">
-          <ins
-            className="adsbygoogle sticky top-10 mt-6"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="9734184827"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div>
-      </div>
-      <section className="space-y-8 bg-white dark:bg-black">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div
-              className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
-              key={post.title}
-            >
-              <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10" prefetch={false}>
-                <span className="sr-only">View Tutorial</span>
-              </Link>
-              <Image
-                src={post.images ? post.images[0] : '/placeholder.svg'}
-                alt="Arduino Basics"
-                width={450}
-                height={300}
-                className="h-48 w-full object-cover transition-opacity group-hover:opacity-50"
-              />
-              <div className="bg-white p-4 dark:bg-black">
-                <h3 className="text-xl font-bold">{post.title}</h3>
-                <p className="text-muted-foreground truncate text-sm">{post.summary}</p>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="bg-primary text-primary-foreground rounded-full px-2 py-1 text-xs">
-                    Beginners
-                  </span>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="font-semibold underline underline-offset-4"
-                  >
-                    Leer
-                  </Link>
-                </div>
+    <div className="bg-background text-foreground flex min-h-screen flex-col">
+      <main className="flex-1">
+        <section className="bg-muted py-12 md:py-24">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto  text-center">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                Curso Gratuito de Traccar desde Cero hasta Avanzado en español
+              </h1>
+              <p className="text-muted-foreground md: mt-4">
+                Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo
+                hasta la gestión avanzada de dispositivos y la personalización de la plataforma.
+              </p>
+              <div className="mt-8 flex justify-center gap-4">
+                <Link className={buttonVariants({ variant: 'default' })} href="#course">
+                  Comenzar ahora
+                </Link>
+                <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
+                  Necesito un servidor
+                </Link>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+        <section className="py-12 md:py-24">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto ">
+              <h2 id="course" className="text-3xl font-bold tracking-tighter sm:text-4xl">
+                Temario
+              </h2>
+              <p className="text-muted-foreground md: mt-4">
+                Explore the comprehensive curriculum and dive into the world of tracking.
+              </p>
+              <div className="mt-8 space-y-4">
+                <Accordion type="single" collapsible className="w-full space-y-4">
+                  {TEMARIO.filter((item) => item.show == !false).map((item, i) => (
+                    <AccordionItem key={item.title} value={`item-${i + 1}`}>
+                      <AccordionTrigger>
+                        <div className="text-left">
+                          <h3 className="text-lg font-bold">{item.title}</h3>
+                          <p className='text-neutral-400'>{item.description}</p>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-4 py-3">
+                        <ul className="space-y-4 ">
+                          {item.sectiones.map((section) => (
+                            <li key={section.title}>
+                              <div className="flex items-center">
+                                <Link href={section.link}>
+                                  {section.type !== 'doc' ? <Play /> : <BookText />}
+                                </Link>
+                                <Link
+                                  href={section.link}
+                                  className={` ${buttonVariants({ variant: 'link' })}`}
+                                >
+                                  {section.title}
+                                </Link>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="bg-muted py-12 md:py-24">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto  text-center">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Sobre el Curso</h2>
+              <p className="text-muted-foreground md: mt-4">
+                Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo
+                hasta la gestión avanzada de dispositivos y la personalización de la plataforma.{' '}
+              </p>
+              <div className="mt-8 flex justify-center gap-4">
+                <Link className={buttonVariants({ variant: 'default' })} href="#course">
+                  Comenzar ahora
+                </Link>{' '}
+                <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
+                  Necesito un servidor
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   )
 }
 
-function SearchIcon(props) {
+function ChevronDownIcon(props) {
   return (
     <svg
       {...props}
@@ -147,28 +279,7 @@ function SearchIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  )
-}
-
-function TagIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
-      <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+      <path d="m6 9 6 6 6-6" />
     </svg>
   )
 }
