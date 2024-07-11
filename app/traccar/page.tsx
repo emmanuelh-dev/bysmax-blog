@@ -114,7 +114,7 @@ const TEMARIO = [
       },
       {
         title: 'Limpiar o eliminar el historial de Traccar',
-        link: '/blog/traccar/traccar-filters-configuration-guide-optimizing-gps-tracking-with-xml-settings',
+        link: '/blog/traccar/removingpurging-old-tracking-data',
         type: 'doc',
       },
       {
