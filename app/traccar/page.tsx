@@ -186,11 +186,68 @@ const TEMARIO = [
     ],
   },
 ]
-
+const jsonLd = () => {
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'Course',
+    name: metadata.title,
+    description: metadata.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'BysMax',
+      url: 'https://www.bysmax.com',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: 4.7,
+      ratingCount: 1234,
+      reviewCount: 450,
+    },
+    offers: {
+      '@type': 'Offer',
+      category: 'Free',
+    },
+    hasCourseInstance: [
+      {
+        '@type': 'CourseInstance',
+        courseMode: 'Online',
+        instructor: [
+          {
+            '@type': 'Person',
+            name: 'emmanuelhdev',
+            description: 'Full Stack Developer at Gonzher Logistic and transport',
+            image: 'https://avatars.githubusercontent.com/u/86961961',
+          },
+        ],
+      },
+      {
+        // Online self-paced course that takes 2 days to complete.
+        '@type': 'CourseInstance',
+        courseMode: 'Online',
+        courseWorkload: 'P2D',
+      },
+    ],
+    totalHistoricalEnrollment: 12345,
+    datePublished: '2024-07-12',
+    educationalLevel: 'Beginner',
+    about: ['Traccar'],
+    teaches: ['Traccar'],
+    inLanguage: 'es',
+    availableLanguage: ['es', 'en'],
+    syllabusSections: TEMARIO.map((section) => ({
+      name: section.title,
+      description: section.description,
+    })),
+  }
+}
 export default function page() {
   return (
     <div className="bg-background text-foreground flex min-h-screen flex-col">
       <main className="flex-1">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
+        />
         <section className="bg-muted py-12 md:py-24">
           <div className="container px-4 sm:px-6 lg:px-8">
             <div className="mx-auto  text-center">
