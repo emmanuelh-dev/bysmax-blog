@@ -1,8 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/2GmQ19JyunA
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from 'next/link'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { genPageMetadata } from 'app/seo'
