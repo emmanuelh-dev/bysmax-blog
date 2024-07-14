@@ -94,10 +94,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             <div>
               <nav>
                 <ul>
-                  {toc.map((item) => (
+                  {toc.map((item, i) => (
                     <li key={item.value}>
                       <Link href={item.url} className="text-sm text-primary-500">
-                        {item.value}
+                        {`${i + 1} ${item.value}`}
                       </Link>
                     </li>
                   ))}
