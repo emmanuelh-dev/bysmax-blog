@@ -11,6 +11,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Link from 'next/link'
 import Main from '../app/Main'
+import TOCInline from 'pliny/ui/TOCInline'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -31,13 +32,25 @@ interface LayoutProps {
   children: ReactNode
 }
 
+type TocItem = {
+  value: string
+  url: string
+  depth: number
+}
+type Toc = TocItem[]
+
+interface TOC {
+  toc: Toc
+}
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
+  const { filePath, path, slug, date, title, tags, toc } = content
 
   const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
   const posts = allCoreContent(filteredPosts)
 
   const basePath = path.split('/')[0]
+
+  const formatedTOC: TOC = toc
 
   return (
     <SectionContainerWithAds>
@@ -90,6 +103,15 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </div>
               )}
             </div>
+            <nav>
+              <ul>
+                {formatedTOC.map((item) => (
+                  <li key={item.value}>
+                    <Link href={item.url}>{item.value}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>
               <dd>
