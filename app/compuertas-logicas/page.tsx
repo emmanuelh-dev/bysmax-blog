@@ -11,6 +11,13 @@ import Link from 'next/link'
 import React from 'react'
 import { LOGICGATES } from '@/data/logic-gates'
 import Sidebar from './components/Sidebar'
+import { genPageMetadata } from 'app/seo'
+
+export const metadata = genPageMetadata({
+  title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
+  description:
+    'Las compuertas lógicas se implementan en circuitos integrados para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.',
+})
 
 export default function page() {
   return (

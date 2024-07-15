@@ -11,6 +11,24 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import Recommended from 'app/Recommended'
+import { Metadata } from 'next'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] }
+}): Promise<Metadata | undefined> {
+  const slug = decodeURI(params.slug.join('/'))
+  const page = LOGICGATES.find((p) => p.url === slug)
+
+  if (!page) return
+
+  return {
+    title: page.heading,
+    description: page.description,
+  }
+}
+
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
 
