@@ -40,18 +40,20 @@ export default function page() {
           <h1 className="text-4xl font-bold">
             Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486
           </h1>
-          <Image
-            src={'/static/images/compuertas.png'}
-            width={1100}
-            height={400}
-            alt="Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486"
-          />
-          <Image
-            src={'/static/images/datashet-compuertas.jpg'}
-            width={1100}
-            height={400}
-            alt="Una Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
-          />
+          <div className="gap-8 md:flex">
+            <Image
+              src={'/static/images/compuertas.png'}
+              width={1100}
+              height={400}
+              alt="Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486"
+            />
+            <Image
+              src={'/static/images/datashet-compuertas.jpg'}
+              width={1100}
+              height={400}
+              alt="Una Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
+            />
+          </div>
           {LOGICGATES.map((gate) => (
             <div key={gate.heading} className="space-y-4 pt-4">
               <article>
