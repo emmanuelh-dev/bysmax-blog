@@ -7,7 +7,7 @@ interface Props {
 
 export function SectionContainerWithAds({ children }: Props) {
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-6xl xl:px-0">
+    <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-7xl xl:px-0">
       {children}
       <GoogleAds />
     </section>
@@ -16,6 +16,6 @@ export function SectionContainerWithAds({ children }: Props) {
 
 export default function SectionContainer({ children }: Props) {
   return (
-    <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-6xl xl:px-0">{children}</section>
+    <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-7xl xl:px-0">{children}</section>
   )
 }
