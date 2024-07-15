@@ -17,6 +17,19 @@ export const metadata = genPageMetadata({
   title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
   description:
     'Las compuertas lógicas se implementan en circuitos integrados para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.',
+  openGraph: {
+    title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
+    description:
+      'Las compuertas lógicas se implementan en circuitos integrados para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.',
+    images: '/static/images/compuertas.png',
+    locale: 'es_MX',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
+    card: '/static/images/compuertas.png',
+    images: '/static/images/compuertas.png',
+  },
 })
 
 export default function page() {
@@ -29,37 +42,60 @@ export default function page() {
           </h1>
           <Image
             src={'/static/images/compuertas.png'}
-            width={1000}
-            height={200}
+            width={1100}
+            height={400}
             alt="Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486"
+          />
+          <Image
+            src={'/static/images/datashet-compuertas.jpg'}
+            width={1100}
+            height={400}
+            alt="Una Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
           />
           {LOGICGATES.map((gate) => (
             <div key={gate.heading} className="space-y-4 pt-4">
-              <h2 className="text-2xl font-bold">
-                <Link href={`/compuertas-logicas/${gate.url}`}>{gate.heading}</Link>
-              </h2>
-              <p>{gate.description}</p>
-              <p>{gate.configuration}</p>
-              <div className="max-w-sm rounded-md border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Entrada A</TableHead>
-                      <TableHead>Entrada B</TableHead>
-                      <TableHead>Salida</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {gate.truthTable.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell>{row['Entrada A']}</TableCell>
-                        <TableCell>{row['Entrada B']}</TableCell>
-                        <TableCell>{row.salida}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+              <article>
+                <header>
+                  <h2 className="text-2xl font-bold">
+                    <Link href={`/compuertas-logicas/${gate.url}`}>{gate.heading}</Link>
+                  </h2>
+                  <p>{gate.description}</p>
+                  <p>{gate.configuration}</p>
+                </header>
+                <section className="justify-around md:flex">
+                  <div className="max-w-sm rounded-md border">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Entrada A</TableHead>
+                          <TableHead>Entrada B</TableHead>
+                          <TableHead>Salida</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {gate.truthTable.map((row, index) => (
+                          <TableRow key={index}>
+                            <TableCell>{row['Entrada A']}</TableCell>
+                            <TableCell>{row['Entrada B']}</TableCell>
+                            <TableCell>{row.salida}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                  <section>
+                    <figure>
+                      <Image
+                        src={gate.datasheet}
+                        width={1100}
+                        height={400}
+                        alt={`datasheet ${gate.heading}`}
+                      />
+                      <figcaption>{`datasheet ${gate.heading}`}</figcaption>
+                    </figure>
+                  </section>
+                </section>
+              </article>
             </div>
           ))}
           <div className="prose dark:prose-invert">
