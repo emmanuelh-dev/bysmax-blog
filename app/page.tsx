@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Main from './Main'
 
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
+import { buttonVariants } from '@/components/ui/button'
 
 export default async function Page() {
   const images = ['/static/notes/01.png', '/static/notes/02.png']
@@ -30,16 +31,10 @@ export default async function Page() {
             a dominar el mundo de la electrónica.
           </p>
           <div className="flex gap-4">
-            <Link
-              href="/blog"
-              className="block rounded-md bg-primary-500 px-4 py-2 font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-primary-400"
-            >
+            <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
               Blog y Tutoriales
             </Link>
-            <Link
-              href="/servicios"
-              className="block rounded-md bg-gray-500 px-4 py-2 font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 dark:ring-offset-black dark:hover:bg-gray-400"
-            >
+            <Link href="/servicios" className={buttonVariants({ variant: 'outline' })}>
               Nuestros Servicios
             </Link>
           </div>
