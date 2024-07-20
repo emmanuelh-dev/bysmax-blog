@@ -11,7 +11,6 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Link from 'next/link'
 import Main from '../app/Main'
-import TOCInline from 'pliny/ui/TOCInline'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -40,6 +39,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
 
   const basePath = path.split('/')[0]
 
+  console.log(toc)
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
