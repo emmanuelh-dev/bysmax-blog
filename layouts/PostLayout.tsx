@@ -74,7 +74,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   data-full-width-responsive="true"
                 ></ins>
               </div>
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
+              <div className="prose  pb-8 pt-10 dark:prose-invert">{children}</div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
                   Revisar en X

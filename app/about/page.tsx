@@ -54,7 +54,7 @@ export default function BlogPage() {
                         </Link>
                       </h2>
                     </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                    <div className="prose  text-gray-500 dark:text-gray-400">
                       {author.occupation}
                       <span className="block font-bold">{getTotalPosts(author.slug)} Posts</span>
                     </div>

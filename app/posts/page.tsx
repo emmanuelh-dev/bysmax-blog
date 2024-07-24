@@ -35,9 +35,9 @@ export default async function Page() {
           <div key={index}>
             <h2>{post.title}</h2>
             <p>{post.date}</p>
-            <a href={`/posts/${post.slug}`}>{post.slug}</a>
-            <p>{post.author.cursor}</p>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <a className="text-primary-600" href={`/posts/${post.slug}`}>
+              {post.slug}
+            </a>
           </div>
         ))}
     </div>

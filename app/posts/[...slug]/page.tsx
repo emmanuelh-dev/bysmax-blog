@@ -1,5 +1,6 @@
 import 'css/prism.css'
 import 'katex/dist/katex.css'
+import Layout from '@/layouts/WordPressLayout'
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
@@ -29,11 +30,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   console.log(data)
   return (
-    <div>
+    <Layout content={data.postBy}>
       <h1 className="text-6xl font-bold">{data.postBy.title}</h1>
-      <div className="prose dark:prose-invert">
+      <div className="prose mx-auto max-w-none dark:prose-invert">
         <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
       </div>
-    </div>
+    </Layout>
   )
 }
