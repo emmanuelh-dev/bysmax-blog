@@ -1,168 +1,154 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/KbEKuFHoHV6
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { allBlogs } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import Image from 'next/image'
-import { genPageMetadata } from 'app/seo'
-
-export const metadata = genPageMetadata({
-  title: 'Cursos de Arduino desde cero',
-  description: 'description',
-})
-
-export default function page() {
-  const tags = ['arduino']
-
-  const filteredPosts = allBlogs.filter((post) => tags.some((tag) => post.tags.includes(tag)))
-
-  const posts = allCoreContent(sortPosts(filteredPosts))
-
+const events = [
+  {
+    name: 'Principiante',
+    items: [
+      {
+        title: 'Enciende un LED',
+        description: 'Aprende a encender y apagar un LED utilizando un pin digital de Arduino.',
+        link: 'https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink',
+      },
+      {
+        title: 'Control de Servomotor',
+        description: 'Controla un servomotor utilizando una señal PWM de Arduino.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/Sweep',
+      },
+      {
+        title: 'Sensor de temperatura',
+        description:
+          'Lee la temperatura ambiental utilizando un sensor LM35 y muestra el valor en el monitor serial.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/Temperature',
+      },
+      {
+        title: 'Zumbador piezoeléctrico',
+        description: 'Genera sonidos simples con un zumbador piezoeléctrico.',
+        link: 'https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody',
+      },
+      {
+        title: 'Pulsador y LED',
+        description: 'Controla un LED con un pulsador: enciéndelo al presionar el botón.',
+        link: 'https://www.arduino.cc/en/Tutorial/BuiltInExamples/Button',
+      },
+    ],
+  },
+  {
+    name: 'Intermedio',
+    items: [
+      {
+        title: 'Sensor de distancia ultrasónico',
+        description:
+          'Utiliza un sensor ultrasónico HC-SR04 para medir distancias y mostrarlas en el monitor serial.',
+        link: 'https://www.arduino.cc/en/Tutorial/BuiltInExamples/Ping',
+      },
+      {
+        title: 'Control de LED RGB',
+        description: 'Controla un LED RGB para mostrar diferentes colores utilizando pines PWM.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/RGBLed',
+      },
+      {
+        title: 'Pantalla LCD',
+        description: 'Muestra texto en una pantalla LCD utilizando la biblioteca LiquidCrystal.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/HelloWorld',
+      },
+      {
+        title: 'Medición de luz con un LDR',
+        description:
+          'Utiliza un LDR (resistor dependiente de la luz) para medir la intensidad de la luz ambiental.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/AnalogReadSerial',
+      },
+      {
+        title: 'Control de motor DC',
+        description: 'Controla un motor de corriente continua con un transistor y una señal PWM.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/DCMotorControl',
+      },
+    ],
+  },
+  {
+    name: 'Avanzado',
+    items: [
+      {
+        title: 'Control remoto IR',
+        description:
+          'Controla tu Arduino utilizando un control remoto infrarrojo y un receptor IR.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/IRremote',
+      },
+      {
+        title: 'Robot seguidor de línea',
+        description:
+          'Construye un robot que siga una línea negra en el suelo utilizando sensores infrarrojos.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/LineFollower',
+      },
+      {
+        title: 'Control de motor paso a paso',
+        description: 'Controla un motor paso a paso utilizando la biblioteca Stepper.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/StepperOneRevolution',
+      },
+      {
+        title: 'Sistema de alarma con sensor PIR',
+        description: 'Construye un sistema de alarma utilizando un sensor de movimiento PIR.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/PIRsensor',
+      },
+      {
+        title: 'Medición de humedad y temperatura',
+        description:
+          'Utiliza un sensor DHT11 para medir la humedad y la temperatura del ambiente y mostrarlas en un LCD.',
+        link: 'https://www.arduino.cc/en/Tutorial/LibraryExamples/DHT11sensor',
+      },
+    ],
+  },
+]
+export default function Page() {
   return (
-    <main className="grid grid-cols-1 md:grid-cols-[300px_1fr]">
-      <div className="sticky top-4 space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold">Tutoriales de Arduino</h1>
-          <p className="text-muted-foreground">
-            Tutoriales de Arduino: Aprende con Sensores, Servomotores y Proyectos Avanzados
-          </p>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Categories</h3>
-          <div className="grid gap-2">
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Beginners
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Advanced Projects
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-primary">
-              Tips and Tricks
-            </Link>
-          </div>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Tags</h3>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((c) => (
-              <Link
-                href={`tags/${c}`}
-                className="bg-muted text-muted-foreground hover:bg-muted/50 inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm"
-                prefetch={false}
-                key={c}
-              >
-                <TagIcon className="h-4 w-4" />
-                {c}
+    <main>
+      <section className="bg-muted py-12 md:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto  text-center">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+              Curso Gratuito de Arduino desde Cero hasta Avanzado en español
+            </h1>
+            <p className="text-muted-foreground md: mt-4">
+              Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo
+              hasta la gestión avanzada de dispositivos y la personalización de la plataforma.
+            </p>
+            <div className="mt-8 flex justify-center gap-4">
+              <Link className={buttonVariants({ variant: 'default' })} href="#course">
+                Comenzar ahora
               </Link>
-            ))}
-          </div>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Search</h3>
-          <form className="relative">
-            <Input type="search" placeholder="Busca tutoriales de arduino..." className="pr-10" />
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2"
-            >
-              <SearchIcon className="h-5 w-5" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </form>
-        </div>
-        <div className="sticky top-0 pt-10">
-          <ins
-            className="adsbygoogle sticky top-10 mt-6"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="9734184827"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div>
-      </div>
-      <section className="space-y-8 bg-white dark:bg-black">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div
-              className="group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
-              key={post.title}
-            >
-              <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10" prefetch={false}>
-                <span className="sr-only">View Tutorial</span>
+              <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
+                Necesito un servidor
               </Link>
-              <Image
-                src={post.images ? post.images[0] : '/placeholder.svg'}
-                alt="Arduino Basics"
-                width={450}
-                height={300}
-                className="h-48 w-full object-cover transition-opacity group-hover:opacity-50"
-              />
-              <div className="bg-white p-4 dark:bg-black">
-                <h3 className="text-xl font-bold">{post.title}</h3>
-                <p className="text-muted-foreground truncate text-sm">{post.summary}</p>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="bg-primary text-primary-foreground rounded-full px-2 py-1 text-xs">
-                    Beginners
-                  </span>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="font-semibold underline underline-offset-4"
-                  >
-                    Leer
-                  </Link>
-                </div>
-              </div>
             </div>
-          ))}
+          </div>
+        </div>
+      </section>
+      <section className="w-full py-12 md:py-24 lg:py-32">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="relative m-8">
+            <div className="absolute left-2 h-full border-r-2 border-neutral-500" />
+            <ul className="m-0 list-none p-0">
+              {events.map((event, index) => (
+                <li key={index} className="mb-2">
+                  <div className={`mb-1 flex items-center`}>
+                    <div className="h-6 w-6 rounded-full bg-neutral-500" />
+                    <div className={` ml-6 flex-1 font-medium`}>{event.name}</div>
+                  </div>
+                  {event.items.map((event) => (
+                    <div className="ml-12" key={event.title}>
+                      <div className="mb-4 rounded-lg bg-neutral-200 p-4 shadow-lg dark:bg-neutral-800">
+                        <h4 className="mb-4 text-lg font-bold">{event.title}</h4>
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                          {event.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
     </main>
-  )
-}
-
-function SearchIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  )
-}
-
-function TagIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
-      <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
-    </svg>
   )
 }

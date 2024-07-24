@@ -10,7 +10,13 @@ const Footer = () => {
   const footerLinks = [
     {
       title: 'Mantente actualizado',
-      links: [...headerNavLinks],
+      links: [
+        ...headerNavLinks,
+        {
+          href: '/wordpress',
+          title: 'Crear en wordpress',
+        },
+      ],
     },
     {
       title: 'Servicios',
