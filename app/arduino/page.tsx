@@ -123,8 +123,8 @@ export default function Page() {
         </div>
       </section>
       <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="relative m-8">
+        <div className="container mx-auto">
+          <div className="relative">
             <div className="absolute left-2 h-full border-r-2 border-neutral-500" />
             <ul className="m-0 list-none p-0">
               {events.map((event, index) => (
