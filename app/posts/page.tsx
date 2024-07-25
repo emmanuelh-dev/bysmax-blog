@@ -23,6 +23,7 @@ export default async function Page() {
         }
       `,
     }),
+    cache: 'no-store',
   })
 
   const { data } = await response.json()
