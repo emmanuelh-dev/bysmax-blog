@@ -26,21 +26,33 @@ interface Nav {
 export const nav: Nav[] = [
   {
     title: 'Servicios',
-    links: services.map((s) => {
-      return {
-        title: s.title,
-        description: s.summary,
-        href: '/' + s.path,
-      }
-    }),
+    links: [
+      ...services.map((s) => {
+        return {
+          title: s.title,
+          description: s.summary,
+          href: '/' + s.path,
+        }
+      }),
+    ],
   },
   {
     title: 'Cursos',
-    links: courses.map((s) => {
-      return {
-        title: s.title,
-        href: '/' + s.path,
-      }
-    }),
+    links: [
+      ...courses.map((s) => {
+        return {
+          title: s.title,
+          href: '/' + s.path,
+        }
+      }),
+      {
+        title: 'Curso Gratis de Traccar',
+        href: '/traccar',
+      },
+      {
+        title: 'Curso Gratis de Arduino',
+        href: '/arduino',
+      },
+    ],
   },
 ]

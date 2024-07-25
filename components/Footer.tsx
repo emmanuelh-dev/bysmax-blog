@@ -27,10 +27,20 @@ const Footer = () => {
     },
     {
       title: 'Cursos',
-      links: allCursos.map((c) => ({
-        href: `/cursos/${c.slug}`,
-        title: c.title,
-      })),
+      links: [
+        ...allCursos.map((c) => ({
+          href: `/cursos/${c.slug}`,
+          title: c.title,
+        })),
+        {
+          title: 'Curso Gratis de Traccar',
+          href: '/traccar',
+        },
+        {
+          title: 'Curso Gratis de Arduino',
+          href: '/arduino',
+        },
+      ],
     },
   ]
 
