@@ -3,6 +3,13 @@ import React from 'react'
 import Services from '@/components/Services'
 import { CgToolbox, CgLaptop, CgWebsite, CgSearch, CgCheckR } from 'react-icons/cg'
 import { buttonVariants } from '@/components/ui/button'
+import { genPageMetadata } from 'app/seo'
+
+export const metadata = genPageMetadata({
+  title: 'Servicios a la medida para tu negocio.',
+  description:
+    'En medio de la pandemia de COVID-19, cuando muchas pequeñas y medianas empresas luchaban por adaptarse a una nueva realidad, nació Bysmax con una misión clara: ayudar a estas empresas a modernizarse y prosperar.',
+})
 
 function Page() {
   return (

@@ -17,6 +17,8 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CgToolbox, CgLaptop, CgWebsite, CgSearch, CgCheckR } from 'react-icons/cg'
+import Link from 'next/link'
+import { buttonVariants } from '@/components/ui/button'
 
 const services = [
   {
@@ -109,6 +111,9 @@ export default function Services() {
           ))}
         </div>
       </div>
+      <Link href="/servicios" className={`${buttonVariants({ variant: 'link' })}`}>
+        Saber mas
+      </Link>
     </section>
   )
 }
