@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import React from 'react'
-import { CardContent, Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import Services from '@/components/Services'
+import { CgToolbox, CgLaptop, CgWebsite, CgSearch, CgCheckR } from 'react-icons/cg'
+import { buttonVariants } from '@/components/ui/button'
 
 function Page() {
   return (
     <main className="flex-1">
       <section className="w-full py-12 sm:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
+        <div className=" ">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
@@ -21,18 +21,10 @@ function Page() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link
-                  href="/"
-                  className="inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
+                <Link href="/" className={buttonVariants({ variant: 'default' })} prefetch={false}>
                   Conoce más
                 </Link>
-                <Link
-                  href="/"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-white hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
-                  prefetch={false}
-                >
+                <Link href="/" className={buttonVariants({ variant: 'outline' })} prefetch={false}>
                   Compra ahora
                 </Link>
               </div>
@@ -48,7 +40,7 @@ function Page() {
         </div>
       </section>
       <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
+        <div className=" ">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-neutral-100 px-3 py-1 text-sm dark:bg-neutral-800">
@@ -107,7 +99,7 @@ function Page() {
         </div>
       </section>
       <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
+        <div className=" grid items-center gap-6  lg:grid-cols-2 lg:gap-10">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
               Nuestros Productos
@@ -118,70 +110,12 @@ function Page() {
             </p>
           </div>
           <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
-            <Link
-              href="/"
-              className="hover/90 inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium  shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 dark:focus-visible:ring-neutral-300"
-              prefetch={false}
-            >
+            <Link href="/" className={buttonVariants({ variant: 'default' })} prefetch={false}>
               Ver Productos
             </Link>
-            <Link
-              href="/"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-neutral-200 border-neutral-200 px-8 text-sm font-medium shadow-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus-visible:ring-neutral-300"
-              prefetch={false}
-            >
+            <Link href="/" className={buttonVariants({ variant: 'outline' })} prefetch={false}>
               Comprar ahora
             </Link>
-          </div>
-        </div>
-      </section>
-      <section className="w-full md:py-24 lg:py-32">
-        <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-              Nuestros Servicios
-            </h2>
-            <p className="mx-auto max-w-[600px] text-neutral-400 dark:text-neutral-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Descubre cómo nuestros servicios pueden ayudarte a llevar tu negocio al siguiente
-              nivel.
-            </p>
-          </div>
-          <div className="mx-auto w-full max-w-4xl space-y-4">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card>
-                <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
-                  <BriefcaseIcon className="h-8 w-8 text-neutral-400 dark:text-neutral-400" />
-                  <h3 className="text-xl font-semibold">Consultoría</h3>
-                  <p className="text-center text-neutral-400 dark:text-neutral-400">
-                    Nuestros expertos te guiarán para optimizar tus procesos y alcanzar tus
-                    objetivos.
-                  </p>
-                  <Button size="sm">Agendar cita</Button>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
-                  <CogIcon className="h-8 w-8 text-neutral-400 dark:text-neutral-400" />
-                  <h3 className="text-xl font-semibold">Implementación</h3>
-                  <p className="text-center text-neutral-400 dark:text-neutral-400">
-                    Nuestro equipo se encargará de la implementación y puesta en marcha de tus
-                    soluciones.
-                  </p>
-                  <Button size="sm">Agendar cita</Button>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex flex-col items-center justify-center gap-2 p-6">
-                  <SettingsIcon className="h-8 w-8 text-neutral-400 dark:text-neutral-400" />
-                  <h3 className="text-xl font-semibold">Soporte</h3>
-                  <p className="text-center text-neutral-400 dark:text-neutral-400">
-                    Nuestro equipo de soporte técnico estará disponible para asistirte en todo
-                    momento.
-                  </p>
-                  <Button size="sm">Agendar cita</Button>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </div>
       </section>

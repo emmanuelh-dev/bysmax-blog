@@ -5,6 +5,7 @@ import Main from './Main'
 
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { buttonVariants } from '@/components/ui/button'
+import Services from '@/components/Services'
 
 export default async function Page() {
   const images = ['/static/notes/01.png', '/static/notes/02.png']
@@ -42,8 +43,7 @@ export default async function Page() {
         <Image alt="Sonrie" width="400" height="400" decoding="async" data-nimg="1" src={image} />
       </div>
       <Main posts={posts} title="Blog" />
-      <Main posts={servicios} title="Servicios" service />
-      <Main posts={cursos} title="Cursos" curso />
+      <Services />
     </div>
   )
 }

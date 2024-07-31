@@ -13,7 +13,7 @@ export default function SoftwareDownload({ mainImage, downloadLink, title, descr
   return (
     <main className="mb-10">
       <section className="w-full">
-        <div className="container grid gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-12">
+        <div className="grid gap-6  lg:grid-cols-2 lg:gap-12">
           <Image
             src={gallery[0].src || '/placeholder.svg'}
             width="1920"
