@@ -359,7 +359,7 @@ export default function Page() {
                 <div>
                   <h3 className="text-xl font-bold">Dirección</h3>
                   <p className="text-muted-foreground">
-                  Franco Olmedo #309, Valle de Santo Domingo, 66447 San Nicolás de los Garza, N.L.
+                    Franco Olmedo #309, Valle de Santo Domingo, 66447 San Nicolás de los Garza, N.L.
                   </p>
                 </div>
                 <div>
