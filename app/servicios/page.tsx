@@ -2,11 +2,12 @@ import Link from 'next/link'
 import React from 'react'
 import { CardContent, Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import Services from '@/components/Services'
 
 function Page() {
   return (
     <main className="flex-1">
-      <section className="w-full py-12 text-white sm:py-24 lg:py-32">
+      <section className="w-full py-12 sm:py-24 lg:py-32">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
@@ -22,14 +23,14 @@ function Page() {
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link
                   href="/"
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-neutral-900 shadow transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium shadow transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Conoce más
                 </Link>
                 <Link
                   href="/"
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-white px-8 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 items-center justify-center rounded-md border border-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-white hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >
                   Compra ahora
@@ -119,14 +120,14 @@ function Page() {
           <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
             <Link
               href="/"
-              className="hover/90 inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium text-neutral-50 shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 dark:focus-visible:ring-neutral-300"
+              className="hover/90 inline-flex h-10 items-center justify-center rounded-md px-8 text-sm font-medium  shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 dark:focus-visible:ring-neutral-300"
               prefetch={false}
             >
               Ver Productos
             </Link>
             <Link
               href="/"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-neutral-200 border-neutral-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus-visible:ring-neutral-300"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-neutral-200 border-neutral-200 px-8 text-sm font-medium shadow-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:focus-visible:ring-neutral-300"
               prefetch={false}
             >
               Comprar ahora
@@ -184,6 +185,7 @@ function Page() {
           </div>
         </div>
       </section>
+      <Services />
     </main>
   )
 }
