@@ -17,9 +17,9 @@ import {
 import { CheckIcon } from 'lucide-react'
 import { genPageMetadata } from 'app/seo'
 export const metadata = genPageMetadata({
-  title: 'Mantenimiento de Computadoras en Monterrey.',
+  title: 'Mantenimiento de Computadoras en Guadalupe.',
   description:
-    'Servicio de reparación y mantenimiento de computadoras de alta calidad en Monterrey.',
+    'Servicio de reparación y mantenimiento de computadoras de alta calidad en Guadalupe.',
 })
 
 export default function Page() {
@@ -30,10 +30,10 @@ export default function Page() {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-4">
               <h1 className="text-primary-foreground text-3xl font-bold md:text-6xl">
-                Mantenimiento de Computadoras en Monterrey
+                Mantenimiento de Computadoras en Guadalupe
               </h1>
               <p className="text-primary-foreground/80 text-lg">
-                Servicio de reparación y mantenimiento de computadoras de alta calidad en Monterrey.
+                Servicio de reparación y mantenimiento de computadoras de alta calidad en Guadalupe.
               </p>
               <div className="flex gap-4">
                 <Link
@@ -217,7 +217,7 @@ export default function Page() {
                   <h4 className="font-semibold">Servicio de Recogida y Entrega</h4>
                   <p className="text-neutral-500 dark:text-neutral-300">
                     Ofrecemos un servicio de recogida y entrega gratuito dentro del área
-                    metropolitana de Monterrey.
+                    metropolitana de Guadalupe.
                   </p>
                 </li>
               </ul>
@@ -336,9 +336,9 @@ export default function Page() {
         <div className=" mx-auto ">
           <div className="space-y-6 md:space-y-8">
             <div className="">
-              <h2 className="text-2xl font-bold md:text-3xl">Visítanos en Monterrey</h2>
+              <h2 className="text-2xl font-bold md:text-3xl">Visítanos en Guadalupe</h2>
               <p className="text-muted-foreground text-lg">
-                Nuestra tienda está ubicada en el corazón de Monterrey, ofreciendo un servicio
+                Nuestra tienda está ubicada en el corazón de Guadalupe, ofreciendo un servicio
                 cercano y de confianza.
               </p>
             </div>

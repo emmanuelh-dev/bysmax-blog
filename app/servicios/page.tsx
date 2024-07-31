@@ -41,7 +41,7 @@ function Page() {
               width="550"
               height="550"
               alt="Hero"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
+              className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:aspect-square"
             />
           </div>
         </div>

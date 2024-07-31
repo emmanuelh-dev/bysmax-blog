@@ -32,6 +32,16 @@ export const nav: Nav[] = [
         description: '',
         href: '/servicios/reparacion-de-computadoras-en-monterrey',
       },
+      {
+        title: 'Mantenimiento de Computadoras en Guadalupe',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-guadalupe',
+      },
+      {
+        title: 'Mantenimiento de Computadoras en San Nicolas',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
+      },
       ...services.map((s) => {
         return {
           title: s.title,
