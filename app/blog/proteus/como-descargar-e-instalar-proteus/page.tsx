@@ -18,6 +18,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { Card, CardContent } from '@/components/ui/card'
+import { genPageMetadata } from 'app/seo'
 
 const FAQ = [
   {
@@ -80,12 +81,49 @@ const images = [
   { src: '/static/images/proteus/2.png', alt: 'Descargar Proteus Imagen Home' },
 ]
 
+export const metadata = genPageMetadata({
+  title: 'Descargar Proteus 8 gratis para PC',
+  description:
+    'Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te permite crear y probar tus proyectos de manera sencilla y eficiente.',
+})
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    image:
+      'https://img-19.ccm.net/e-taDvkvQtl8wkrumfhmxP8gCvg=/80x80/2d9d38064f2f43b3813892fc0b55963f/ccmcms-esccm/38118736.png',
+    name: 'Proteus',
+    applicationCategory: 'BusinessApplication',
+    downloadUrl: 'https://es.ccm.net/descargas/profesional/7974-proteus-para-pc/',
+    description:
+      'Proteus Design Suite es uno de los programas de dise\u00f1o electr\u00f3nico m\u00e1s utilizados del mercado. Sus versiones m\u00e1s recientes, adem\u00e1s, nos permiten crear simulaciones de dispositivos f\u00e1cilmente en nuestro PC utilizando las herramientas de Arduino.',
+    offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
+    fileSize: '688,8 Mo',
+    operatingSystem: 'Windows 7,Windows 8,Windows 10,Windows 11',
+    softwareVersion: '8.16.36097.0',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingCount: 9,
+      ratingValue: 4.3,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  },
+]
+
 export default function Page() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col items-start justify-center">
-          <h1 className="mb-4 text-6xl font-bold">Descargar Proteus 8 gratis para PC</h1>
+          <h1 className="mb-4 text-6xl font-bold">
+            Descargar Proteus Design Suite 8 gratis para PC
+          </h1>
           <p className="text-muted-foreground mb-6">
             Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te
             permite crear y probar tus proyectos de manera sencilla y eficiente.
