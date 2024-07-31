@@ -48,7 +48,7 @@ function Page() {
       </section>
       <section className="w-full py-12 md:py-24 lg:py-32">
         <div className=" ">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="flex flex-col space-y-4">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-neutral-100 px-3 py-1 text-sm dark:bg-neutral-800">
                 Nuestra Historia
@@ -63,7 +63,7 @@ function Page() {
               </p>
             </div>
           </div>
-          <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+          <div className="mx-auto grid items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
             <img
               src="/placeholder.svg"
               width="550"
