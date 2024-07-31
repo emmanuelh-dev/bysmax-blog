@@ -9,7 +9,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import Image from 'next/image'
 import {
   Carousel,
   CarouselContent,
@@ -19,7 +18,8 @@ import {
 } from '@/components/ui/carousel'
 import { Card, CardContent } from '@/components/ui/card'
 import { genPageMetadata } from 'app/seo'
-
+import Image from '@/components/Image'
+import NextImage from 'next/image'
 const FAQ = [
   {
     seccion: '¿Qué es Proteus?',
@@ -141,12 +141,12 @@ export default function Page() {
           </div>
         </div>
         <div className="flex justify-center">
-          <Image
-            src="/static/images/proteus/1.jpg"
+          <NextImage
+            src="/static/images/proteus/3.png"
             alt="Proteus 8"
-            width={400}
-            height={400}
-            className="rounded-lg shadow-lg"
+            width={800}
+            height={800}
+            className="aspect-square rounded-lg object-cover shadow-lg"
           />
         </div>
       </section>
@@ -270,17 +270,13 @@ function Gallery({ gallery }) {
         {gallery.map((image, index) => (
           <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <Image
-                    src={image.src}
-                    alt={image.alt || `Gallery image ${index + 1}`}
-                    className="object-cover"
-                    width="1270"
-                    height="300"
-                  />
-                </CardContent>
-              </Card>
+              <Image
+                src={image.src}
+                alt={image.alt || `Gallery image ${index + 1}`}
+                className="aspect-square object-cover"
+                width="1270"
+                height="300"
+              />
             </div>
           </CarouselItem>
         ))}
