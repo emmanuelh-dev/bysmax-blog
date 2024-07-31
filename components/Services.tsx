@@ -102,11 +102,9 @@ export default function Services() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black">
                   {Icon}
                 </div>
-                <h3 className="text-xl font-semibold">Web Development</h3>
+                <h3 className="text-xl font-semibold">{title}</h3>
               </div>
-              <p className="text-muted-foreground mt-2">
-                Unleash the power of the web with our expert web development services.
-              </p>
+              <p className="text-muted-foreground mt-2">{description}</p>
             </div>
           ))}
         </div>
