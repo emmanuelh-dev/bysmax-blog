@@ -99,7 +99,7 @@ export default function Services() {
               key={title}
             >
               <div className="flex items-center gap-4">
-                <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black">
                   {Icon}
                 </div>
                 <h3 className="text-xl font-semibold">Web Development</h3>
