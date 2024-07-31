@@ -367,15 +367,17 @@ export default function Page() {
                   <p className="text-muted-foreground">
                     Lunes a Viernes: 9:00 am - 7:00 pm
                     <br />
-                    Sábados: 10:00 am - 4:00 pm
+                    Sábados: 03:00 pm - 11:00 pm
+                    <br />
+                    Domingo: 08:00 am - 12:00 pm
                   </p>
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">Contacto</h3>
                   <p className="text-muted-foreground">
-                    Teléfono: 81-11-91-36-76
+                    Teléfono: 81 1369 4726
                     <br />
-                    Email: info@bysmax.com
+                    Email: contacto@kjtecnologies.com
                   </p>
                 </div>
               </div>
