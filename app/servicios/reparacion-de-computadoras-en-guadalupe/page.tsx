@@ -372,7 +372,7 @@ export default function Page() {
                 <div>
                   <h3 className="text-xl font-bold">Contacto</h3>
                   <p className="text-muted-foreground">
-                    Teléfono: 81-11-91-36-76
+                    Teléfono: 81-26-06-07-95
                     <br />
                     Email: info@bysmax.com
                   </p>
