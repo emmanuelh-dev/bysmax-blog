@@ -27,6 +27,11 @@ export const nav: Nav[] = [
   {
     title: 'Servicios',
     links: [
+      {
+        title: 'Mantenimiento de Computadoras en Monterrey',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-monterrey',
+      },
       ...services.map((s) => {
         return {
           title: s.title,
