@@ -8,7 +8,7 @@ export default function Page() {
       </div>
       <div>
         <h2 className="py-3 text-4xl">Mándanos un WhatsApp</h2>
-        <a href="https://api.whatsapp.com/send/?phone=8126060795">8111913676</a>
+        <a href="https://api.whatsapp.com/send/?phone=8126060795">8126060795</a>
       </div>
     </div>
   )

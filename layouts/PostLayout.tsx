@@ -36,10 +36,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
 
   const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
   const posts = allCoreContent(filteredPosts)
-
   const basePath = path.split('/')[0]
 
-  console.log(toc)
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
@@ -74,7 +72,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   data-full-width-responsive="true"
                 ></ins>
               </div>
-              <div className="prose  pb-8 pt-10 dark:prose-invert">{children}</div>
+              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
                   Revisar en X
@@ -97,7 +95,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   {toc.map((item, i) => (
                     <li key={item.value}>
                       <Link href={item.url} className="text-sm text-primary-500">
-                        {`${i + 1} ${item.value}`}
+                        {item.value}
                       </Link>
                     </li>
                   ))}

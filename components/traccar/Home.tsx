@@ -53,6 +53,19 @@ const TEMARIO = [
     ],
   },
   {
+    title: 'Configuracion Avanzada de Traccar',
+    show: true,
+    description:
+      'Traccar sirve la interfaz web y la API usando HTTP regular. Para habilitar HTTPS, se usa un servidor proxy, como Apache.',
+    sectiones: [
+      {
+        title: 'Conexión Segura para Traccar HTTPS SSL',
+        link: '/blog/conexion-segura-para-traccar-https',
+        type: 'doc',
+      },
+    ],
+  },
+  {
     title: 'Agrega tu primer dispositivo a Traccar',
     show: true,
     description:
@@ -257,7 +270,10 @@ export function Home() {
                 <Link className={buttonVariants({ variant: 'default' })} href="#course">
                   Comenzar ahora
                 </Link>
-                <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
+                <Link
+                  href="/servicios/servicios-para-traccar"
+                  className={buttonVariants({ variant: 'outline' })}
+                >
                   Necesito un servidor
                 </Link>
               </div>

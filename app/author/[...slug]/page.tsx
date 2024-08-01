@@ -33,8 +33,6 @@ export async function generateMetadata({
   if (!author) {
     return
   }
-
-  console.log('author', author)
   return {
     title: author.name,
     description: author.body.raw,

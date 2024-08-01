@@ -1,5 +1,5 @@
 ---
-title: 'Cómo instalar Traccar en Ubuntu en DigitalOcean - Guía paso a paso'
+title: 'Cómo instalar Traccar en Ubuntu en DigitalOcean con HTTPS SSL'
 date: '2024-02-23'
 tags: ['digitalocean', 'deploy', 'traccar']
 draft: false
@@ -81,7 +81,87 @@ Inicia el servicio Traccar:
 service traccar start
 ```
 
-## 7. Problemas comunes
+## 7. Conexión Segura
+
+Traccar sirve la interfaz web y la API usando HTTP regular, sin encriptación. Esta guía proporciona instrucciones para configurar Traccar con HTTPS, usando encriptación SSL/TLS. Los ejemplos son para Ubuntu Linux, pero se pueden aplicar a otras plataformas. Traccar no soporta conexiones seguras de manera nativa, por lo que se usa un servidor proxy, en este caso Apache, para tunelizar todas las solicitudes a través de una conexión segura.
+
+        #### Instalación y Configuración de Apache
+
+        1. Instala Apache y habilita los módulos necesarios:
+
+        ```bash
+        sudo add-apt-repository ppa:ondrej/apache2
+        sudo apt-get install ssl-cert apache2
+        sudo a2enmod ssl proxy_http proxy_wstunnel rewrite
+        sudo service apache2 restart
+        ```
+
+        2. Agrega una nueva configuración de sitio:
+
+        ```bash
+        sudo nano /etc/apache2/sites-available/traccar.conf
+        ```
+
+        Contenido de la configuración del sitio:
+
+        ```apache
+        <VirtualHost *:80>
+            ServerName demo.traccar.org
+            Redirect / https://demo.traccar.org/
+        </VirtualHost>
+        <IfModule mod_ssl.c>
+            <VirtualHost _default_:443>
+                ServerName demo.traccar.org
+                ServerAdmin webmaster@localhost
+                DocumentRoot /var/www/html
+
+                ProxyPass /api/socket ws://localhost:8082/api/socket
+                ProxyPassReverse /api/socket ws://localhost:8082/api/socket
+
+                ProxyPass / http://localhost:8082/
+                ProxyPassReverse / http://localhost:8082/
+
+                SSLEngine on
+                SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+                SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+            </VirtualHost>
+        </IfModule>
+        ```
+
+        3. Desactiva el sitio predeterminado y activa la nueva configuración:
+
+        ```bash
+        sudo a2dissite 000-default
+        sudo a2ensite traccar
+        sudo service apache2 restart
+        ```
+
+        4. Genera un certificado SSL válido usando Let's Encrypt:
+        ```bash
+        sudo apt install certbot python3-certbot-apache
+        sudo certbot --apache
+        ```
+
+        #### Traccar en un subdirectorio
+
+        Para hacer que Traccar esté disponible en una ruta no raíz, ajusta la configuración del proxy y la ruta de las cookies:
+
+        ```apache
+        ProxyRequests off
+
+        ProxyPass /gps/api/socket ws://localhost:8082/api/socket
+        ProxyPassReverse /gps/api/socket ws://localhost:8082/api/socket
+
+        ProxyPass /gps/ http://localhost:8082/
+        ProxyPassReverse /gps/ http://localhost:8082/
+        ProxyPassReverseCookiePath / /gps/
+
+        Redirect permanent /gps /gps/
+        ```
+
+        Además, recompila la aplicación moderna para que funcione correctamente en la nueva ruta.
+
+## 8. Problemas comunes
 
 _Esta sección debe actualizarse según sea necesario._
 
