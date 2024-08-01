@@ -19,7 +19,7 @@ import { genPageMetadata } from 'app/seo'
 export const metadata = genPageMetadata({
   title: 'Reparación de Computadoras en San Nicolas.',
   description:
-    'Servicio de reparación y Reparación de computadoras de alta calidad en San Nicolas.',
+    'Servicio de Mantenimiento y reparación de computadoras de alta calidad en San Nicolas.',
 })
 
 export default function Page() {
@@ -33,7 +33,7 @@ export default function Page() {
                 Reparación de Computadoras en San Nicolas
               </h1>
               <p className="text-primary-foreground/80 text-lg">
-                Servicio de reparación y Reparación de computadoras de alta calidad en San
+                Servicio de Mantenimiento y reparación de computadoras de alta calidad en San
                 Nicolas.
               </p>
               <div className="flex gap-4">
@@ -69,7 +69,7 @@ export default function Page() {
             <div className="">
               <h2 className="text-2xl font-bold md:text-3xl">Nuestros Servicios</h2>
               <p className="text-muted-foreground text-lg">
-                Ofrecemos una amplia gama de servicios de Reparación y reparación de
+                Ofrecemos una amplia gama de servicios de Mantenimiento y reparación de
                 computadoras.
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function Page() {
       <section>
         <div className="mb-4">
           <h2 className="text-2xl font-bold md:text-3xl">Conoce nuestras Polizas</h2>
-          <p>Compara los diferentes planes de Reparación y sus características.</p>
+          <p>Compara los diferentes planes de Mantenimiento y sus características.</p>
         </div>
 
         <Table>
