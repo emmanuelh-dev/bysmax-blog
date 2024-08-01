@@ -17,9 +17,9 @@ import {
 import { CheckIcon } from 'lucide-react'
 import { genPageMetadata } from 'app/seo'
 export const metadata = genPageMetadata({
-  title: 'Mantenimiento de Computadoras en San Nicolas.',
+  title: 'Reparación de Computadoras en San Nicolas.',
   description:
-    'Servicio de reparación y mantenimiento de computadoras de alta calidad en San Nicolas.',
+    'Servicio de reparación y Reparación de computadoras de alta calidad en San Nicolas.',
 })
 
 export default function Page() {
@@ -30,10 +30,10 @@ export default function Page() {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-4">
               <h1 className="text-primary-foreground text-3xl font-bold md:text-6xl">
-                Mantenimiento de Computadoras en San Nicolas
+                Reparación de Computadoras en San Nicolas
               </h1>
               <p className="text-primary-foreground/80 text-lg">
-                Servicio de reparación y mantenimiento de computadoras de alta calidad en San
+                Servicio de reparación y Reparación de computadoras de alta calidad en San
                 Nicolas.
               </p>
               <div className="flex gap-4">
@@ -55,7 +55,7 @@ export default function Page() {
             </div>
             <Image
               src="/static/services/1.png"
-              alt="Mantenimiento de computadoras"
+              alt="Reparación de computadoras"
               width={500}
               height={400}
               className="rounded-lg"
@@ -69,7 +69,7 @@ export default function Page() {
             <div className="">
               <h2 className="text-2xl font-bold md:text-3xl">Nuestros Servicios</h2>
               <p className="text-muted-foreground text-lg">
-                Ofrecemos una amplia gama de servicios de mantenimiento y reparación de
+                Ofrecemos una amplia gama de servicios de Reparación y reparación de
                 computadoras.
               </p>
             </div>
@@ -185,7 +185,7 @@ export default function Page() {
                   </TableRow>
                   <TableRow>
                     <TableCell>Recuperación de Datos</TableCell>
-                    <TableCell className="text-right">$250/gb</TableCell>
+                    <TableCell className="text-right">$250/100gb</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -229,7 +229,7 @@ export default function Page() {
       <section>
         <div className="mb-4">
           <h2 className="text-2xl font-bold md:text-3xl">Conoce nuestras Polizas</h2>
-          <p>Compara los diferentes planes de mantenimiento y sus características.</p>
+          <p>Compara los diferentes planes de Reparación y sus características.</p>
         </div>
 
         <Table>
@@ -375,10 +375,11 @@ export default function Page() {
                 <div>
                   <h3 className="text-xl font-bold">Contacto</h3>
                   <p className="text-muted-foreground">
-                    Teléfono: 81 1369 4726
+                    <strong>Teléfono:</strong> 81 1369 4726
                     <br />
-                    Email: contacto@kjtecnologies.com
+                    <strong>Email:</strong> contacto@kjtecnologies.com
                   </p>
+                  <strong>Empresas:</strong> <a href="mailto:info@bysmax.com">info@bysmax.com</a>
                 </div>
               </div>
             </div>
