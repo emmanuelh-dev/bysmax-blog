@@ -152,6 +152,18 @@ export default function Page() {
       <section id="policies" className="py-12">
         <div className="mb-4">
           <h2 className="text-2xl font-bold md:text-3xl">Conoce nuestros precios</h2>
+          <p className="sr-only">
+            <span>
+              Partes, Piezas, Refacciones, Lenovo, HP, Dell, Acer, Apple, Toshiba, Samsung, Asus,
+              Alienware, Gateway, Lanix, Windows, Mac, Linux, Ubuntu, Kubuntu, Solus Os, Linux Mint,
+              Linux Lite, recomponer, restaurar, arreglar, rectificar, Microprocesador, CPU,
+              Motherboard, placa madre, Memoria RAM, Disco Duro, Lectores ópticos, Tarjeta de Vídeo,
+              Mouse, Unidades de almacenamiento externo, Dispositivos multimedia, Nuevo Leon,
+              Monterrey, Guadalupe, Apodaca, San Nicolás de los Garza, General Escobedo, Santa
+              Catarina, Benito Juárez, García, San Pedro Garza García, Cadereyta Jiménez, Santiago,
+              Salinas Victoria, Empresas, Empresarial, Personas, Domicilio,
+            </span>
+          </p>
           <p>Conoce nuestros precios.</p>
         </div>
         <div>
