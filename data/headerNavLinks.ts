@@ -70,4 +70,23 @@ export const nav: Nav[] = [
       },
     ],
   },
+  {
+    title: 'Guias',
+    links: [
+      ...courses.map((s) => {
+        return {
+          title: s.title,
+          href: '/' + s.path,
+        }
+      }),
+      {
+        title: 'Compuertas Logicas',
+        href: '/compuertas-logicas',
+      },
+      {
+        title: 'Tutoriales de arduino',
+        href: '/arduino/tutoriales',
+      },
+    ],
+  },
 ]
