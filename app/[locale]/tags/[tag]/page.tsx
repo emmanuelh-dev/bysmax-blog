@@ -3,7 +3,7 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
 import { allBlogs } from 'contentlayer/generated'
-import tagData from 'app/tag-data.json'
+import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from '@/app/[locale]/seo'
 import { Metadata } from 'next'
 
