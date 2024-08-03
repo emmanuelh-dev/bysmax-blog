@@ -29,7 +29,7 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
-import { fallbackLng, secondLng } from './app/[locale]/i18n/locales'
+import { fallbackLng, secondLng, thirtLng } from './app/[locale]/i18n/locales'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -75,8 +75,9 @@ function createTagCount(allBlogs) {
   const tagCount = {
     [fallbackLng]: {},
     [secondLng]: {},
+    [thirtLng]: {},
   }
-
+  console.log('Generate tags')
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag: string) => {
@@ -93,6 +94,19 @@ function createTagCount(allBlogs) {
   writeFileSync('./app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
 
+function createSearchIndex(allBlogs) {
+  if (
+    siteMetadata?.search?.provider === 'kbar' &&
+    siteMetadata.search.kbarConfig.searchDocumentsPath
+  ) {
+    writeFileSync(
+      `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
+      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+    )
+    console.log('Local search index generated...')
+  }
+}
+
 export const Series = defineNestedType(() => ({
   name: 'Series',
   fields: {
@@ -106,19 +120,6 @@ export const Series = defineNestedType(() => ({
     },
   },
 }))
-
-function createSearchIndex(allBlogs) {
-  if (
-    siteMetadata?.search?.provider === 'kbar' &&
-    siteMetadata.search.kbarConfig.searchDocumentsPath
-  ) {
-    writeFileSync(
-      `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
-    )
-    console.log('Local search index generated...')
-  }
-}
 
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
@@ -233,7 +234,7 @@ export const Pages = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Servicios, Cursos, Pages],
+  documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
