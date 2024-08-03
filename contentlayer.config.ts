@@ -114,6 +114,7 @@ export const Blog = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    series: { type: 'nested', of: Series },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
@@ -151,6 +152,7 @@ export const Authors = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     name: { type: 'string', required: true },
+    language: { type: 'string', required: true },
     avatar: { type: 'string' },
     occupation: { type: 'string' },
     company: { type: 'string' },
