@@ -121,9 +121,10 @@ export default function Page() {
       />
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col items-start justify-center">
-          <h1 className="mb-4 text-6xl font-bold">
+          <h1 className="text-sm text-neutral-400">
             Descargar Proteus Design Suite 8 gratis para PC
           </h1>
+          <p className="mb-4 text-6xl font-bold">Descargar Proteus 8</p>
           <p className="text-muted-foreground mb-6">
             Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te
             permite crear y probar tus proyectos de manera sencilla y eficiente.
@@ -227,7 +228,9 @@ export default function Page() {
               <Accordion type="single" collapsible>
                 {FAQ.map((faq, i) => (
                   <AccordionItem value={`item-${i}`} key={i}>
-                    <AccordionTrigger className="text-lg">{faq.seccion}</AccordionTrigger>
+                    <AccordionTrigger className="text-lg">
+                      <h3>{faq.seccion}</h3>
+                    </AccordionTrigger>
                     <AccordionContent>
                       <ul className="text-sm">
                         {faq.contenido.map((item) => (
@@ -265,8 +268,8 @@ function Gallery({ gallery }) {
   if (!gallery) return null
 
   return (
-    <Carousel className="my-10">
-      <CarouselContent className="-ml-1">
+    <Carousel className="my-10 w-full overflow-hidden">
+      <CarouselContent>
         {gallery.map((image, index) => (
           <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
@@ -281,8 +284,6 @@ function Gallery({ gallery }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   )
 }

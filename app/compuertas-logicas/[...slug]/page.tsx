@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
               <h3 className="mb-2 text-lg font-bold">Funcion Booleana</h3>
               <p className="text-muted-foreground">Y = A AND B</p>
             </div>
-            <div className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+            <section className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
               <h3 className="mb-2 text-lg font-bold">Tabla de Verdad</h3>
               <Table>
                 <TableHeader>
@@ -94,7 +94,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                   ))}
                 </TableBody>
               </Table>
-            </div>
+            </section>
           </div>
           <div>
             <h2 className="mb-4 text-2xl font-bold">Datasheet</h2>
@@ -104,7 +104,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                 width={1100}
                 height={400}
                 alt={`datasheet ${page.heading}`}
-                className="rounded-md"
+                className="w-full rounded-md"
               />
               <figcaption>{`datasheet ${page.heading}`}</figcaption>
             </figure>

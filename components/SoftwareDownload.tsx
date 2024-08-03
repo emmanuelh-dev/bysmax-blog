@@ -62,8 +62,8 @@ function Gallery({ gallery }) {
   if (!gallery) return null
 
   return (
-    <Carousel className="my-10">
-      <CarouselContent className="-ml-1">
+    <Carousel className="my-10  w-full overflow-hidden">
+      <CarouselContent>
         {gallery.map((image, index) => (
           <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
@@ -82,8 +82,6 @@ function Gallery({ gallery }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
     </Carousel>
   )
 }

@@ -64,26 +64,28 @@ export default function page() {
                   <p>{gate.description}</p>
                   <p>{gate.configuration}</p>
                 </header>
-                <section className="justify-around md:flex">
-                  <div className="max-w-sm rounded-md border">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Entrada A</TableHead>
-                          <TableHead>Entrada B</TableHead>
-                          <TableHead>Salida</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {gate.truthTable.map((row, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{row['Entrada A']}</TableCell>
-                            <TableCell>{row['Entrada B']}</TableCell>
-                            <TableCell>{row.salida}</TableCell>
+                <section className="w-full justify-around gap-6 py-6 md:flex">
+                  <div className="w-1/3">
+                    <div className=" rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Entrada A</TableHead>
+                            <TableHead>Entrada B</TableHead>
+                            <TableHead>Salida</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                        </TableHeader>
+                        <TableBody>
+                          {gate.truthTable.map((row, index) => (
+                            <TableRow key={index}>
+                              <TableCell>{row['Entrada A']}</TableCell>
+                              <TableCell>{row['Entrada B']}</TableCell>
+                              <TableCell>{row.salida}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
                   </div>
                   <section>
                     <figure>
