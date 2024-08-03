@@ -65,7 +65,7 @@ export default function page() {
                   <p>{gate.configuration}</p>
                 </header>
                 <section className="w-full justify-around gap-6 py-6 md:flex">
-                  <div className="w-1/3">
+                  <div className="md:w-1/3">
                     <div className=" rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
                       <Table>
                         <TableHeader>
