@@ -36,7 +36,6 @@ const Recommended = dynamic(() => import('./components/Recomended'), {
 })
 const Sidebar = dynamic(() => import('./components/SideBar'), {
   loading: () => <Lazy />,
-  ssr: false,
 })
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
   const { filePath, path, slug, date, title, tags } = content
