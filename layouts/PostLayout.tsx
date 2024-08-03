@@ -214,7 +214,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           </div>
         </div>
       </article>
-      <Recommended />
+      <Recommended tags={tags} />
     </SectionContainerWithAds>
   )
 }
