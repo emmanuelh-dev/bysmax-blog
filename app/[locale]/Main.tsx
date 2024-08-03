@@ -8,7 +8,6 @@ import Image from 'next/image'
 const MAX_DISPLAY = 6
 
 export default function Home({ posts, locale = 'es', title = '', service = false, curso = false }) {
-  console.log(posts)
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">

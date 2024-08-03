@@ -62,7 +62,7 @@ export async function generateMetadata({
     return
   }
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
-  const authorList = post.authors || author
+  const authorList = post.authors || (author ? [author] : [])
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors
       .filter((a) => a.language === locale)
