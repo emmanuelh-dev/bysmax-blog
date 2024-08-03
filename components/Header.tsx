@@ -6,6 +6,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import Navigation from './NavigationMenu'
+import LangSwitch from './langswitch'
 
 const editUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
 
@@ -40,6 +41,7 @@ const Header = () => {
             ))}
           <SearchButton />
           <ThemeSwitch />
+          <LangSwitch />
           <MobileNav />
         </div>
       </header>

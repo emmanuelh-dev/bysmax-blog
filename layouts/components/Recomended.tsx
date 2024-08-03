@@ -1,5 +1,5 @@
 import React from 'react'
-import Main from '../../app/Main'
+import Main from '@/app/[locale]/Main'
 import { allBlogs } from 'contentlayer/generated'
 import { allCoreContent } from 'pliny/utils/contentlayer'
 

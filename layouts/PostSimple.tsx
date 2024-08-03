@@ -8,7 +8,7 @@ import PageTitle from '@/components/PageTitle'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import Recommended from '../app/Recommended'
+import Recommended from '@/app/[locale]/Recommended'
 
 interface LayoutProps {
   content: CoreContent<Blog>
