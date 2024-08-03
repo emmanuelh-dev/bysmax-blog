@@ -1,0 +1,163 @@
+---
+title: 'Cómo desplegar un proyecto Laravel en DigitalOcean'
+date: '2024-02-18'
+tags: ['laravel', 'digitalocean', 'deploy']
+draft: false
+authors: ['emmanuelhdev']
+language: es
+summary: 'Aprende a desplegar una aplicación Laravel desde cero en un servidor DigitalOcean, incluyendo la configuración del servidor, la instalación de dependencias y la adición de un dominio. Sigue estos pasos detallados para tener tu proyecto en línea.'
+---
+
+## Desplegar una aplicación Laravel en un VPS desde cero
+
+1. **Requerimientos**
+
+   - VPS (Linode, Digital Ocean, EC2, etc. Nosotros usaremos digital ocean)
+   - No se requieren conocimientos básicos
+   - Tu proyecto, claro esta.
+
+2. **Qué vamos a realizar**
+
+   - Subir la web a nuestro propio VPS desde CERO
+   - Configurar nuestro servidor (PHP, Composer, MySQL, Nginx)
+   - Subir proyecto a nuestro servidor
+   - Protocolo de Copia Segura (SCP)
+   - GitHub
+   - Añadir un dominio a nuestra web
+
+3. **Crea un proyecto Laravel (Claro, si no lo tienes)**
+
+   - Ejecuta el comando: `composer create-project laravel/laravel youtube-laravel-deploy`
+
+4. **Crea tu VPS**
+
+   - [Digital Ocean](https://m.do.co/c/5ac4ff8a5bab) (Si usas el link, obtienes 200 dolares en credito)
+   - Ejecuta los siguientes comandos:
+     ```
+     sudo apt update
+     sudo apt upgrade
+     sudo apt install nginx
+     ```
+
+5. **Configurar PHP**
+
+   - **No lo hagas así:**
+     ```
+     sudo apt install php8.2-cli
+     ```
+   - **Hazlo de esta manera:**
+     ```
+     sudo apt install php8.2-fpm php-mysql
+     ```
+   - Instala Composer:
+     ```
+     curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+     ```
+   - Consulta el sitio web oficial para más detalles: https://getcomposer.org/download/
+
+6. **Instala MySQL**
+
+   - Ejecuta el comando:
+     ```
+     sudo apt install mysql-server
+     ```
+
+7. **Crea un usuario MySQL**
+
+   - Ejecuta los siguientes comandos:
+     ```
+     CREATE USER 'neiderruiz'@'localhost' IDENTIFIED BY 'password123';
+     GRANT ALL PRIVILEGES ON *.* TO 'neiderruiz'@'localhost';
+     FLUSH PRIVILEGES;
+     ```
+   - Revocar permisos del usuario root:
+     ```
+     REVOKE ALL PRIVILEGES ON *.* FROM 'root'@'localhost';
+     DROP USER 'root'@'localhost';
+     ```
+
+8. **Utilizar SCP para subir el proyecto**
+
+   - Ejecuta el siguiente comando:
+     ```
+     scp project.zip root@ip:/var/www/project
+     ```
+   - En el servidor, instala unzip:
+     ```
+     sudo apt install unzip
+     ```
+
+9. **Clona el proyecto desde GitHub**
+
+   - Ejecuta el siguiente comando:
+     ```
+     git clone https://github.com/neiderruiz/youtube...
+     ```
+   - Instala paquetes PHP adicionales:
+     ```
+     sudo apt install zip unzip php-zip php-xml php-curl
+     ```
+
+10. **Configurar la URL web en Nginx**
+
+    - Configurar el bloque de servidor de Nginx:
+
+      ```
+      server {
+          listen 80;
+          server_name localhost;
+          root /var/www/youtube-laravel-deploy-basic/public;
+          add_header X-Frame-Options "SAMEORIGIN";
+          add_header X-XSS-Protection "1; mode=block";
+          add_header X-Content-Type-Options "nosniff";
+          index index.html index.htm index.php;
+          charset utf-8;
+
+          location / {
+              try_files $uri $uri/ /index.php?$query_string;
+          }
+
+          location = /favicon.ico { access_log off; log_not_found off; }
+          location = /robots.txt { access_log off; log_not_found off; }
+
+          error_page 404 /index.php;
+
+          location ~ \.php$ {
+              include snippets/fastcgi-php.conf;
+              fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+          }
+
+          location ~ /\\.(?!well-known).*$ {
+              deny all;
+          }
+      }
+      ```
+
+11. **Establecer permisos de carpetas**
+
+    - Ejecuta los siguientes comandos:
+      ```
+      sudo chown -R www-data:www-data /var/www/
+      sudo chmod -R 775 /var/www/youtube-laravel-deploy-basic/storage
+      sudo chmod -R 775 /var/www/youtube-laravel-deploy-basic/bootstrap/cache
+      ```
+
+12. **Generar una clave de aplicación y crea una base de datos**
+
+    - Ejecuta los siguientes comandos:
+      ```
+      php artisan key:generate
+      create database youtube_laravel_deploy;
+      php artisan migrate
+      php artisan storage:link
+      ```
+
+13. **Añadir SSL (HTTPS)**
+    - Ejecuta los siguientes comandos:
+      ```
+      sudo apt install certbot python3-certbot-nginx
+      sudo certbot --nginx -d your.url.com
+      sudo certbot --nginx -d laravel.neiderruiz.com --register-unsafely-without-email
+      ```
+
+Con estos pasos, deberías poder hacer el despliegue correctamente de tu proyecto en DigitalOcean. También tenemos un video en YouTube para ayudarte en el camino de una forma más visual. Te comparto el siguiente enlace para que puedas obtener $200 de crédito en DigitalOcean y pruebes la plataforma: [Enlace de referencia de DigitalOcean]. A mí me darán una comisión, y tú podrás comenzar con tu proyecto con un buen presupuesto para experimentar.

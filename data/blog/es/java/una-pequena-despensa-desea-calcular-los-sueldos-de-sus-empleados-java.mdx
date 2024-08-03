@@ -1,0 +1,74 @@
+---
+title: 'Una pequeña despensa desea calcular los sueldos de sus empleados java'
+date: 2024-05-06
+tags: ['java']
+draft: false
+authors: ['emmanuelhdev']
+language: es
+summary: Una pequeña despensa desea calcular los sueldos de sus empleados. Los puestos de los mismos pueden tener 3 categorías...
+---
+
+**Calculando los Sueldos de Empleados en una Pequeña Despensa**
+
+En el ámbito de una pequeña despensa, es esencial contar con una aplicación que permita calcular de manera eficiente los sueldos de los empleados según su categoría laboral. En este blog post, exploraremos cómo se puede implementar esta funcionalidad utilizando un programa simple en Java.
+
+### Solución en Java
+
+A continuación, te presento una solución en Java que te permitirá calcular los sueldos de los empleados según su categoría en la despensa:
+
+```java
+/*Consigna del Ejercicio
+* Una pequeña despensa desea calcular los sueldos de sus empleados. Los puestos de los mismos pueden tener 3 categorías: 1- repositor, 2-cajero y 3-supervisor.
+*
+* Los repositores cobran $15.890 + un bono de 10%.
+* Los cajeros cobran $25.630,89 fijos.
+* Los supervisores cobran $35.560,20 en bruto al cual se les descuenta un 11% de jubilación.
+* Se necesita una aplicación que, dependiendo el tipo de empleado del que se trate, calcule y muestre en pantalla el correspondiente sueldo.
+*/
+
+import java.util.Scanner;
+
+public class SueldoDeEmpleados {
+  public static void main(String[] args) {
+
+    double sueldo = 0;
+
+    System.out.println("Ingresa el tipo de empleado");
+    System.out.println("1: Repositor");
+    System.out.println("2: Cajero");
+    System.out.println("3: Supervisor");
+
+    Scanner scanner = new Scanner (System.in);
+
+    int categoria = scanner.nextInt();
+
+    if(categoria == 1){
+      sueldo = 15890 + (15.890*0.10);
+    }
+    else if(categoria == 2) {
+      sueldo = 25630.89;
+    }
+    else if(categoria == 3){
+      sueldo = 35560.20 - (35560.20 * 0.11);
+    } else {
+      System.out.println("La categoria que ingresaste no existe");
+    }
+    System.out.println("El sueldo de la persona es de: " + sueldo);
+  }
+}
+
+```
+
+### Descripción del Problema
+
+La despensa tiene tres categorías de empleados: repositor, cajero y supervisor. Cada categoría tiene su propio esquema de remuneración:
+
+- Los repositores tienen un sueldo base de $15,890 y reciben un bono del 10% sobre ese sueldo.
+- Los cajeros tienen un sueldo fijo de $25,630.89.
+- Los supervisores reciben $35,560.20 brutos, pero se les descuenta un 11% por jubilación.
+
+### Explicación del Código
+
+Este programa solicita al usuario que ingrese el tipo de empleado (mediante un número del 1 al 3 correspondiente a cada categoría) y luego calcula y muestra el sueldo correspondiente según las reglas mencionadas para cada categoría. Si se ingresa una categoría no válida, se muestra un mensaje de error y se termina la ejecución del programa.
+
+Puedes ejecutar este código en tu entorno de desarrollo Java para probar diferentes categorías y ver los sueldos resultantes para cada tipo de empleado en la despensa. ¡Espero que encuentres útil esta implementación!

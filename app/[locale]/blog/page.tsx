@@ -1,30 +1,26 @@
+import { Metadata } from 'next'
 import ListLayout from '@/layouts/ListLayout'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import { genPageMetadata } from '@/app/[locale]/seo'
+import { genPageMetadata } from 'app/[locale]/seo'
+import { createTranslation } from '../i18n/server'
+import { LocaleTypes } from '../i18n/settings'
 
-const POSTS_PER_PAGE = 5
+type BlogPageProps = {
+  params: { locale: LocaleTypes }
+}
 
-export const metadata = genPageMetadata({ title: 'Blog' })
+export async function generateMetadata({ params: { locale } }: BlogPageProps): Promise<Metadata> {
+  return genPageMetadata({
+    title: 'Blog',
+    params: { locale: locale },
+  })
+}
 
-export default function BlogPage() {
+export default async function BlogPage({ params: { locale } }: BlogPageProps) {
+  const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))
-  const pageNumber = 1
-  const initialDisplayPosts = posts.slice(
-    POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
-  )
-  const pagination = {
-    currentPage: pageNumber,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-  }
+  const filteredPosts = posts.filter((post) => post.language === locale)
 
-  return (
-    <ListLayout
-      posts={posts}
-      initialDisplayPosts={initialDisplayPosts}
-      pagination={pagination}
-      title="All Posts"
-    />
-  )
+  return <ListLayout params={{ locale: locale }} posts={filteredPosts} title={t('all')} />
 }

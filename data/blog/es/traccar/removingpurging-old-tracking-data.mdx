@@ -1,0 +1,113 @@
+---
+title: 'Removing/Purging Old Tracking Data'
+date: 2024-07-11
+tags: ['traccar', 'avanzado']
+draft: false
+authors: ['emmanuelhdev']
+language: es
+summary: Este artículo te guiará a través de los métodos manuales y automáticos para purgar datos antiguos en Traccar, asegurando un sistema optimizado y eficiente.
+---
+## Curso de traccar
+
+Accede al curso de traccar aqui: [Curso de traccar](/cursos/curso-de-traccar-desde-cero-hasta-avanzado)
+
+Cuanto comienzas a tener muchos dispositivos o estos llevan mucho tiempo, traccar puede usar mucho espacio en el disco. Por lo que ir purgando estos datos es muy importante.
+
+## 1. Métodos Manuales para Eliminar Historial en Traccar
+
+Eliminar manualmente el historial de seguimiento en Traccar es sencillo y ayuda a mantener el sistema eficiente. Aquí te mostramos cómo hacerlo:
+
+1. **Accede a la Base de Datos**: Utiliza un cliente de base de datos como phpMyAdmin o la línea de comandos:
+
+   ```sql
+   mysql -u root -p
+   ```
+
+2. **Identifica la Base de Datos**: En nuestro caso es `traccar`.
+
+   ```sql
+   USE traccar;
+   ```
+3. **Ejecuta el siguiente comando**: Eliminará todos los registros después de 180 días, aprox 3 meses:
+
+   Por lo general solo necesitarás eliminar las posiciones.
+
+   ```sql
+     delete from tc_positions where servertime < DATE(NOW() - INTERVAL 180 day);
+   ```
+
+   Pero tal vez te interese eliminar otras cosas como las estadísticas, los eventos y claro, las posiciones.
+
+   ```sql
+     delete from tc_positions where servertime < DATE(NOW() - INTERVAL 180 day);
+     delete from tc_statistics where capturetime < DATE(NOW() - INTERVAL 180 day);
+     delete from tc_events where servertime < DATE(NOW() - INTERVAL 180 day);
+   ```
+
+4. **Confirmar la Eliminación**: Te saldrá un mensaje de X cantidad de columnas afectadas.
+   ```bash
+     Query OK, 1050 rows affected (1.85 sec)
+   ```
+
+## 2. Configuración de Cron Job para la Eliminación Automática
+
+Automatizar la eliminación de datos antiguos mediante cron jobs puede ahorrar tiempo. Sigue estos pasos:
+
+1.  **Crea un Script de Eliminación**:
+
+    ```sh
+    nano /etc/cron.daily/traccar-clear-database
+    ```
+
+    ```sh
+    #!/bin/bash
+    result=""
+    while [[ "$result" != *" 0 rows affected"* ]]; do
+      result=$(mysql -u root -proot traccar -vve "DELETE FROM tc_positions WHERE fixTime < DATE(DATE_ADD(NOW(), INTERVAL -90 DAY)) AND id NOT IN (SELECT positionId FROM tc_devices WHERE positionid IS NOT NULL) LIMIT 10000")
+      sleep 1
+    done
+    result=""
+    while [[ "$result" != *" 0 rows affected"* ]]; do
+      result=$(mysql -u root -proot traccar -vve "DELETE FROM tc_events WHERE eventTime < DATE(DATE_ADD(NOW(), INTERVAL -90 DAY)) LIMIT 10000")
+      sleep 1
+    done
+    ```
+
+    Vuelvelo ejecutable
+
+    ```sh
+    chmod +x /etc/cron.daily/traccar-clear-database
+    ```
+
+2.  **Asegúrate de ajustar los parámetros según tu caso de uso:**:
+
+        La longitud del historial de la base de datos se controla mediante el INTERVAL -90 DAY. En el ejemplo, eliminamos los valores con más de 90 días de antigüedad.
+
+        Ten en cuenta que la fecha límite se redondea a una fecha.
+
+        El nombre de la base de datos (traccar), el nombre de usuario (root) y la contraseña (root) también deben actualizarse.
+
+        Se recomienda encarecidamente crear índices en tc_positions.fixTime y tc_events.eventTime de la siguiente manera:
+
+        ```sql
+        CREATE INDEX idx_positions_fixtime ON tc_positions (fixtime);
+
+        CREATE INDEX idx_events_eventtime ON tc_events (eventtime);
+        ```
+
+## 3. **Clear Logs**: El siguiente comando hará una eliminación diaria de los logs de traccar.
+
+        ```
+        cat > /etc/cron.daily/traccar-clear-logs << EOF
+
+        #!/bin/sh
+        find /opt/traccar/logs/ -mtime +3 -type f -delete
+        EOF
+        chmod +x /etc/cron.daily/traccar-clear-logs
+        ```
+
+## Consejos Rápidos
+
+- **Respaldo Regular**: Realiza respaldos de la base de datos antes de eliminar datos.
+- **Verificación Post-Operación**: Verifica el correcto funcionamiento del sistema después de la eliminación.
+- **Documentación**Documenta los scripts y configuraciones usadas.

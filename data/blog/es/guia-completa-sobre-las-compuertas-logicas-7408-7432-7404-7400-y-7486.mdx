@@ -1,0 +1,106 @@
+---
+title: Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486
+date: 2024-05-27
+tags: ['electronica']
+draft: false
+authors: ['emmanuelhdev']
+language: es
+summary: ¿Alguna vez te has preguntado cómo funcionan los dispositivos electrónicos que usas todos los días? La respuesta está en las compuertas lógicas.
+cover: /static/images/compuertas.png
+---
+
+Encuentra una guia mejor explicada [qui](/compuertas-logicas)
+
+## Compuerta Lógica: Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486
+
+![Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486](/static/images/compuertas.png)
+
+¿Alguna vez te has preguntado cómo funcionan los dispositivos electrónicos que usas diariamente? La respuesta radica en las **compuertas lógicas**, los componentes fundamentales en cualquier circuito digital. En este artículo, exploraremos algunas de las compuertas lógicas más comunes: 7408, 7432, 7404, 7400 y 7486. Comprender estos componentes es crucial para cualquier entusiasta de la electrónica.
+
+## ¿Qué son las Compuertas Lógicas?
+
+Las **compuertas lógicas** son bloques básicos de la electrónica digital que realizan operaciones booleanas sobre una o más entradas binarias para producir una salida binaria. Estos componentes son esenciales en la creación de circuitos digitales complejos y se utilizan para construir todo, desde calculadoras hasta computadoras y sistemas de comunicación.
+
+## Compuertas Lógicas Comunes y sus Características
+
+### Compuerta AND (7408)
+
+La **compuerta 7408** es una compuerta AND de 2 entradas. Para que la salida de esta compuerta sea alta (1), ambas entradas deben ser altas (1).
+
+- **Configuración**: 2 entradas y 1 salida.
+- **Tabla de verdad**:
+
+| Entrada A | Entrada B | Salida |
+| --------- | --------- | ------ |
+| 0         | 0         | 0      |
+| 0         | 1         | 0      |
+| 1         | 0         | 0      |
+| 1         | 1         | 1      |
+
+### Compuerta OR (7432)
+
+La **compuerta 7432** es una compuerta OR de 2 entradas. La salida será alta (1) si al menos una de las entradas es alta (1).
+
+- **Configuración**: 2 entradas y 1 salida.
+- **Tabla de verdad**:
+
+| Entrada A | Entrada B | Salida |
+| --------- | --------- | ------ |
+| 0         | 0         | 0      |
+| 0         | 1         | 1      |
+| 1         | 0         | 1      |
+| 1         | 1         | 1      |
+
+### Compuerta NOT (7404)
+
+La **compuerta 7404** es una compuerta NOT, también conocida como inversor. Tiene una sola entrada y una salida, invirtiendo el estado lógico de la entrada.
+
+- **Configuración**: 1 entrada y 1 salida.
+- **Tabla de verdad**:
+
+| Entrada | Salida |
+| ------- | ------ |
+| 0       | 1      |
+| 1       | 0      |
+
+### Compuerta NAND (7400)
+
+La **compuerta 7400** es una compuerta NAND de 2 entradas. Es una combinación de las compuertas AND y NOT. La salida será baja (0) solo cuando ambas entradas sean altas (1).
+
+- **Configuración**: 2 entradas y 1 salida.
+- **Tabla de verdad**:
+
+| Entrada A | Entrada B | Salida |
+| --------- | --------- | ------ |
+| 0         | 0         | 1      |
+| 0         | 1         | 1      |
+| 1         | 0         | 1      |
+| 1         | 1         | 0      |
+
+### Compuerta XOR (7486)
+
+La **compuerta 7486** es una compuerta XOR de 2 entradas. La salida será alta (1) si solo una de las entradas es alta (1).
+
+- **Configuración**: 2 entradas y 1 salida.
+- **Tabla de verdad**:
+
+| Entrada A | Entrada B | Salida |
+| --------- | --------- | ------ |
+| 0         | 0         | 0      |
+| 0         | 1         | 1      |
+| 1         | 0         | 1      |
+| 1         | 1         | 0      |
+
+## Cómo Funcionan las Compuertas Lógicas
+
+### Activo Alto y Activo Bajo
+
+Entender el concepto de **activo alto y activo bajo** es esencial para trabajar con compuertas lógicas. Un pin bajo activo debe conectarse a un nivel lógico bajo (0 voltios) para activarse, mientras que un pin alto activo debe conectarse a un nivel lógico alto (3 o 5 voltios).
+
+### Implementación en Circuitos Integrados (ICs)
+
+Las compuertas lógicas se implementan en **circuitos integrados** para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.
+
+### Operaciones Complejas
+
+Combinando diferentes compuertas lógicas, se pueden realizar operaciones complejas. Por ejemplo, un flip-flop, que se utiliza para almacenar datos, puede construirse combinando compuertas NAND.

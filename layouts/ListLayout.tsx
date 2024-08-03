@@ -8,12 +8,14 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 
 interface PaginationProps {
   totalPages: number
   currentPage: number
 }
 interface ListLayoutProps {
+  params: { locale: LocaleTypes }
   posts: CoreContent<Blog>[]
   title: string
   initialDisplayPosts?: CoreContent<Blog>[]
@@ -61,6 +63,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 }
 
 export default function ListLayout({
+  params: { locale },
   posts,
   title,
   initialDisplayPosts = [],

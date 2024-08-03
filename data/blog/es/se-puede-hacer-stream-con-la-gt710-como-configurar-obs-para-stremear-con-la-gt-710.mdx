@@ -1,0 +1,74 @@
+---
+title: ¿Se puede hacer stream con la gt710, gt1030? ¿Cómo configurar obs para stremear con la gt 710, gt 1030?
+date: 2024-05-23
+tags: ['obs', 'nvidia']
+draft: false
+authors: ['default']
+language: es
+summary: Hola a todos Hoy les enseñaré cómo hacer streaming con una tarjeta gráfica GT 710 en solo 5 minutos
+cover: /static/images/streamgt720.jpg
+---
+
+## Cómo Hacer Streaming con una GT 710: Guía Rápida en 5 Minutos
+
+[![Miniatura del video ¿Se puede hacer stream con la gt710, gt1030? ¿Cómo configurar obs para stremear con la gt 710, gt 1030?](/static/images/streamgt720.jpg)](https://www.youtube.com/watch?v=CBNcLOZGl8A)
+
+## Introducción
+
+¡Hola a todos! Hoy les enseñaré cómo hacer streaming con una tarjeta gráfica GT 710 o una gt1030 en solo 5 minutos. Ya sea que la hayas adquirido recientemente o quieras hacer un tutorial para tu escuela, esta guía te ayudará a configurar todo de manera eficiente. Vamos a abordar dos configuraciones: 1080p y 720p. La principal diferencia entre ambas es la resolución, ya que escalar de 720p a 1080p tiene mejor calidad que hacerlo a la inversa.
+
+## Importante
+
+La GT 710 no tiene suficiente potencia para manejar la grabación y el streaming mientras juegas sin generar latencia. Esta latencia será notable para ti aunque no se vea en el stream. Así que, si no tienes una pantalla 1080p, lo mejor es usar la configuración de 720p.
+
+## Configuraciones Básicas
+
+### Configuración en 1080p
+
+1. **Abrir OBS Studio**: Inicia OBS y ve a `Configuración`.
+2. **Resolución**: En la pestaña de `Vídeo`, ajusta la `Resolución de base (Lienzo)` y la `Resolución de salida (Escalado)` a 1920x1080.
+3. **Filtro de Escalado**: Elige Lanczos (36 muestras) para mayor nitidez. Aunque consume más recursos, ofrece mejor calidad.
+
+![Imagen de la configuracion de obs con la gt710](/static/images/gt710.png)
+
+4. **Salida**:
+   - Ve a la pestaña de `Salida`.
+   - Configura la `Tasa de bits` a 6000 Kbps.
+   - Ajusta el `Control de velocidad` a `CBR`.
+   - Configura el `Preset` en `Máxima calidad`.
+   - En `Perfil`, selecciona `alto`.
+
+![Imagen de la configuracion de obs con la gt710](/static/images/gt710salida.png)
+
+### Configuración en 720p
+
+1. **Resolución**: Cambia la `Resolución de base (Lienzo)` y la `Resolución de salida (Escalado)` a 1280x720.
+2. **Filtro de Escalado**: Elige Bilineal (rápido, menor uso de CPU).
+
+![Imagen de la configuracion de obs con la gt710](/static/images/gt710.png)
+
+3. **Salida**:
+   - Ajusta la `Tasa de bits` a 4000 Kbps.
+   - Usa `CBR` como `Control de velocidad`.
+   - Configura el `Preset` en `Calidad`.
+   - Deja el `Perfil` en `alto`.
+
+![Imagen de la configuracion de obs con la gt710](/static/images/gt710salida.png)
+
+## Recomendaciones
+
+- **Latencia**: La latencia es inevitable con la GT 710 si juegas y streameas al mismo tiempo. Ajustar la resolución a 720p puede ayudar a reducirla.
+- **Juegos Pesados**: Para juegos como Call of Duty Mobile, te recomiendo usar la configuración de 720p para evitar un gran impacto en el rendimiento.
+- **Juegos Livianos**: Juegos como Minecraft, Among Us, o Geometry Dash pueden funcionar bien a 1080p si usas la configuración adecuada.
+
+## Prueba y Ajustes Finales
+
+1. **Prueba de Grabación**: Inicia una grabación de prueba en OBS.
+2. **Revisión**: Revisa la grabación para asegurarte de que la calidad es la esperada y que la latencia es manejable.
+3. **Ajustes Finaes**: Realiza ajustes en la configuración si es necesario, priorizando la calidad y el rendimiento según el tipo de contenido que estés transmitiendo.
+
+## Conclusión
+
+Espero que esta guía te haya sido útil para configurar tu streaming con una GT 710. Recuerda que, aunque no es la tarjeta más poderosa, con los ajustes correctos puedes obtener buenos resultados. Si te gustó esta guía, no dudes en darle like y compartirla con alguien que también tenga una GT 710. ¡Nos vemos en el próximo tutorial!
+
+¡Gracias por leer y feliz streaming!
