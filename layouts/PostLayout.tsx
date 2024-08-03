@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import { allCoreContent, CoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
-import { allBlogs } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import PageTitle from '@/components/PageTitle'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
@@ -10,7 +9,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Link from 'next/link'
-import Main from '../app/Main'
+import dynamic from 'next/dynamic'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -31,11 +30,12 @@ interface LayoutProps {
   children: ReactNode
 }
 
+const Recommended = dynamic(() => import('./components/Recomended'), {
+  loading: () => <p>Cargando...</p>,
+  ssr: false,
+})
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
   const { filePath, path, slug, date, title, tags, toc } = content
-
-  const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
-  const posts = allCoreContent(filteredPosts)
   const basePath = path.split('/')[0]
 
   return (
@@ -214,7 +214,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           </div>
         </div>
       </article>
-      <Main posts={posts} title="Te podria interesar" />
+      <Recommended />
     </SectionContainerWithAds>
   )
 }

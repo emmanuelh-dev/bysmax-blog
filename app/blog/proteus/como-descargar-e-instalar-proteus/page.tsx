@@ -20,6 +20,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { genPageMetadata } from 'app/seo'
 import Image from '@/components/Image'
 import NextImage from 'next/image'
+import dynamic from 'next/dynamic'
+
 const FAQ = [
   {
     seccion: '¿Qué es Proteus?',
@@ -111,6 +113,11 @@ const jsonLd = [
     },
   },
 ]
+
+const Recommended = dynamic(() => import('./Recommended'), {
+  loading: () => <p>Cargando...</p>,
+  ssr: false,
+})
 
 export default function Page() {
   return (
@@ -247,19 +254,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="resources" className="bg-muted py-12 md:py-24 lg:py-32">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Recursos sobre Proteus
-            </h2>
-            <p className="text-lg text-neutral-400">
-              Explora más sobre Proteus y cómo utilizarlo en tus proyectos.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2" />
-        </div>
-      </section>
+      <Recommended />
     </main>
   )
 }
