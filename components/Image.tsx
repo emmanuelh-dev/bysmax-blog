@@ -46,7 +46,7 @@ const Image = ({ className, ...rest }: ImageProps) => {
 
   return (
     <div>
-      <button className="relative m-0 w-full cursor-pointer" onClick={openModal}>
+      <button className="z-1 relative m-0 w-full cursor-pointer" onClick={openModal}>
         <NextImage {...rest} className={`h-auto w-full ${className}`} />
       </button>
       {isModalOpen && ReactDOM.createPortal(modalContent, document.body)}

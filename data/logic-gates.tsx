@@ -4,7 +4,7 @@ export const LOGICGATES = [
     heading: 'Compuerta AND (7408/74LS08)',
     datasheet: '/static/images/74LS08.jpg',
     description:
-      'La **compuerta 7408** es una compuerta AND de 2 entradas. Para que la salida de esta compuerta sea alta (1), ambas entradas deben ser altas (1).',
+      'La compuerta 7408 es una compuerta AND de 2 entradas. Para que la salida de esta compuerta sea alta (1), ambas entradas deben ser altas (1).',
     configuration: '2 entradas y 1 salida',
     truthTable: [
       { 'Entrada A': 0, 'Entrada B': 0, salida: 0 },
@@ -18,7 +18,7 @@ export const LOGICGATES = [
     heading: 'Compuerta OR (7432/74LS32)',
     datasheet: '/static/images/74LS32.jpg',
     description:
-      'La **compuerta 7432** es una compuerta OR de 2 entradas. La salida será alta (1) si al menos una de las entradas es alta (1).',
+      'La compuerta 7432 es una compuerta OR de 2 entradas. La salida será alta (1) si al menos una de las entradas es alta (1).',
     configuration: '2 entradas y 1 salida',
     truthTable: [
       { 'Entrada A': 0, 'Entrada B': 0, salida: 0 },
@@ -32,7 +32,7 @@ export const LOGICGATES = [
     heading: 'Compuerta NOT (7404/74LS04)',
     datasheet: '/static/images/74LS04.jpg',
     description:
-      'La **compuerta 7404** es una compuerta NOT, también conocida como inversor. Tiene una sola entrada y una salida, invirtiendo el estado lógico de la entrada.',
+      'La compuerta 7404 es una compuerta NOT, también conocida como inversor. Tiene una sola entrada y una salida, invirtiendo el estado lógico de la entrada.',
     configuration: '1 entrada y 1 salida',
     truthTable: [
       { 'Entrada A': 0, 'Entrada B': 0, salida: 1 },
@@ -44,7 +44,7 @@ export const LOGICGATES = [
     heading: 'Compuerta NAND (7400/74LS00)',
     datasheet: '/static/images/74LS00.jpg',
     description:
-      'La **compuerta 7400** es una compuerta NAND de 2 entradas. Es una combinación de las compuertas AND y NOT. La salida será baja (0) solo cuando ambas entradas sean altas (1).',
+      'La compuerta 7400 es una compuerta NAND de 2 entradas. Es una combinación de las compuertas AND y NOT. La salida será baja (0) solo cuando ambas entradas sean altas (1).',
     configuration: '2 entradas y 1 salida',
     truthTable: [
       { 'Entrada A': 0, 'Entrada B': 0, salida: 1 },
@@ -58,7 +58,7 @@ export const LOGICGATES = [
     heading: 'Compuerta XOR (7486/74LS86)',
     datasheet: '/static/images/74LS86.jpg',
     description:
-      'La **compuerta 7486** es una compuerta XOR de 2 entradas. La salida será alta (1) si solo una de las entradas es alta (1).',
+      'La compuerta 7486 es una compuerta XOR de 2 entradas. La salida será alta (1) si solo una de las entradas es alta (1).',
     configuration: '2 entradas y 1 salida',
     truthTable: [
       { 'Entrada A': 0, 'Entrada B': 0, salida: 0 },
