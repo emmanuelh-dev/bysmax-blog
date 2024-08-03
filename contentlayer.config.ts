@@ -234,7 +234,7 @@ export const Pages = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Authors, Cursos, Servicios, Pages],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
