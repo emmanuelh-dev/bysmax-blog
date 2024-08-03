@@ -17,6 +17,8 @@ import {
   remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js'
+import { remarkAlert } from 'remark-github-blockquote-alert'
+
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -27,6 +29,7 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
+import { fallbackLng, secondLng } from './app/[locale]/i18n/locales'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -48,7 +51,11 @@ const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    resolve: (doc) => {
+      // Split the flattenedPath by '/' and take the last part
+      const pathParts = doc._raw.flattenedPath.split('/')
+      return pathParts[pathParts.length - 1]
+    },
   },
   path: {
     type: 'string',
@@ -65,20 +72,25 @@ const computedFields: ComputedFields = {
  * Count the occurrences of all tags across blog posts and write to json file
  */
 function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
+  const tagCount = {
+    [fallbackLng]: {},
+    [secondLng]: {},
+  }
+
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
-      file.tags.forEach((tag) => {
+      file.tags.forEach((tag: string) => {
         const formattedTag = slug(tag)
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
-        } else {
-          tagCount[formattedTag] = 1
+        if (file.language === fallbackLng) {
+          tagCount[fallbackLng][formattedTag] = (tagCount[fallbackLng][formattedTag] || 0) + 1
+        } else if (file.language === secondLng) {
+          tagCount[secondLng][formattedTag] = (tagCount[secondLng][formattedTag] || 0) + 1
         }
       })
     }
   })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+
+  writeFileSync('./app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
 
 export const Series = defineNestedType(() => ({
@@ -130,6 +142,7 @@ export const Blog = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -139,8 +152,8 @@ export const Blog = defineDocumentType(() => ({
         datePublished: doc.date,
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
-        image: doc.cover ? doc.cover : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/${doc.language}/blog/${doc.slug}`,
       }),
     },
   },
@@ -228,6 +241,7 @@ export default makeSource({
       remarkCodeTitles,
       remarkMath,
       remarkImgToJsx,
+      remarkAlert,
     ],
     rehypePlugins: [
       rehypeSlug,
