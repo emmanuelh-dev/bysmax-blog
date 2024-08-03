@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import Recommended from 'app/Recommended'
+import Recommended from '@/app/[locale]/Recommended'
 import { Metadata } from 'next'
 import Image from '@/components/Image'
 
