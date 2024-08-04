@@ -2,16 +2,17 @@
 
 import { useState } from 'react'
 import { useTagStore } from '@/components/util/useTagStore'
+import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
+import Link from 'next/link'
 import { sortByDate } from '@/components/util/sortByDate'
 import Pagination from './Pagination'
 import tagData from 'app/[locale]/tag-data.json'
-import { POSTS_PER_PAGE } from '../data/postsPerPage'
+import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import Link from 'next/link'
 
 interface PaginationProps {
   totalPages: number
@@ -116,54 +117,58 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             </div>
           </div>
           <div>
-            {displayPosts.map((post) => {
-              const { slug, date, title, summary, tags, language } = post
-              if (language === locale) {
-                return (
-                  <article className="flex flex-col space-y-2 xl:space-y-0" key={title}>
-                    <dl>
-                      <dt className="sr-only">{t('pub')}</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, language)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-3">
-                      <div>
-                        <div className="text-2xl font-bold leading-8 tracking-tight">
-                          <Link
-                            href={`/${locale}/blog/${slug}`}
-                            className="text-gray-900 dark:text-gray-100"
-                            aria-labelledby={title}
-                          >
-                            <h2>{title}</h2>
-                          </Link>
-                        </div>
-                        <ul className="flex flex-wrap">
-                          {tags.map((t) => (
-                            <li key={t} className="my-3">
-                              <button
-                                onClick={() => handleTagClick(t)}
-                                className={`${
-                                  useTagStore.getState().selectedTag === t
-                                    ? 'text-heading-500 dark:text-heading-400'
-                                    : 'text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500'
-                                } mr-3 text-sm font-medium uppercase`}
-                                aria-label={`View posts tagged ${t}`}
+            <motion.ul variants={container} initial="hidden" animate="show">
+              {displayPosts.map((post) => {
+                const { slug, date, title, summary, tags, language } = post
+                if (language === locale) {
+                  return (
+                    <motion.li variants={item} key={slug} className="py-5">
+                      <article className="flex flex-col space-y-2 xl:space-y-0">
+                        <dl>
+                          <dt className="sr-only">{t('pub')}</dt>
+                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                            <time dateTime={date}>{formatDate(date, language)}</time>
+                          </dd>
+                        </dl>
+                        <div className="space-y-3">
+                          <div>
+                            <div className="text-2xl font-bold leading-8 tracking-tight">
+                              <Link
+                                href={`/${locale}/blog/${slug}`}
+                                className="text-gray-900 dark:text-gray-100"
+                                aria-labelledby={title}
                               >
-                                {`${t}`}
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
-                      </div>
-                    </div>
-                  </article>
-                )
-              }
-            })}
+                                <h2>{title}</h2>
+                              </Link>
+                            </div>
+                            <ul className="flex flex-wrap">
+                              {tags.map((t) => (
+                                <li key={t} className="my-3">
+                                  <button
+                                    onClick={() => handleTagClick(t)}
+                                    className={`${
+                                      useTagStore.getState().selectedTag === t
+                                        ? 'text-heading-500 dark:text-heading-400'
+                                        : 'text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500'
+                                    } mr-3 text-sm font-medium uppercase`}
+                                    aria-label={`View posts tagged ${t}`}
+                                  >
+                                    {`${t}`}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                            {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
+                          </div>
+                        </div>
+                      </article>
+                    </motion.li>
+                  )
+                }
+              })}
+            </motion.ul>
             {totalPages > 1 && (
               <Pagination
                 totalPages={totalPages}
