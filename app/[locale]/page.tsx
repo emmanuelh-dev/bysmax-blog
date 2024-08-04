@@ -6,8 +6,9 @@ import Main from './Main'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { buttonVariants } from '@/components/ui/button'
 import Services from '@/components/Services'
+import { createTranslation } from './i18n/server'
 
-export default async function Page() {
+export default async function Page({ params: { locale } }) {
   const images = ['/static/notes/01.png', '/static/notes/02.png']
 
   function getRandom() {
@@ -17,6 +18,8 @@ export default async function Page() {
   const image = images[getRandom()]
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
+
+  const { t } = await createTranslation(locale, 'home')
 
   return (
     <div>

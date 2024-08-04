@@ -1,0 +1,11 @@
+{
+  "hello": "¡Hola! 👋",
+  "intro": "¿Tienes algo que decirnos? ¡Déjanos un mensaje y te responderemos lo antes posible!",
+  "nameLabel": "Nombre",
+  "namePlaceholder": "Ingresa tu nombre",
+  "emailLabel": "Correo electrónico",
+  "emailPlaceholder": "Ingresa tu correo electrónico",
+  "messageLabel": "Mensaje",
+  "messagePlaceholder": "Escribe tu mensaje aquí...",
+  "sendMessageButton": "Enviar mensaje"
+}

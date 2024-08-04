@@ -1,9 +1,4 @@
-import { Button } from '@/components/ui/button'
-import { createTranslation } from '../i18n/server'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Input } from '@/components/ui/input'
-const jsonLd = {
+export const bysmaxMetaData = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'BysMax',
@@ -81,41 +76,4 @@ const jsonLd = {
       closes: '24:00',
     },
   ],
-}
-export default async function Page({ params: { locale } }) {
-  return <Contacto locale={locale} />
-}
-
-const Contacto = async ({ locale }) => {
-  const { t } = await createTranslation(locale, 'contact')
-
-  return (
-    <section className="mx-auto max-w-xl">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <h1 className="text-card-foreground mb-4 text-3xl font-bold">{t('hello')}</h1>
-      <p className="text-muted-foreground mb-6">{t('intro')}</p>
-      <div className="flex gap-6 ">
-        <form className="w-full space-y-4">
-          <div>
-            <Label htmlFor="name">{t('nameLabel')}</Label>
-            <Input type="text" id="name" name="name" placeholder={t('namePlaceholder')} />
-          </div>
-          <div>
-            <Label htmlFor="email">{t('emailLabel')}</Label>
-            <Input type="email" id="email" name="email" placeholder={t('emailPlaceholder')} />
-          </div>
-          <div>
-            <Label htmlFor="message">{t('messageLabel')}</Label>
-            <Textarea id="message" name="message" rows={4} placeholder={t('messagePlaceholder')} />
-          </div>
-          <Button type="submit" className="w-full">
-            {t('sendMessageButton')}
-          </Button>
-        </form>
-      </div>
-    </section>
-  )
 }

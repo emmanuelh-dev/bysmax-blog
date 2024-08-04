@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/table'
 import { CheckIcon } from 'lucide-react'
 import { genPageMetadata } from '@/app/[locale]/seo'
+import { bysmaxMetaData } from '../common'
 export const metadata = genPageMetadata({
   title: 'Reparación de Computadoras en San Nicolas.',
   description:
@@ -26,6 +27,10 @@ export default function Page() {
   return (
     <main>
       <section id="hero" className="bg-primary py-12 md:py-20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(bysmaxMetaData) }}
+        />
         <div className=" mx-auto ">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-4">
