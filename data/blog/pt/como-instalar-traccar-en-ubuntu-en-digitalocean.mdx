@@ -1,0 +1,174 @@
+---
+title: 'Como instalar o Traccar no Ubuntu no DigitalOcean com HTTPS SSL'
+date: '2024-02-23'
+tags: ['digitalocean', 'traccar']
+draft: false
+authors: ['emmanuelhdev']
+language: pt
+summary: 'Aprenda a instalar e configurar o Traccar, uma plataforma de rastreamento GPS de código aberto, em um servidor Ubuntu no DigitalOcean com este guia detalhado.'
+---
+Traccar é uma popular plataforma de rastreamento GPS de código aberto. Neste guia, você aprenderá a instalar o Traccar em um servidor Ubuntu no DigitalOcean e configurá-lo para usar um banco de dados MySQL.
+
+Você pode encontrar o vídeo guiado aqui [Instalação do Traccar no YouTube](https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=1). Também pode interessar a você [como atualizar o Traccar no DigitalOcean](https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=2).
+
+## Curso de Traccar
+
+Acesse o curso de Traccar aqui: [Curso de Traccar](/cursos/curso-de-traccar-desde-cero-hasta-avanzado)
+
+## 1. Registrar-se no DigitalOcean
+
+A primeira coisa que você precisa é de uma conta no DigitalOcean. Você pode se registrar usando [este link](https://m.do.co/c/5ac4ff8a5bab) para receber $200 de crédito gratuito.
+
+Uma vez registrado, crie um novo "droplet" (instância de servidor virtual) com Ubuntu como sistema operacional. A configuração básica com 1GB de RAM e 1 CPU é suficiente para executar o Traccar.
+
+## 2. Instalar o software necessário
+
+Conecte-se ao droplet por SSH e execute os seguintes comandos para instalar o software necessário:
+
+```bash
+apt update && apt -y install unzip mysql-server
+```
+
+Isso instalará a utilidade `unzip` e o servidor MySQL.
+
+## 3. Configurar o banco de dados MySQL
+
+Configure o banco de dados com os seguintes comandos:
+
+```bash
+mysql -u root --execute="ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES; CREATE DATABASE traccar;"
+```
+
+Isso define a senha do root, concede permissões totais ao usuário root e cria um novo banco de dados chamado "traccar".
+
+## 4. Baixar e instalar o Traccar
+
+Baixe a versão mais recente do Traccar:
+
+```bash
+wget https://www.traccar.org/download/traccar-linux-64-latest.zip
+```
+
+Descompacte e instale:
+
+```bash
+unzip traccar-linux-*.zip && ./traccar.run
+```
+
+## 5. Configurar Traccar para MySQL
+
+Edite o arquivo de configuração para que o Traccar use o banco de dados MySQL que você criou:
+
+```bash
+cat > /opt/traccar/conf/traccar.xml << EOF
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+<properties>
+    <entry key="config.default">./conf/default.xml</entry>
+    <entry key='database.driver'>com.mysql.jdbc.Driver</entry>
+    <entry key='database.url'>jdbc:mysql://localhost/traccar?zeroDateTimeBehavior=round&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
+    <entry key='database.user'>root</entry>
+    <entry key='database.password'>root</entry>
+</properties>
+EOF
+```
+
+## 6. Iniciar o serviço Traccar
+
+Inicie o serviço Traccar:
+
+```bash
+service traccar start
+```
+
+## 7. Conexão Segura
+
+O Traccar serve a interface web e a API usando HTTP regular, sem criptografia. Este guia fornece instruções para configurar o Traccar com HTTPS, usando criptografia SSL/TLS. Os exemplos são para Ubuntu Linux, mas podem ser aplicados a outras plataformas. O Traccar não suporta conexões seguras nativamente, então um servidor proxy, neste caso, o Apache, é usado para tunelizar todas as solicitações através de uma conexão segura.
+
+#### Instalação e Configuração do Apache
+
+1. Instale o Apache e habilite os módulos necessários:
+
+```bash
+sudo add-apt-repository ppa:ondrej/apache2
+sudo apt-get install ssl-cert apache2
+sudo a2enmod ssl proxy_http proxy_wstunnel rewrite
+sudo service apache2 restart
+```
+
+2. Adicione uma nova configuração de site:
+
+```bash
+sudo nano /etc/apache2/sites-available/traccar.conf
+```
+
+Conteúdo da configuração do site:
+
+```apache
+<VirtualHost *:80>
+    ServerName demo.traccar.org
+    Redirect / https://demo.traccar.org/
+</VirtualHost>
+<IfModule mod_ssl.c>
+    <VirtualHost _default_:443>
+        ServerName demo.traccar.org
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ProxyPass /api/socket ws://localhost:8082/api/socket
+        ProxyPassReverse /api/socket ws://localhost:8082/api/socket
+
+        ProxyPass / http://localhost:8082/
+        ProxyPassReverse / http://localhost:8082/
+
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+    </VirtualHost>
+</IfModule>
+```
+
+3. Desative o site padrão e ative a nova configuração:
+
+```bash
+sudo a2dissite 000-default
+sudo a2ensite traccar
+sudo service apache2 restart
+```
+
+4. Gere um certificado SSL válido usando Let's Encrypt:
+```bash
+sudo apt install certbot python3-certbot-apache
+sudo certbot --apache
+```
+
+#### Traccar em um subdiretório
+
+Para disponibilizar o Traccar em uma rota que não seja a raiz, ajuste a configuração do proxy e o caminho dos cookies:
+
+```apache
+ProxyRequests off
+
+ProxyPass /gps/api/socket ws://localhost:8082/api/socket
+ProxyPassReverse /gps/api/socket ws://localhost:8082/api/socket
+
+ProxyPass /gps/ http://localhost:8082/
+ProxyPassReverse /gps/ http://localhost:8082/
+ProxyPassReverseCookiePath / /gps/
+
+Redirect permanent /gps /gps/
+```
+
+Além disso, recompile o aplicativo moderno para que funcione corretamente na nova rota.
+
+## 8. Problemas Comuns
+
+_Esta seção deve ser atualizada conforme necessário._
+
+Os passos anteriores devem funcionar corretamente. No entanto, se ao acessar o IP do seu droplet `http://000.000.000.00:8082/` a página não for exibida, é possível que o serviço esteja funcionando, mas haja algum problema. Tente parar e reiniciar o serviço:
+
+```bash
+service traccar stop && service traccar start
+```
+
+E é isso! O Traccar deve estar em execução agora na porta 8082, pronto para ser configurado e utilizado para rastrear dispositivos GPS.

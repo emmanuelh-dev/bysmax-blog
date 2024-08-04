@@ -1,0 +1,176 @@
+---
+title: 'How to Install Traccar on Ubuntu in DigitalOcean with HTTPS SSL'
+date: '2024-02-23'
+tags: ['digitalocean', 'deploy', 'traccar']
+draft: false
+authors: ['emmanuelhdev']
+language: en
+summary: 'Learn how to install and configure Traccar, an open-source GPS tracking platform, on an Ubuntu server in DigitalOcean with this detailed guide.'
+---
+
+Traccar is a popular open-source GPS tracking platform. In this guide, you will learn how to install Traccar on an Ubuntu server in DigitalOcean and configure it to use a MySQL database.
+
+You can find the guided video here [Traccar Installation on YouTube](https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=1). You might also be interested in [how to update Traccar on DigitalOcean](https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV&index=2).
+
+## Traccar Course
+
+Access the Traccar course here: [Traccar Course](/traccar)
+
+## 1. Sign up for DigitalOcean
+
+The first thing you need is a DigitalOcean account. You can sign up using [this link](https://m.do.co/c/5ac4ff8a5bab) to receive $200 in free credit.
+
+Once registered, create a new "droplet" (virtual server instance) with Ubuntu as the operating system. The basic configuration with 1GB of RAM and 1 CPU is sufficient to run Traccar.
+
+## 2. Install the necessary software
+
+Connect to the droplet via SSH and run the following commands to install the necessary software:
+
+```bash
+apt update && apt -y install unzip mysql-server
+```
+
+This will install the `unzip` utility and the MySQL server.
+
+## 3. Configure the MySQL database
+
+Set up the database with the following commands:
+
+```bash
+mysql -u root --execute="ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES; CREATE DATABASE traccar;"
+```
+
+This sets the root password, grants full permissions to the root user, and creates a new database called "traccar".
+
+## 4. Download and Install Traccar
+
+Download the latest version of Traccar:
+
+```bash
+wget https://www.traccar.org/download/traccar-linux-64-latest.zip
+```
+
+Unzip and install:
+
+```bash
+unzip traccar-linux-*.zip && ./traccar.run
+```
+
+## 5. Configure Traccar for MySQL
+
+Edit the configuration file to make Traccar use the MySQL database you created:
+
+```bash
+cat > /opt/traccar/conf/traccar.xml << EOF
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+<properties>
+    <entry key="config.default">./conf/default.xml</entry>
+    <entry key='database.driver'>com.mysql.jdbc.Driver</entry>
+    <entry key='database.url'>jdbc:mysql://localhost/traccar?zeroDateTimeBehavior=round&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
+    <entry key='database.user'>root</entry>
+    <entry key='database.password'>root</entry>
+</properties>
+EOF
+```
+
+## 6. Start the Traccar Service
+
+Start the Traccar service:
+
+```bash
+service traccar start
+```
+
+## 7. Secure Connection
+
+Traccar serves the web interface and API using regular HTTP, without encryption. This guide provides instructions to configure Traccar with HTTPS, using SSL/TLS encryption. The examples are for Ubuntu Linux but can be applied to other platforms. Traccar does not natively support secure connections, so a proxy server, in this case, Apache, is used to tunnel all requests through a secure connection.
+
+#### Installing and Configuring Apache
+
+1. Install Apache and enable the necessary modules:
+
+```bash
+sudo add-apt-repository ppa:ondrej/apache2
+sudo apt-get install ssl-cert apache2
+sudo a2enmod ssl proxy_http proxy_wstunnel rewrite
+sudo service apache2 restart
+```
+
+2. Add a new site configuration:
+
+```bash
+sudo nano /etc/apache2/sites-available/traccar.conf
+```
+
+Site configuration content:
+
+```apache
+<VirtualHost *:80>
+    ServerName demo.traccar.org
+    Redirect / https://demo.traccar.org/
+</VirtualHost>
+<IfModule mod_ssl.c>
+    <VirtualHost _default_:443>
+        ServerName demo.traccar.org
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ProxyPass /api/socket ws://localhost:8082/api/socket
+        ProxyPassReverse /api/socket ws://localhost:8082/api/socket
+
+        ProxyPass / http://localhost:8082/
+        ProxyPassReverse / http://localhost:8082/
+
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+    </VirtualHost>
+</IfModule>
+```
+
+3. Disable the default site and enable the new configuration:
+
+```bash
+sudo a2dissite 000-default
+sudo a2ensite traccar
+sudo service apache2 restart
+```
+
+4. Generate a valid SSL certificate using Let's Encrypt:
+
+```bash
+sudo apt install certbot python3-certbot-apache
+sudo certbot --apache
+```
+
+#### Traccar in a Subdirectory
+
+To make Traccar available in a non-root path, adjust the proxy configuration and cookie path:
+
+```apache
+ProxyRequests off
+
+ProxyPass /gps/api/socket ws://localhost:8082/api/socket
+ProxyPassReverse /gps/api/socket ws://localhost:8082/api/socket
+
+ProxyPass /gps/ http://localhost:8082/
+ProxyPassReverse /gps/ http://localhost:8082/
+ProxyPassReverseCookiePath / /gps/
+
+Redirect permanent /gps /gps/
+```
+
+Additionally, recompile the modern application to work correctly in the new path.
+
+## 8. Common Issues
+
+_This section should be updated as needed._
+
+The previous steps should work correctly. However, if you access your droplet’s IP `http://000.000.000.00:8082/` and the page does not show up, it’s possible that the service is running but there may be some issues. Try stopping and restarting the service:
+
+```bash
+service traccar stop && service traccar start
+```
+
+And that's it! Traccar should now be running on port 8082, ready to be configured and used for GPS device tracking.
