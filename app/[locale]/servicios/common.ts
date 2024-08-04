@@ -1,12 +1,11 @@
 export const bysmaxMetaData = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'BysMax',
-  '@id': '#A30F53F0668F4F9A8F5690994D25C936/CYLEX',
-  url: 'https://bysmax.xyz/',
+  name: 'Reparación de computadoras - BysMax',
+  url: 'https://bysmax.com/',
   telephone: ['8126060795'],
   description:
-    'Tenemos mucha experiencia en el ámbito tecnológico, puedes revisar nuestro blog, nuestra página de servicios y la de contacto.\r\nYa seas un arquitecto, un pequeño negocio, un despacho de contadores, nosotros te podemos ayudar a ahorrar recursos y hacer más eficientes tus procesos.',
+    'Nuestros Servicios · Consultoría · Implementación · Soporte · Desarrollo a la Medida · Desarrollo iOS · Desarrollo Android · Desarrollo Web · Optimización SEO.',
   paymentAccepted: [
     'Efectivo',
     "Diner's Club",
