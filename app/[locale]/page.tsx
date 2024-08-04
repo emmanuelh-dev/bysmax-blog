@@ -1,4 +1,4 @@
-import { allBlogs, allCursos, allServicios } from 'contentlayer/generated'
+import { allBlogs } from 'contentlayer/generated'
 import Image from 'next/image'
 import Link from 'next/link'
 import Main from './Main'
@@ -17,8 +17,6 @@ export default async function Page() {
   const image = images[getRandom()]
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
-  const servicios = allCoreContent(allServicios)
-  const cursos = allCoreContent(allCursos)
 
   return (
     <div>

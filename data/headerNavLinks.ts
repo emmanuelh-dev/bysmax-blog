@@ -1,8 +1,5 @@
 import siteMetadata from '@/data/siteMetadata'
-import { allCursos, allServicios } from 'contentlayer/generated'
 import { allCoreContent } from 'pliny/utils/contentlayer'
-const services = allCoreContent(allServicios)
-const courses = allCoreContent(allCursos)
 
 const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog` // Change if you want to create a new file in a different directory
 
@@ -42,24 +39,11 @@ export const nav: Nav[] = [
         description: '',
         href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
       },
-      ...services.map((s) => {
-        return {
-          title: s.title,
-          description: s.summary,
-          href: '/' + s.path,
-        }
-      }),
     ],
   },
   {
     title: 'Cursos',
     links: [
-      ...courses.map((s) => {
-        return {
-          title: s.title,
-          href: '/' + s.path,
-        }
-      }),
       {
         title: 'Curso Gratis de Traccar',
         href: '/traccar',
@@ -73,12 +57,6 @@ export const nav: Nav[] = [
   {
     title: 'Guias',
     links: [
-      ...courses.map((s) => {
-        return {
-          title: s.title,
-          href: '/' + s.path,
-        }
-      }),
       {
         title: 'Compuertas Logicas',
         href: '/compuertas-logicas',

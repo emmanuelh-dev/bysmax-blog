@@ -4,34 +4,22 @@ import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
-import { allServicios, allCursos } from 'contentlayer/generated'
 
 const Footer = () => {
   const footerLinks = [
     {
       title: 'Mantente actualizado',
       links: [
-        ...headerNavLinks,
         {
-          href: '/wordpress',
-          title: 'Crear en wordpress',
+          title: 'Curso Gratis de Traccar',
+          href: '/traccar',
         },
       ],
     },
-    {
-      title: 'Servicios',
-      links: allServicios.map((s) => ({
-        href: `/servicios/${s.slug}`,
-        title: s.title,
-      })),
-    },
+
     {
       title: 'Cursos',
       links: [
-        ...allCursos.map((c) => ({
-          href: `/cursos/${c.slug}`,
-          title: c.title,
-        })),
         {
           title: 'Curso Gratis de Traccar',
           href: '/traccar',

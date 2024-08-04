@@ -3,22 +3,22 @@ import {
   ComputedFields,
   makeSource,
   defineNestedType,
-} from 'contentlayer/source-files'
+} from 'contentlayer2/source-files'
 import { writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import { slug } from 'github-slugger'
 import path from 'path'
+import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 // Remark packages
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import { remarkAlert } from 'remark-github-blockquote-alert'
 import {
   remarkExtractFrontmatter,
   remarkCodeTitles,
   remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js'
-import { remarkAlert } from 'remark-github-blockquote-alert'
-
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -28,7 +28,6 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
-import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import { fallbackLng, secondLng, thirtLng } from './app/[locale]/i18n/locales'
 
 const root = process.cwd()
@@ -65,19 +64,21 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFilePath,
   },
-  toc: { type: 'json', resolve: (doc) => extractTocHeadings(doc.body.raw) },
+  toc: { type: 'string', resolve: (doc) => extractTocHeadings(doc.body.raw) },
 }
 
 /**
  * Count the occurrences of all tags across blog posts and write to json file
+ * Add logic to your own locales and project
  */
+
 function createTagCount(allBlogs) {
   const tagCount = {
     [fallbackLng]: {},
     [secondLng]: {},
     [thirtLng]: {},
   }
-  console.log('Generate tags')
+
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag: string) => {
@@ -132,10 +133,10 @@ export const Blog = defineDocumentType(() => ({
     language: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
     lastmod: { type: 'date' },
+    featured: { type: 'boolean' },
     draft: { type: 'boolean' },
     summary: { type: 'string' },
     images: { type: 'json' },
-    cover: { type: 'json' },
     authors: { type: 'list', of: { type: 'string' }, required: true },
     layout: { type: 'string' },
     bibliography: { type: 'string' },
@@ -171,7 +172,6 @@ export const Authors = defineDocumentType(() => ({
     avatar: { type: 'string' },
     occupation: { type: 'string' },
     company: { type: 'string' },
-    url: { type: 'string' },
     email: { type: 'string' },
     twitter: { type: 'string' },
     linkedin: { type: 'string' },
@@ -181,60 +181,9 @@ export const Authors = defineDocumentType(() => ({
   computedFields,
 }))
 
-export const Servicios = defineDocumentType(() => ({
-  name: 'Servicios',
-  filePathPattern: 'servicios/**/*.mdx',
-  contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true },
-    tags: { type: 'list', of: { type: 'string' }, default: [] },
-    date: { type: 'date', required: true },
-    price: { type: 'number' },
-    summary: { type: 'string' },
-    images: { type: 'json' },
-    cover: { type: 'json' },
-    layout: { type: 'string' },
-  },
-  computedFields,
-  // computedFields: {
-  //   ...computedFields,
-  //   structuredData: {
-  //     type: 'json',
-  //     resolve: (doc) => ({
-  //       '@context': 'https://schema.org',
-  //       '@type': 'BlogPosting',
-  //       headline: doc.title,
-  //       datePublished: doc.date,
-  //       dateModified: doc.lastmod || doc.date,
-  //       description: doc.summary,
-  //       image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-  //       url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
-  //     }),
-  //   },
-  // },
-}))
-
-export const Cursos = defineDocumentType(() => ({
-  name: 'Cursos',
-  filePathPattern: 'cursos/**/*.mdx',
-  contentType: 'mdx',
-  fields: {
-    title: { type: 'string', required: true },
-    cover: { type: 'json' },
-  },
-  computedFields,
-}))
-export const Pages = defineDocumentType(() => ({
-  name: 'Page',
-  filePathPattern: 'pages/**/*.mdx',
-  contentType: 'mdx',
-  fields: {},
-  computedFields,
-}))
-
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Cursos, Servicios, Pages],
+  documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
