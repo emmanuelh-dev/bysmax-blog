@@ -9,13 +9,13 @@ const MAX_DISPLAY = 6
 
 export default function Home({ posts, locale = 'es', title = '', service = false, curso = false }) {
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+    <div className="divide-y divide-gray-200 pt-12 dark:divide-gray-700">
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {!posts.length && 'No posts found.'}
         {posts.slice(0, MAX_DISPLAY).map((post) => {
           const { slug, date, title, summary, tags, cover, authors, images } = post
           return (
-            <li key={slug} className="py-12">
+            <li key={slug}>
               <article className="h-full flex-1">
                 <div className="block w-full lg:col-span-2">
                   {images ? (
