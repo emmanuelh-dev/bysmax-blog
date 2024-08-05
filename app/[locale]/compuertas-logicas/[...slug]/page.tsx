@@ -45,7 +45,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
+export default async function Page({ params, locale }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'))
 
   const page = LOGICGATES.find((p) => p.url === slug)
@@ -151,7 +151,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         <h2 id="recommended-projects" className="text-2xl font-bold">
           Proyectos con {slug}
         </h2>
-        <Recommended tags={[slug]} title={`Proyectos con ${slug}`} locale={'es'} />
+        <Recommended tags={[slug]} locale={locale} />
       </nav>
     </Sidebar>
   )
