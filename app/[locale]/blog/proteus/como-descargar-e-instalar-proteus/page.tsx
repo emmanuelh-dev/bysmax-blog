@@ -127,7 +127,7 @@ const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
 
 export default function Page({ params: { locale } }: PageProps) {
   return (
-    <main>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -274,7 +274,7 @@ export default function Page({ params: { locale } }: PageProps) {
         </div>
         <Recommended tags={['proteus']} locale={locale} />
       </section>
-    </main>
+    </>
   )
 }
 
