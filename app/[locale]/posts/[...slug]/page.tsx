@@ -1,3 +1,4 @@
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
 const getPosts = async () => {
@@ -61,11 +62,13 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const { data } = await response.json()
 
   return (
-    <div className="w-full overflow-hidden">
-      <h1 className="text-6xl font-bold">{data.postBy.title}</h1>
-      <div className="prose dark:prose-invert">
-        <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
+    <SectionContainerWithAds>
+      <div className="w-full overflow-hidden">
+        <h1 className="text-6xl font-bold">{data.postBy.title}</h1>
+        <div className="prose dark:prose-invert">
+          <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
+        </div>
       </div>
-    </div>
+    </SectionContainerWithAds>
   )
 }
