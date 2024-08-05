@@ -10,6 +10,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import SuspencePosts from './components/SuspencePosts'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -31,7 +32,7 @@ interface LayoutProps {
 }
 
 const Recommended = dynamic(() => import('./components/Recomended'), {
-  loading: () => <p>Cargando...</p>,
+  loading: () => <SuspencePosts />,
   ssr: false,
 })
 const Sidebar = dynamic(() => import('./components/SideBar'), {
@@ -96,7 +97,19 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           </div>
         </div>
       </article>
-      <Recommended tags={tags} />
+      <div>
+        <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+            <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+              Te podria interesar.
+            </h2>
+            <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+              {/*siteMetadata.description*/}
+            </p>
+          </div>
+          <Recommended tags={tags} />
+        </div>
+      </div>
     </SectionContainerWithAds>
   )
 }
