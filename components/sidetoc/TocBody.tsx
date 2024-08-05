@@ -31,21 +31,23 @@ const TocBody = ({ toc }: TocBodyProps) => {
   const { t } = useTranslation(locale, 'common')
   const { sidebarOpen } = useSidebarStore()
 
-  if (!sidebarOpen) {
-    return null
-  }
-
   const filteredToc = filterToc(toc as TocItem[])
 
   return (
     <div className="fixed left-0 top-0 z-50 h-screen md:flex">
-      <div className="fixed left-0 top-0 z-50 flex h-screen w-64 flex-col bg-gray-100 px-2 py-4 dark:bg-gray-800">
+      <div
+        className={`fixed left-0 top-0 z-50 flex h-screen ${sidebarOpen ? 'w-72' : 'w-0 -translate-x-10'} flex-col border-r border-neutral-100 bg-gray-100  px-2 py-4 transition-all duration-300 dark:border-neutral-800 dark:bg-black`}
+      >
         <div className="mt-20">
-          <div className="text-xl font-bold text-heading-400">{t('sidetoc')}</div>
+          <div
+            className={`text-heading-400 text-xl font-bold ${sidebarOpen ? '' : 'hidden'} transition-all duration-300`}
+          >
+            {t('sidetoc')}
+          </div>
           <div className="my-auto mt-5 overflow-y-auto">
             <TOCInline
               toc={filteredToc}
-              ulClassName="space-y-2 overflow-y-auto my-auto text-primary-500"
+              ulClassName="space-y-4 overflow-y-auto my-auto text-primary-500"
               liClassName="hover:text-heading-400"
             />
           </div>
