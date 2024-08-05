@@ -15,7 +15,10 @@ import Image from '@/components/Image'
 import { LocaleTypes } from '../../i18n/settings'
 import dynamic from 'next/dynamic'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
-
+const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
+  loading: () => <SuspencePosts />,
+  ssr: false,
+})
 interface Props {
   params: { slug: string[]; locale: LocaleTypes }
 }
@@ -50,10 +53,11 @@ export async function generateMetadata({
   }
 }
 
-const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
-  loading: () => <SuspencePosts />,
-  ssr: false,
-})
+export const generateStaticParams = async () => {
+  const paths = LOGICGATES.map((p) => ({ slug: p.url.split('/') }))
+  return paths
+}
+
 export default async function Page({ params: { locale, slug } }: Props) {
   const decodeSlug = decodeURI(slug.join('/'))
 
