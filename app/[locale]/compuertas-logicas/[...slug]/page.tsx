@@ -13,7 +13,11 @@ import {
 import Recommended from '@/app/[locale]/Recommended'
 import { Metadata } from 'next'
 import Image from '@/components/Image'
+import { LocaleTypes } from '../../i18n/settings'
 
+interface Props {
+  params: { slug: string[]; locale: LocaleTypes }
+}
 export async function generateMetadata({
   params,
 }: {
@@ -45,10 +49,10 @@ export async function generateMetadata({
   }
 }
 
-export default async function Page({ params, locale }: { params: { slug: string[] } }) {
-  const slug = decodeURI(params.slug.join('/'))
+export default async function Page({ params: { locale, slug } }: Props) {
+  const decodeSlug = decodeURI(slug.join('/'))
 
-  const page = LOGICGATES.find((p) => p.url === slug)
+  const page = LOGICGATES.find((p) => p.url === decodeSlug)
 
   if (!page) return notFound()
 
