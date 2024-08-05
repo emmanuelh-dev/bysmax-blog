@@ -105,8 +105,8 @@ export default function Page() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4">
-                  "Los cursos de BysMax me han ayudado a adquirir\n nuevas habilidades y a
-                  mejorar mi carrera. ¡Altamente\n recomendados!"
+                  "Los cursos de BysMax me han ayudado a adquirir\n nuevas habilidades y a mejorar
+                  mi carrera. ¡Altamente\n recomendados!"
                 </p>
               </CardContent>
             </Card>
@@ -120,8 +120,8 @@ export default function Page() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4">
-                  "BysMax ha sido una excelente inversión para mi\n carrera. Los instructores
-                  son expertos y los cursos son\n muy prácticos."
+                  "BysMax ha sido una excelente inversión para mi\n carrera. Los instructores son
+                  expertos y los cursos son\n muy prácticos."
                 </p>
               </CardContent>
             </Card>
@@ -135,8 +135,8 @@ export default function Page() {
                   </div>
                 </div>
                 <p className="text-muted-foreground mt-4">
-                  "Estoy muy satisfecho con los cursos de BysMax.\n Aprendí mucho y pude
-                  aplicar los conocimientos\n directamente en mi trabajo."
+                  "Estoy muy satisfecho con los cursos de BysMax.\n Aprendí mucho y pude aplicar los
+                  conocimientos\n directamente en mi trabajo."
                 </p>
               </CardContent>
             </Card>

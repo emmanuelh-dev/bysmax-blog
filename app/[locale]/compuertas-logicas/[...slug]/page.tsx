@@ -151,7 +151,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         <h2 id="recommended-projects" className="text-2xl font-bold">
           Proyectos con {slug}
         </h2>
-        <Recommended tags={[slug]} title={`Proyectos con ${slug}`} />
+        <Recommended tags={[slug]} title={`Proyectos con ${slug}`} locale={'es'} />
       </nav>
     </Sidebar>
   )

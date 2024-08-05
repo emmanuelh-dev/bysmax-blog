@@ -9,15 +9,23 @@ import { SectionContainerWithAds } from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Recommended from '@/app/[locale]/Recommended'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 
 interface LayoutProps {
+  params: { locale: LocaleTypes }
   content: CoreContent<Blog>
   children: ReactNode
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
 }
 
-export default function PostLayout({ content, next, prev, children }: LayoutProps) {
+export default function PostLayout({
+  params: { locale },
+  content,
+  next,
+  prev,
+  children,
+}: LayoutProps) {
   const { path, slug, date, title, tags } = content
   const filteredPosts = allBlogs.filter((post) => post.tags.includes(tags[0]))
   const posts = allCoreContent(filteredPosts)
@@ -87,7 +95,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           </div>
         </div>
       </article>
-      <Recommended tags={tags} title="Te podria interesar" />
+      <Recommended tags={tags} locale={locale} />
     </SectionContainerWithAds>
   )
 }
