@@ -101,7 +101,7 @@ export default function RootLayout({
           <SpeedInsights />
           <VercelAnalytics />
           <SectionContainer>
-            <div className="container flex h-screen flex-col justify-between font-sans">
+            <div>
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
                 <main className="mb-auto">{children}</main>
