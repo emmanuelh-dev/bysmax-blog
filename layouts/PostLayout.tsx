@@ -39,6 +39,10 @@ const Sidebar = dynamic(() => import('./components/SideBar'), {
   loading: () => <Lazy />,
   ssr: false,
 })
+const SideTOC = dynamic(() => import('@/components/sidetoc'), {
+  loading: () => <Lazy />,
+  ssr: false,
+})
 export default function PostLayout({
   params: { locale },
   content,
@@ -47,8 +51,7 @@ export default function PostLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
-
+  const { filePath, path, slug, date, title, tags, toc } = content
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
@@ -117,6 +120,7 @@ export default function PostLayout({
           <Recommended tags={tags} locale={locale} />
         </div>
       </div>
+      <SideTOC toc={toc} />
     </SectionContainerWithAds>
   )
 }

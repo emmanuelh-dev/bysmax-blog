@@ -9,58 +9,45 @@ export default function Sidebar({ authorDetails, next, prev, content }) {
 
   return (
     <div>
-      <div>
-        <nav>
-          <ul>
-            {toc.map((item, i) => (
-              <li key={item.value}>
-                <Link href={item.url} className="text-sm text-primary-500">
-                  {item.value}
-                </Link>
+      <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+        <dt className="sr-only">Authors</dt>
+        <dd>
+          <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+            {authorDetails.map((author) => (
+              <li className="flex items-center space-x-2" key={author.name}>
+                {author.avatar && (
+                  <Image
+                    src={author.avatar}
+                    width={38}
+                    height={38}
+                    alt="avatar"
+                    className="h-10 w-10 rounded-full"
+                  />
+                )}
+                <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                  <dt className="sr-only">Name</dt>
+                  <dd className="text-gray-900 dark:text-gray-100">
+                    <Link href={`${author.url ? author.url : '/author/' + author.slug}`}>
+                      {author.name}
+                    </Link>
+                  </dd>
+                  <dt className="sr-only">Twitter</dt>
+                  <dd>
+                    {author.twitter && (
+                      <Link
+                        href={author.twitter}
+                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      >
+                        {author.twitter.replace('https://twitter.com/', '@')}
+                      </Link>
+                    )}
+                  </dd>
+                </dl>
               </li>
             ))}
           </ul>
-        </nav>
-        <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-          <dt className="sr-only">Authors</dt>
-          <dd>
-            <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-              {authorDetails.map((author) => (
-                <li className="flex items-center space-x-2" key={author.name}>
-                  {author.avatar && (
-                    <Image
-                      src={author.avatar}
-                      width={38}
-                      height={38}
-                      alt="avatar"
-                      className="h-10 w-10 rounded-full"
-                    />
-                  )}
-                  <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                    <dt className="sr-only">Name</dt>
-                    <dd className="text-gray-900 dark:text-gray-100">
-                      <Link href={`${author.url ? author.url : '/author/' + author.slug}`}>
-                        {author.name}
-                      </Link>
-                    </dd>
-                    <dt className="sr-only">Twitter</dt>
-                    <dd>
-                      {author.twitter && (
-                        <Link
-                          href={author.twitter}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        >
-                          {author.twitter.replace('https://twitter.com/', '@')}
-                        </Link>
-                      )}
-                    </dd>
-                  </dl>
-                </li>
-              ))}
-            </ul>
-          </dd>
-        </dl>
-      </div>
+        </dd>
+      </dl>
       <footer>
         <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
           {/* Adds*/}
