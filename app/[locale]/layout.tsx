@@ -101,13 +101,11 @@ export default function RootLayout({
           <SpeedInsights />
           <VercelAnalytics />
           <SectionContainer>
-            <div>
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
-                <main className="mb-auto">{children}</main>
-              </SearchProvider>
-              <Footer />
-            </div>
+            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <Header />
+              <main className="mb-auto">{children}</main>
+            </SearchProvider>
+            <Footer />
           </SectionContainer>
         </ThemeProviders>
         <Metrics />
