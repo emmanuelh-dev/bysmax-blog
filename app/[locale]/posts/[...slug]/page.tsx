@@ -72,12 +72,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   console.log(data)
   return (
     <>
-      <div className="w-full overflow-hidden">
-        <h1 className="text-6xl font-bold">{data.postBy.title}</h1>
-        <div className="prose dark:prose-invert">
-          <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
-        </div>
-      </div>
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
@@ -119,12 +113,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </div>
         </div>
       </article>
-      <div className="w-full overflow-hidden">
-        <h1 className="text-6xl font-bold"></h1>
-        <div className="prose dark:prose-invert">
-          <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
-        </div>
-      </div>
     </>
   )
 }
