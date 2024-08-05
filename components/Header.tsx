@@ -1,3 +1,5 @@
+'use client'
+
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
@@ -7,14 +9,17 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import Navigation from './NavigationMenu'
 import LangSwitch from './langswitch'
-
-const editUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
+import { useParams } from 'next/navigation'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 
 const Header = () => {
+  const locale = useParams()?.locale as LocaleTypes
+
+  const editUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
   return (
     <header className="flex items-center justify-between py-10">
       <div>
-        <Link href="/" aria-label={siteMetadata.headerTitle}>
+        <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             {typeof siteMetadata.headerTitle === 'string' ? (
               <div className="h-6 text-2xl font-semibold">{siteMetadata.headerTitle}</div>
@@ -32,7 +37,7 @@ const Header = () => {
           .map((link) => (
             <Link
               key={link.title}
-              href={link.href}
+              href={`/${locale}${link.href}`}
               className="hidden font-medium text-gray-900 dark:text-gray-100 sm:block"
             >
               {link.title}

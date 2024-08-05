@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 const MAX_DISPLAY = 6
 
-export default function Home({ posts, locale = 'es', title = '', service = false, curso = false }) {
+export default function Home({ posts, locale, title = '', service = false, curso = false }) {
   return (
     <div className="divide-y divide-gray-200 pt-12 dark:divide-gray-700">
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">

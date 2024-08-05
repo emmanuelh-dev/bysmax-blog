@@ -63,7 +63,7 @@ export default async function Page({ params: { locale } }) {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {/*siteMetadata.description*/}
           </p>
-          <Blog posts={filteredPosts} />
+          <Blog posts={filteredPosts} locale={locale} />
         </div>
       </section>
       <Services />
