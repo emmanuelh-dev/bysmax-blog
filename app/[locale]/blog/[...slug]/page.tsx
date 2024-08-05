@@ -143,9 +143,6 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
   })
 
   const Layout = layouts[post.layout || defaultLayout]
-  console.log(post.slug)
-  console.log(post.path)
-  console.log(post.filePath)
   return (
     <>
       <script

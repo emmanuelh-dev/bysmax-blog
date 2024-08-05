@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export default function Sidebar({ authorDetails, next, prev, content }) {
+export default function Sidebar({ authorDetails, next, prev, content, locale }) {
   const { filePath, path, slug, date, title, tags, toc } = content
   const basePath = path.split('/')[0]
-
+  console.log(prev)
   return (
     <div>
       <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
@@ -75,23 +75,23 @@ export default function Sidebar({ authorDetails, next, prev, content }) {
           )}
           {(next || prev) && (
             <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-              {prev && prev.path && (
+              {prev && prev.slug && (
                 <div>
                   <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                     Previous Article
                   </h2>
                   <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${prev.path}`}>{prev.title}</Link>
+                    <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
                   </div>
                 </div>
               )}
-              {next && next.path && (
+              {next && next.slug && (
                 <div>
                   <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                     Next Article
                   </h2>
                   <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${next.path}`}>{next.title}</Link>
+                    <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
                   </div>
                 </div>
               )}

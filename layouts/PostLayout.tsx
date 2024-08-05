@@ -103,7 +103,13 @@ export default function PostLayout({
                 </div>
               )}
             </div>
-            <Sidebar authorDetails={authorDetails} next={next} prev={prev} content={content} />
+            <Sidebar
+              authorDetails={authorDetails}
+              next={next}
+              prev={prev}
+              content={content}
+              locale={locale}
+            />
           </div>
         </div>
       </article>
