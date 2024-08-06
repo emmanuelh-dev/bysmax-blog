@@ -27,6 +27,7 @@ const getPosts = async () => {
         }
       `,
     }),
+    next: { revalidate: 86400001 },
   })
 
   const { data } = await response.json()

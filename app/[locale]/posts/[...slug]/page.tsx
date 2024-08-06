@@ -65,6 +65,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       variables: {
         slug: slug,
       },
+      next: { revalidate: 86400001 },
     }),
   })
 
