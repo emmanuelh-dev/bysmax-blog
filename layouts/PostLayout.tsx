@@ -35,7 +35,7 @@ const Recommended = dynamic(() => import('./components/Recomended'), {
   loading: () => <SuspencePosts />,
   ssr: false,
 })
-const Sidebar = dynamic(() => import('./components/SideBar'), {
+const Sidebar = dynamic(() => import('@/components/SideBar'), {
   loading: () => <Lazy />,
   ssr: false,
 })

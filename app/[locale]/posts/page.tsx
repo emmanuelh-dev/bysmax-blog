@@ -1,38 +1,9 @@
 import React from 'react'
-import Main from '@/app/[locale]/Main'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatDate } from 'pliny/utils/formatDate'
 import siteMetadata from '@/data/siteMetadata'
-const getPosts = async () => {
-  const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-        query PostQuery {
-          posts {
-            nodes {
-              title
-              date
-              slug
-              author {
-                cursor
-              }
-              content
-            }
-          }
-        }
-      `,
-    }),
-    next: { revalidate: 86400001 },
-  })
-
-  const { data } = await response.json()
-  return data.posts.nodes
-}
+import { getPosts } from '@/components/util/wpGraphQL'
 
 export default async function Page() {
   const posts = await getPosts()
@@ -77,7 +48,6 @@ export default async function Page() {
                           {author}
                         </p>
                       ))}
-
                     <span aria-hidden="true">·</span>
                     <div className="flex text-xs text-gray-500">
                       <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>

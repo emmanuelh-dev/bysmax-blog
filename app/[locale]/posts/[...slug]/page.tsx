@@ -1,41 +1,36 @@
 import PageTitle from '@/components/PageTitle'
-import { SectionContainerWithAds } from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-const getPosts = async () => {
-  const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-        query PostQuery {
-          posts {
-            nodes {
-              title
-              date
-              slug
-              author {
-                cursor
-              }
-              content
-            }
-          }
-        }
-      `,
-    }),
-  })
+import { LocaleTypes } from '../../i18n/settings'
+import dynamic from 'next/dynamic'
+import { getAuthorByID, getPostBySlug, getPosts } from '@/components/util/wpGraphQL'
+import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormatter'
 
-  const { data } = await response.json()
-  return data.posts.nodes
+interface BlogPageProps {
+  params: { slug: string[]; locale: LocaleTypes }
 }
+
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: 'numeric',
+}
+const Sidebar = dynamic(() => import('@/components/SideBar'), {
+  loading: () => <Lazy />,
+  ssr: false,
+})
+export async function generateMetadata({ params: { slug, locale } }) {
+  const dslug = decodeURI(slug.join('/'))
+  const post = await getPostBySlug(dslug)
+
+  if (!post) {
+    null
+  }
+  return {
+    title: post.postBy.title,
+  }
 }
 export const generateStaticParams = async () => {
   const posts = await getPosts()
@@ -43,34 +38,12 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  const slug = decodeURI(params.slug.join('/'))
-
-  const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-      query PostQuery($slug: String!) {
-        postBy(slug: $slug) {
-          id
-          title
-          content
-          date
-        }
-      }
-    `,
-      variables: {
-        slug: slug,
-      },
-      next: { revalidate: 86400001 },
-    }),
-  })
-
-  const { data } = await response.json()
-  console.log(data)
+export default async function Page({ params: { slug, locale } }: BlogPageProps) {
+  const dslug = decodeURI(slug.join('/'))
+  const post = await getPostBySlug(dslug)
+  const blog = graphqlToBlog({ post })
+  const author = await getAuthorByID(post.postBy.authorId)
+  const authorDetails = graphqlToBlogAuthor({ author })
   return (
     <>
       <article>
@@ -83,8 +56,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                     <div>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={data.postBy.date}>
-                          {new Date(data.postBy.date).toLocaleDateString(
+                        <time dateTime={post.postBy.date}>
+                          {new Date(post.postBy.date).toLocaleDateString(
                             siteMetadata.locale,
                             postDateTemplate
                           )}
@@ -93,7 +66,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                     </div>
                   </dl>
                   <div>
-                    <PageTitle>{data.postBy.title}</PageTitle>
+                    <PageTitle>{post.postBy.title}</PageTitle>
                   </div>
                 </div>
               </header>
@@ -108,12 +81,26 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                 ></ins>
               </div>
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-                <div dangerouslySetInnerHTML={{ __html: data.postBy.content }} />
+                <div dangerouslySetInnerHTML={{ __html: post.postBy.content }} />
               </div>
             </div>
+            <Sidebar
+              authorDetails={authorDetails}
+              next={null}
+              prev={null}
+              content={blog}
+              locale={null}
+            />
           </div>
         </div>
       </article>
     </>
   )
 }
+const Lazy = () => (
+  <div className="space-y-6">
+    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+    <div className="aspect-video w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+  </div>
+)
