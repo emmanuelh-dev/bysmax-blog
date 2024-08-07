@@ -14,67 +14,87 @@ import { Textarea } from '@/components/ui/textarea'
 import { CgToolbox, CgLaptop, CgWebsite, CgSearch, CgCheckR } from 'react-icons/cg'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
+import { Navigation } from 'lucide-react'
 
 const services = [
   {
-    title: 'Consultoría',
-    Icon: <CgToolbox className="h-6 w-6" />,
-    description:
-      'Nuestros expertos te guiarán para optimizar tus procesos y alcanzar tus objetivos.',
-    action: 'Agendar cita',
+    title: 'Logistica y transporte',
+    services: [
+      {
+        title: 'Plataforma de rastreo GPS',
+        Icon: <Navigation className="h-6 w-6" />,
+        description: 'Datos precisos y en tiempo real, que te ayuda a alcanzar tus objetivos.',
+        action: 'Ver mas',
+        link: '/servicios/servicios-para-traccar',
+      },
+    ],
   },
   {
-    title: 'Implementación',
-    Icon: <CgToolbox className="h-6 w-6" />,
-    description:
-      'Nuestro equipo se encargará de la implementación y puesta en marcha de tus soluciones.',
-    action: 'Agendar cita',
-  },
-  {
-    title: 'Soporte',
-    Icon: <CgToolbox className="h-6 w-6" />,
-    description:
-      'Nuestro equipo de soporte técnico estará disponible para asistirte en todo momento.',
-    action: 'Agendar cita',
-  },
-  {
-    title: 'Desarrollo a la Medida',
-    Icon: <CgLaptop className="h-6 w-6" />,
-    description:
-      'Creamos software personalizado que se adapta a las necesidades específicas de tu negocio.',
-    action: 'Solicitar cotización',
-  },
-  {
-    title: 'Desarrollo iOS',
-    Icon: <CgLaptop className="h-6 w-6" />,
-    description:
-      'Desarrollamos aplicaciones iOS robustas y eficientes que mejoran la experiencia del usuario.',
-    action: 'Solicitar cotización',
-  },
-  {
-    title: 'Desarrollo Android',
-    Icon: <CgLaptop className="h-6 w-6" />,
-    description: 'Desarrollamos aplicaciones Android innovadoras que impulsan tu negocio.',
-    action: 'Solicitar cotización',
-  },
-  {
-    title: 'Desarrollo Web',
-    Icon: <CgWebsite className="h-6 w-6" />,
-    description: 'Creamos sitios web atractivos y funcionales que representan tu marca en línea.',
-    action: 'Solicitar cotización',
-  },
-  {
-    title: 'Optimización SEO',
-    Icon: <CgSearch className="h-6 w-6" />,
-    description:
-      'Mejoramos tu presencia en línea con estrategias SEO efectivas que aumentan tu visibilidad.',
-    action: 'Solicitar análisis',
-  },
-  {
-    title: 'Gestión de Equipos',
-    Icon: <CgCheckR className="h-6 w-6" />,
-    description: 'Ofrecemos soluciones completas para la gestión y mantenimiento de tus equipos.',
-    action: 'Agendar consulta',
+    title: 'Software',
+    services: [
+      {
+        title: 'Consultoría',
+        Icon: <CgToolbox className="h-6 w-6" />,
+        description:
+          'Nuestros expertos te guiarán para optimizar tus procesos y alcanzar tus objetivos.',
+        action: 'Agendar cita',
+      },
+      {
+        title: 'Implementación',
+        Icon: <CgToolbox className="h-6 w-6" />,
+        description:
+          'Nuestro equipo se encargará de la implementación y puesta en marcha de tus soluciones.',
+        action: 'Agendar cita',
+      },
+      {
+        title: 'Soporte',
+        Icon: <CgToolbox className="h-6 w-6" />,
+        description:
+          'Nuestro equipo de soporte técnico estará disponible para asistirte en todo momento.',
+        action: 'Agendar cita',
+      },
+      {
+        title: 'Desarrollo a la Medida',
+        Icon: <CgLaptop className="h-6 w-6" />,
+        description:
+          'Creamos software personalizado que se adapta a las necesidades específicas de tu negocio.',
+        action: 'Solicitar cotización',
+      },
+      {
+        title: 'Desarrollo iOS',
+        Icon: <CgLaptop className="h-6 w-6" />,
+        description:
+          'Desarrollamos aplicaciones iOS robustas y eficientes que mejoran la experiencia del usuario.',
+        action: 'Solicitar cotización',
+      },
+      {
+        title: 'Desarrollo Android',
+        Icon: <CgLaptop className="h-6 w-6" />,
+        description: 'Desarrollamos aplicaciones Android innovadoras que impulsan tu negocio.',
+        action: 'Solicitar cotización',
+      },
+      {
+        title: 'Desarrollo Web',
+        Icon: <CgWebsite className="h-6 w-6" />,
+        description:
+          'Creamos sitios web atractivos y funcionales que representan tu marca en línea.',
+        action: 'Solicitar cotización',
+      },
+      {
+        title: 'Optimización SEO',
+        Icon: <CgSearch className="h-6 w-6" />,
+        description:
+          'Mejoramos tu presencia en línea con estrategias SEO efectivas que aumentan tu visibilidad.',
+        action: 'Solicitar análisis',
+      },
+      {
+        title: 'Gestión de Equipos',
+        Icon: <CgCheckR className="h-6 w-6" />,
+        description:
+          'Ofrecemos soluciones completas para la gestión y mantenimiento de tus equipos.',
+        action: 'Agendar consulta',
+      },
+    ],
   },
 ]
 export default function Services() {
@@ -89,22 +109,37 @@ export default function Services() {
         </p>
       </div>
       <div className="">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ title, description, action, Icon }) => (
-            <div
-              className="bg-background hover:bg-muted group rounded-lg border p-6 shadow-sm transition-all hover:shadow-md"
-              key={title}
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black">
-                  {Icon}
-                </div>
-                <h3 className="text-xl font-semibold">{title}</h3>
+        <ul>
+          {services.map(({ title, services }) => (
+            <li key={title}>
+              <h3 className="block py-4 text-3xl font-bold tracking-tighter">{title}</h3>
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {services.map(({ title, description, action, Icon, link = null as any }) => (
+                  <div
+                    className="bg-background hover:bg-muted group rounded-lg border p-6 shadow-sm transition-all hover:shadow-md"
+                    key={title}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black">
+                        {Icon}
+                      </div>
+                      <h3 className="text-xl font-semibold">{title}</h3>
+                    </div>
+                    <p className="text-muted-foreground mt-2">{description}</p>
+                    {link && (
+                      <Link
+                        className="mt-4 block text-neutral-500 dark:text-neutral-300"
+                        href={link}
+                      >
+                        {action}
+                      </Link>
+                    )}
+                  </div>
+                ))}
               </div>
-              <p className="text-muted-foreground mt-2">{description}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
       <Link href="/servicios" className={`${buttonVariants({ variant: 'link' })}`}>
         Saber mas
