@@ -39,6 +39,11 @@ export const nav: Nav[] = [
         description: '',
         href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
       },
+      {
+        title: 'Servicios GPS y Rastreo',
+        description: '',
+        href: '/servicios/servicios-para-traccar',
+      },
     ],
   },
   {

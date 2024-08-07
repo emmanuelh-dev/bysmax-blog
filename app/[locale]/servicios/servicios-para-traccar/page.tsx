@@ -1,3 +1,4 @@
+import Globe from '@/components/magicui/globe'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -18,6 +19,7 @@ import {
   ReplaceIcon,
   ServerIcon,
   SmartphoneIcon,
+  SunSnow,
   TimerIcon,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -49,14 +51,10 @@ export default function Page() {
               </Link>
             </div>
           </div>
-          <div className="flex justify-center">
-            <img
-              src="/placeholder.svg"
-              width={400}
-              height={400}
-              alt="Dispositivo de seguimiento GPS"
-              className="max-w-full"
-            />
+          <div className="flex aspect-square justify-center">
+            <div className="relative flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden px-40 pb-40 pt-8 md:pb-60">
+              <Globe />
+            </div>
           </div>
         </div>
       </section>
@@ -74,7 +72,7 @@ export default function Page() {
               <ServerIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Servidor Seguro</h3>
               <p className="text-muted-foreground mt-2">
-                Nuestra infraestructura de servidor confiable y segura garantiza la seguridad y
+                Nuestra infraestructura con servidores confiables y seguros garantiza la seguridad y
                 accesibilidad de tus datos.
               </p>
             </div>
@@ -124,6 +122,14 @@ export default function Page() {
               </p>
             </div>
             <div className="bg-card rounded-md p-6 shadow-sm">
+              <SunSnow className="text-primary h-12 w-12" />
+              <h3 className="mt-4 text-xl font-bold">Soporte para Monitoreo de Temperatura</h3>
+              <p className="text-muted-foreground mt-2">
+                Controla tus activos con una precisión de ±0.5 grados, ideal para la cadena en frío.
+              </p>
+            </div>
+
+            <div className="bg-card rounded-md p-6 shadow-sm">
               <MapIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Geovallas</h3>
               <p className="text-muted-foreground mt-2">
@@ -159,8 +165,8 @@ export default function Page() {
               <SmartphoneIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Accesibilidad Móvil</h3>
               <p className="text-muted-foreground mt-2">
-                Accede a tus datos de seguimiento y gestiona tu flota sobre la marcha con nuestra
-                plataforma optimizada para móviles.
+                Accede a tus datos de seguimiento y gestiona tu flota en cualquier lugar con nuestra
+                aplicación móvil.
               </p>
             </div>
           </div>
@@ -178,7 +184,7 @@ export default function Page() {
             <Card className="bg-card rounded-md p-6 shadow-sm">
               <CardHeader>
                 <CardTitle>Básico</CardTitle>
-                <CardDescription>Ideal para pequeños negocios</CardDescription>
+                <CardDescription>Ideal para flotas pequeñas</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -188,20 +194,24 @@ export default function Page() {
                   </div>
                   <ul className="text-muted-foreground space-y-2">
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
-                      10 Dispositivos de Seguimiento
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
+                      Hasta 10 Dispositivos de Seguimiento
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Seguimiento en Tiempo Real
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Geovallas
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Informes Básicos
+                    </li>
+                    <li>
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
+                      Alertas Personalizables
                     </li>
                   </ul>
                 </div>
@@ -213,7 +223,7 @@ export default function Page() {
             <Card className="bg-card rounded-md p-6 shadow-sm">
               <CardHeader>
                 <CardTitle>Pro</CardTitle>
-                <CardDescription>Ideal para negocios de tamaño mediano</CardDescription>
+                <CardDescription>Ideal para flotas grandes</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -223,23 +233,23 @@ export default function Page() {
                   </div>
                   <ul className="text-muted-foreground space-y-2">
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
-                      50 Dispositivos de Seguimiento
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
+                      Hasta 50 Dispositivos de Seguimiento
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Seguimiento en Tiempo Real
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Geovallas
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Informes Avanzados
                     </li>
                     <li>
-                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5" />
+                      <CheckIcon className="text-primary mr-2 inline-block h-5 w-5 text-green-500" />
                       Alertas Personalizables
                     </li>
                   </ul>

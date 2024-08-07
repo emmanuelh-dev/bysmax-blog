@@ -97,6 +97,21 @@ const Contacto = async ({ locale }) => {
       />
       <h1 className="text-card-foreground mb-4 text-3xl font-bold">{t('hello')}</h1>
       <p className="text-muted-foreground mb-6">{t('intro')}</p>
+      <p>
+        Por el momento, enviar mensajes no está habilitado. Por favor, envíanos un correo o mándanos
+        un WhatsApp y con gusto te responderemos.
+      </p>
+      <a className="block pt-4 text-primary-500" href="mailto:info@bysmax.com">
+        info@bysmax.com
+      </a>
+      <a
+        className="block py-4 text-primary-500"
+        href="https://wa.me/528126060795"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        8126060795
+      </a>
       <div className="flex gap-6 ">
         <form className="w-full space-y-4">
           <div>
@@ -111,7 +126,7 @@ const Contacto = async ({ locale }) => {
             <Label htmlFor="message">{t('messageLabel')}</Label>
             <Textarea id="message" name="message" rows={4} placeholder={t('messagePlaceholder')} />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled>
             {t('sendMessageButton')}
           </Button>
         </form>

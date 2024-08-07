@@ -32,8 +32,11 @@ module.exports = {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.blue,
-        seccondary: '#007deb',
+        main: '#007deb',
+        primary: {
+          ...colors.blue,
+          500: '#007deb',
+        },
         gray: colors.gray,
       },
       keyframes: {
