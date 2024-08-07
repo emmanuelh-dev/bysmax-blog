@@ -123,12 +123,18 @@ export default function Page() {
             </div>
             <div className="bg-card rounded-md p-6 shadow-sm">
               <SunSnow className="text-primary h-12 w-12" />
-              <h3 className="mt-4 text-xl font-bold">Soporte para Monitoreo de Temperatura</h3>
+              <h3 className="mt-4 text-xl font-bold">Monitoreo de Temperatura</h3>
               <p className="text-muted-foreground mt-2">
                 Controla tus activos con una precisión de ±0.5 grados, ideal para la cadena en frío.
               </p>
             </div>
-
+            <div className="bg-card rounded-md p-6 shadow-sm">
+              <SunSnow className="text-primary h-12 w-12" />
+              <h3 className="mt-4 text-xl font-bold">Compartir Ubicación</h3>
+              <p className="text-muted-foreground mt-2">
+                Comparte la ubicación con colaboradores y clientes sin tener que prestar tu cuenta.
+              </p>
+            </div>
             <div className="bg-card rounded-md p-6 shadow-sm">
               <MapIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Geovallas</h3>
