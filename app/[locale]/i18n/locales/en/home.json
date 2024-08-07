@@ -1,6 +1,7 @@
 {
+  "title": "Electronics for Students, Resources, and More",
+  "description": "Access detailed tutorials, practical guides, and innovative projects that will help you master the world of electronics.",
   "greeting": "Latest",
-  "description": "A blog created with Next.js, i18n and Tailwind.css",
   "more": "Read more",
   "all": "All posts",
   "moreaboutme": "More about me",

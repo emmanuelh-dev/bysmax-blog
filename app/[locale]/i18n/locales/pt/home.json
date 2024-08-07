@@ -1,6 +1,7 @@
 {
+  "title": "Eletrônica para Estudantes, Recursos e Mais",
+  "description": "Acesse tutoriais detalhados, guias práticos e projetos inovadores que te ajudarão a dominar o mundo da eletrônica.",
   "greeting": "Les plus récents",
-  "description": "Un blog crée grâce à Next.js, i18n et Tailwind.css",
   "more": "Lire la suite",
   "all": "Tous les articles",
 
