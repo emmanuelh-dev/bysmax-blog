@@ -24,6 +24,13 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import { genPageMetadata } from '../../seo'
+
+export const metadata = genPageMetadata({
+  title: 'Plataforma GPS Avanzada para Gestión y Monitoreo en Tiempo Real',
+  description:
+    'Plataforma de localización GPS para administración de todo tipo de vehículos y activos.',
+})
 
 export default function Page() {
   return (
@@ -33,14 +40,15 @@ export default function Page() {
           <div className="space-y-4">
             <div>
               <h1 className="text-sm">
-                Plataforma GPS Avanzada para Gestión y Monitoreo Eficiente
+                <strong>Plataforma GPS </strong>Avanzada para Gestión y{' '}
+                <strong>Monitoreo en Tiempo Real</strong>
               </h1>
               <p className="text-5xl font-bold md:text-6xl">Plataforma de rastreo GPS</p>
             </div>
             <p className="text-lg md:text-xl">
-              Nuestra plataforma utiliza tecnología de vanguardia para ofrecerte datos precisos y
-              funcionalidad avanzada, ayudándote a optimizar tus operaciones y garantizar la
-              seguridad de tus activos.
+              <strong>Plataforma de localización GPS</strong> para{' '}
+              <strong>administración de todo tipo de vehículos y activos</strong>. Visualiza tus
+              unidades, kilometraje, combustible y minimizar los costos de operación.
             </p>
             <div className="flex gap-4">
               <Link href="/contacto" className={buttonVariants({ variant: 'default' })}>
@@ -106,7 +114,12 @@ export default function Page() {
       <section id="caracteristicas" className="bg-muted py-12 md:py-24 lg:py-32">
         <div className="container grid gap-12 px-4 md:px-6">
           <div className="space-y-4 text-center">
-            <h2 className="text-3xl font-bold md:text-4xl">Características Principales</h2>
+            <div>
+              <h2 className="text-sm text-neutral-600 dark:text-neutral-400">
+                Monitoreo en Tiempo Real para Flotas
+              </h2>
+              <p className="text-3xl font-bold md:text-4xl">Características Principales</p>
+            </div>
             <p className="text-muted-foreground text-lg md:text-xl">
               Descubre las poderosas características que hacen que nuestras soluciones de
               seguimiento GPS se destaquen.
@@ -223,7 +236,9 @@ export default function Page() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>Empezar</Button>
+                <Link href="/contacto" className={buttonVariants({ variant: 'default' })}>
+                  Empezar
+                </Link>
               </CardFooter>
             </Card>
             <Card className="bg-card rounded-md p-6 shadow-sm">
@@ -262,7 +277,9 @@ export default function Page() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button>Empezar</Button>
+                <Link href="/contacto" className={buttonVariants({ variant: 'default' })}>
+                  Empezar
+                </Link>
               </CardFooter>
             </Card>
           </div>
