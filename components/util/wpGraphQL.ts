@@ -29,7 +29,7 @@ export const getPosts = async () => {
 
 export const getPostBySlug = async (slug: string) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    cache: 'no-store',
+    next: { revalidate: 3600 },
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
