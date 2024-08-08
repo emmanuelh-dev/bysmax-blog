@@ -8,7 +8,7 @@ import { getPosts } from './util/wpGraphQL'
 export default async function ShowPosts() {
   const posts = await getPosts()
   return (
-    <section>
+    <>
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {!posts.length && 'No posts found.'}
         {posts.map(
@@ -72,6 +72,6 @@ export default async function ShowPosts() {
           }
         )}
       </ul>
-    </section>
+    </>
   )
 }

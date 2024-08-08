@@ -15,6 +15,7 @@ export async function generateMetadata({ params: { locale } }) {
     params: { locale: locale },
   })
 }
+
 export default async function Page() {
   return (
     <>
