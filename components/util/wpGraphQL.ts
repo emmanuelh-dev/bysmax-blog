@@ -1,5 +1,6 @@
 export const getPosts = async () => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
+    cache: 'no-store',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +21,6 @@ export const getPosts = async () => {
         }
       `,
     }),
-    next: { revalidate: 86400001 },
   })
 
   const { data } = await response.json()
@@ -29,6 +29,7 @@ export const getPosts = async () => {
 
 export const getPostBySlug = async (slug: string) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
+    cache: 'no-store',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +56,6 @@ export const getPostBySlug = async (slug: string) => {
       variables: {
         slug: slug,
       },
-      next: { revalidate: 86400001 },
     }),
   })
   const { data } = await response.json()

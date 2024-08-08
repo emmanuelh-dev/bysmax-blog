@@ -43,3 +43,8 @@ input:-webkit-autofill:focus {
   display: inline-block;
   vertical-align: middle;
 }
+
+.wp-block-gallery-is-layout-flex {
+  display: flex;
+  gap: 1rem;
+}
