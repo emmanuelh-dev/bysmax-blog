@@ -1,4 +1,4 @@
-export const getPosts = async () => {
+export const getPosts = async ({ locale = 'es' }) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
     next: { revalidate: 3600 },
     method: 'POST',
@@ -7,19 +7,25 @@ export const getPosts = async () => {
     },
     body: JSON.stringify({
       query: `
-        query PostQuery {
-          posts {
+        query GetPostsByCategory($categoryName: String!) {
+          posts(where: {categoryName: $categoryName}) {
             nodes {
               title
+              content
               date
               slug
-              author {
-                cursor
+              categories {
+                nodes {
+                  name
+                }
               }
             }
           }
         }
       `,
+      variables: {
+        categoryName: locale,
+      },
     }),
   })
 

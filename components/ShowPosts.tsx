@@ -5,8 +5,8 @@ import { formatDate } from 'pliny/utils/formatDate'
 import React from 'react'
 import { getPosts } from './util/wpGraphQL'
 
-export default async function ShowPosts() {
-  const posts = await getPosts()
+export default async function ShowPosts({ locale }) {
+  const posts = await getPosts({ locale })
   return (
     <>
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">

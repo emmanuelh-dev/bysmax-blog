@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }) {
   })
 }
 
-export default async function Page() {
+export default async function Page({ params: { locale } }) {
   return (
     <>
       <section>
@@ -24,7 +24,7 @@ export default async function Page() {
           <h1 className="text-sm text-neutral-500 dark:text-neutral-400">{siteMetadata.title}</h1>
           <p className="text-4xl font-bold xl:text-6xl">Posts</p>
         </div>
-        <Posts />
+        <Posts locale={locale} />
       </section>
     </>
   )
