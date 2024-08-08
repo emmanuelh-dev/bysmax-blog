@@ -6,6 +6,7 @@ import { LocaleTypes } from '../../i18n/settings'
 import dynamic from 'next/dynamic'
 import { getAuthorByID, getPostBySlug, getPosts } from '@/components/util/wpGraphQL'
 import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormatter'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
@@ -45,7 +46,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
   const author = await getAuthorByID(post.postBy.authorId)
   const authorDetails = graphqlToBlogAuthor({ author })
   return (
-    <>
+    <SectionContainerWithAds>
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
@@ -94,7 +95,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
           </div>
         </div>
       </article>
-    </>
+    </SectionContainerWithAds>
   )
 }
 const Lazy = () => (
