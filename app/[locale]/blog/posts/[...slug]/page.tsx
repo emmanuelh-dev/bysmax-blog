@@ -10,6 +10,7 @@ import { components } from '@/components/MDXComponents'
 import Layout from '@/layouts/PostLayout'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
+import { maintitle } from '@/data/localeMetadata'
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
 }
@@ -24,17 +25,39 @@ const Sidebar = dynamic(() => import('@/components/SideBar'), {
   loading: () => <Lazy />,
   ssr: false,
 })
+
 export async function generateMetadata({ params: { slug, locale } }) {
   const dslug = decodeURI(slug.join('/'))
   const post = await getPostBySlug(dslug)
+  const blog = graphqlToBlog({ post })
 
   if (!post) {
     null
   }
   return {
-    title: post.postBy.title,
+    title: blog.title,
+    description: blog.summary,
+    openGraph: {
+      title: blog.title,
+      description: blog.summary,
+      siteName: maintitle[locale],
+      locale: blog.language,
+      type: 'article',
+      publishedTime: blog.date,
+      modifiedTime: blog.date,
+      url: './',
+      images: siteMetadata.socialBanner,
+      authors: [siteMetadata.author],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.summary,
+      images: siteMetadata.socialBanner,
+    },
   }
 }
+
 export const generateStaticParams = async ({ params: { slug, locale } }) => {
   const posts = await getPosts({ locale })
   const paths = await posts.map((p) => ({ slug: p.slug.split('/') }))
