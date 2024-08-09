@@ -1,14 +1,23 @@
+import type { Blog, Authors } from 'contentlayer/generated'
+
 export function graphqlToBlog({ post }) {
-  const { id, title, date, slug, authorId, tags } = post.postBy
+  console.log(post)
+  const { id, title, date, slug, authorId, tags, content } = post.postBy
   return {
+    type: 'Blog',
     filePath: null,
     path: `posts/${slug}`,
     slug: slug,
     date,
     title,
-    tags: tags ? [...tags.nodes.map((tag) => tag.name)] : null,
+    tags: tags ? [...tags.nodes.map((tag) => tag.name)] : [],
     toc: [],
-  }
+    language: 'es',
+    authors: ['default'],
+    readingTime: null,
+    content,
+    structuredData: [],
+  } as unknown as Blog
 }
 
 export function graphqlToBlogAuthor({ author }) {
@@ -23,5 +32,5 @@ export function graphqlToBlogAuthor({ author }) {
       description,
       url,
     },
-  ]
+  ] as unknown as Authors[]
 }
