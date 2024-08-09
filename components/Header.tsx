@@ -30,7 +30,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-        <Navigation locale={locale} />
+        <Navigation />
         {headerNavLinks
           .filter((link) => link.href !== '/')
           .map((link) => (

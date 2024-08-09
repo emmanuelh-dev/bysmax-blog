@@ -1,6 +1,4 @@
 import * as React from 'react'
-import Link from 'next/link'
-
 import { cn } from '../lib/utils'
 import {
   NavigationMenu,
@@ -12,10 +10,13 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { nav } from '@/data/headerNavLinks'
-import { createTranslation } from '@/app/[locale]/i18n/server'
+import { useParams } from 'next/navigation'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 
-export default async function Navigation({ locale }) {
-  const { t } = await createTranslation(locale, 'software')
+export default async function Navigation() {
+  const locale = useParams()?.locale as LocaleTypes
+
+  // const { t } = await createTranslation(locale, 'software')
 
   return (
     <NavigationMenu className="hidden lg:block">
@@ -28,7 +29,7 @@ export default async function Navigation({ locale }) {
                 <NavigationMenuLink asChild>
                   <a
                     className="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href={'/' + locale}
                   >
                     <div className="mb-2 mt-4 text-lg font-medium">BysMax</div>
                     <p className="text-muted-foreground text-sm leading-tight">
@@ -38,15 +39,15 @@ export default async function Navigation({ locale }) {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/cursos" title="Cursos">
+              <ListItem href={`/${locale}/cursos`} title="Cursos">
                 Explora nuestros cursos de alta calidad diseñados para facilitar el aprendizaje y
                 hacer que la electrónica y tecnología sean accesibles para todos.
               </ListItem>
-              <ListItem href="/blog" title="Guías/Tutoriales">
+              <ListItem href={`/${locale}/blog`} title="Guías/Tutoriales">
                 Accede a nuestras guías y tutoriales detallados que te ayudarán a modernizar tu
                 empresa con las últimas tecnologías.
               </ListItem>
-              <ListItem href="/servicios" title="Servicios">
+              <ListItem href={`/${locale}/blog`} title="Servicios">
                 Descubre nuestros servicios personalizados, desde la instalación de servidores hasta
                 la personalización completa de aplicaciones, todo con la calidad y accesibilidad que
                 nos define.
@@ -60,7 +61,7 @@ export default async function Navigation({ locale }) {
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                 {item.links.map((item) => (
-                  <ListItem key={item.title} title={item.title} href={item.href}>
+                  <ListItem key={item.title} title={item.title} href={`/${locale}${item.href}`}>
                     {item.description && item.description}
                   </ListItem>
                 ))}
@@ -72,10 +73,10 @@ export default async function Navigation({ locale }) {
           <NavigationMenuTrigger>Software</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[400px] ">
-              <ListItem title={t('all')} href="/software" className="font-bold"></ListItem>
-              {(t('cards', { returnObjects: true }) as unknown as any[]).map((item) => (
+              <ListItem title="Todos" href={`/${locale}/software`} className="font-bold"></ListItem>
+              {/* {(t('cards', { returnObjects: true }) as unknown as any[]).map((item) => (
                 <ListItem key={item.title} title={item.title} href={item.link}></ListItem>
-              ))}
+              ))} */}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
