@@ -1,11 +1,11 @@
 {
-  "title": "Baixar Multisim grátis para PC",
-  "mainHeading": "Baixar Multisim",
-  "description": "Multisim é uma ferramenta poderosa para projetar e simular circuitos eletrônicos. Permite criar e testar seus projetos de forma eficiente.",
+  "title": "Baixar NI Multisim grátis para PC",
+  "mainHeading": "Baixar NI Multisim",
+  "description": "NI Multisim é uma ferramenta poderosa para projetar e simular circuitos eletrônicos. Permite criar e testar seus projetos de forma eficiente.",
   "downloadNowButton": "Baixar Agora",
   "systemRequirementsButton": "Requisitos do sistema",
   "imageSrc": "/static/images/multisim/3.png",
-  "imageAlt": "Multisim 14.2",
+  "imageAlt": "NI Multisim 14.2",
   "imageWidth": 800,
   "imageHeight": 800,
   "gallery": "Galeria",
@@ -14,7 +14,7 @@
   "requirementsList": [
     {
       "title": "Sistema Operacional",
-      "description": "Multisim 14.2 é compatível com Windows 7, 8, 10 e 11."
+      "description": "NI Multisim 14.2 é compatível com Windows 7, 8, 10 e 11."
     },
     {
       "title": "Processador",
@@ -29,58 +29,58 @@
       "description": "São necessários pelo menos 2 GB de espaço livre em disco."
     }
   ],
-  "downloadHeader": "Baixe o Multisim agora",
-  "downloadDescription": "Comece a projetar e simular seus projetos eletrônicos com o Multisim hoje mesmo! Clique no botão de download para obter a versão mais recente.",
+  "downloadHeader": "Baixe o NI Multisim agora",
+  "downloadDescription": "Comece a projetar e simular seus projetos eletrônicos com o NI Multisim hoje mesmo! Clique no botão de download para obter a versão mais recente.",
   "downloadLink": {
     "url": "https://drive.google.com/drive/folders/1YozgQmI_2nll_4jj-Z2GdZIAnEV_vhFO?usp=sharing",
-    "text": "Baixar Multisim"
+    "text": "Baixar NI Multisim"
   },
   "faqTitle": "Perguntas Frequentes",
-  "faqDescription": "Aqui você encontrará as respostas para as perguntas mais comuns sobre o Multisim.",
-  "resourcesTitle": "Recursos sobre o Multisim",
-  "resourcesDescription": "Explore mais sobre o Multisim e como usá-lo em seus projetos.",
+  "faqDescription": "Aqui você encontrará as respostas para as perguntas mais comuns sobre o NI Multisim.",
+  "resourcesTitle": "Recursos sobre o NI Multisim",
+  "resourcesDescription": "Explore mais sobre o NI Multisim e como usá-lo em seus projetos.",
   "accordionItems": [
     {
-      "section": "O que é o Multisim?",
+      "section": "O que é o NI Multisim?",
       "content": [
-        "Multisim é um software de design e simulação de circuitos eletrônicos desenvolvido pela National Instruments. Assim como o Proteus, o Multisim permite criar e testar circuitos de forma virtual. Você pode projetar seus projetos eletrônicos no computador antes de construí-los fisicamente, economizando tempo e recursos ao evitar erros na fase de design."
+        "NI Multisim é um software de design e simulação de circuitos eletrônicos desenvolvido pela National Instruments. Assim como o Proteus, o NI Multisim permite criar e testar circuitos de forma virtual. Você pode projetar seus projetos eletrônicos no computador antes de construí-los fisicamente, economizando tempo e recursos ao evitar erros na fase de design."
       ]
     },
     {
-      "section": "Principais Características do Multisim",
+      "section": "Principais Características do NI Multisim",
       "content": [
         "Simulação em Tempo Real: Observe como seu circuito se comporta enquanto você o projeta, facilitando a detecção e correção de erros.",
-        "Biblioteca de Componentes: O Multisim inclui uma ampla variedade de componentes eletrônicos, como resistores, transistores, microcontroladores e sensores.",
+        "Biblioteca de Componentes: O NI Multisim inclui uma ampla variedade de componentes eletrônicos, como resistores, transistores, microcontroladores e sensores.",
         "Design de PCB: Além de simular circuitos, você pode projetar placas de circuito impresso (PCB) para seus projetos.",
-        "Visualização 3D: O Multisim fornece uma visualização 3D das suas PCBs, permitindo que você veja como o design final será uma vez montado.",
+        "Visualização 3D: O NI Multisim fornece uma visualização 3D das suas PCBs, permitindo que você veja como o design final será uma vez montado.",
         "Compatibilidade com Microcontroladores: Você pode simular diversos microcontroladores, como os das famílias PIC, AVR e ARM, e testar o código diretamente no ambiente simulado."
       ]
     },
     {
-      "section": "Como Baixar o Multisim?",
+      "section": "Como Baixar o NI Multisim?",
       "content": [
         "Clique em \"Baixar Agora\".",
-        "Baixe o arquivo executável do Multisim.",
+        "Baixe o arquivo executável do NI Multisim.",
         "Instale-o no seu computador.",
         "Execute-o como administrador após a instalação.",
         "Se preferir em português, baixe o pacote de idioma correspondente e a biblioteca do Arduino, se necessário."
       ]
     },
     {
-      "section": "Como Instalar o Multisim?",
+      "section": "Como Instalar o NI Multisim?",
       "content": [
         "Abra o arquivo baixado e siga as instruções na tela.",
         "Aceite os termos e condições de uso.",
         "Escolha o local de instalação no seu computador.",
         "Complete a instalação.",
-        "Execute o Multisim como administrador."
+        "Execute o NI Multisim como administrador."
       ]
     },
     {
-      "section": "Por que Usar o Multisim?",
+      "section": "Por que Usar o NI Multisim?",
       "content": [
         "Economia de Tempo e Dinheiro: A simulação prévia à construção evita gastos com componentes físicos.",
-        "Facilidade de Uso: O Multisim possui uma interface amigável, ideal para iniciantes.",
+        "Facilidade de Uso: O NI Multisim possui uma interface amigável, ideal para iniciantes.",
         "Aprendizado Interativo: É uma excelente ferramenta educativa para experimentar e aprender em tempo real.",
         "Versatilidade: Adapta-se a projetos simples e complexos.",
         "Suporte e Comunidade: A comunidade de usuários compartilha tutoriais e soluções comuns."

@@ -30,7 +30,7 @@ export default async function Software({ locale }) {
           </p>
         </div>
         <div className="grid gap-6 md:gap-8">
-          <div className="flex items-center justify-between">
+          <div className="flex hidden items-center justify-between">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="gap-2">
@@ -41,10 +41,11 @@ export default async function Software({ locale }) {
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem checked>Civil Engineering</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>Mechanical Engineering</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>Electrical Engineering</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>Computer Science</DropdownMenuCheckboxItem>
+                {(t('cards', { returnObjects: true }) as unknown as any[]).map((card, index) => (
+                  <DropdownMenuCheckboxItem key={card.badge.label}>
+                    {card.badge.label}
+                  </DropdownMenuCheckboxItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
             <div className="relative max-w-md flex-1">

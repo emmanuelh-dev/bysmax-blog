@@ -1,7 +1,7 @@
 {
   "title": "Free Software for Windows for Engineering Students",
   "heading": "Free today and always.",
-  "description": "Find programs like Proteus, MATLAB, MathCAD, Multisim, among others, for free.",
+  "description": "Find programs like Proteus, MATLAB, MathCAD, NI Multisim, among others, for free.",
 
   "softwaresTitle": "Software for Engineering Students",
   "softawreDescription": "Choose the one that best suits your needs with the best available tools.",
@@ -18,8 +18,8 @@
       "linkText": "View"
     },
     {
-      "title": "Multisim",
-      "description": "Multisim is a SPICE simulation software for designing and analyzing electronic circuits.",
+      "title": "NI Multisim",
+      "description": "NI Multisim is a SPICE simulation software for designing and analyzing electronic circuits.",
       "badge": {
         "label": "Electronics"
       },

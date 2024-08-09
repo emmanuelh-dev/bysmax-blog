@@ -54,11 +54,11 @@ export default async function Page({ params: { locale } }: PageProps) {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
       image: 'https://www.bysmax.com/static/images/multisim/1.jpg',
-      name: 'Multisim',
+      name: 'NI Multisim',
       applicationCategory: 'BusinessApplication',
       downloadUrl: `https://www.bysmax.com/${locale}/software/multisim`,
       description:
-        'Multisim es una herramienta poderosa para el diseño y simulación de circuitos electrónicos. Permite modelar y analizar circuitos con componentes electrónicos, como resistencias, transistores y microcontroladores.',
+        'NI Multisim es una herramienta poderosa para el diseño y simulación de circuitos electrónicos. Permite modelar y analizar circuitos con componentes electrónicos, como resistencias, transistores y microcontroladores.',
       offers: {
         '@type': 'Offer',
         price: 0,

@@ -18,8 +18,8 @@
       "linkText": "Ver"
     },
     {
-      "title": "Multisim",
-      "description": "Multisim é um software de simulação SPICE para o design e análise de circuitos eletrônicos.",
+      "title": "NI Multisim",
+      "description": "NI Multisim é um software de simulação SPICE para o design e análise de circuitos eletrônicos.",
       "badge": {
         "label": "Eletrônica"
       },
