@@ -38,7 +38,7 @@ export default async function Page({ params: { locale } }) {
 
   return (
     <>
-      <section className="bg-muted py-12 md:py-20 lg:py-28" id="programs">
+      <section className="bg-muted py-12 md:py-20 lg:py-28">
         <div className=" grid items-center gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-sm text-neutral-500">{t('title')}</h1>
