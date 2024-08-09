@@ -91,11 +91,13 @@ const images = [
   { src: '/static/images/proteus/2.png', alt: 'Descargar Proteus Imagen Home' },
 ]
 
-export const metadata = genPageMetadata({
-  title: 'Descargar Proteus 8 gratis para PC',
-  description:
-    'Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te permite crear y probar tus proyectos de manera sencilla y eficiente.',
-})
+export async function generateMetadata({ params: { slug, locale } }) {
+  const { t } = await createTranslation(locale, 'downloadproteus')
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
+}
 
 const jsonLd = [
   {

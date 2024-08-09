@@ -18,11 +18,20 @@ import { Input } from '@/components/ui/input'
 import dynamic from 'next/dynamic'
 import Loading from '@/components/software/Loading'
 import { MailIcon, PhoneIcon } from 'lucide-react'
+import { title } from '@/data/siteMetadata'
 
 const Software = dynamic(() => import('@/components/software/Software'), {
   loading: () => <Loading />,
   ssr: false,
 })
+
+export async function generateMetadata({ params: { slug, locale } }) {
+  const { t } = await createTranslation(locale, 'software')
+  return {
+    title: t('title'),
+    description: t('description'),
+  }
+}
 
 export default async function Page({ params: { locale } }) {
   const { t } = await createTranslation(locale, 'software')
