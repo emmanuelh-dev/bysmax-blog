@@ -2,13 +2,14 @@ import PageTitle from '@/components/PageTitle'
 import siteMetadata from '@/data/siteMetadata'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-import { LocaleTypes } from '../../i18n/settings'
+
 import dynamic from 'next/dynamic'
 import { getAuthorByID, getPostBySlug, getPosts } from '@/components/util/wpGraphQL'
 import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormatter'
 import { components } from '@/components/MDXComponents'
 import Layout from '@/layouts/PostLayout'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
 }
