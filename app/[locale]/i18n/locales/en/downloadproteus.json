@@ -1,0 +1,96 @@
+{
+  "title": "Download Proteus Design Suite 8 for Free for PC",
+  "mainHeading": "Download Proteus 8",
+  "description": "Proteus 8 is a design and simulation tool for electronic circuits that allows you to create and test your projects easily and efficiently.",
+  "downloadNowButton": "Download Now",
+  "systemRequirementsButton": "System Requirements",
+  "imageSrc": "/static/images/proteus/3.png",
+  "imageAlt": "Proteus 8",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Gallery",
+  "id": "requirements",
+  "requirementsHeader": "System Requirements",
+  "requirementsList": [
+    {
+      "title": "Operating System",
+      "description": "Proteus is compatible with Windows 7, 8, 10, and 11."
+    },
+    {
+      "title": "Processor",
+      "description": "A processor of 2 GHz or higher is recommended."
+    },
+    {
+      "title": "RAM",
+      "description": "At least 4 GB of RAM is recommended."
+    },
+    {
+      "title": "Disk Space",
+      "description": "At least 2 GB of free disk space is required."
+    }
+  ],
+  "downloadHeader": "Download Proteus Now",
+  "downloadDescription": "Start designing and simulating your electronic projects with Proteus today! Click the download button to get the latest version.",
+  "downloadLink": {
+    "url": "https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r",
+    "text": "Download Proteus"
+  },
+  "faqTitle": "Frequently Asked Questions",
+  "faqDescription": "Here you will find answers to the most common questions about Proteus.",
+  "accordionItems": [
+    {
+      "section": "What is Proteus?",
+      "content": [
+        "Proteus is a circuit design and simulation software developed by Labcenter Electronics. It is widely used by engineers, technicians, and students to create and test circuits virtually. With Proteus, you can design and simulate electronic circuits on your computer, allowing you to verify their operation before physically building them. This not only saves time but also resources by avoiding errors at the design stage."
+      ]
+    },
+    {
+      "section": "Main Features of Proteus",
+      "content": [
+        "Real-Time Simulation: You can see how your circuit behaves while you are designing it, which makes it easier to detect and correct errors.",
+        "Component Library: Includes a wide variety of electronic components such as resistors, transistors, microcontrollers, sensors, and more.",
+        "PCB Design: In addition to simulating circuits, you can design printed circuit boards (PCBs) for your projects, allowing you to move from design to production efficiently.",
+        "3D Visualization: Provides a 3D view of your PCBs, allowing you to visualize how the final design will look once assembled.",
+        "Microcontroller Compatibility: Simulates a wide range of microcontrollers, such as those from the PIC, AVR, and ARM families, allowing you to test code directly in the simulated environment."
+      ]
+    },
+    {
+      "section": "How to Download Proteus?",
+      "content": [
+        "Click to download.",
+        "Download proteus.exe",
+        "Install it: Once downloaded, just install it.",
+        "Run as Administrator: After installation, run it as an administrator and everything should work properly.",
+        "The software is in English; you can download the Spanish package and the Arduino library if needed."
+      ]
+    },
+    {
+      "section": "How to Install Proteus?",
+      "content": [
+        "Run the Installer: Open the file you downloaded and follow the on-screen instructions.",
+        "Accept the Terms and Conditions: Read and accept the software’s terms of use.",
+        "Select Installation Location: Choose where you want to install Proteus on your computer.",
+        "Complete Installation: Once this is done, the installer will copy all necessary files and set up the software to be ready for use.",
+        "Run as Administrator."
+      ]
+    },
+    {
+      "section": "Why Use Proteus?",
+      "content": [
+        "Time and Money Saving: By simulating your circuits before building them, you can identify and correct errors without spending on physical components.",
+        "Ease of Use: Proteus has a user-friendly interface and is easy to learn, even for those new to electronics.",
+        "Interactive Learning: It is an excellent educational tool that allows students to experiment and learn by doing, testing different configurations and seeing results in real time.",
+        "Versatility: Proteus is suitable for both simple projects and complex designs, adapting to the needs of different users.",
+        "Support and Community: There is a large community of Proteus users who share tutorials, examples, and solutions to common problems, making learning and problem-solving easier."
+      ]
+    },
+    {
+      "section": "Conclusion",
+      "content": [
+        "Proteus is a powerful tool for designing and simulating electronic circuits. Its real-time simulation capability, along with a comprehensive component library, makes it an ideal choice for both beginners and experts. Downloading and installing Proteus is a straightforward process that will allow you to start designing and testing your own circuits without needing to invest in physical components."
+      ]
+    }
+  ],
+  "resourcesTitle": "Resources about Proteus",
+  "resourcesDescription": "Explore more about Proteus and how to use it in your projects."
+}

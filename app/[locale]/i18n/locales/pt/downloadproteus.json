@@ -1,0 +1,96 @@
+{
+  "title": "Baixar Proteus Design Suite 8 grátis para PC",
+  "mainHeading": "Baixar Proteus 8",
+  "description": "Proteus 8 é uma ferramenta de design e simulação de circuitos eletrônicos que permite criar e testar seus projetos de maneira simples e eficiente.",
+  "downloadNowButton": "Baixar Agora",
+  "systemRequirementsButton": "Requisitos do sistema",
+  "imageSrc": "/static/images/proteus/3.png",
+  "imageAlt": "Proteus 8",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Galeria",
+  "id": "requisitos",
+  "requirementsHeader": "Requisitos do sistema",
+  "requirementsList": [
+    {
+      "title": "Sistema operacional",
+      "description": "Proteus é compatível com Windows 7, 8, 10 e 11."
+    },
+    {
+      "title": "Processador",
+      "description": "Recomenda-se um processador de 2 GHz ou superior."
+    },
+    {
+      "title": "Memória RAM",
+      "description": "Recomenda-se pelo menos 4 GB de RAM."
+    },
+    {
+      "title": "Espaço em disco",
+      "description": "São necessários pelo menos 2 GB de espaço livre em disco."
+    }
+  ],
+  "downloadHeader": "Baixe o Proteus agora",
+  "downloadDescription": "Comece a criar e simular seus projetos eletrônicos com o Proteus hoje mesmo! Clique no botão de download para obter a versão mais recente.",
+  "downloadLink": {
+    "url": "https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r",
+    "text": "Baixar Proteus"
+  },
+  "faqTitle": "Perguntas Frequentes",
+  "faqDescription": "Aqui você encontrará respostas para as perguntas mais comuns sobre o Proteus.",
+  "accordionItems": [
+    {
+      "section": "O que é o Proteus?",
+      "content": [
+        "O Proteus é um software de design e simulação de circuitos eletrônicos desenvolvido pela Labcenter Electronics. É amplamente utilizado por engenheiros, técnicos e estudantes para criar e testar circuitos virtualmente. Com o Proteus, você pode projetar e simular circuitos eletrônicos no seu computador, permitindo verificar seu funcionamento antes de construí-los fisicamente. Isso não só economiza tempo, mas também recursos ao evitar erros na fase de design."
+      ]
+    },
+    {
+      "section": "Principais Características do Proteus",
+      "content": [
+        "Simulação em Tempo Real: Você pode ver como seu circuito se comporta enquanto o está projetando, o que facilita a detecção e correção de erros.",
+        "Biblioteca de Componentes: Inclui uma ampla variedade de componentes eletrônicos, como resistores, transistores, microcontroladores, sensores e muito mais.",
+        "Design de PCB: Além de simular circuitos, você pode projetar placas de circuito impresso (PCBs) para seus projetos, permitindo passar do design para a produção de forma eficiente.",
+        "Visualização 3D: Fornece uma visualização em 3D das suas PCBs, permitindo visualizar como o design final ficará depois de montado.",
+        "Compatibilidade com Microcontroladores: Simula uma ampla gama de microcontroladores, como os das famílias PIC, AVR e ARM, permitindo testar o código diretamente no ambiente simulado."
+      ]
+    },
+    {
+      "section": "Como Baixar o Proteus?",
+      "content": [
+        "Clique para baixar.",
+        "Baixe o proteus.exe",
+        "Instale-o: Após o download, basta instalá-lo.",
+        "Execute como Administrador: Após a instalação, execute-o como administrador e tudo deve funcionar corretamente.",
+        "O software está em inglês; você pode baixar o pacote em português e a biblioteca do Arduino, se necessário."
+      ]
+    },
+    {
+      "section": "Como Instalar o Proteus?",
+      "content": [
+        "Execute o Instalador: Abra o arquivo que você baixou e siga as instruções na tela.",
+        "Aceite os Termos e Condições: Leia e aceite os termos de uso do software.",
+        "Selecione o Local de Instalação: Escolha onde deseja instalar o Proteus no seu computador.",
+        "Complete a Instalação: Depois disso, o instalador copiará todos os arquivos necessários e configurará o software para estar pronto para uso.",
+        "Execute como Administrador."
+      ]
+    },
+    {
+      "section": "Por que Usar o Proteus?",
+      "content": [
+        "Economia de Tempo e Dinheiro: Ao simular seus circuitos antes de construí-los, você pode identificar e corrigir erros sem gastar com componentes físicos.",
+        "Facilidade de Uso: O Proteus possui uma interface amigável e é fácil de aprender, mesmo para quem está começando no mundo da eletrônica.",
+        "Aprendizado Interativo: É uma excelente ferramenta educacional que permite aos estudantes experimentar e aprender fazendo, testando diferentes configurações e vendo resultados em tempo real.",
+        "Versatilidade: O Proteus é adequado tanto para projetos simples quanto para designs complexos, adaptando-se às necessidades de diferentes usuários.",
+        "Suporte e Comunidade: Há uma grande comunidade de usuários do Proteus que compartilha tutoriais, exemplos e soluções para problemas comuns, facilitando o aprendizado e a resolução de dúvidas."
+      ]
+    },
+    {
+      "section": "Conclusão",
+      "content": [
+        "O Proteus é uma ferramenta poderosa para projetar e simular circuitos eletrônicos. Sua capacidade de simulação em tempo real, juntamente com uma biblioteca abrangente de componentes, o torna uma escolha ideal tanto para iniciantes quanto para especialistas. Baixar e instalar o Proteus é um processo simples que permitirá começar a projetar e testar seus próprios circuitos sem precisar investir em componentes físicos."
+      ]
+    }
+  ],
+  "resourcesTitle": "Recursos sobre o Proteus",
+  "resourcesDescription": "Explore mais sobre o Proteus e como utilizá-lo em seus projetos."
+}

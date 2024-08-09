@@ -23,6 +23,7 @@ import NextImage from 'next/image'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
+import { createTranslation } from '@/app/[locale]/i18n/server'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -125,7 +126,9 @@ const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
   ssr: false,
 })
 
-export default function Page({ params: { locale } }: PageProps) {
+export default async function Page({ params: { locale } }: PageProps) {
+  const { t } = await createTranslation(locale, 'downloadproteus')
+
   return (
     <>
       <script
@@ -134,30 +137,25 @@ export default function Page({ params: { locale } }: PageProps) {
       />
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col items-start justify-center">
-          <h1 className="text-sm text-neutral-400">
-            Descargar Proteus Design Suite 8 gratis para PC
-          </h1>
-          <p className="mb-4 text-6xl font-bold">Descargar Proteus 8</p>
-          <p className="text-muted-foreground mb-6">
-            Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te
-            permite crear y probar tus proyectos de manera sencilla y eficiente.
-          </p>
+          <h1 className="text-sm text-neutral-400">{t('title')}</h1>
+          <p className="mb-4 text-6xl font-bold">{t('mainHeading')}</p>
+          <p className="text-muted-foreground mb-6">{t('description')}</p>
           <div className="flex gap-4">
             <a
               className={buttonVariants({ variant: 'default' })}
               href="https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r"
             >
-              Descargar Ahora
+              {t('downloadNowButton')}
             </a>
             <Link className={buttonVariants({ variant: 'outline' })} href="#requisitos">
-              Requisitos del sistema
+              {t('systemRequirementsButton')}
             </Link>
           </div>
         </div>
         <div className="flex justify-center">
           <NextImage
             src="/static/images/proteus/3.png"
-            alt="Proteus 8"
+            alt={t('imageAlt')}
             width={800}
             height={800}
             className="aspect-square rounded-lg object-cover shadow-lg"
@@ -170,57 +168,32 @@ export default function Page({ params: { locale } }: PageProps) {
           <Gallery gallery={images} />
         </div>
       </section>
-      <section className="py-12 md:py-24 lg:py-32" id="requisitos">
+      <section className="py-12 md:py-24 lg:py-32" id={t('id')}>
         <div>
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Requisitos del sistema
+                {t('requirementsHeader')}
               </h2>
               <ul className="mt-4 grid gap-4">
-                <li className="flex items-start gap-2">
-                  <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                  <div>
-                    <h3 className="font-medium">Sistema operativo</h3>
-                    <p>Proteus es compatible con Windows 7, 8, 10 y 11.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                  <div>
-                    <h3 className="font-medium">Procesador</h3>
-                    <p>Se recomienda un procesador de 2 GHz o superior.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                  <div>
-                    <h3 className="font-medium">Memoria RAM</h3>
-                    <p>Se recomienda al menos 4 GB de RAM.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                  <div>
-                    <h3 className="font-medium">Espacio en disco</h3>
-                    <p>Se necesitan al menos 2 GB de espacio libre en disco.</p>
-                  </div>
-                </li>
+                {(t('requirementsList', { returnObjects: true }) as any[]).map((req, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
+                    <div>
+                      <h3 className="font-medium">{req.title}</h3>
+                      <p>{req.description}</p>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="flex flex-col items-start gap-4">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Descarga Proteus ahora
+                {t('downloadHeader')}
               </h2>
-              <p className="md:text-xl/relaxed">
-                ¡Comienza a diseñar y simular tus proyectos electrónicos con Proteus hoy mismo! Haz
-                clic en el botón de descarga para obtener la última versión.
-              </p>
-              <a
-                href="https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r"
-                className={buttonVariants({ variant: 'default' })}
-              >
-                Descargar Proteus
+              <p className="md:text-xl/relaxed">{t('downloadDescription')}</p>
+              <a href={t('downloadLink.url')} className={buttonVariants({ variant: 'default' })}>
+                {t('downloadLink.text')}
               </a>
             </div>
           </div>
@@ -231,23 +204,21 @@ export default function Page({ params: { locale } }: PageProps) {
           <div className="space-y-4">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Preguntas Frecuentes
+                {t('faqTitle')}
               </h2>
-              <p className="text-lg text-neutral-400">
-                Aquí encontrarás las respuestas a las preguntas más comunes sobre Proteus.
-              </p>
+              <p className="text-lg text-neutral-400">{t('faqDescription')}</p>
             </div>
             <div className="w-full space-y-4">
               <Accordion type="single" collapsible>
-                {FAQ.map((faq, i) => (
+                {(t('accordionItems', { returnObjects: true }) as any[]).map((faq, i) => (
                   <AccordionItem value={`item-${i}`} key={i}>
                     <AccordionTrigger className="text-lg">
-                      <h3>{faq.seccion}</h3>
+                      <h3>{faq.section}</h3>
                     </AccordionTrigger>
                     <AccordionContent>
                       <ul className="text-sm">
-                        {faq.contenido.map((item) => (
-                          <li key={item} className="list-disc">
+                        {faq.content.map((item, index) => (
+                          <li key={index} className="list-disc">
                             {item}
                           </li>
                         ))}
@@ -264,11 +235,9 @@ export default function Page({ params: { locale } }: PageProps) {
         <div className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Recursos sobre Proteus
+              {t('resourcesTitle')}
             </h2>
-            <p className="text-lg text-neutral-400">
-              Explora más sobre Proteus y cómo utilizarlo en tus proyectos.
-            </p>
+            <p className="text-lg text-neutral-400">{t('resourcesDescription')}</p>
           </div>
           <div className="grid md:grid-cols-2" />
         </div>

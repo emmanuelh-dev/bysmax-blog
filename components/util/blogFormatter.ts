@@ -3,11 +3,11 @@ export function graphqlToBlog({ post }) {
   return {
     filePath: null,
     path: `posts/${slug}`,
-    slug: null,
+    slug: slug,
     date,
     title,
     tags: tags ? [...tags.nodes.map((tag) => tag.name)] : null,
-    toc: null,
+    toc: [],
   }
 }
 
