@@ -92,7 +92,7 @@ export default async function Page({ params: { locale } }: PageProps) {
             <a
               className={buttonVariants({ variant: 'default' })}
               target="_blank"
-              href="https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r"
+              href="https://drive.google.com/drive/folders/1YozgQmI_2nll_4jj-Z2GdZIAnEV_vhFO?usp=sharing"
             >
               {t('downloadNowButton')}
             </a>
