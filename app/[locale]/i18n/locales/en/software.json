@@ -1,0 +1,41 @@
+{
+  "title": "Free Software for Windows for Engineering Students",
+  "heading": "Free today and always.",
+  "description": "Find programs like Proteus, MATLAB, MathCAD, Multisim, among others, for free.",
+
+  "softwaresTitle": "Software for Engineering Students",
+  "softawreDescription": "Choose the one that best suits your needs with the best available tools.",
+  "all": "All",
+  "show": "View Software",
+  "cards": [
+    {
+      "title": "Proteus",
+      "description": "Proteus 8 is a tool for designing and simulating electronic circuits.",
+      "badge": {
+        "label": "Electronics"
+      },
+      "link": "/software/proteus",
+      "linkText": "View"
+    },
+    {
+      "title": "Multisim",
+      "description": "Multisim is a SPICE simulation software for designing and analyzing electronic circuits.",
+      "badge": {
+        "label": "Electronics"
+      },
+      "link": "/software/multisim",
+      "linkText": "View"
+    },
+    {
+      "title": "MathCAD",
+      "description": "MathCAD is a technical calculation tool that allows you to perform, analyze, and share engineering calculations.",
+      "badge": {
+        "label": "Mathematics"
+      },
+      "link": "/software/mathcad",
+      "linkText": "View"
+    }
+  ],
+  "contact": "Contact Us",
+  "contactText": "If you want to contribute or add something, send us a message and we will gladly include it. Thank you for making this community bigger."
+}

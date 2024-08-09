@@ -1,7 +1,12 @@
 {
+  "title": "Programas gratis para Windows para estudiantes de ingeniería",
+  "heading": "Gratis hoy y siempre.",
+  "description": "Encuentra programas como Proteus, MATLAB, MathCAD, Multisim, entre otros, gratis.",
+
   "softwaresTitle": "Programas para estudiantes de ingeniería",
   "softawreDescription": "Elige el que mejor se adapte a tus necesidades con las mejores herramientas disponibles.",
   "all": "Todos",
+  "show": "Ver Programas",
   "cards": [
     {
       "title": "Proteus",
@@ -30,5 +35,7 @@
       "link": "/software/mathcad",
       "linkText": "Ver"
     }
-  ]
+  ],
+  "contact": "Contáctanos",
+  "contactText": "Si quieres contribuir o aportar con algo, mándanos un mensaje y con gusto lo agregaremos. Gracias por hacer esta comunidad más grande."
 }

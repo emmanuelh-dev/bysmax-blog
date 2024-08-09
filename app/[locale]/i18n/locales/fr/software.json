@@ -1,0 +1,41 @@
+{
+  "title": "Logiciels gratuits pour Windows pour les étudiants en ingénierie",
+  "heading": "Gratuit aujourd'hui et toujours.",
+  "description": "Trouvez des programmes comme Proteus, MATLAB, MathCAD, Multisim, entre autres, gratuitement.",
+
+  "softwaresTitle": "Logiciels pour les étudiants en ingénierie",
+  "softawreDescription": "Choisissez celui qui correspond le mieux à vos besoins avec les meilleurs outils disponibles.",
+  "all": "Tous",
+  "show": "Voir les logiciels",
+  "cards": [
+    {
+      "title": "Proteus",
+      "description": "Proteus 8 est un outil de conception et de simulation de circuits électroniques.",
+      "badge": {
+        "label": "Électronique"
+      },
+      "link": "/software/proteus",
+      "linkText": "Voir"
+    },
+    {
+      "title": "Multisim",
+      "description": "Multisim est un logiciel de simulation SPICE pour la conception et l'analyse de circuits électroniques.",
+      "badge": {
+        "label": "Électronique"
+      },
+      "link": "/software/multisim",
+      "linkText": "Voir"
+    },
+    {
+      "title": "MathCAD",
+      "description": "MathCAD est un outil de calcul technique qui permet de réaliser, d'analyser et de partager des calculs d'ingénierie.",
+      "badge": {
+        "label": "Mathématiques"
+      },
+      "link": "/software/mathcad",
+      "linkText": "Voir"
+    }
+  ],
+  "contact": "Contactez-nous",
+  "contactText": "Si vous souhaitez contribuer ou ajouter quelque chose, envoyez-nous un message et nous l'ajouterons avec plaisir. Merci de rendre cette communauté plus grande."
+}

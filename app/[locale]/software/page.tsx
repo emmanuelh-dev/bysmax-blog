@@ -29,19 +29,18 @@ export default async function Page({ params: { locale } }) {
 
   return (
     <>
-      <section className="bg-muted py-12 md:py-20 lg:py-28">
+      <section className="bg-muted py-12 md:py-20 lg:py-28" id="programs">
         <div className=" grid items-center gap-8 md:grid-cols-2">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Free Engineering Software for Students
-            </h1>
-            <p className="text-muted-foreground mt-4 max-w-md md:text-xl">
-              Explore a wide range of free engineering software tools to enhance your academic
-              journey. Discover the perfect programs to support your studies and projects.
+            <h1 className="text-sm text-neutral-500">{t('title')}</h1>
+            <p className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              {t('heading')}
             </p>
+            <p className="text-muted-foreground mt-4 max-w-md md:text-xl">{t('description')}</p>
             <div className="mt-6 flex gap-4">
-              <Button>Explore Programs</Button>
-              <Button variant="outline">Download</Button>
+              <Link className={buttonVariants({ variant: 'default' })} href="#programs">
+                {t('show')}
+              </Link>
             </div>
           </div>
           <div className="hidden md:block">
@@ -61,41 +60,19 @@ export default async function Page({ params: { locale } }) {
         <div className=" grid gap-8 md:grid-cols-2">
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Get in Touch
+              {t('contact')}
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-md md:text-xl">
-              Have questions or need assistance? Don't hesitate to reach out to our team. We're here
-              to help you make the most of these engineering software tools.
-            </p>
+            <p className="text-muted-foreground mt-4 max-w-md md:text-xl">{t('contactText')}</p>
             <div className="mt-6 flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <MailIcon className="text-primary h-5 w-5" />
-                <a href="/#">support@engineeringsoftware.com</a>
+                <a href="mailto:info@bysmax.com">info@bysmax.com</a>
               </div>
               <div className="flex items-center gap-2">
                 <PhoneIcon className="text-primary h-5 w-5" />
-                <a href="/#">+1 (234) 567-890</a>
+                <a href="tel:8126060795">+52 8126060795</a>
               </div>
             </div>
-          </div>
-          <div>
-            <form className="grid gap-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Your email" />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Your message" rows={4} />
-              </div>
-              <Button type="submit">Send Message</Button>
-            </form>
           </div>
         </div>
       </section>
