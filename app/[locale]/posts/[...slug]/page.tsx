@@ -9,6 +9,7 @@ import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormat
 import { components } from '@/components/MDXComponents'
 import Layout from '@/layouts/PostLayout'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
+
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
 }
@@ -53,6 +54,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       name: author.name,
     }
   })
+  const content = parse(post.postBy.content)
   return (
     <>
       <script
@@ -62,10 +64,13 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       <Layout content={blog} authorDetails={authorDetails} params={{ locale: locale }}>
         {/* <MDXLayoutRenderer code={blog.content} components={components} toc={post.toc} /> */}
         <div dangerouslySetInnerHTML={{ __html: post.postBy.content }} />
+        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+
       </Layout>
     </>
   )
 }
+
 const Lazy = () => (
   <div className="space-y-6">
     <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
