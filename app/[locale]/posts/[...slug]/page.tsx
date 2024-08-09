@@ -54,7 +54,6 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       name: author.name,
     }
   })
-  const content = parse(post.postBy.content)
   return (
     <>
       <script
@@ -65,7 +64,6 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
         {/* <MDXLayoutRenderer code={blog.content} components={components} toc={post.toc} /> */}
         <div dangerouslySetInnerHTML={{ __html: post.postBy.content }} />
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-
       </Layout>
     </>
   )
