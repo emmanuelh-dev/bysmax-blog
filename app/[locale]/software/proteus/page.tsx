@@ -16,6 +16,7 @@ import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
+import Loading from '@/components/software/Loading'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -60,6 +61,11 @@ const jsonLd = [
 
 const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
   loading: () => <SuspencePosts />,
+  ssr: false,
+})
+
+const Software = dynamic(() => import('@/components/software/Software'), {
+  loading: () => <Loading />,
   ssr: false,
 })
 
@@ -136,6 +142,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </div>
       </section>
+      <Software locale={locale} />
       <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
         <div>
           <div className="space-y-4">
