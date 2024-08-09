@@ -8,7 +8,6 @@ import { getAuthorByID, getPostBySlug, getPosts } from '@/components/util/wpGrap
 import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormatter'
 import { components } from '@/components/MDXComponents'
 import Layout from '@/layouts/PostLayout'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
 
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
@@ -63,7 +62,6 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       <Layout content={blog} authorDetails={authorDetails} params={{ locale: locale }}>
         {/* <MDXLayoutRenderer code={blog.content} components={components} toc={post.toc} /> */}
         <div dangerouslySetInnerHTML={{ __html: post.postBy.content }} />
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
     </>
   )
