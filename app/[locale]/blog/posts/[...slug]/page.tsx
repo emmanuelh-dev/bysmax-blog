@@ -1,164 +1,75 @@
+import PageTitle from '@/components/PageTitle'
+import siteMetadata from '@/data/siteMetadata'
 import 'css/prism.css'
 import 'katex/dist/katex.css'
-import { Metadata } from 'next'
+import { LocaleTypes } from '../../i18n/settings'
+import dynamic from 'next/dynamic'
+import { getAuthorByID, getPostBySlug, getPosts } from '@/components/util/wpGraphQL'
+import { graphqlToBlog, graphqlToBlogAuthor } from '@/components/util/blogFormatter'
 import { components } from '@/components/MDXComponents'
+import Layout from '@/layouts/PostLayout'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs, allAuthors } from 'contentlayer/generated'
-import type { Authors, Blog } from 'contentlayer/generated'
-import PostSimple from '@/layouts/PostSimple'
-import PostLayout from '@/layouts/PostLayout'
-import PostBanner from '@/layouts/PostBanner'
-import siteMetadata from '@/data/siteMetadata'
-import { maintitle } from '@/data/localeMetadata'
-import { notFound } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
 }
 
-const defaultLayout = 'PostLayout'
-const layouts = {
-  PostSimple,
-  PostLayout,
-  PostBanner,
+const postDateTemplate: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 }
-
-async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): Promise<any> {
+const Sidebar = dynamic(() => import('@/components/SideBar'), {
+  loading: () => <Lazy />,
+  ssr: false,
+})
+export async function generateMetadata({ params: { slug, locale } }) {
   const dslug = decodeURI(slug.join('/'))
-  const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+  const post = await getPostBySlug(dslug)
 
   if (!post) {
     null
   }
-
-  if (post?.series) {
-    const seriesPosts = allBlogs
-      .filter((p) => p.language === locale && p.series?.title === post.series?.title)
-      .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
-      .map((p) => {
-        return {
-          title: p.title,
-          slug: p.slug,
-          language: p.language,
-          isCurrent: p.slug === post.slug,
-        }
-      })
-    if (seriesPosts.length > 0) {
-      return { ...post, series: { ...post.series, posts: seriesPosts } }
-    }
-  }
-
-  return post
-}
-
-export async function generateMetadata({
-  params: { slug, locale },
-}: BlogPageProps): Promise<Metadata | undefined> {
-  const dslug = decodeURI(slug.join('/'))
-  const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
-  if (!post) {
-    return
-  }
-  const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
-  const authorList = post.authors || (author ? [author] : [])
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors
-      .filter((a) => a.language === locale)
-      .find((a) => a.slug.includes(author))
-    return coreContent(authorResults as Authors)
-  })
-  const publishedAt = new Date(post.date).toISOString()
-  const modifiedAt = new Date(post.lastmod || post.date).toISOString()
-  const authors = authorDetails.map((author) => author.name)
-  let imageList = [siteMetadata.socialBanner]
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images
-  }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
-    }
-  })
-
   return {
-    title: post.title,
-    description: post.summary,
-    openGraph: {
-      title: post.title,
-      description: post.summary,
-      siteName: maintitle[locale],
-      locale: post.language,
-      type: 'article',
-      publishedTime: publishedAt,
-      modifiedTime: modifiedAt,
-      url: './',
-      images: ogImages,
-      authors: authors.length > 0 ? authors : [siteMetadata.author],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
-      images: imageList,
-    },
+    title: post.postBy.title,
   }
 }
-
-export const generateStaticParams = async () => {
-  const paths = allBlogs.map((p) => ({ slug: p.slug.split('/') }))
+export const generateStaticParams = async ({ params: { slug, locale } }) => {
+  const posts = await getPosts({ locale })
+  const paths = await posts.map((p) => ({ slug: p.slug.split('/') }))
   return paths
 }
 
 export default async function Page({ params: { slug, locale } }: BlogPageProps) {
   const dslug = decodeURI(slug.join('/'))
-  // Filter out drafts in production + locale filtering
-  const sortedCoreContents = allCoreContent(
-    sortPosts(allBlogs.filter((p) => p.language === locale))
-  )
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === dslug)
-  if (postIndex === -1) {
-    return notFound()
-  }
+  const post = await getPostBySlug(dslug)
+  const blog = graphqlToBlog({ post })
+  const author = await getAuthorByID(post.postBy.authorId)
+  const authorDetails = graphqlToBlogAuthor({ author })
 
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
-  const post = await getPostFromParams({ params: { slug, locale } })
-  const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
-  const authorList = post.authors || author
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors
-      .filter((a) => a.language === locale)
-      .find((a) => a.slug.includes(author))
-    return coreContent(authorResults as Authors)
-  })
-  const mainContent = coreContent(post)
-  const jsonLd = post.structuredData
-  jsonLd['author'] = authorDetails.map((author) => {
+  const jsonLd = authorDetails.map((author) => {
     return {
       '@type': 'Person',
       name: author.name,
     }
   })
-
-  const Layout = layouts[post.layout || defaultLayout]
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Layout
-        content={mainContent}
-        authorDetails={authorDetails}
-        next={next}
-        prev={prev}
-        params={{ locale: locale }}
-      >
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+      <Layout content={blog} authorDetails={authorDetails} params={{ locale: locale }}>
+        {/* <MDXLayoutRenderer code={blog.content} components={components} toc={post.toc} /> */}
+        <div dangerouslySetInnerHTML={{ __html: post.postBy.content }} />
       </Layout>
     </>
   )
 }
+const Lazy = () => (
+  <div className="space-y-6">
+    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+    <div className="aspect-video w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
+  </div>
+)
