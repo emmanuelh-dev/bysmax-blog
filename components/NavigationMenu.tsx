@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react'
 import { cn } from '../lib/utils'
 import {
@@ -13,7 +14,7 @@ import { nav } from '@/data/headerNavLinks'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 
-export default async function Navigation() {
+export default function Navigation() {
   const locale = useParams()?.locale as LocaleTypes
 
   // const { t } = await createTranslation(locale, 'software')
