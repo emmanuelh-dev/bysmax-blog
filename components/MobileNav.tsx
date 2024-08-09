@@ -69,6 +69,15 @@ const MobileNav = () => {
                 </Link>
               </div>
             ))}
+            <div>
+              <Link
+                href="/software"
+                className="tracking-widest text-gray-900 dark:text-gray-100"
+                onClick={onToggleNav}
+              >
+                Software
+              </Link>
+            </div>
             {nav.map((section) => (
               <div key={section.title}>
                 <div className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100">

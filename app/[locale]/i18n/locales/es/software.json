@@ -1,0 +1,34 @@
+{
+  "softwaresTitle": "Programas para estudiantes de ingeniería",
+  "softawreDescription": "Elige el que mejor se adapte a tus necesidades con las mejores herramientas disponibles.",
+  "all": "Todos",
+  "cards": [
+    {
+      "title": "Proteus",
+      "description": "Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos.",
+      "badge": {
+        "label": "Electrónica"
+      },
+      "link": "/software/proteus",
+      "linkText": "Ver"
+    },
+    {
+      "title": "Multisim",
+      "description": "Multisim es un software de simulación SPICE para el diseño y análisis de circuitos electrónicos.",
+      "badge": {
+        "label": "Electrónica"
+      },
+      "link": "/software/multisim",
+      "linkText": "Ver"
+    },
+    {
+      "title": "MathCAD",
+      "description": "MathCAD es una herramienta de cálculo técnico que permite realizar, analizar y compartir cálculos de ingeniería.",
+      "badge": {
+        "label": "Matemáticas"
+      },
+      "link": "/software/mathcad",
+      "linkText": "Ver"
+    }
+  ]
+}

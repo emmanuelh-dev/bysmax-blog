@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,9 +13,12 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { createTranslation } from '@/app/[locale]/i18n/server'
 import Image from 'next/image'
 
-export default function Page() {
+export default async function Page({ params: { locale } }) {
+  const { t } = await createTranslation(locale, 'software')
+
   return (
     <>
       <section className="bg-muted py-12 md:py-20 lg:py-28">
@@ -45,63 +48,14 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="features" className="bg-background py-12 md:py-20 lg:py-28">
-        <div className=" grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="grid gap-4">
-            <CpuIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">High-Performance</h3>
-            <p className="text-muted-foreground">
-              Leverage powerful engineering software to tackle complex projects with ease.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <LayersIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">Versatile Tools</h3>
-            <p className="text-muted-foreground">
-              Explore a diverse range of software catering to various engineering disciplines.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <UsersIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">Student-Friendly</h3>
-            <p className="text-muted-foreground">
-              Discover user-friendly interfaces and comprehensive documentation to support your
-              learning.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <ZapIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">Free and Open-Source</h3>
-            <p className="text-muted-foreground">
-              Access a wide range of free engineering software without financial barriers.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <BriefcaseIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">Career-Boosting</h3>
-            <p className="text-muted-foreground">
-              Gain hands-on experience with industry-standard engineering tools to enhance your
-              career prospects.
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <CompassIcon className="text-primary h-8 w-8" />
-            <h3 className="text-lg font-semibold">Guided Exploration</h3>
-            <p className="text-muted-foreground">
-              Discover new software and learn how to leverage them through our comprehensive guides.
-            </p>
-          </div>
-        </div>
-      </section>
       <section id="programs" className="bg-muted py-12 md:py-20 lg:py-28">
         <div className="">
           <div className="mb-8 flex flex-col gap-4">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Available Engineering Programs
+              {t('softwaresTitle')}
             </h2>
             <p className="text-muted-foreground max-w-[700px] md:text-xl">
-              Explore our collection of free engineering software and find the perfect tools to
-              support your studies and projects.
+              {t('softawreDescription')}
             </p>
           </div>
           <div className="grid gap-6 md:gap-8">
@@ -132,102 +86,22 @@ export default function Page() {
               </div>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <Card>
-                <CardHeader>
-                  <CardTitle>AutoCAD</CardTitle>
-                  <CardDescription>
-                    Computer-Aided Design (CAD) software for 2D and 3D modeling.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Civil Engineering</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>MATLAB</CardTitle>
-                  <CardDescription>
-                    Powerful programming and numerical computing environment.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Electrical Engineering</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>SolidWorks</CardTitle>
-                  <CardDescription>
-                    3D CAD software for product design and engineering.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Mechanical Engineering</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Fusion 360</CardTitle>
-                  <CardDescription>
-                    Integrated CAD, CAM, and CAE software for product design.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Mechanical Engineering</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Proteus</CardTitle>
-                  <CardDescription>
-                    Circuit design and simulation software for electronic engineering.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Electrical Engineering</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Visual Studio Code</CardTitle>
-                  <CardDescription>
-                    Powerful code editor with support for various programming languages.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline">Computer Science</Badge>
-                    <Button variant="ghost" size="sm">
-                      Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              {(t('cards', { returnObjects: true }) as unknown as any[]).map((card, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle>{card.title}</CardTitle>
+                    <CardDescription>{card.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center justify-between">
+                      <Badge variant={'outline'}>{card.badge.label}</Badge>
+                      <Link href={card.link} className={buttonVariants({ variant: 'default' })}>
+                        {card.linkText}
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

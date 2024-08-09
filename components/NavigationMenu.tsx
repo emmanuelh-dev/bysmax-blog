@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react'
 import Link from 'next/link'
 
@@ -14,8 +12,11 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { nav } from '@/data/headerNavLinks'
+import { createTranslation } from '@/app/[locale]/i18n/server'
 
-export default function Navigation() {
+export default async function Navigation({ locale }) {
+  const { t } = await createTranslation(locale, 'software')
+
   return (
     <NavigationMenu className="hidden lg:block">
       <NavigationMenuList>
@@ -67,6 +68,17 @@ export default function Navigation() {
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Software</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[400px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[400px] ">
+              <ListItem title={t('all')} href="/software" className="font-bold"></ListItem>
+              {(t('cards', { returnObjects: true }) as unknown as any[]).map((item) => (
+                <ListItem key={item.title} title={item.title} href={item.link}></ListItem>
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
         <NavigationMenuItem>
           {/* <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
