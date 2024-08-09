@@ -27,12 +27,21 @@
       "linkText": "Ver"
     },
     {
-      "title": "MathCAD",
+      "title": "MathCAD 14",
       "description": "MathCAD es una herramienta de cálculo técnico que permite realizar, analizar y compartir cálculos de ingeniería.",
       "badge": {
         "label": "Matemáticas"
       },
-      "link": "/software/mathcad",
+      "link": "/software/mathcad-14",
+      "linkText": "Ver"
+    },
+    {
+      "title": "MathCAD Prime 7",
+      "description": "MathCAD es una herramienta de cálculo técnico que permite realizar, analizar y compartir cálculos de ingeniería.",
+      "badge": {
+        "label": "Matemáticas"
+      },
+      "link": "/software/mathcad-prime-7",
       "linkText": "Ver"
     }
   ],
