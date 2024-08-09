@@ -1,0 +1,90 @@
+{
+  "title": "Download Multisim for Free on PC",
+  "mainHeading": "Download Multisim",
+  "description": "Multisim is a powerful tool for designing and simulating electronic circuits. It allows you to create and test your projects efficiently.",
+  "downloadNowButton": "Download Now",
+  "systemRequirementsButton": "System Requirements",
+  "imageSrc": "/static/images/multisim/3.png",
+  "imageAlt": "Multisim 14.2",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Gallery",
+  "id": "requirements",
+  "requirementsHeader": "System Requirements",
+  "requirementsList": [
+    {
+      "title": "Operating System",
+      "description": "Multisim 14.2 is compatible with Windows 7, 8, 10, and 11."
+    },
+    {
+      "title": "Processor",
+      "description": "A 2 GHz processor or higher is recommended."
+    },
+    {
+      "title": "RAM",
+      "description": "At least 4 GB of RAM is recommended."
+    },
+    {
+      "title": "Disk Space",
+      "description": "At least 2 GB of free disk space is required."
+    }
+  ],
+  "downloadHeader": "Download Multisim Now",
+  "downloadDescription": "Start designing and simulating your electronic projects with Multisim today! Click the download button to get the latest version.",
+  "downloadLink": {
+    "url": "https://drive.google.com/drive/folders/1YozgQmI_2nll_4jj-Z2GdZIAnEV_vhFO?usp=sharing",
+    "text": "Download Multisim"
+  },
+  "faqTitle": "Frequently Asked Questions",
+  "faqDescription": "Here you will find answers to the most common questions about Multisim.",
+  "resourcesTitle": "Multisim Resources",
+  "resourcesDescription": "Explore more about Multisim and how to use it in your projects.",
+  "accordionItems": [
+    {
+      "section": "What is Multisim?",
+      "content": [
+        "Multisim is an electronic circuit design and simulation software developed by National Instruments. Like Proteus, Multisim allows you to create and test circuits virtually. You can design your electronic projects on the computer before building them physically, saving time and resources by avoiding errors in the design phase."
+      ]
+    },
+    {
+      "section": "Key Features of Multisim",
+      "content": [
+        "Real-Time Simulation: Observe how your circuit behaves while you design it, making it easier to detect and fix errors.",
+        "Component Library: Multisim includes a wide range of electronic components such as resistors, transistors, microcontrollers, and sensors.",
+        "PCB Design: In addition to simulating circuits, you can design printed circuit boards (PCBs) for your projects.",
+        "3D Visualization: Multisim provides a 3D view of your PCBs, allowing you to see what the final design will look like once assembled.",
+        "Microcontroller Compatibility: You can simulate various microcontrollers, such as those from the PIC, AVR, and ARM families, and test the code directly in the simulated environment."
+      ]
+    },
+    {
+      "section": "How to Download Multisim?",
+      "content": [
+        "Click on \"Download Now\".",
+        "Download the Multisim executable file.",
+        "Install it on your computer.",
+        "Run it as administrator after installation.",
+        "If you prefer in Portuguese, download the corresponding language pack and the Arduino library, if needed."
+      ]
+    },
+    {
+      "section": "How to Install Multisim?",
+      "content": [
+        "Open the downloaded file and follow the on-screen instructions.",
+        "Accept the terms and conditions of use.",
+        "Choose the installation location on your computer.",
+        "Complete the installation.",
+        "Run Multisim as administrator."
+      ]
+    },
+    {
+      "section": "Why Use Multisim?",
+      "content": [
+        "Saves Time and Money: Simulating before building avoids spending on physical components.",
+        "Ease of Use: Multisim has a user-friendly interface, ideal for beginners.",
+        "Interactive Learning: It is an excellent educational tool for experimenting and learning in real time.",
+        "Versatility: Adapts to both simple and complex projects.",
+        "Support and Community: The user community shares tutorials and common solutions."
+      ]
+    }
+  ]
+}

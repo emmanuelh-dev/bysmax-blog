@@ -1,0 +1,90 @@
+{
+  "title": "Descargar Multisim gratis para PC",
+  "mainHeading": "Descargar Multisim",
+  "description": "Multisim es una herramienta poderosa para diseñar y simular circuitos electrónicos. Te permite crear y probar tus proyectos de manera eficiente.",
+  "downloadNowButton": "Descargar Ahora",
+  "systemRequirementsButton": "Requisitos del sistema",
+  "imageSrc": "/static/images/multisim/3.png",
+  "imageAlt": "Multisim 14.2",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Galeria",
+  "id": "requisitos",
+  "requirementsHeader": "Requisitos del sistema",
+  "requirementsList": [
+    {
+      "title": "Sistema operativo",
+      "description": "Multisim 14.2 es compatible con Windows 7, 8, 10 y 11."
+    },
+    {
+      "title": "Procesador",
+      "description": "Se recomienda un procesador de 2 GHz o superior."
+    },
+    {
+      "title": "Memoria RAM",
+      "description": "Se recomienda al menos 4 GB de RAM."
+    },
+    {
+      "title": "Espacio en disco",
+      "description": "Se necesitan al menos 2 GB de espacio libre en disco."
+    }
+  ],
+  "downloadHeader": "Descarga Multisim ahora",
+  "downloadDescription": "¡Comienza a diseñar y simular tus proyectos electrónicos con Multisim hoy mismo! Haz clic en el botón de descarga para obtener la última versión.",
+  "downloadLink": {
+    "url": "https://drive.google.com/drive/folders/1YozgQmI_2nll_4jj-Z2GdZIAnEV_vhFO?usp=sharing",
+    "text": "Descargar Multisim"
+  },
+  "faqTitle": "Preguntas Frecuentes",
+  "faqDescription": "Aquí encontrarás las respuestas a las preguntas más comunes sobre Multisim.",
+  "accordionItems": [
+    {
+      "section": "¿Qué es Multisim?",
+      "content": [
+        "Multisim es un software de diseño y simulación de circuitos electrónicos desarrollado por National Instruments. Al igual que Proteus, Multisim te permite crear y probar circuitos de manera virtual. Puedes diseñar tus proyectos electrónicos en la computadora antes de construirlos físicamente, lo que ahorra tiempo y recursos al evitar errores en la etapa de diseño."
+      ]
+    },
+    {
+      "section": "Características Principales de Multisim",
+      "content": [
+        "Simulación en Tiempo Real: Observa cómo se comporta tu circuito mientras lo diseñas, lo que facilita la detección y corrección de errores.",
+        "Biblioteca de Componentes: Multisim incluye una amplia variedad de componentes electrónicos, como resistencias, transistores, microcontroladores y sensores.",
+        "Diseño de PCB: Además de simular circuitos, puedes diseñar placas de circuito impreso (PCB) para tus proyectos.",
+        "Visualización 3D: Multisim proporciona una vista en 3D de tus PCB, permitiéndote visualizar cómo se verá el diseño final una vez ensamblado.",
+        "Compatibilidad con Microcontroladores: Puedes simular diversos microcontroladores, como los de la familia PIC, AVR y ARM, y probar el código directamente en el entorno simulado."
+      ]
+    },
+    {
+      "section": "¿Cómo Descargar Multisim?",
+      "content": [
+        "Haz clic en \"Descargar Ahora\".",
+        "Descarga el archivo ejecutable de Multisim.",
+        "Instálalo en tu computadora.",
+        "Ejecútalo como administrador una vez instalado.",
+        "Si lo prefieres en español, descarga el paquete de idioma correspondiente y la librería de Arduino si la necesitas."
+      ]
+    },
+    {
+      "section": "¿Cómo Instalar Multisim?",
+      "content": [
+        "Abre el archivo descargado y sigue las instrucciones en pantalla.",
+        "Acepta los términos y condiciones de uso.",
+        "Elige la ubicación de instalación en tu computadora.",
+        "Completa la instalación.",
+        "Ejecuta Multisim como administrador."
+      ]
+    },
+    {
+      "section": "¿Por Qué Usar Multisim?",
+      "content": [
+        "Ahorro de Tiempo y Dinero: La simulación previa a la construcción evita gastos en componentes físicos.",
+        "Facilidad de Uso: Multisim tiene una interfaz amigable, ideal para principiantes.",
+        "Aprendizaje Interactivo: Es una excelente herramienta educativa para experimentar y aprender en tiempo real.",
+        "Versatilidad: Se adapta a proyectos simples y complejos.",
+        "Soporte y Comunidad: La comunidad de usuarios comparte tutoriales y soluciones comunes."
+      ]
+    }
+  ],
+  "resourcesTitle": "Recursos sobre Multisim",
+  "resourcesDescription": "Explora más sobre Multisim y cómo utilizarlo en tus proyectos."
+}

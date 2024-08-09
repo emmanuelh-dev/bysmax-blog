@@ -66,7 +66,10 @@ export default async function Software({ locale }) {
                 <CardContent>
                   <div className="flex items-center justify-between">
                     <Badge variant={'outline'}>{card.badge.label}</Badge>
-                    <Link href={card.link} className={buttonVariants({ variant: 'default' })}>
+                    <Link
+                      href={`/${locale}/${card.link}`}
+                      className={buttonVariants({ variant: 'default' })}
+                    >
                       {card.linkText}
                     </Link>
                   </div>
@@ -76,6 +79,9 @@ export default async function Software({ locale }) {
           </div>
         </div>
       </div>
+      <Link href={`/${locale}/software`} className={buttonVariants({ variant: 'link' })}>
+        {t('showMore')}
+      </Link>
     </section>
   )
 }

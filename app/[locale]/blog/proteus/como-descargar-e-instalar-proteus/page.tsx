@@ -103,11 +103,10 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    image:
-      'https://img-19.ccm.net/e-taDvkvQtl8wkrumfhmxP8gCvg=/80x80/2d9d38064f2f43b3813892fc0b55963f/ccmcms-esccm/38118736.png',
+    image: 'https://www.bysmax.com/static/images/proteus/3.png',
     name: 'Proteus',
     applicationCategory: 'BusinessApplication',
-    downloadUrl: 'https://es.ccm.net/descargas/profesional/7974-proteus-para-pc/',
+    downloadUrl: 'https://www.bysmax.com/software/proteus',
     description:
       'Proteus Design Suite es uno de los programas de dise\u00f1o electr\u00f3nico m\u00e1s utilizados del mercado. Sus versiones m\u00e1s recientes, adem\u00e1s, nos permiten crear simulaciones de dispositivos f\u00e1cilmente en nuestro PC utilizando las herramientas de Arduino.',
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
