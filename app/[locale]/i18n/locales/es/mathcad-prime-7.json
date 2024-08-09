@@ -1,0 +1,90 @@
+{
+  "title": "Descargar Mathcad Prime 7 gratis para PC",
+  "mainHeading": "Descargar Mathcad",
+  "description": "Mathcad es una herramienta poderosa para resolver, analizar y compartir cálculos de ingeniería. Te permite crear y documentar tus proyectos de manera eficiente.",
+  "downloadNowButton": "Descargar Ahora",
+  "systemRequirementsButton": "Requisitos del sistema",
+  "imageSrc": "/static/images/mathcad/1.png",
+  "imageAlt": "Mathcad",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Galería",
+  "id": "requisitos",
+  "requirementsHeader": "Requisitos del sistema",
+  "requirementsList": [
+    {
+      "title": "Sistema operativo",
+      "description": "Mathcad es compatible con Windows 7, 8, 10 y 11."
+    },
+    {
+      "title": "Procesador",
+      "description": "Se recomienda un procesador de 2 GHz o superior."
+    },
+    {
+      "title": "Memoria RAM",
+      "description": "Se recomienda al menos 4 GB de RAM."
+    },
+    {
+      "title": "Espacio en disco",
+      "description": "Se necesitan al menos 2 GB de espacio libre en disco."
+    }
+  ],
+  "downloadHeader": "Descarga Mathcad ahora",
+  "downloadDescription": "¡Comienza a realizar y compartir tus cálculos de ingeniería con Mathcad hoy mismo! Haz clic en el botón de descarga para obtener la última versión.",
+  "downloadLink": {
+    "url": "https://drive.google.com/drive/folders/16QW8cpAjLja9nfXUfFqi3NX2lKzUHYyk?usp=sharing",
+    "text": "Descargar Mathcad"
+  },
+  "faqTitle": "Preguntas Frecuentes",
+  "faqDescription": "Aquí encontrarás las respuestas a las preguntas más comunes sobre Mathcad.",
+  "accordionItems": [
+    {
+      "section": "¿Qué es Mathcad?",
+      "content": [
+        "Mathcad es un software desarrollado por PTC que permite realizar cálculos matemáticos y de ingeniería de manera simbólica y numérica. Con Mathcad, puedes documentar, analizar y compartir tus cálculos en un entorno interactivo que combina matemáticas y texto en un mismo documento."
+      ]
+    },
+    {
+      "section": "Características Principales de Mathcad",
+      "content": [
+        "Entorno Interactivo: Mathcad permite la edición en vivo de cálculos y resultados en un entorno que combina texto y matemáticas.",
+        "Unidades de Medida: Mathcad maneja automáticamente las unidades, ayudando a evitar errores en cálculos que involucran diferentes unidades.",
+        "Visualización de Datos: Incluye herramientas para graficar y analizar datos, lo que facilita la comprensión y presentación de los resultados.",
+        "Integración con otras Herramientas: Mathcad se integra con herramientas de CAD y otros programas de ingeniería para facilitar el flujo de trabajo.",
+        "Plantillas y Documentación: Mathcad ofrece plantillas predefinidas para documentar cálculos de manera profesional y estandarizada."
+      ]
+    },
+    {
+      "section": "¿Cómo Descargar Mathcad?",
+      "content": [
+        "Haz clic en \"Descargar Ahora\".",
+        "Descarga el archivo ejecutable de Mathcad.",
+        "Instálalo en tu computadora.",
+        "Ejecútalo como administrador una vez instalado.",
+        "Si lo prefieres en otro idioma, descarga el paquete de idioma correspondiente."
+      ]
+    },
+    {
+      "section": "¿Cómo Instalar Mathcad?",
+      "content": [
+        "Abre el archivo descargado y sigue las instrucciones en pantalla.",
+        "Acepta los términos y condiciones de uso.",
+        "Elige la ubicación de instalación en tu computadora.",
+        "Completa la instalación.",
+        "Ejecuta Mathcad como administrador."
+      ]
+    },
+    {
+      "section": "¿Por Qué Usar Mathcad?",
+      "content": [
+        "Precisión y Fiabilidad: Realiza cálculos complejos con exactitud, sin preocuparte por errores manuales.",
+        "Facilidad de Uso: Mathcad tiene una interfaz amigable, ideal para ingenieros y científicos.",
+        "Aprendizaje Interactivo: Es una excelente herramienta educativa para aprender matemáticas y física aplicadas.",
+        "Documentación Eficiente: Permite crear informes profesionales y compartir cálculos fácilmente.",
+        "Soporte y Comunidad: La comunidad de usuarios de Mathcad es extensa y ofrece numerosos recursos y tutoriales."
+      ]
+    }
+  ],
+  "resourcesTitle": "Recursos sobre Mathcad",
+  "resourcesDescription": "Explora más sobre Mathcad y cómo utilizarlo en tus proyectos de ingeniería."
+}
