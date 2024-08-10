@@ -35,7 +35,6 @@ export const getPosts = async ({ locale = 'es' }) => {
 
 export const getPostBySlug = async (slug: string) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    next: { revalidate: 3600 },
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -63,6 +62,7 @@ export const getPostBySlug = async (slug: string) => {
         slug: slug,
       },
     }),
+    next: { revalidate: 10 },
   })
   const { data } = await response.json()
   return data
@@ -97,6 +97,7 @@ export const getAuthorByID = async (id: string) => {
         id: id,
       },
     }),
+    next: { revalidate: 10 },
   })
   const { data } = await response.json()
   return data
