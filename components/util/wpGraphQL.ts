@@ -1,6 +1,5 @@
 export const getPosts = async ({ locale = 'es' }) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
-    next: { revalidate: 3600 },
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,6 +26,7 @@ export const getPosts = async ({ locale = 'es' }) => {
         categoryName: locale,
       },
     }),
+    next: { revalidate: 3600 },
   })
 
   const { data } = await response.json()
