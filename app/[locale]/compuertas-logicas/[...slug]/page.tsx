@@ -72,10 +72,10 @@ export default async function Page({ params: { locale, slug } }: Props) {
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
-          <h2 className="mb-2 text-lg font-bold">Funcion Booleana</h2>
+          {/* <h2 className="mb-2 text-lg font-bold">Funcion Booleana</h2>
           <div className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
             <p className="text-muted-foreground">Y = A AND B</p>
-          </div>
+          </div> */}
           <section className="mb-4">
             <h2 className="mb-2 text-lg font-bold">Tabla de Verdad</h2>
             <div className="rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">

@@ -10,6 +10,8 @@ import ColorCodeMain from './colorCodeCalculator/ColorCodeMain'
 import HeaderGenerator from './HeaderGenerator'
 import SoftwareDownload from './SoftwareDownload'
 import CursoTraccar from '@/app/[locale]/traccar/page'
+import CompuertasNav from './compuertas/Nav'
+
 export const components: MDXComponents = {
   Image,
   TOCInline,
@@ -22,4 +24,5 @@ export const components: MDXComponents = {
   HeaderGenerator,
   SoftwareDownload,
   CursoTraccar,
+  CompuertasNav,
 }
