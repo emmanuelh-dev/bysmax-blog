@@ -84,12 +84,6 @@ export default function RootLayout({
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <meta name="google-adsense-account" content="ca-pub-3646138644530578"></meta>
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <link
-        rel="preload"
-        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
-        as="script"
-        crossOrigin="anonymous"
-      />
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
@@ -104,8 +98,8 @@ export default function RootLayout({
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
               <main className="mb-auto">{children}</main>
+              <Footer />
             </SearchProvider>
-            <Footer />
           </SectionContainer>
         </ThemeProviders>
         <Metrics />

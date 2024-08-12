@@ -1,11 +1,10 @@
-'use client'
 import React from 'react'
 import Link from 'next/link'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 
-const Footer = () => {
+const Footer = async () => {
   const footerLinks = [
     {
       title: 'Mantente actualizado',
