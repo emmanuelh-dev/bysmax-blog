@@ -150,6 +150,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           <div className="flex gap-4">
             <a
               className={buttonVariants({ variant: 'default' })}
+              target="_blank"
               href="https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r"
             >
               {t('downloadNowButton')}
