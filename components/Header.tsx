@@ -2,15 +2,20 @@
 
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
 import Link from './Link'
-import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
-import Navigation from './NavigationMenu'
 import LangSwitch from './langswitch'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
+import dynamic from 'next/dynamic'
+
+const Navigation = dynamic(() => import('./NavigationMenu'), {
+  ssr: false,
+})
+const MobileNav = dynamic(() => import('./MobileNav'), {
+  ssr: false,
+})
 
 const Header = () => {
   const locale = useParams()?.locale as LocaleTypes
