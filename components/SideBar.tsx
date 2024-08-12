@@ -2,6 +2,7 @@ import Tag from '@/components/Tag'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { buttonVariants } from './ui/button'
 
 export default function Sidebar({ authorDetails, next, prev, content, locale }) {
   const { filePath, path, slug, date, title, tags, toc } = content
@@ -66,16 +67,11 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
       <footer>
         <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
           {/* Adds*/}
-          <div className="flex items-center justify-center py-4 xl:py-8">
-            <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
-              <Image
-                width={200}
-                height={200}
-                src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
-                alt="DigitalOcean Referral Badge"
-              />
-            </a>
-          </div>
+          {tags.some((tag) => tag.toLowerCase() == 'proteus') ? (
+            <ProgramCard text="Descargar Proteus" link="/software/proteus" />
+          ) : tags.some((tag) => tag.toLowerCase() == 'traccar') ? (
+            <ProgramCard text="Curso traccar" link="/traccar" />
+          ) : null}
           {tags && (
             <div className="py-4 xl:py-8">
               <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
@@ -136,3 +132,9 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
     </div>
   )
 }
+
+const ProgramCard = async ({ text, link }) => (
+  <Link href={link} className={`${buttonVariants({ variant: 'default' })} my-6 block w-full py-3`}>
+    {text}
+  </Link>
+)
