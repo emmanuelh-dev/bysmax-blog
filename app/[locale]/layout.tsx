@@ -6,7 +6,6 @@ import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
-import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
@@ -15,6 +14,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Script from 'next/script'
 import Metrics from './metrics'
 import { LocaleTypes } from './i18n/settings'
+import dynamic from 'next/dynamic'
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
@@ -107,3 +107,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+const Footer = dynamic(() => import('@/components/Footer'), { ssr: false })
