@@ -38,8 +38,8 @@ export default async function Page({ params: { locale } }) {
 
   return (
     <>
-      <section className="bg-muted py-12 md:py-20 lg:py-28">
-        <div className=" grid items-center gap-8 md:grid-cols-2">
+      <section className="py-12 md:py-20 lg:py-28">
+        <div className="grid items-center gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-sm text-neutral-500">{t('title')}</h1>
             <p className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
@@ -52,16 +52,14 @@ export default async function Page({ params: { locale } }) {
               </Link>
             </div>
           </div>
-          <div className="hidden md:block">
-            <Image
-              src="/placeholder.svg"
-              width={500}
-              height={400}
-              alt="Hero Image"
-              className="rounded-xl"
-              style={{ aspectRatio: '500/400', objectFit: 'cover' }}
-            />
-          </div>
+          <Image
+            src="/static/images/student.jpg"
+            width={500}
+            height={400}
+            alt="Persona trabajando en laptop en escritorio con pared de ladrillo de fondo. Taza y teléfono junto a la computadora"
+            className="rounded-xl"
+            style={{ aspectRatio: '500/300', objectFit: 'cover' }}
+          />
         </div>
       </section>
       <Software locale={locale} />
