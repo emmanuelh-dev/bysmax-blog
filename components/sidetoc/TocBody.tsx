@@ -39,7 +39,7 @@ const TocBody = ({ toc }: TocBodyProps) => {
         className={`fixed left-0 top-0 z-50 flex h-screen ${sidebarOpen ? 'w-72' : 'w-0 -translate-x-10'} flex-col border-r border-neutral-100 bg-gray-100  px-2 py-4 transition-all duration-300 dark:border-neutral-800 dark:bg-black`}
       >
         <div className="mt-40">
-          <div className="my-auto mt-5 overflow-y-auto">
+          <div className="my-auto mt-5 max-h-[38rem]  overflow-y-auto pt-4">
             <div className="text-heading-400 text-xl font-bold">{t('sidetoc')}</div>
             <TOCInline
               toc={filteredToc}
