@@ -91,6 +91,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           <div className="flex gap-4">
             <a
               className={buttonVariants({ variant: 'default' })}
+              data-umami-event={t('mainHeading')}
               target="_blank"
               href={t('downloadLink.url')}
             >
