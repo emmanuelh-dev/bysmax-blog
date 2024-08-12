@@ -43,6 +43,15 @@
       },
       "link": "/software/mathcad-prime-7",
       "linkText": "Ver"
+    },
+    {
+      "title": "PSeInt",
+      "description": "PSeInt es una herramienta para asistir a un estudiante en sus primeros pasos en programación.",
+      "badge": {
+        "label": "Software"
+      },
+      "link": "https://pseint.sourceforge.net/index.php?page=descargas.php",
+      "linkText": "Ver"
     }
   ],
   "contact": "Contáctanos",
