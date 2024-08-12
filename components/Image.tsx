@@ -23,11 +23,11 @@ const Image = ({ className, ...rest }: ImageProps) => {
 
   const modalContent = (
     <dialog
-      className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-75"
+      className="fixed left-0 top-0 z-[100] flex h-screen w-screen items-center justify-center bg-black bg-opacity-75"
       open={isModalOpen}
       onKeyDown={handleKeyDown}
     >
-      <div className="flex w-full flex-col items-center justify-center p-6">
+      <div className="-mt-20 flex w-full flex-col items-center justify-center p-6">
         <div className="flex w-full flex-col items-end justify-center p-6">
           <button
             className="inline-block text-left text-white"
@@ -39,7 +39,7 @@ const Image = ({ className, ...rest }: ImageProps) => {
           </button>
         </div>
 
-        <NextImage {...rest} className="max-h-[40rem] w-full object-contain" />
+        <NextImage {...rest} className="z-[100] max-h-[40rem] max-w-full object-contain" />
       </div>
     </dialog>
   )

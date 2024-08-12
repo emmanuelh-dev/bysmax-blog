@@ -45,13 +45,13 @@ export default function page() {
               src={'/static/images/compuertas.png'}
               width={1100}
               height={400}
-              alt="Una Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486"
+              alt="Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486"
             />
             <Image
               src={'/static/images/datashet-compuertas.jpg'}
               width={1100}
               height={400}
-              alt="Una Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
+              alt="Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
             />
           </div>
           {LOGICGATES.map((gate) => (

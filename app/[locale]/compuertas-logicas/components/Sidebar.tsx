@@ -7,7 +7,7 @@ import { buttonVariants } from '@/components/ui/button'
 export default function Sidebar({ children }: Props) {
   return (
     <div className="flex flex-col md:flex-row">
-      <aside className="sticky -top-4 z-[100] bg-white dark:bg-black md:max-w-[300px]">
+      <aside className="sticky -top-4 z-[88] bg-white dark:bg-black md:max-w-[300px]">
         <nav aria-label="Navegación de la barra lateral" className="sticky top-10">
           <ul className="flex flex-row-reverse space-y-2 overflow-x-auto lg:flex-col">
             <li>
