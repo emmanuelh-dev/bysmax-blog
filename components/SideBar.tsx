@@ -4,9 +4,27 @@ import Link from 'next/link'
 import React from 'react'
 import { buttonVariants } from './ui/button'
 
+const tagMap = {
+  proteus: {
+    text: 'Descargar Proteus',
+    link: '/software/proteus',
+  },
+  traccar: {
+    text: 'Curso Traccar',
+    link: '/traccar',
+  },
+  pseint: {
+    text: 'Descargar PSeInt',
+    link: '/software/pseint',
+  },
+}
+
 export default function Sidebar({ authorDetails, next, prev, content, locale }) {
   const { filePath, path, slug, date, title, tags, toc } = content
   const basePath = path.split('/')[0]
+
+  const matchedTag = tags.find((tag) => tagMap[tag.toLowerCase()])
+
   return (
     <div>
       <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
@@ -67,10 +85,11 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
       <footer>
         <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
           {/* Adds*/}
-          {tags.some((tag) => tag.toLowerCase() == 'proteus') ? (
-            <ProgramCard text="Descargar Proteus" link="/software/proteus" />
-          ) : tags.some((tag) => tag.toLowerCase() == 'traccar') ? (
-            <ProgramCard text="Curso traccar" link="/traccar" />
+          {matchedTag ? (
+            <ProgramCard
+              text={tagMap[matchedTag.toLowerCase()].text}
+              link={tagMap[matchedTag.toLowerCase()].link}
+            />
           ) : null}
           {tags && (
             <div className="py-4 xl:py-8">
