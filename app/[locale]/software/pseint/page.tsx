@@ -23,9 +23,9 @@ interface PageProps {
 }
 
 const images = [
-  { src: '/static/images/proteus/3.png', alt: 'Descargar Proteus Imagen Circuito' },
-  { src: '/static/images/virus-total-proteus.png', alt: 'Descargar Proteus Virus Total Image 1' },
-  { src: '/static/images/proteus/2.png', alt: 'Descargar Proteus Imagen Home' },
+  { src: '/static/images/pseint/1.jpg', alt: 'Descargar PseInt Imagen Circuito' },
+  { src: '/static/images/pseint/1.png', alt: 'Descargar PseInt Imagen Circuito' },
+  { src: '/static/images/pseint/2.jpg', alt: 'Descargar PseInt Imagen Home' },
 ]
 const jsonLd = [
   {
@@ -99,9 +99,9 @@ export default async function Page({ params: { locale } }: PageProps) {
             </Link>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex aspect-video justify-center">
           <NextImage
-            src="/static/images/proteus/3.png"
+            src={'/static/images/pseint/1.png'}
             alt={t('imageAlt')}
             width={800}
             height={800}
@@ -206,7 +206,7 @@ function Gallery({ gallery }) {
     <Carousel className="my-10 w-full overflow-hidden">
       <CarouselContent>
         {gallery.map((image, index) => (
-          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/4">
             <div className="p-1">
               <Image
                 src={image.src}
