@@ -1,0 +1,70 @@
+{
+  "title": "Descargar PSeInt gratis para PC",
+  "mainHeading": "Descargar PSeInt",
+  "description": "PSeInt es una herramienta educativa ideal para estudiantes que quieren aprender a programar a través de pseudocódigo. Con PSeInt, puedes crear, simular y depurar tus primeros algoritmos de manera sencilla y eficiente.",
+  "downloadNowButton": "Descargar Ahora",
+  "systemRequirementsButton": "Requisitos del sistema",
+  "imageSrc": "/static/images/pseint/pseint-logo.png",
+  "imageAlt": "PSeInt",
+  "imageWidth": 800,
+  "imageHeight": 800,
+  "gallery": "Galería",
+  "id": "requisitos",
+  "requirementsHeader": "Requisitos del sistema",
+  "resources": "Tutoriales",
+  "requirementsList": [
+    {
+      "title": "Sistema operativo",
+      "description": "PSeInt es compatible con Windows, macOS y Linux."
+    },
+    {
+      "title": "Procesador",
+      "description": "Se recomienda un procesador de 1 GHz o superior."
+    },
+    {
+      "title": "Memoria RAM",
+      "description": "Se recomienda al menos 1 GB de RAM."
+    },
+    {
+      "title": "Espacio en disco",
+      "description": "Se necesitan al menos 50 MB de espacio libre en disco."
+    }
+  ],
+  "downloadHeader": "Descarga PSeInt ahora",
+  "downloadDescription": "¡Empieza a aprender programación y a desarrollar tus habilidades con PSeInt hoy mismo! Haz clic en el botón de descarga para obtener la última versión.",
+  "downloadLink": {
+    "url": "https://pseint.sourceforge.net/index.php?page=descargas.php",
+    "text": "Descargar PSeInt"
+  },
+  "faqTitle": "Preguntas Frecuentes",
+  "faqDescription": "Aquí encontrarás las respuestas a las preguntas más comunes sobre PSeInt.",
+  "accordionItems": [
+    {
+      "section": "¿Qué es PSeInt?",
+      "content": [
+        "PSeInt es un software educativo diseñado para ayudar a los estudiantes a iniciarse en la programación mediante el uso de pseudocódigo. Es ampliamente utilizado por principiantes para entender los conceptos básicos de programación, ya que facilita la creación, simulación y depuración de algoritmos en un entorno sencillo y accesible."
+      ]
+    },
+    {
+      "section": "Características Principales de PSeInt",
+      "content": [
+        "Interfaz Intuitiva: PSeInt ofrece una interfaz simple y fácil de usar que es perfecta para quienes están comenzando en la programación.",
+        "Simulación de Algoritmos: Permite a los usuarios simular y depurar algoritmos, lo que ayuda a entender mejor el flujo de control y la lógica de programación.",
+        "Ayuda y Tutoriales Integrados: Incluye una amplia gama de tutoriales y documentación que guían a los estudiantes a través de los conceptos clave de programación.",
+        "Soporte Multiplataforma: PSeInt está disponible para Windows, macOS y Linux, lo que garantiza su accesibilidad para la mayoría de los estudiantes.",
+        "Lenguaje Pseudocódigo: Emplea un lenguaje de pseudocódigo que es fácil de entender y aprender, sirviendo como un puente entre la lógica algorítmica y los lenguajes de programación reales."
+      ]
+    },
+    {
+      "section": "¿Cómo Descargar PSeInt?",
+      "content": [
+        "Haz clic en el botón de descarga.",
+        "Descarga el instalador de PSeInt según tu sistema operativo.",
+        "Instálalo: Ejecuta el archivo descargado y sigue las instrucciones de instalación.",
+        "Inicia la aplicación: Una vez instalada, abre PSeInt y comienza a crear tus propios algoritmos."
+      ]
+    }
+  ],
+  "resourcesTitle": "Proyectos con PSeInt",
+  "resourcesDescription": "Explora proyectos educativos y ejemplos prácticos para aplicar tus conocimientos de programación con PSeInt. Aprende con ejercicios diseñados para mejorar tu comprensión y habilidad en la resolución de problemas."
+}

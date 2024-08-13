@@ -68,7 +68,7 @@ export default async function Software({ locale }) {
                   <div className="flex items-center justify-between">
                     <Badge variant={'outline'}>{card.badge.label}</Badge>
                     <Link
-                      href={`/${locale}/${card.link}`}
+                      href={card.link.startsWith('http') ? card.link : `/${locale}/${card.link}`}
                       className={buttonVariants({ variant: 'default' })}
                     >
                       {card.linkText}
