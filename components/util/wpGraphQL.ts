@@ -1,4 +1,6 @@
-export const getPosts = async ({ locale = 'es' }) => {
+import { graphqlToBlog } from './blogFormatter'
+
+export const getPosts = async ({ locale }) => {
   const response = await fetch('https://cdn.bysmax.com/index.php?graphql', {
     method: 'POST',
     headers: {
@@ -13,6 +15,13 @@ export const getPosts = async ({ locale = 'es' }) => {
               content
               date
               slug
+              authorId
+              excerpt
+              tags {
+                nodes {
+                  name
+                }
+              }
               categories {
                 nodes {
                   name
@@ -30,7 +39,9 @@ export const getPosts = async ({ locale = 'es' }) => {
   })
 
   const { data } = await response.json()
-  return data.posts.nodes
+  const posts = data.posts.nodes
+  const formattedPosts = posts.map((post) => graphqlToBlog({ post, locale }))
+  return formattedPosts
 }
 
 export const getPostBySlug = async (slug: string) => {

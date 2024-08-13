@@ -8,6 +8,7 @@ import Services from '@/components/Services'
 import { createTranslation } from './i18n/server'
 import dynamic from 'next/dynamic'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
+import getAllPosts from '@/lib/allPosts'
 
 const Blog = dynamic(() => import('./Main'), {
   loading: () => <SuspencePosts />,
@@ -15,16 +16,7 @@ const Blog = dynamic(() => import('./Main'), {
 })
 
 export default async function Page({ params: { locale } }) {
-  const images = ['/static/notes/01.png', '/static/notes/02.png']
-
-  function getRandom() {
-    return Math.floor(Math.random() * images.length)
-  }
-
-  const image = images[getRandom()]
-  const sortedPosts = sortPosts(allBlogs)
-  const posts = allCoreContent(sortedPosts)
-  const filteredPosts = posts.filter((p) => p.language === locale)
+  const posts = await getAllPosts({ locale })
 
   const { t } = await createTranslation(locale, 'home')
   return (
@@ -60,7 +52,7 @@ export default async function Page({ params: { locale } }) {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {/*siteMetadata.description*/}
           </p>
-          <Blog posts={filteredPosts} locale={locale} />
+          <Blog posts={posts} locale={locale} />
         </div>
       </section>
       <Services />

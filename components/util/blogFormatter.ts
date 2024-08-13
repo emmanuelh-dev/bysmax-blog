@@ -1,8 +1,13 @@
 import type { Blog, Authors } from 'contentlayer/generated'
 
-export function graphqlToBlog({ post }) {
-  console.log(post)
-  const { id, title, date, slug, authorId, tags, content } = post.postBy
+export function graphqlToBlog({ post, locale }) {
+  const { title, excerpt, date, slug, authorId, tags, content } = post
+
+  // Función para eliminar etiquetas HTML
+  const stripHTML = (htmlString: string) => {
+    return htmlString.replace(/<\/?[^>]+(>|$)/g, '')
+  }
+
   return {
     type: 'Blog',
     filePath: null,
@@ -12,17 +17,18 @@ export function graphqlToBlog({ post }) {
     title,
     tags: tags ? [...tags.nodes.map((tag) => tag.name)] : [],
     toc: [],
-    language: 'es',
+    language: locale,
     authors: ['default'],
     readingTime: null,
     content,
+    summary: excerpt ? stripHTML(excerpt) : '',
+    wpBlog: true,
     structuredData: [],
   } as unknown as Blog
 }
 
 export function graphqlToBlogAuthor({ author }) {
   const { id, name, email, description, url } = author.user
-  console.log(author)
   return [
     {
       id,

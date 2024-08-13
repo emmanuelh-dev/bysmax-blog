@@ -3,7 +3,6 @@ import 'katex/dist/katex.css'
 import { Metadata } from 'next'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Authors, Blog } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
@@ -13,6 +12,8 @@ import siteMetadata from '@/data/siteMetadata'
 import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import getAllPosts from '@/lib/allPosts'
+import { coreContent } from 'pliny/utils/contentlayer'
 
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
@@ -23,34 +24,6 @@ const layouts = {
   PostSimple,
   PostLayout,
   PostBanner,
-}
-
-async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): Promise<any> {
-  const dslug = decodeURI(slug.join('/'))
-  const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
-
-  if (!post) {
-    null
-  }
-
-  if (post?.series) {
-    const seriesPosts = allBlogs
-      .filter((p) => p.language === locale && p.series?.title === post.series?.title)
-      .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
-      .map((p) => {
-        return {
-          title: p.title,
-          slug: p.slug,
-          language: p.language,
-          isCurrent: p.slug === post.slug,
-        }
-      })
-    if (seriesPosts.length > 0) {
-      return { ...post, series: { ...post.series, posts: seriesPosts } }
-    }
-  }
-
-  return post
 }
 
 export async function generateMetadata({
@@ -114,9 +87,7 @@ export const generateStaticParams = async () => {
 export default async function Page({ params: { slug, locale } }: BlogPageProps) {
   const dslug = decodeURI(slug.join('/'))
   // Filter out drafts in production + locale filtering
-  const sortedCoreContents = allCoreContent(
-    sortPosts(allBlogs.filter((p) => p.language === locale))
-  )
+  const sortedCoreContents = await getAllPosts({ locale })
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === dslug)
   if (postIndex === -1) {
     return notFound()
@@ -124,8 +95,18 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = await getPostFromParams({ params: { slug, locale } })
+  let post = sortedCoreContents.filter((p) => p.language === locale).find((p) => p.slug === dslug)
+
+  if (!post) {
+    return notFound()
+  }
+
+  if (!post.wpBlog) {
+    post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+  }
+
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
+
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors
@@ -133,7 +114,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       .find((a) => a.slug.includes(author))
     return coreContent(authorResults as Authors)
   })
-  const mainContent = coreContent(post)
+  const mainContent = !post.wpBlog ? coreContent(post) : post
   const jsonLd = post.structuredData
   jsonLd['author'] = authorDetails.map((author) => {
     return {
@@ -144,6 +125,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
 
   const Layout = layouts[post.layout || defaultLayout]
 
+  post
   return (
     <>
       <script
@@ -157,7 +139,11 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
         prev={prev}
         params={{ locale: locale }}
       >
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        {!post.wpBlog ? (
+          <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+        )}
       </Layout>
     </>
   )
