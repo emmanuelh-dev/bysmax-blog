@@ -46,6 +46,10 @@ const Software = dynamic(() => import('@/components/software/Software'), {
   ssr: false,
 })
 
+const Gallery = dynamic(() => import('@/components/Gallery'), {
+  ssr: false,
+})
+
 export default async function Page({ params: { locale } }: PageProps) {
   const { t } = await createTranslation(locale, 'mathcad-prime-7')
 
@@ -83,7 +87,7 @@ export default async function Page({ params: { locale } }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-8 py-20 md:grid-cols-2">
         <div className="flex flex-col items-start justify-center">
           <h1 className="text-sm text-neutral-400">{t('title')}</h1>
           <p className="mb-4 text-6xl font-bold">{t('mainHeading')}</p>
@@ -102,7 +106,7 @@ export default async function Page({ params: { locale } }: PageProps) {
             </Link>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex aspect-video justify-center">
           <NextImage
             src="/static/images/mathcad/3.jpg"
             alt={t('imageAlt')}
@@ -199,29 +203,5 @@ export default async function Page({ params: { locale } }: PageProps) {
         <Recommended tags={['proteus']} locale={locale} />
       </section>
     </>
-  )
-}
-
-function Gallery({ gallery }) {
-  if (!gallery) return null
-
-  return (
-    <Carousel className="my-10 w-full overflow-hidden">
-      <CarouselContent>
-        {gallery.map((image, index) => (
-          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/3">
-            <div className="p-1">
-              <Image
-                src={image.src}
-                alt={image.alt || `Gallery image ${index + 1}`}
-                className="aspect-square object-cover"
-                width="1270"
-                height="300"
-              />
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
   )
 }

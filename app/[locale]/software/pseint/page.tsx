@@ -8,9 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import { genPageMetadata } from '@/app/[locale]/seo'
-import Image from '@/components/Image'
 import NextImage from 'next/image'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
@@ -58,6 +55,9 @@ const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
 
 const Software = dynamic(() => import('@/components/software/Software'), {
   loading: () => <Loading />,
+  ssr: false,
+})
+const Gallery = dynamic(() => import('@/components/Gallery'), {
   ssr: false,
 })
 
@@ -196,29 +196,5 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
       </section>
     </>
-  )
-}
-
-function Gallery({ gallery }) {
-  if (!gallery) return null
-
-  return (
-    <Carousel className="my-10 w-full overflow-hidden">
-      <CarouselContent>
-        {gallery.map((image, index) => (
-          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/4">
-            <div className="p-1">
-              <Image
-                src={image.src}
-                alt={image.alt || `Gallery image ${index + 1}`}
-                className="aspect-square object-cover"
-                width="1270"
-                height="300"
-              />
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
   )
 }
