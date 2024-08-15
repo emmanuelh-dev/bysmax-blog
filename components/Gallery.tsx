@@ -8,12 +8,12 @@ export default function Gallery({ gallery }) {
     <Carousel className="my-10 w-full overflow-hidden">
       <CarouselContent>
         {gallery.map((image, index) => (
-          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-1/2 lg:basis-1/4">
+          <CarouselItem key={index} className="basis-10/12 pl-1 md:basis-4/6 lg:basis-2/4">
             <div className="p-1">
               <Image
                 src={image.src}
                 alt={image.alt || `Gallery image ${index + 1}`}
-                className="aspect-square object-cover"
+                className="aspect-video object-cover"
                 width="1270"
                 height="300"
               />
