@@ -167,9 +167,9 @@ export default async function Page({ params: { locale } }: PageProps) {
                       <h3>{faq.section}</h3>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="text-sm">
+                      <ul className="text-base">
                         {faq.content.map((item, index) => (
-                          <li key={index} className="list-disc">
+                          <li key={index} className="list-disc py-2">
                             {item}
                           </li>
                         ))}
