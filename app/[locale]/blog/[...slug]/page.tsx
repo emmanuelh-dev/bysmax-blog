@@ -30,7 +30,8 @@ export async function generateMetadata({
   params: { slug, locale },
 }: BlogPageProps): Promise<Metadata | undefined> {
   const dslug = decodeURI(slug.join('/'))
-  const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
+  const sortedCoreContents = await getAllPosts({ locale })
+  const post = sortedCoreContents.find((p) => p.slug === dslug && p.language === locale) as Blog
   if (!post) {
     return
   }
