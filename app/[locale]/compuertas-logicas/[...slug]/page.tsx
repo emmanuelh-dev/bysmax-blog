@@ -164,7 +164,7 @@ export default async function Page({ params: { locale, slug } }: Props) {
         <h2 id="recommended-projects" className="text-2xl font-bold">
           Proyectos con {slug}
         </h2>
-        <Recommended tags={[slug]} locale={locale} />
+        <Recommended tags={slug} locale={locale} />
       </nav>
     </Sidebar>
   )
