@@ -9,6 +9,7 @@ import { createTranslation } from './i18n/server'
 import dynamic from 'next/dynamic'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
 import getAllPosts from '@/lib/allPosts'
+import Filter from '@/components/cursos/Filter'
 
 const Blog = dynamic(() => import('./Main'), {
   loading: () => <SuspencePosts />,
@@ -44,6 +45,8 @@ export default async function Page({ params: { locale } }) {
           src={'/static/notes/02.png'}
         />
       </section>
+      <Filter />
+
       <section className="py-12">
         <div className=" divide-gray-200 dark:divide-gray-700">
           <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
