@@ -9,7 +9,7 @@ const MAX_DISPLAY = 6
 
 export default function Home({ posts, locale, title = '', service = false, curso = false }) {
   return (
-    <div className="divide-y divide-gray-200 pt-12 dark:divide-gray-700">
+    <div className="divide-y divide-neutral-200 pt-12 dark:divide-neutral-700">
       <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {!posts.length && 'No posts found.'}
         {posts.slice(0, MAX_DISPLAY).map((post) => {
@@ -20,35 +20,39 @@ export default function Home({ posts, locale, title = '', service = false, curso
                 <div className="block w-full lg:col-span-2">
                   {images ? (
                     <Image
-                      className="aspect-[384/246] h-full bg-center object-cover"
+                      className="aspect-[384/246] h-full rounded-md bg-center object-cover"
                       width={600}
                       height={400}
                       src={images[0]}
                       alt="The Time Traveler's Notebook"
                     />
                   ) : (
-                    <div className="aspect-[384/246] h-full bg-amber-200 bg-center object-cover dark:bg-amber-400" />
+                    <div className="aspect-[384/246] h-full rounded-md bg-amber-200 bg-center object-cover dark:bg-amber-400" />
                   )}
                 </div>
                 <div className="-mt-20 flex w-full flex-col items-start justify-between p-4">
                   <div className="flex h-full w-full flex-col justify-between text-balance p-4">
                     <div>
-                      <div className="bg-black/50 p-2 text-white">
-                        <Link
-                          className="font-medium uppercase"
-                          href={`/${locale}/${service ? 'servicios' : curso ? 'cursos' : 'blog'}/${slug}`}
-                        >
-                          {title}
-                        </Link>
+                      <div className="rounded-md bg-black/50 p-2 text-white">
+                        <h3>
+                          <Link
+                            className="font-medium uppercase"
+                            href={`/${locale}/${service ? 'servicios' : curso ? 'cursos' : 'blog'}/${slug}`}
+                          >
+                            {title}
+                          </Link>
+                        </h3>
                       </div>
-                      <p className="mt-6 line-clamp-2 text-sm text-slate-600">{summary}</p>
+                      <p className="mt-6 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-200">
+                        {summary}
+                      </p>
                     </div>
                     {!service && !curso && (
                       <div className="mt-1 inline-flex items-center space-x-1">
                         {authors &&
                           authors.map((author) => (
                             <p
-                              className="text-xs font-medium text-gray-900 dark:text-gray-400"
+                              className="text-xs font-medium text-neutral-900 dark:text-neutral-400"
                               key={author}
                             >
                               {author}
@@ -56,7 +60,7 @@ export default function Home({ posts, locale, title = '', service = false, curso
                           ))}
 
                         <span aria-hidden="true">·</span>
-                        <div className="flex text-xs text-gray-500">
+                        <div className="flex text-xs text-neutral-500">
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                         </div>
                       </div>
