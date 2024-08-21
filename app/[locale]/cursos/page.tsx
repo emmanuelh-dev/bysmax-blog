@@ -1,10 +1,65 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { CloudIcon, CodeIcon, DatabaseIcon, GamepadIcon, SmartphoneIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import React, { useState } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+const categorias = [
+  { nombre: 'Todas', icono: CodeIcon },
+  { nombre: 'Web Development', icono: CodeIcon },
+  { nombre: 'Data Science', icono: DatabaseIcon },
+  { nombre: 'Mobile Development', icono: SmartphoneIcon },
+  { nombre: 'Cloud Computing', icono: CloudIcon },
+  { nombre: 'Game Development', icono: GamepadIcon },
+]
+
+const cursos = [
+  {
+    id: 1,
+    titulo: 'Introducción a React',
+    categoria: 'Web Development',
+    descripcion: 'Aprende los fundamentos de React',
+  },
+  {
+    id: 2,
+    titulo: 'Python para Data Science',
+    categoria: 'Data Science',
+    descripcion: 'Análisis de datos con Python',
+  },
+  {
+    id: 3,
+    titulo: 'Desarrollo de Apps con Flutter',
+    categoria: 'Mobile Development',
+    descripcion: 'Crea apps multiplataforma con Flutter',
+  },
+  {
+    id: 4,
+    titulo: 'AWS Fundamentals',
+    categoria: 'Cloud Computing',
+    descripcion: 'Fundamentos de Amazon Web Services',
+  },
+  {
+    id: 5,
+    titulo: 'Unity para Principiantes',
+    categoria: 'Game Development',
+    descripcion: 'Crea tu primer juego con Unity',
+  },
+  {
+    id: 6,
+    titulo: 'JavaScript Avanzado',
+    categoria: 'Web Development',
+    descripcion: 'Conceptos avanzados de JavaScript',
+  },
+]
+
 export default function Page() {
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
+
+  const cursosFiltrados =
+    categoriaSeleccionada === 'Todas'
+      ? cursos
+      : cursos.filter((curso) => curso.categoria === categoriaSeleccionada)
   return (
     <>
       <section className="py-12 md:py-16 lg:py-20">
@@ -35,53 +90,46 @@ export default function Page() {
         </div>
       </section>
       <section>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Categories</h2>
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Categorías</h2>
           <Link href="/#" className="text-sm font-medium hover:underline" prefetch={false}>
-            View All
+            Ver Todas
           </Link>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          <Link
-            href="/#"
-            className="hover:bg-accent hover:text-accent-foreground group flex flex-col items-center justify-center gap-2 rounded-lg bg-neutral-100 p-4 transition-colors dark:bg-neutral-900"
-            prefetch={false}
-          >
-            <CodeIcon className="h-8 w-8" />
-            <span className="text-sm font-medium">Web Development</span>
-          </Link>
-          <Link
-            href="/#"
-            className="hover:bg-accent hover:text-accent-foreground group flex flex-col items-center justify-center gap-2 rounded-lg bg-neutral-100 p-4 transition-colors dark:bg-neutral-900"
-            prefetch={false}
-          >
-            <DatabaseIcon className="h-8 w-8" />
-            <span className="text-sm font-medium">Data Science</span>
-          </Link>
-          <Link
-            href="/#"
-            className="hover:bg-accent hover:text-accent-foreground group flex flex-col items-center justify-center gap-2 rounded-lg bg-neutral-100 p-4 transition-colors dark:bg-neutral-900"
-            prefetch={false}
-          >
-            <SmartphoneIcon className="h-8 w-8" />
-            <span className="text-sm font-medium">Mobile Development</span>
-          </Link>
-          <Link
-            href="/#"
-            className="hover:bg-accent hover:text-accent-foreground group flex flex-col items-center justify-center gap-2 rounded-lg bg-neutral-100 p-4 transition-colors dark:bg-neutral-900"
-            prefetch={false}
-          >
-            <CloudIcon className="h-8 w-8" />
-            <span className="text-sm font-medium">Cloud Computing</span>
-          </Link>
-          <Link
-            href="/#"
-            className="hover:bg-accent hover:text-accent-foreground group flex flex-col items-center justify-center gap-2 rounded-lg bg-neutral-100 p-4 transition-colors dark:bg-neutral-900"
-            prefetch={false}
-          >
-            <GamepadIcon className="h-8 w-8" />
-            <span className="text-sm font-medium">Game Development</span>
-          </Link>
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {categorias.map((categoria) => {
+            const IconComponent = categoria.icono
+            return (
+              <button
+                key={categoria.nombre}
+                onClick={() => setCategoriaSeleccionada(categoria.nombre)}
+                className={`flex flex-col items-center justify-center gap-2 rounded-lg  ${
+                  categoriaSeleccionada === categoria.nombre
+                    ? 'bg-neutral-100 p-4 text-black transition-colors dark:bg-neutral-900 dark:text-white'
+                    : 'bg-neutral-900 p-4 text-white transition-colors dark:bg-neutral-100 dark:text-black'
+                }`}
+              >
+                <IconComponent className="h-8 w-8" />
+                <span className="text-sm font-medium">{categoria.nombre}</span>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+      <section className="mt-12">
+        <h2 className="mb-6 text-2xl font-bold">Cursos de {categoriaSeleccionada}</h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {cursosFiltrados.map((curso) => (
+            <Card key={curso.id} className="flex flex-col">
+              <CardHeader>
+                <CardTitle>{curso.titulo}</CardTitle>
+                <CardDescription>{curso.categoria}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p>{curso.descripcion}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
       <section className="bg-muted py-12 md:py-16 lg:py-20">
