@@ -48,3 +48,10 @@ input:-webkit-autofill:focus {
   display: flex;
   gap: 1rem;
 }
+.ez-toc-title-container{
+  display: flex;
+  justify-content: space-between;
+}
+.ez-toc-title-toggle{
+  display: none;
+}
