@@ -11,12 +11,8 @@ import { useParams } from 'next/navigation'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import dynamic from 'next/dynamic'
 
-const Navigation = dynamic(() => import('./NavigationMenu'), {
-  ssr: false,
-})
-const MobileNav = dynamic(() => import('./MobileNav'), {
-  ssr: false,
-})
+const Navigation = dynamic(() => import('./NavigationMenu'))
+const MobileNav = dynamic(() => import('./MobileNav'))
 const SearchButton = dynamic(() => import('./search/SearchButton'))
 
 export default function Component() {
