@@ -11,6 +11,7 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
 import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from './icons'
+import { CgSoftwareDownload } from 'react-icons/cg'
 
 interface SearchProviderProps {
   children: ReactNode
@@ -97,32 +98,18 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             ),
           },
           {
-            id: 'tags',
-            name: locale === fallbackLng ? 'Tags' : 'Tags',
+            id: 'software',
+            name: locale === fallbackLng ? 'Software' : 'Software',
             keywords: '',
-            shortcut: ['t'],
+            shortcut: ['s'],
             section: navigationSection,
-            perform: () => router.push(`/${locale}/tags`),
+            perform: () => router.push(`/${locale}/software`),
             icon: (
               <i>
-                <TagsIcon />
+                <CgSoftwareDownload />
               </i>
             ),
           },
-          {
-            id: 'projects',
-            name: locale === fallbackLng ? 'Projects' : 'Projets',
-            keywords: '',
-            shortcut: ['p'],
-            section: navigationSection,
-            perform: () => router.push(`/${locale}/projects`),
-            icon: (
-              <i>
-                <ProjectsIcon />
-              </i>
-            ),
-          },
-          ...authorsActions,
         ],
         onSearchDocumentsLoad(json) {
           return json

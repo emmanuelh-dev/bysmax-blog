@@ -32,7 +32,7 @@ export default function Filter() {
                 className={`flex flex-col items-center justify-center gap-2 rounded-lg  ${
                   categoriaSeleccionada === categoria.nombre
                     ? 'bg-neutral-100 p-4 text-black transition-colors dark:bg-neutral-900 dark:text-white'
-                    : 'bg-neutral-900 p-4 text-white transition-colors dark:bg-neutral-100 dark:text-black'
+                    : 'bg-neutral-900 p-4 text-white transition-colors dark:bg-white dark:text-black'
                 }`}
               >
                 <IconComponent className="h-8 w-8" />
