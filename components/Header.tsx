@@ -45,29 +45,27 @@ export default function Component() {
       </div>
       <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
         {isClient ? (
-          <>
-            {isDesktop ? (
-              <>
-                <Navigation />
-                {headerNavLinks
-                  .filter((link) => link.href !== '/')
-                  .map((link) => (
-                    <Link
-                      key={link.title}
-                      href={`/${locale}${link.href}`}
-                      className="font-medium text-gray-900 dark:text-gray-100"
-                    >
-                      {link.title}
-                    </Link>
-                  ))}
-              </>
-            ) : null}
-            {!isDesktop ? <MobileNav /> : null}
-          </>
+          isDesktop ? (
+            <>
+              <Navigation />
+              {headerNavLinks
+                .filter((link) => link.href !== '/')
+                .map((link) => (
+                  <Link
+                    key={link.title}
+                    href={`/${locale}${link.href}`}
+                    className="font-medium text-gray-900 dark:text-gray-100"
+                  >
+                    {link.title}
+                  </Link>
+                ))}
+            </>
+          ) : null
         ) : null}
         <SearchButton />
         <ThemeSwitch />
         <LangSwitch />
+        {isClient ? !isDesktop ? <MobileNav /> : null : null}
       </div>
     </header>
   )
