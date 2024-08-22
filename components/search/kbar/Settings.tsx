@@ -1,5 +1,5 @@
+import { Monitor, Moon, Sun } from 'lucide-react'
 import { SettingsIcon } from '../icons'
-import { Sun, Moon, Monitor } from '@/components/theme/icons'
 import LangButton from './LangButton'
 import ThemeButton from './ThemeButton'
 import { fallbackLng, secondLng } from 'app/[locale]/i18n/locales'
