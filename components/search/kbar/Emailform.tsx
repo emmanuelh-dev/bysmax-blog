@@ -25,7 +25,7 @@ const EmailForm: React.FC<EmailFormProps> = ({
   t,
 }) => (
   <>
-    <div className="ml-2 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
+    <div className="text-heading-400 ml-2 mt-5 flex flex-row items-center text-3xl font-semibold">
       <span>
         <MailIcon className="mr-1 h-6 w-6" />
       </span>

@@ -77,7 +77,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     router.push(resolvedUrl)
   }
 
-
   return (
     <>
       <KBarPortal>
