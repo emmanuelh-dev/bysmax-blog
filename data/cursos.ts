@@ -6,12 +6,13 @@ import {
   MapPin,
   SmartphoneIcon,
 } from 'lucide-react'
+import { FaPython } from 'react-icons/fa'
 
 export const categorias = [
   { nombre: 'Todas', icono: CodeIcon },
   { nombre: 'Electronica', icono: BatteryCharging },
   { nombre: 'Traccar / Tracking', icono: MapPin },
-  { nombre: 'Mobile Development', icono: SmartphoneIcon },
+  { nombre: 'Programacion', icono: FaPython },
   { nombre: 'Cloud Computing', icono: CloudIcon },
   { nombre: 'Game Development', icono: GamepadIcon },
 ]
@@ -29,6 +30,13 @@ export const cursos = [
     categoria: 'Traccar / Tracking',
     descripcion: 'Aprende las bases del tracking y ten tu propio servidor.',
     link: '/traccar',
+    icono: MapPin,
+  },
+  {
+    title: 'Curso de Python desde Cero',
+    categoria: 'Programacion',
+    descripcion: 'Aprende Python desde cero',
+    link: '/cursos/curso-de-python-basico',
     icono: MapPin,
   },
 ]

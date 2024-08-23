@@ -44,14 +44,6 @@ input:-webkit-autofill:focus {
   vertical-align: middle;
 }
 
-.wp-block-gallery-is-layout-flex {
-  display: flex;
-  gap: 1rem;
-}
-.ez-toc-title-container{
-  display: flex;
-  justify-content: space-between;
-}
-.ez-toc-title-toggle{
+#ez-toc-container{
   display: none;
 }
