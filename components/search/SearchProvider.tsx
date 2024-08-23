@@ -127,6 +127,54 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
           },
         ],
         onSearchDocumentsLoad(json) {
+          const software = [
+            {
+              id: 'proteus',
+              name: 'Descargar Proteus',
+              keywords: 'Proteus, descargar',
+              section: '',
+              subtitle:
+                'Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos.',
+              perform: () => router.push(`/${locale}/software/proteus`),
+            },
+            {
+              id: 'ni_multisim',
+              name: 'Descargar NI Multisim',
+              keywords: 'NI Multisim, descargar',
+              section: 'Electrónica',
+              subtitle:
+                'NI Multisim es un software de simulación SPICE para el diseño y análisis de circuitos electrónicos.',
+              perform: () => router.push(`/${locale}/software/ni_multisim`),
+            },
+            {
+              id: 'mathcad_14',
+              name: 'Descargar MathCAD 14',
+              keywords: 'MathCAD 14, descargar',
+              section: 'Matemáticas',
+              subtitle:
+                'MathCAD es una herramienta de cálculo técnico que permite realizar, analizar y compartir cálculos de ingeniería.',
+              perform: () => router.push(`/${locale}/software/mathcad-14`),
+            },
+            {
+              id: 'mathcad_prime_7',
+              name: 'Descargar MathCAD Prime 7',
+              keywords: 'MathCAD Prime 7, descargar',
+              section: 'Matemáticas',
+              subtitle:
+                'MathCAD es una herramienta de cálculo técnico que permite realizar, analizar y compartir cálculos de ingeniería.',
+              perform: () => router.push(`/${locale}/software/mathcad-prime-7`),
+            },
+            {
+              id: 'pseint',
+              name: 'Descargar PSeInt',
+              keywords: 'PSeInt, descargar',
+              section: 'Software',
+              subtitle:
+                'PSeInt es una herramienta para asistir a un estudiante en sus primeros pasos en programación.',
+              perform: () => router.push(`/${locale}/software/pseint`),
+            },
+          ]
+
           const docs = json
             .filter((post: CoreContent<Blog>) => post.language === locale)
             .map((post: CoreContent<Blog>) => ({
@@ -137,7 +185,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
               subtitle: post.tags.join(', '),
               perform: () => router.push(`/${locale}/blog/${post.slug}`),
             }))
-          return docs
+          return [...docs, ...software]
         },
       }}
     >
