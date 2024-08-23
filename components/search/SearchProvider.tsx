@@ -10,8 +10,9 @@ import { Blog } from 'contentlayer/generated'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
-import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from './icons'
+import { HomeIcon, BlogIcon, AboutIcon } from './icons'
 import { CgSoftwareDownload } from 'react-icons/cg'
+import { FaPython } from 'react-icons/fa'
 
 interface SearchProviderProps {
   children: ReactNode
@@ -65,6 +66,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
   ]
   /* issue when using regular translations, this is a workaround to show how to implement section titles */
   const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
+
   return (
     <KBarSearchProvider
       kbarConfig={{
@@ -110,9 +112,22 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
               </i>
             ),
           },
+          {
+            id: 'cursos',
+            name: locale === fallbackLng ? 'Cursos' : 'Cursos',
+            keywords: '',
+            shortcut: ['s'],
+            section: navigationSection,
+            perform: () => router.push(`/${locale}/software`),
+            icon: (
+              <i>
+                <FaPython />
+              </i>
+            ),
+          },
         ],
         onSearchDocumentsLoad(json) {
-          return json
+          const docs = json
             .filter((post: CoreContent<Blog>) => post.language === locale)
             .map((post: CoreContent<Blog>) => ({
               id: post.path,
@@ -122,6 +137,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
               subtitle: post.tags.join(', '),
               perform: () => router.push(`/${locale}/blog/${post.slug}`),
             }))
+          return docs
         },
       }}
     >
