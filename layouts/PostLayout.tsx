@@ -32,17 +32,11 @@ interface LayoutProps {
   children: ReactNode
 }
 
-const Recommended = dynamic(() => import('./components/Recomended'), {
-  loading: () => <SuspencePosts />,
-  ssr: false,
-})
 const Sidebar = dynamic(() => import('@/components/SideBar'), {
   loading: () => <Lazy />,
-  ssr: false,
 })
 const SideTOC = dynamic(() => import('@/components/sidetoc'), {
   loading: () => <Lazy />,
-  ssr: false,
 })
 
 export default async function PostLayout({
@@ -118,7 +112,6 @@ export default async function PostLayout({
               {/*siteMetadata.description*/}
             </p>
           </div>
-          <Recommended tags={tags} locale={locale} />
         </div>
       </div>
       <SideTOC toc={toc} />
