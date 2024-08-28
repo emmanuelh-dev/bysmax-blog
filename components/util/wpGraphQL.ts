@@ -17,6 +17,11 @@ export const getPosts = async ({ locale }) => {
               slug
               authorId
               excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
               tags {
                 nodes {
                   name

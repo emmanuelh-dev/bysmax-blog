@@ -50,7 +50,7 @@ export default async function PostLayout({
 }: LayoutProps) {
   const { filePath, path, slug, date, title, tags, toc, summary, images } = content
   const { t } = await createTranslation(locale, 'post')
-  const image = images.lenght > 0 ? images[0] : '/static/images/twitter-card.png'
+  const image = images ? images[0] : '/static/images/twitter-card.png'
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
@@ -73,13 +73,13 @@ export default async function PostLayout({
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+          <div className="grid-rows-[auto_1fr] pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
+            <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
               <p className="py-12">{summary}</p>
               <div>
                 <Image
                   src={image}
-                  className="aspect-video object-cover"
+                  className="aspect-video rounded-md object-cover"
                   alt="Post Banner"
                   width={1000}
                   height={100}
@@ -87,7 +87,7 @@ export default async function PostLayout({
               </div>
               <div>
                 <ins
-                  className="adsbygoogle h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+                  className="adsbygoogle mt-16 h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="6395288197"

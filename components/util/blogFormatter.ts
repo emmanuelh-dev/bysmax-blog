@@ -2,7 +2,7 @@ import type { Blog, Authors } from 'contentlayer/generated'
 import { TocItem } from 'pliny/mdx-plugins/remark-toc-headings'
 
 export function graphqlToBlog({ post, locale }) {
-  const { title, excerpt, date, slug, authorId, tags, content } = post
+  const { title, excerpt, date, slug, authorId, tags, content, featuredImage } = post
 
   // Función para eliminar etiquetas HTML
   const stripHTML = (htmlString: string) => {
@@ -49,7 +49,7 @@ export function graphqlToBlog({ post, locale }) {
     authors: ['default'],
     readingTime: null,
     content,
-    images: [],
+    images: featuredImage ? [featuredImage.node.sourceUrl] : null,
     summary: excerpt ? stripHTML(excerpt) : '',
     wpBlog: true,
     structuredData: [],

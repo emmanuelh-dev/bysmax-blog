@@ -14,7 +14,7 @@ export default function Home({ posts, locale, title = '', service = false, curso
         {!posts.length && 'No posts found.'}
         {posts.slice(0, MAX_DISPLAY).map((post) => {
           const { slug, date, title, summary, tags, cover, authors, images } = post
-          const image = images?.lenght > 0 ? images[0] : '/static/images/twitter-card.png'
+          const image = images ? images[0] : '/static/images/twitter-card.png'
 
           return (
             <li key={slug}>
