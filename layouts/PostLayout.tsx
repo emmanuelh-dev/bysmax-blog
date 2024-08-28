@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import SuspencePosts from './components/SuspencePosts'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import { createTranslation } from '@/app/[locale]/i18n/server'
+import Image from 'next/image'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -47,8 +48,9 @@ export default async function PostLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, toc } = content
+  const { filePath, path, slug, date, title, tags, toc, summary, images } = content
   const { t } = await createTranslation(locale, 'post')
+  const image = images.lenght > 0 ? images[0] : '/static/images/twitter-card.png'
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
@@ -73,6 +75,16 @@ export default async function PostLayout({
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+              <p className="py-12">{summary}</p>
+              <div>
+                <Image
+                  src={image}
+                  className="aspect-video object-cover"
+                  alt="Post Banner"
+                  width={1000}
+                  height={100}
+                />
+              </div>
               <div>
                 <ins
                   className="adsbygoogle h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"

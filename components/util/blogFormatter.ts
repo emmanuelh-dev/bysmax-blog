@@ -49,6 +49,7 @@ export function graphqlToBlog({ post, locale }) {
     authors: ['default'],
     readingTime: null,
     content,
+    images: [],
     summary: excerpt ? stripHTML(excerpt) : '',
     wpBlog: true,
     structuredData: [],

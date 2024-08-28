@@ -14,6 +14,8 @@ export default function Home({ posts, locale, title = '', service = false, curso
         {!posts.length && 'No posts found.'}
         {posts.slice(0, MAX_DISPLAY).map((post) => {
           const { slug, date, title, summary, tags, cover, authors, images } = post
+          const image = images.lenght > 0 ? images[0] : '/static/images/twitter-card.png'
+
           return (
             <li key={slug}>
               <article className="h-full flex-1">
@@ -23,7 +25,7 @@ export default function Home({ posts, locale, title = '', service = false, curso
                       className="aspect-[384/246] h-full rounded-md bg-center object-cover"
                       width={600}
                       height={400}
-                      src={images[0]}
+                      src={image}
                       alt="The Time Traveler's Notebook"
                     />
                   ) : (
