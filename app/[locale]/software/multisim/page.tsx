@@ -122,6 +122,16 @@ export default async function Page({ params: { locale } }: PageProps) {
           <Gallery gallery={images} />
         </div>
       </section>
+      <section>
+        <ins
+          className="adsbygoogle h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-3646138644530578"
+          data-ad-slot="6395288197"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </section>
       <section className="py-12 md:py-24 lg:py-32" id="requisitos">
         <div>
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
