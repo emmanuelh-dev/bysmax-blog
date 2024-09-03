@@ -75,16 +75,6 @@ export default async function PostLayout({
           </header>
           <div className="grid-rows-[auto_1fr] pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <p className="py-12">{summary}</p>
-              <div>
-                <Image
-                  src={image}
-                  className="aspect-video rounded-md object-cover"
-                  alt="Post Banner"
-                  width={1000}
-                  height={100}
-                />
-              </div>
               <div>
                 <ins
                   className="adsbygoogle mt-16 h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
