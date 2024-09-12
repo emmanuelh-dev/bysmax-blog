@@ -57,10 +57,6 @@ const jsonLd = [
   },
 ]
 
-const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
-  loading: () => <SuspencePosts />,
-})
-
 const Software = dynamic(() => import('@/components/software/Software'), {
   loading: () => <Loading />,
   ssr: false,
@@ -181,7 +177,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </div>
       </section>
-      <section id="resources" className="bg-muted py-12 md:py-24 lg:py-32">
+      {/* <section id="resources" className="bg-muted py-12 md:py-24 lg:py-32">
         <div className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -192,7 +188,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           <div className="grid md:grid-cols-2" />
         </div>
         <Recommended tags={['proteus']} locale={locale} />
-      </section>
+      </section> */}
     </>
   )
 }
