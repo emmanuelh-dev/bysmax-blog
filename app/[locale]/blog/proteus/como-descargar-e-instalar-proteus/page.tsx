@@ -59,7 +59,6 @@ const jsonLd = [
 
 const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
   loading: () => <SuspencePosts />,
-  ssr: false,
 })
 
 const Software = dynamic(() => import('@/components/software/Software'), {
