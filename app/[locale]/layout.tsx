@@ -14,7 +14,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Script from 'next/script'
 import Metrics from './metrics'
 import { LocaleTypes } from './i18n/settings'
-import dynamic from 'next/dynamic'
+import Footer from '@/components/Footer'
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
@@ -107,5 +107,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-const Footer = dynamic(() => import('@/components/Footer'), { ssr: false })
