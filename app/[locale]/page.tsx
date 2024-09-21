@@ -6,15 +6,9 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { buttonVariants } from '@/components/ui/button'
 import Services from '@/components/Services'
 import { createTranslation } from './i18n/server'
-// import dynamic from 'next/dynamic'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
 import getAllPosts from '@/lib/allPosts'
 import Filter from '@/components/cursos/Filter'
-
-// const Blog = dynamic(() => import('./Main'), {
-//   loading: () => <SuspencePosts />,
-//   ssr: false,
-// })
 
 export default async function Page({ params: { locale } }) {
   const posts = await getAllPosts({ locale })
@@ -49,7 +43,6 @@ export default async function Page({ params: { locale } }) {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {/*siteMetadata.description*/}
           </p>
-          {/* <Blog posts={posts} locale={locale} /> */}
         </div>
       </section>
       <Services />
