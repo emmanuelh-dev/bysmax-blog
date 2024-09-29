@@ -54,6 +54,16 @@ export default function page() {
               alt="Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
             />
           </div>
+          <div>
+            <ins
+              className="adsbygoogle my-6 h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-3646138644530578"
+              data-ad-slot="6395288197"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </div>
           {LOGICGATES.map((gate) => (
             <div key={gate.heading} className="space-y-4 pt-4">
               <article>
