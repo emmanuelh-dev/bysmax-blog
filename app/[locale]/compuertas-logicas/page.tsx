@@ -38,7 +38,7 @@ export default function page() {
     <SectionContainerWithAds>
       <Sidebar>
         <div>
-          <h1 className="text-4xl font-bold">
+          <h1 className="pb-8 text-4xl font-bold">
             Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486
           </h1>
           <div className="gap-8 md:flex">
