@@ -4,10 +4,10 @@ interface Props {
 import { LOGICGATES } from '@/data/logic-gates'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
-import SectionContainer from '@/components/SectionContainer'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 export default function Sidebar({ children }: Props) {
   return (
-    <SectionContainer>
+    <div>
       <div className="flex flex-col md:flex-row">
         <aside className="sticky -top-4 z-[88] bg-white dark:bg-black md:max-w-[300px]">
           <nav aria-label="Navegación de la barra lateral" className="sticky top-10">
@@ -31,22 +31,10 @@ export default function Sidebar({ children }: Props) {
                 </li>
               ))}
             </ul>
-            <div className="sticky top-10 mt-6">
-              <ins
-                className="adsbygoogle"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="9734184827"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-                aria-hidden="true"
-              ></ins>
-            </div>
           </nav>
         </aside>
-
         <main className="w-full flex-1 space-y-4 p-4">{children}</main>
       </div>
-    </SectionContainer>
+    </div>
   )
 }

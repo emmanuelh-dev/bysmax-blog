@@ -12,6 +12,7 @@ import React from 'react'
 import { LOGICGATES } from '@/data/logic-gates'
 import Sidebar from './components/Sidebar'
 import { genPageMetadata } from '@/app/[locale]/seo'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 
 export const metadata = genPageMetadata({
   title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
@@ -34,7 +35,7 @@ export const metadata = genPageMetadata({
 
 export default function page() {
   return (
-    <div>
+    <SectionContainerWithAds>
       <Sidebar>
         <div>
           <h1 className="text-4xl font-bold">
@@ -190,6 +191,6 @@ export default function page() {
           </div>
         </div>
       </Sidebar>
-    </div>
+    </SectionContainerWithAds>
   )
 }
