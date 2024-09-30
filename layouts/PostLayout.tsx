@@ -73,7 +73,16 @@ export default async function PostLayout({
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
+          <div className="b-8 grid-rows-[auto_1fr] dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 ">
+            <div className="hidden xl:block">
+              <Sidebar
+                authorDetails={authorDetails}
+                next={next}
+                prev={prev}
+                content={content}
+                locale={locale}
+              />
+            </div>
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div>
                 <ins
@@ -94,13 +103,6 @@ export default async function PostLayout({
                 <Link href={editUrl(filePath)}>Editar en Github</Link>
               </div>
             </div>
-            <Sidebar
-              authorDetails={authorDetails}
-              next={next}
-              prev={prev}
-              content={content}
-              locale={locale}
-            />
           </div>
         </div>
       </article>
