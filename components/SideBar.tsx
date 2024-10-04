@@ -26,7 +26,7 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
   const matchedTag = tags.find((tag) => tagMap[tag.toLowerCase()])
 
   return (
-    <div>
+    <div className="h-full">
       <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
         <dt className="sr-only">Authors</dt>
         <dd>
@@ -137,16 +137,14 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
             &larr; Back to the blog
           </Link>
         </div>
-        {/* <div className="sticky top-0 pt-10">
-          <ins
-            className="adsbygoogle sticky top-10 mt-6"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="9734184827"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div> */}
+        <ins
+          className="adsbygoogle sticky top-10 mt-6"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-3646138644530578"
+          data-ad-slot="9734184827"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
       </footer>
     </div>
   )
