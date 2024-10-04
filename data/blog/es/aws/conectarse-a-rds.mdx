@@ -1,0 +1,89 @@
+---
+title: 'Cómo Conectarte a una Base de Datos MySQL de Amazon RDS desde Ubuntu'
+date: '2024-10-03'
+tags: ['aws', 'tecmilenio']
+draft: false
+authors: ['emmanuelhdev', 'ale', 'default']
+language: es
+summary: '¡Bienvenidos al nuevo blog de bysmax!'
+---
+
+Si tienes una instancia de MySQL en Amazon RDS y estás trabajando en un entorno Ubuntu, te mostraré paso a paso cómo puedes conectarte a esa base de datos desde tu terminal. Ya sea para realizar consultas directamente o conectarte desde una aplicación, estos pasos te guiarán en el proceso.
+
+## Paso 1: Instalar el Cliente MySQL
+
+Lo primero que necesitas es asegurarte de que tienes instalado el cliente MySQL en tu sistema. Este cliente te permitirá conectarte a tu base de datos de manera fácil desde la línea de comandos.
+
+Abre la terminal y ejecuta los siguientes comandos para instalar el cliente MySQL en Ubuntu:
+
+```bash
+sudo apt update
+sudo apt install mysql-client
+```
+
+Con esto, tendrás todo lo necesario para poder establecer la conexión con tu instancia de RDS.
+
+## Paso 2: Obtener la Información de Conexión
+
+Para conectarte a tu base de datos en Amazon RDS, necesitarás algunos datos importantes. Estos datos los puedes encontrar en la consola de administración de AWS en la sección de **RDS**:
+
+- **Endpoint de la base de datos**: Esto es básicamente la URL de tu instancia de RDS.
+- **Puerto**: El puerto por defecto de MySQL es `3306`, a menos que hayas configurado otro puerto.
+- **Nombre de usuario**: El usuario que configuraste al crear la base de datos.
+- **Contraseña**: La contraseña correspondiente al usuario.
+- **Nombre de la base de datos**: Si tienes varias bases de datos dentro de la instancia, asegúrate de saber a cuál quieres conectarte.
+
+## Paso 3: Configurar el Acceso a la Base de Datos
+
+Antes de conectarte, es importante asegurarte de que tu instancia de Amazon RDS permite conexiones desde tu máquina local. Para esto, debes verificar las **Reglas del Grupo de Seguridad** asociado a tu instancia RDS:
+
+1. Ve a la consola de AWS.
+2. Dirígete a **RDS** > **Databases** y selecciona tu base de datos.
+3. Encuentra el grupo de seguridad asignado y verifica sus reglas de entrada.
+4. Asegúrate de que el puerto `3306` esté abierto y que se permita el acceso desde tu dirección IP.
+
+Si no configuras esto correctamente, recibirás errores al intentar conectarte, ya que el tráfico será bloqueado por el firewall.
+
+## Paso 4: Conectarte a la Base de Datos
+
+Con la información correcta y los permisos configurados, ya puedes conectarte a tu base de datos MySQL en Amazon RDS. Usa el siguiente comando en tu terminal:
+
+```bash
+mysql -h <endpoint-de-la-base-de-datos> -P 3306 -u <nombre-de-usuario> -p
+```
+
+### Explicación:
+- **-h**: Define el host, que en este caso es el **endpoint** de tu instancia de RDS.
+- **-P**: Indica el puerto de conexión, en este caso `3306`.
+- **-u**: Especifica el usuario de MySQL que quieres usar.
+- **-p**: Este indicador te pedirá la contraseña del usuario que introduzcas.
+
+#### Ejemplo práctico:
+
+```bash
+mysql -h mydb.abcdefg12345.rds.amazonaws.com -P 3306 -u admin -p
+```
+
+Al ejecutar el comando, te pedirá la contraseña del usuario `admin`. Una vez introducida, estarás conectado a tu base de datos MySQL en Amazon RDS desde tu terminal de Ubuntu.
+
+## Paso 5: Conectar Desde una Aplicación
+
+Si en lugar de conectarte directamente desde la terminal, prefieres hacerlo desde una aplicación (como un proyecto en PHP, Node.js, o Python), simplemente utiliza el **endpoint**, **usuario**, **contraseña**, y **puerto** que ya obtuviste para configurar la conexión en tu código.
+
+Aquí te dejo un ejemplo rápido en PHP:
+
+```php
+$servername = "mydb.abcdefg12345.rds.amazonaws.com";
+$username = "admin";
+$password = "yourpassword";
+$dbname = "mibasededatos";
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+echo "Conectado exitosamente";
+```

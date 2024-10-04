@@ -137,16 +137,16 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
             &larr; Back to the blog
           </Link>
         </div>
-        {/* <div className="sticky top-0 pt-10">
+        <div className="sticky top-0 pt-10">
           <ins
             className="adsbygoogle sticky top-10 mt-6"
             style={{ display: 'block' }}
             data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="9734184827"
+            data-ad-slot="6395288197"
             data-ad-format="auto"
             data-full-width-responsive="true"
           ></ins>
-        </div> */}
+        </div>
       </footer>
     </div>
   )
