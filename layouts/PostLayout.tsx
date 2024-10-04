@@ -74,7 +74,7 @@ export default async function PostLayout({
             </div>
           </header>
           <div className="b-8 grid-rows-[auto_1fr] dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 ">
-            <div className="hidden h-full xl:block">
+            <div className="hidden xl:block">
               <Sidebar
                 authorDetails={authorDetails}
                 next={next}
