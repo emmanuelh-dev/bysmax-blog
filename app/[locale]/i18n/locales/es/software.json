@@ -1,5 +1,5 @@
 {
-  "title": "Programas gratis para Windows para estudiantes de ingeniería",
+  "title": "Programas gratis para Windows para estudiantes de ingeniería y creativos",
   "heading": "Gratis hoy y siempre.",
   "description": "Encuentra programas como Proteus, MATLAB, MathCAD, Multisim, entre otros, gratis.",
 
@@ -51,6 +51,57 @@
         "label": "Software"
       },
       "link": "/software/pseint",
+      "linkText": "Ver"
+    }
+  ],
+  "softwaresTitleCreativos": "Programas para creativos",
+  "softawreDescriptionCreativos": "Elige el que mejor se adapte a tus necesidades con las mejores herramientas de diseño, edición y creatividad.",
+  "allCreativos": "Todos",
+  "showCreativos": "Ver Programas",
+  "cardsCreativos": [
+    {
+      "title": "Adobe Photoshop",
+      "description": "Adobe Photoshop es una herramienta líder en edición de imágenes y diseño gráfico.",
+      "badge": {
+        "label": "Diseño Gráfico"
+      },
+      "link": "/software/photoshop",
+      "linkText": "Ver"
+    },
+    {
+      "title": "Adobe Illustrator",
+      "description": "Adobe Illustrator es una herramienta de ilustración vectorial utilizada para crear gráficos escalables.",
+      "badge": {
+        "label": "Ilustración"
+      },
+      "link": "/software/illustrator",
+      "linkText": "Ver"
+    },
+    {
+      "title": "DaVinci Resolve",
+      "description": "DaVinci Resolve es un software de edición de video profesional que incluye herramientas de corrección de color.",
+      "badge": {
+        "label": "Edición de Video"
+      },
+      "link": "/software/davinci-resolve",
+      "linkText": "Ver"
+    },
+    {
+      "title": "Affinity Designer",
+      "description": "Affinity Designer es una herramienta de diseño gráfico vectorial rápida y fluida.",
+      "badge": {
+        "label": "Diseño Gráfico"
+      },
+      "link": "/software/affinity-designer",
+      "linkText": "Ver"
+    },
+    {
+      "title": "CorelDRAW",
+      "description": "CorelDRAW es una aplicación de gráficos vectoriales utilizada para diseño gráfico profesional.",
+      "badge": {
+        "label": "Ilustración"
+      },
+      "link": "/software/coreldraw",
       "linkText": "Ver"
     }
   ],
