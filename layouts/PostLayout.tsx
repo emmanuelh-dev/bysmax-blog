@@ -131,16 +131,14 @@ export default async function PostLayout({
                   &larr; Back to the blog
                 </Link>
               </div>
-              <div className="sticky top-0 pt-10">
-                <ins
-                  className="adsbygoogle sticky top-8 mt-6  w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-3646138644530578"
-                  data-ad-slot="6395288197"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
-              </div>
+              <ins
+                className="adsbygoogle sticky top-10 mt-6 w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-3646138644530578"
+                data-ad-slot="6395288197"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
             </footer>
           </div>
         </div>
