@@ -12,6 +12,8 @@ import SuspencePosts from './components/SuspencePosts'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import Image from 'next/image'
+import Tag from '@/components/Tag'
+import { buttonVariants } from '@/components/ui/button'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
 const discussUrl = (path) =>
@@ -40,6 +42,21 @@ const SideTOC = dynamic(() => import('@/components/sidetoc'), {
   loading: () => <Lazy />,
 })
 
+const tagMap = {
+  proteus: {
+    text: 'Descargar Proteus',
+    link: '/software/proteus',
+  },
+  traccar: {
+    text: 'Curso Traccar',
+    link: '/traccar',
+  },
+  pseint: {
+    text: 'Descargar PSeInt',
+    link: '/software/pseint',
+  },
+}
+
 export default async function PostLayout({
   params: { locale },
   content,
@@ -51,6 +68,9 @@ export default async function PostLayout({
   const { filePath, path, slug, date, title, tags, toc, summary, images } = content
   const { t } = await createTranslation(locale, 'post')
   const image = images ? images[0] : '/static/images/twitter-card.png'
+  const matchedTag = false
+  const basePath = path.split('/')[0]
+
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
@@ -74,15 +94,13 @@ export default async function PostLayout({
             </div>
           </header>
           <div className="b-8 grid-rows-[auto_1fr] dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 ">
-            <div className="hidden xl:block">
-              <Sidebar
-                authorDetails={authorDetails}
-                next={next}
-                prev={prev}
-                content={content}
-                locale={locale}
-              />
-            </div>
+            <Sidebar
+              authorDetails={authorDetails}
+              next={next}
+              prev={prev}
+              content={content}
+              locale={locale}
+            />
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div>
                 <ins
@@ -103,6 +121,27 @@ export default async function PostLayout({
                 <Link href={editUrl(filePath)}>Editar en Github</Link>
               </div>
             </div>
+            <footer>
+              <div className="pt-4 xl:pt-8">
+                <Link
+                  href={`/${basePath}`}
+                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  aria-label="Back to the blog"
+                >
+                  &larr; Back to the blog
+                </Link>
+              </div>
+              <div className="sticky top-0 pt-10">
+                <ins
+                  className="adsbygoogle sticky top-8 mt-6"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-3646138644530578"
+                  data-ad-slot="6395288197"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
+              </div>
+            </footer>
           </div>
         </div>
       </article>
@@ -128,4 +167,9 @@ const Lazy = () => (
     <div className="aspect-video w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
     <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
   </div>
+)
+const ProgramCard = async ({ text, link }) => (
+  <Link href={link} className={`${buttonVariants({ variant: 'default' })} my-6 block w-full py-3`}>
+    {text}
+  </Link>
 )

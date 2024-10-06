@@ -26,7 +26,7 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
   const matchedTag = tags.find((tag) => tagMap[tag.toLowerCase()])
 
   return (
-    <div>
+    <div className="hidden h-full xl:block">
       <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
         <dt className="sr-only">Authors</dt>
         <dd>
@@ -82,72 +82,6 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
           </ul>
         </dd>
       </dl>
-      <footer>
-        <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-          {/* Adds*/}
-          {matchedTag ? (
-            <ProgramCard
-              text={tagMap[matchedTag.toLowerCase()].text}
-              link={tagMap[matchedTag.toLowerCase()].link}
-            />
-          ) : null}
-          {tags && (
-            <div className="py-4 xl:py-8">
-              <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                Tags
-              </h2>
-              <div className="flex flex-wrap">
-                {tags.map((tag) => (
-                  <Tag key={tag} text={tag} />
-                ))}
-              </div>
-            </div>
-          )}
-          {(next || prev) && (
-            <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-              {prev && prev.slug && (
-                <div>
-                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Previous Article
-                  </h2>
-                  <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
-                  </div>
-                </div>
-              )}
-              {next && next.slug && (
-                <div>
-                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Next Article
-                  </h2>
-                  <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-        <div className="pt-4 xl:pt-8">
-          <Link
-            href={`/${basePath}`}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="Back to the blog"
-          >
-            &larr; Back to the blog
-          </Link>
-        </div>
-        <div className="sticky top-0 pt-10">
-          <ins
-            className="adsbygoogle sticky top-10 mt-6"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="6395288197"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div>
-      </footer>
     </div>
   )
 }
