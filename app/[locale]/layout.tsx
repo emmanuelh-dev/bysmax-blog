@@ -3,7 +3,7 @@ import 'pliny/search/algolia.css'
 
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider } from '@/components/search/SearchProvider'
+import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
@@ -82,27 +82,28 @@ export default function RootLayout({
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-      <meta name="google-adsense-account" content="ca-pub-3646138644530578"></meta>
-      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+      <meta name="google-adsense-account" content="ca-pub-3646138644530578" />
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
         crossOrigin="anonymous"
       ></Script>
-      <body className="overflow-x-hidden bg-white text-black antialiased dark:bg-black dark:text-white">
+      <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+      <body className="text-md bg-white text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SpeedInsights />
           <VercelAnalytics />
+          <SpeedInsights />
           <SectionContainer>
-            <SearchProvider>
-              <Header />
-              <main className="mb-auto">{children}</main>
+            <div className="flex h-screen flex-col justify-between font-sans">
+              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                <Header />
+                <main className="mb-auto">{children}</main>
+              </SearchProvider>
               <Footer />
-            </SearchProvider>
+            </div>
           </SectionContainer>
         </ThemeProviders>
-        <Metrics />
       </body>
     </html>
   )
