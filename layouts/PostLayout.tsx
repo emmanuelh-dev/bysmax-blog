@@ -2,20 +2,15 @@ import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
+import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
-import { SectionContainerWithAds } from '@/components/SectionContainer'
+import SectionContainer, { SectionContainerWithAds } from '@/components/SectionContainer'
+import Image from '@/components/Image'
+import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import SuspencePosts from './components/SuspencePosts'
-import { LocaleTypes } from '@/app/[locale]/i18n/settings'
-import { createTranslation } from '@/app/[locale]/i18n/server'
-import Image from 'next/image'
-import Tag from '@/components/Tag'
-import { buttonVariants } from '@/components/ui/button'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/edit/main/data/${path}`
+const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
 
@@ -27,7 +22,6 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 }
 
 interface LayoutProps {
-  params: { locale: LocaleTypes }
   content: CoreContent<Blog>
   authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
@@ -35,40 +29,8 @@ interface LayoutProps {
   children: ReactNode
 }
 
-const Sidebar = dynamic(() => import('@/components/SideBar'), {
-  loading: () => <Lazy />,
-})
-const SideTOC = dynamic(() => import('@/components/sidetoc'), {
-  loading: () => <Lazy />,
-})
-
-const tagMap = {
-  proteus: {
-    text: 'Descargar Proteus',
-    link: '/software/proteus',
-  },
-  traccar: {
-    text: 'Curso Traccar',
-    link: '/traccar',
-  },
-  pseint: {
-    text: 'Descargar PSeInt',
-    link: '/software/pseint',
-  },
-}
-
-export default async function PostLayout({
-  params: { locale },
-  content,
-  authorDetails,
-  next,
-  prev,
-  children,
-}: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, toc, summary, images } = content
-  const { t } = await createTranslation(locale, 'post')
-  const image = images ? images[0] : '/static/images/twitter-card.png'
-  const matchedTag = false
+export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
+  const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
 
   return (
@@ -76,35 +38,28 @@ export default async function PostLayout({
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
-                  </dd>
+          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+              <header className="pt-6 xl:pb-6">
+                <div className="space-y-1">
+                  <dl className="space-y-10">
+                    <div>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                        <time dateTime={date}>
+                          {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                        </time>
+                      </dd>
+                    </div>
+                  </dl>
+                  <div>
+                    <PageTitle>{title}</PageTitle>
+                  </div>
                 </div>
-              </dl>
-              <div>
-                <PageTitle>{title}</PageTitle>
-              </div>
-            </div>
-          </header>
-          <div className="b-8 grid-rows-[auto_1fr] dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 ">
-            <Sidebar
-              authorDetails={authorDetails}
-              next={next}
-              prev={prev}
-              content={content}
-              locale={locale}
-            />
-            <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
+              </header>
               <div>
                 <ins
-                  className="adsbygoogle mt-16 h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+                  className="adsbygoogle"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="6395288197"
@@ -113,15 +68,107 @@ export default async function PostLayout({
                 ></ins>
               </div>
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+              <div className="text-md pb-6 pt-6 text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path)} rel="nofollow">
-                  Revisar en X
+                  Discuss on Twitter
                 </Link>
                 {` • `}
-                <Link href={editUrl(filePath)}>Editar en Github</Link>
+                <Link href={editUrl(filePath)}>View on GitHub</Link>
               </div>
+              {siteMetadata.comments && (
+                <div
+                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+                  id="comment"
+                >
+                  <Comments slug={slug} />
+                </div>
+              )}
             </div>
+            <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+              <dt className="sr-only">Authors</dt>
+              <dd>
+                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                  {authorDetails.map((author) => (
+                    <li className="flex items-center space-x-2" key={author.name}>
+                      {author.avatar && (
+                        <Image
+                          src={author.avatar}
+                          width={38}
+                          height={38}
+                          alt="avatar"
+                          className="h-10 w-10 rounded-full"
+                        />
+                      )}
+                      <dl className="text-md whitespace-nowrap font-medium leading-5">
+                        <dt className="sr-only">Name</dt>
+                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                        <dt className="sr-only">Twitter</dt>
+                        <dd>
+                          {author.twitter && (
+                            <Link
+                              href={author.twitter}
+                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                            >
+                              {author.twitter.replace('https://twitter.com/', '@')}
+                            </Link>
+                          )}
+                        </dd>
+                      </dl>
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </dl>
+
             <footer>
+              <div className="text-md divide-gray-200 font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
+                <div className="flex items-center justify-center py-4 xl:py-8">
+                  <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+                    <Image
+                      width={200}
+                      height={200}
+                      src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
+                      alt="DigitalOcean Referral Badge"
+                    />
+                  </a>
+                </div>
+                {tags && (
+                  <div className="py-4 xl:py-8">
+                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      Tags
+                    </h2>
+                    <div className="flex flex-wrap">
+                      {tags.map((tag) => (
+                        <Tag key={tag} text={tag} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {(next || prev) && (
+                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+                    {prev && prev.path && (
+                      <div>
+                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Previous Article
+                        </h2>
+                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                          <Link href={`/${prev.path}`}>{prev.title}</Link>
+                        </div>
+                      </div>
+                    )}
+                    {next && next.path && (
+                      <div>
+                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          Next Article
+                        </h2>
+                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                          <Link href={`/${next.path}`}>{next.title}</Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
@@ -132,10 +179,10 @@ export default async function PostLayout({
                 </Link>
               </div>
               <ins
-                className="adsbygoogle sticky top-10 mt-6 w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+                className="adsbygoogle sticky top-10 mt-6"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6395288197"
+                data-ad-slot="9734184827"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
@@ -143,31 +190,6 @@ export default async function PostLayout({
           </div>
         </div>
       </article>
-      <div>
-        <div className="divide-y divide-gray-200 dark:divide-gray-700">
-          <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-            <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-              {t('beinterested')}
-            </h2>
-            <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-              {/*siteMetadata.description*/}
-            </p>
-          </div>
-        </div>
-      </div>
-      <SideTOC toc={toc} />
     </SectionContainerWithAds>
   )
 }
-const Lazy = () => (
-  <div className="space-y-6">
-    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
-    <div className="aspect-video w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
-    <div className="aspect-square w-full rounded-md bg-neutral-200 dark:bg-neutral-900"></div>
-  </div>
-)
-const ProgramCard = async ({ text, link }) => (
-  <Link href={link} className={`${buttonVariants({ variant: 'default' })} my-6 block w-full py-3`}>
-    {text}
-  </Link>
-)
