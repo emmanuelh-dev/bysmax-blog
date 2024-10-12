@@ -5,8 +5,7 @@ const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog` // Change if you
 
 const headerNavLinks = [
   { href: '/blog', title: 'Blog' },
-  { href: '/donate', title: 'Donate' },
-  { href: '/contribute', title: 'Contribute' },
+  { href: '/donate', title: 'Donate or Contribute' },
 ]
 
 export default headerNavLinks
