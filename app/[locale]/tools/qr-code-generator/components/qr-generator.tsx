@@ -262,9 +262,9 @@ export default function QRGenerator() {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-4xl">
+    <Card>
       <CardHeader>
-        <CardTitle>Generador de Código QR Avanzado</CardTitle>
+        <CardTitle>Generador de Código QR Gratis</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -286,9 +286,7 @@ export default function QRGenerator() {
               </Select>
             </div>
             {renderInputs()}
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="mb-4 grid w-full grid-cols-2 gap-4">
+            <div className="mb-4 grid w-full gap-4 py-6 md:grid-cols-2">
               <div>
                 <Label htmlFor="qrColor">Color del QR</Label>
                 <div className="flex flex-col items-center gap-2">
@@ -316,6 +314,8 @@ export default function QRGenerator() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col justify-center gap-4">
             <div>
               <Label htmlFor="qrShape">Forma del QR</Label>
               <RadioGroup
@@ -352,59 +352,56 @@ export default function QRGenerator() {
                 </SelectContent>
               </Select>
             </div>
-            <div
-              ref={qrRef}
-              className={`mt-4 ${qrFrame !== 'none' ? 'p-4' : ''}`}
-              style={{
-                borderRadius: qrFrame === 'rounded' ? '16px' : qrFrame === 'fancy' ? '8px' : '0',
-                border: qrFrame !== 'none' ? `4px solid ${qrColor}` : 'none',
-                boxShadow:
-                  qrFrame === 'fancy'
-                    ? `0 0 0 4px ${qrColor}, 0 0 0 8px ${qrBackgroundColor}`
-                    : 'none',
-              }}
-            />
+            <div>
+              <div className="flex w-full gap-8">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Formato</h4>
+                  <Select value={downloadFormat} onValueChange={setDownloadFormat}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona el formato" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="png">PNG</SelectItem>
+                      <SelectItem value="jpeg">JPEG</SelectItem>
+                      <SelectItem value="svg">SVG</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Tamaño</h4>
+                  <Select value={downloadSize} onValueChange={setDownloadSize}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona el tamaño" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="200">200x200</SelectItem>
+                      <SelectItem value="300">300x300</SelectItem>
+                      <SelectItem value="400">400x400</SelectItem>
+                      <SelectItem value="500">500x500</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-center py-4">
+              <div
+                ref={qrRef}
+                className={`mt-4 ${qrFrame !== 'none' ? 'p-4' : ''}`}
+                style={{
+                  borderRadius: qrFrame === 'rounded' ? '16px' : qrFrame === 'fancy' ? '8px' : '0',
+                  border: qrFrame !== 'none' ? `4px solid ${qrColor}` : 'none',
+                  boxShadow:
+                    qrFrame === 'fancy'
+                      ? `0 0 0 4px ${qrColor}, 0 0 0 8px ${qrBackgroundColor}`
+                      : 'none',
+                }}
+              />
+            </div>
             <p className="mt-2 text-center">SCAN ME</p>
           </div>
         </div>
       </CardContent>
       <CardFooter className="flex justify-center gap-4">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline">Opciones de descarga</Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80">
-            <div className="grid gap-4">
-              <div className="space-y-2">
-                <h4 className="font-medium leading-none">Formato</h4>
-                <Select value={downloadFormat} onValueChange={setDownloadFormat}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona el formato" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="png">PNG</SelectItem>
-                    <SelectItem value="jpeg">JPEG</SelectItem>
-                    <SelectItem value="svg">SVG</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-medium leading-none">Tamaño</h4>
-                <Select value={downloadSize} onValueChange={setDownloadSize}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona el tamaño" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="200">200x200</SelectItem>
-                    <SelectItem value="300">300x300</SelectItem>
-                    <SelectItem value="400">400x400</SelectItem>
-                    <SelectItem value="500">500x500</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </PopoverContent>
-        </Popover>
         <Button onClick={downloadQRCode}>Descargar QR</Button>
       </CardFooter>
     </Card>
