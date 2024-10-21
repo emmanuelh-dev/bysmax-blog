@@ -35,7 +35,7 @@ export default function Home({ posts, locale, title = '', service = false, curso
                 <div className="-mt-20 flex w-full flex-col items-start justify-between p-4">
                   <div className="flex h-full w-full flex-col justify-between text-balance p-4">
                     <div>
-                      <div className="rounded-3xl bg-black/50 p-2 text-white">
+                      <div className="rounded-3xl bg-black/50 px-4 py-2.5 text-white">
                         <h3>
                           <Link
                             className="font-medium uppercase"
