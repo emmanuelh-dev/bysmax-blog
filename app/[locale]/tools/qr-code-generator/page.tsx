@@ -74,7 +74,7 @@ export default function Page() {
               'Integración web',
               'Eventos y exposiciones',
             ].map((use, index) => (
-              <li key={index} className="flex items-center rounded-lg bg-blue-100 p-3">
+              <li key={index} className="flex items-center rounded-lg bg-blue-100 p-3 text-black">
                 <svg
                   className="mr-2 h-6 w-6 text-blue-500"
                   fill="none"
