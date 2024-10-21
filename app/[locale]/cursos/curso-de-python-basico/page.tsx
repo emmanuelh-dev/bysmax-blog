@@ -18,7 +18,7 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">Estructura del Curso</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {courseStructure.map((module, index) => (
-              <div key={index} className="rounded-lg border p-4 transition-shadow hover:shadow-md">
+              <div key={index} className="rounded-3xl border p-4 transition-shadow hover:shadow-md">
                 <h3 className="mb-2 text-xl font-medium">{module.title}</h3>
                 <ul className="space-y-2">
                   {module.topics.map((topic, topicIndex) => (

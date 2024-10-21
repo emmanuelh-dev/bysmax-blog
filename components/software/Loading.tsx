@@ -8,13 +8,13 @@ export default function Loading() {
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="animate-pulse">
-          <div className="mb-16 aspect-video transform rounded-md bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
+          <div className="mb-16 aspect-video transform rounded-3xl bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
         </div>
         <div className="animate-pulse">
-          <div className="mb-16 aspect-video transform rounded-md bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
+          <div className="mb-16 aspect-video transform rounded-3xl bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
         </div>
         <div className="animate-pulse">
-          <div className="mb-16 aspect-video transform rounded-md bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
+          <div className="mb-16 aspect-video transform rounded-3xl bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
         </div>
       </div>
     </div>

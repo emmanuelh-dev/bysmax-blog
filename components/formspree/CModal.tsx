@@ -51,7 +51,7 @@ export const CModal: React.FC<cModalProps> = ({
       <div className="relative mx-auto my-3 h-full w-full sm:h-auto sm:w-2/5 sm:max-w-xl">
         <div
           ref={modalContentRef}
-          className="relative flex h-full w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-black lg:h-auto"
+          className="relative flex h-full w-full flex-col rounded-3xl border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-black lg:h-auto"
         >
           <div className="flex items-center justify-between p-6">
             <div className="text-heading-400 ml-2 flex flex-row items-center text-3xl font-semibold">

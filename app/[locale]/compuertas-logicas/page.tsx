@@ -57,7 +57,7 @@ export default function page() {
           </div>
           <div>
             <ins
-              className="adsbygoogle my-6 h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+              className="adsbygoogle my-6 h-[280px] w-full rounded-3xl bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
               style={{ display: 'block' }}
               data-ad-client="ca-pub-3646138644530578"
               data-ad-slot="6395288197"
@@ -77,7 +77,7 @@ export default function page() {
                 </header>
                 <section className="flex w-full flex-col justify-around gap-6 py-6 md:flex-row">
                   <div className="md:w-1/3">
-                    <div className=" rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+                    <div className=" rounded-3xl bg-neutral-200 p-4 dark:bg-neutral-800">
                       <Table>
                         <TableHeader>
                           <TableRow>

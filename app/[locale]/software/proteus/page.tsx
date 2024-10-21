@@ -104,7 +104,7 @@ export default async function Page({ params: { locale } }: PageProps) {
             alt={t('imageAlt')}
             width={800}
             height={800}
-            className="aspect-square rounded-lg object-cover shadow-lg"
+            className="aspect-square rounded-3xl object-cover shadow-lg"
           />
         </div>
       </section>

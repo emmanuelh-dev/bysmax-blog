@@ -26,7 +26,7 @@ export default function features() {
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <TimerIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Monitoreo en Tiempo Real</h3>
             <p className="text-muted-foreground mt-2">
@@ -34,21 +34,21 @@ export default function features() {
               eficiencia.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <SunSnow className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Monitoreo de Temperatura</h3>
             <p className="text-muted-foreground mt-2">
               Controla tus activos con una precisión de ±0.5 grados, ideal para la cadena en frío.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <SunSnow className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Compartir Ubicación</h3>
             <p className="text-muted-foreground mt-2">
               Comparte la ubicación con colaboradores y clientes sin tener que prestar tu cuenta.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <MapIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Geovallas</h3>
             <p className="text-muted-foreground mt-2">
@@ -56,7 +56,7 @@ export default function features() {
               áreas designadas.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <FilesIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Informes Detallados</h3>
             <p className="text-muted-foreground mt-2">
@@ -64,7 +64,7 @@ export default function features() {
               operaciones.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <BadgeAlertIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Alertas Personalizables</h3>
             <p className="text-muted-foreground mt-2">
@@ -72,7 +72,7 @@ export default function features() {
               movimiento no autorizado.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <MergeIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Integración Fluida</h3>
             <p className="text-muted-foreground mt-2">
@@ -80,7 +80,7 @@ export default function features() {
               trabajo empresariales existentes.
             </p>
           </div>
-          <div className="bg-card rounded-md p-6 shadow-sm">
+          <div className="bg-card rounded-3xl p-6 shadow-sm">
             <SmartphoneIcon className="text-primary h-12 w-12" />
             <h3 className="mt-4 text-xl font-bold">Accesibilidad Móvil</h3>
             <p className="text-muted-foreground mt-2">

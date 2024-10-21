@@ -135,7 +135,7 @@ export function Home() {
                   </div>
                   {event.items.map((event) => (
                     <div className="ml-12" key={event.title}>
-                      <div className="mb-4 rounded-lg bg-neutral-200 p-4 shadow-lg dark:bg-neutral-800">
+                      <div className="mb-4 rounded-3xl bg-neutral-200 p-4 shadow-lg dark:bg-neutral-800">
                         <h4 className="mb-4 text-lg font-bold">{event.title}</h4>
                         <p className="text-neutral-600 dark:text-neutral-400">
                           {event.description}

@@ -58,7 +58,7 @@ const LangSwitch = () => {
         {({ open }) => (
           <>
             <MenuButton
-              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
+              className="inline-flex rounded-3xl px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
               aria-haspopup="true"
               aria-expanded={open}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -78,7 +78,7 @@ const LangSwitch = () => {
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <MenuItems
-                className="absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                className="absolute right-0 z-50 mt-2 w-12 origin-top-right divide-y divide-gray-100 rounded-3xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
                 aria-orientation="vertical"
                 onBlur={() => setIsMenuOpen(false)}
               >
@@ -98,7 +98,7 @@ const LangSwitch = () => {
                                 focus
                                   ? 'bg-gray-100 dark:bg-gray-600'
                                   : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                              } rounded-md px-4 py-2 text-sm text-gray-700 hover:text-primary-500 dark:text-white dark:hover:text-primary-500`}
+                              } rounded-3xl px-4 py-2 text-sm text-gray-700 hover:text-primary-500 dark:text-white dark:hover:text-primary-500`}
                               role="menuitem"
                               style={{ display: 'block', width: '100%', textDecoration: 'none' }}
                             >

@@ -72,4 +72,11 @@ export const nav: Nav[] = [
       },
     ],
   },
+  {
+    title: 'Herramientas',
+    links: [
+      { title: 'Todas', href: '/tools' },
+      { title: 'Generador de QR', href: '/tools/qr-code-generator' },
+    ],
+  },
 ]

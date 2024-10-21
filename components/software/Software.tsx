@@ -54,7 +54,7 @@ export default async function Software({ locale }) {
                 <Input
                   type="search"
                   placeholder="Search programs..."
-                  className="bg-background w-full rounded-lg pl-8"
+                  className="bg-background w-full rounded-3xl pl-8"
                 />
               </div>
             </div>
@@ -120,7 +120,7 @@ export default async function Software({ locale }) {
                 <Input
                   type="search"
                   placeholder="Search programs..."
-                  className="bg-background w-full rounded-lg pl-8"
+                  className="bg-background w-full rounded-3xl pl-8"
                 />
               </div>
             </div>

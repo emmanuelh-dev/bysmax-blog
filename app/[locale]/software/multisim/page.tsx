@@ -113,7 +113,7 @@ export default async function Page({ params: { locale } }: PageProps) {
             alt={t('imageAlt')}
             width={800}
             height={800}
-            className="aspect-square rounded-lg object-cover shadow-lg"
+            className="aspect-square rounded-3xl object-cover shadow-lg"
           />
         </div>
       </section>
@@ -125,7 +125,7 @@ export default async function Page({ params: { locale } }: PageProps) {
       </section>
       <section>
         <ins
-          className="adsbygoogle h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+          className="adsbygoogle h-[280px] w-full rounded-3xl bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
           style={{ display: 'block' }}
           data-ad-client="ca-pub-3646138644530578"
           data-ad-slot="6395288197"

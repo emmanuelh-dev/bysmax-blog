@@ -73,12 +73,12 @@ export default async function Page({ params: { locale, slug } }: Props) {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
           {/* <h2 className="mb-2 text-lg font-bold">Funcion Booleana</h2>
-          <div className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+          <div className="mb-4 rounded-3xl bg-neutral-200 p-4 dark:bg-neutral-800">
             <p className="text-muted-foreground">Y = A AND B</p>
           </div> */}
           <section className="mb-4">
             <h2 className="mb-2 text-lg font-bold">Tabla de Verdad</h2>
-            <div className="rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+            <div className="rounded-3xl bg-neutral-200 p-4 dark:bg-neutral-800">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -108,13 +108,13 @@ export default async function Page({ params: { locale, slug } }: Props) {
               width={1100}
               height={400}
               alt={`datasheet ${page.heading}`}
-              className="w-full rounded-md"
+              className="w-full rounded-3xl"
             />
             <figcaption className="text-sm">{`datasheet ${page.heading}`}</figcaption>
           </figure>
           <div>
             <h2 className="mb-2 text-lg font-bold">Características Eléctricas</h2>
-            <div className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+            <div className="mb-4 rounded-3xl bg-neutral-200 p-4 dark:bg-neutral-800">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-muted-foreground">Voltaje de Operación</p>
@@ -137,7 +137,7 @@ export default async function Page({ params: { locale, slug } }: Props) {
           </div>
           <div>
             <h2 className="mb-2 text-lg font-bold">Información del Paquete</h2>
-            <div className="mb-4 rounded-lg bg-neutral-200 p-4 dark:bg-neutral-800">
+            <div className="mb-4 rounded-3xl bg-neutral-200 p-4 dark:bg-neutral-800">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-muted-foreground">Tipo de Paquete</p>

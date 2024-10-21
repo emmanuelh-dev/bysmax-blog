@@ -162,7 +162,7 @@ export default function PaginaEstudiantes() {
                   </Button>
                 </CardFooter>
               </Card>
-              <div className="bg-primary/10 mt-8 rounded-lg p-6">
+              <div className="bg-primary/10 mt-8 rounded-3xl p-6">
                 <h3 className="mb-4 text-2xl font-semibold">Nuestro Impacto</h3>
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="flex flex-col items-center">
