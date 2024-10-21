@@ -22,9 +22,7 @@ export default function Page() {
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight lg:text-5xl">
               Generador de Códigos QR Gratis
             </h1>
-            <p>
-              Crea códigos QR personalizados para cualquier propósito. Fácil, rápido y gratuito.
-            </p>
+            <p>Crea códigos QR personalizados para cualquier propósito. Fácil, rápido y gratis.</p>
           </div>
           <QRGenerator />
         </section>
