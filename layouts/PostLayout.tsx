@@ -39,7 +39,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       <ScrollTopAndComment />
 
       {/* Fondo con cuadrados */}
-      <div className="responsive-grid mt-20 min-h-screen bg-black text-white">
+      <div className="responsive-grid mt-20 min-h-screen dark:bg-black dark:text-white">
         <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
           <div className="mb-12">
             <a href="/" className="flex items-center text-sm text-gray-400 hover:text-white">

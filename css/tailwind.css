@@ -47,11 +47,28 @@ input:-webkit-autofill:focus {
 #ez-toc-container{
   display: none;
 }
+/* Estilo general de la cuadrícula */
 .responsive-grid {
-  background-image: 
-    linear-gradient(to right, #3333337e 1px, transparent 1px),
-    linear-gradient(to bottom, #3333337e 1px, transparent 1px);
   background-size: 50% 50%;
+  color-scheme: light dark; /* Indica soporte para ambos esquemas */
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Configuración para modo oscuro */
+  .responsive-grid {
+    background-image: 
+      linear-gradient(to right, #4d4d4d7e 1px, transparent 1px),
+      linear-gradient(to bottom, #5050507e 1px, transparent 1px);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  /* Configuración para modo claro */
+  .responsive-grid {
+    background-image: 
+      linear-gradient(to right, #3131313d 1px, transparent 1px), /* Menor opacidad */
+      linear-gradient(to bottom, #2e2e2e3d 1px, transparent 1px);
+  }
 }
 
 @media (min-width: 768px) {
