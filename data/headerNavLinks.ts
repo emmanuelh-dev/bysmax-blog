@@ -42,7 +42,7 @@ export const nav: Nav[] = [
       {
         title: 'Servicios GPS y Rastreo',
         description: '',
-        href: '/servicios/servicios-para-traccar',
+        href: '/servicios/plataforma-de-rastreo-gps',
       },
     ],
   },

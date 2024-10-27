@@ -11,20 +11,20 @@ import { buttonVariants } from '@/components/ui/button'
 const services = [
   {
     category: 'logistica',
-    title: 'Logística y transporte',
+    title: 'Soluciones',
     services: [
       {
         title: 'Plataforma de rastreo GPS',
         Icon: Navigation,
         description: 'Datos precisos y en tiempo real, que te ayuda a alcanzar tus objetivos.',
         action: 'Ver más',
-        link: '/servicios/servicios-para-traccar',
+        link: '/servicios/plataforma-de-rastreo-gps',
       },
     ],
   },
   {
     category: 'software',
-    title: 'Software',
+    title: 'Consultoría',
     services: [
       {
         title: 'Consultoría',
@@ -66,9 +66,7 @@ export default function Services() {
         className="container mx-auto px-4"
       >
         <div className="flex items-center justify-between">
-          <h2 className="mb-4 text-3xl font-bold tracking-tighter md:text-4xl/tight">
-            Nuestros Servicios
-          </h2>{' '}
+          <h2 className="mb-4 text-3xl font-bold tracking-tighter md:text-4xl/tight">Servicios</h2>{' '}
           <Link className={buttonVariants({ variant: 'link' })} href="/servicios">
             Ver mas...
           </Link>
@@ -102,10 +100,13 @@ export default function Services() {
                         <p className="text-muted-foreground mb-4 flex-grow">
                           {service.description}
                         </p>
-                        <Button variant="outline" className="group w-full justify-between">
+                        <Link
+                          href={service.link || '#'}
+                          className={`${buttonVariants({ variant: 'outline' })} group w-full justify-between`}
+                        >
                           {service.action}
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   </motion.div>

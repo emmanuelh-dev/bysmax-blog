@@ -271,7 +271,7 @@ export function Home() {
                   Comenzar ahora
                 </Link>
                 <Link
-                  href="/servicios/servicios-para-traccar"
+                  href="/servicios/plataforma-de-rastreo-gps"
                   className={buttonVariants({ variant: 'outline' })}
                 >
                   Necesito un servidor
