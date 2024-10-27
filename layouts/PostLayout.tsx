@@ -42,7 +42,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       <div className="mt-20 h-full min-h-screen w-full bg-[linear-gradient(to_right,_#adadad3a_1px,_transparent_1px),_linear-gradient(to_bottom,_#9494943b_1px,_transparent_1px)] bg-[length:33%_33%] dark:bg-black dark:bg-[linear-gradient(to_right,_#3131313d_1px,_transparent_1px),_linear-gradient(to_bottom,_#2e2e2e3d_1px,_transparent_1px)] dark:text-white">
         <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
           <div className="mb-12">
-            <a href="/" className="flex items-center text-sm text-gray-400 hover:text-white">
+            <a
+              href="/"
+              className="flex items-center text-sm text-gray-400 hover:text-black dark:hover:text-white"
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Blog / Engineering
             </a>
