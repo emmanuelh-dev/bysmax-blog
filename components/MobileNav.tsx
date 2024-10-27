@@ -66,21 +66,6 @@ const MobileNav = () => {
         {/* Navigation content */}
         <nav className="px-4 py-6">
           <div className="space-y-6">
-            {/* Header Links */}
-            <div className="space-y-3">
-              {headerNavLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  onClick={onToggleNav}
-                  className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-gray-900 dark:text-gray-100"
-                >
-                  {link.icon && <link.icon className="mr-3 h-5 w-5" />}
-                  {link.title}
-                </Link>
-              ))}
-            </div>
-
             {/* Nav Sections */}
             <div className="space-y-4">
               {nav.map((section) => (
@@ -124,6 +109,20 @@ const MobileNav = () => {
                     </div>
                   </div>
                 </div>
+              ))}
+            </div>
+            {/* Header Links */}
+            <div className="space-y-3">
+              {headerNavLinks.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  onClick={onToggleNav}
+                  className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-gray-900 dark:text-gray-100"
+                >
+                  {link.icon && <link.icon className="mr-3 h-5 w-5" />}
+                  {link.title}
+                </Link>
               ))}
             </div>
           </div>
