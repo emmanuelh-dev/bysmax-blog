@@ -38,7 +38,7 @@ const MobileNav = () => {
       {/* Overlay */}
       <div
         className={cn(
-          'fixed inset-0 z-40 bg-gray-600/20 backdrop-blur-sm dark:bg-black/40',
+          'fixed -inset-10 z-40 bg-gray-600/20 backdrop-blur-sm dark:bg-black/40',
           navShow ? 'block' : 'hidden'
         )}
         onClick={onToggleNav}
@@ -53,7 +53,7 @@ const MobileNav = () => {
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-4 py-4 dark:border-gray-700">
+        <div className="flex items-center justify-between border-b px-4 py-4 dark:border-gray-700  max-md:mt-20">
           <span className="text-lg font-semibold">Menú</span>
           <button
             className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-gray-100 dark:hover:bg-gray-800"
