@@ -12,6 +12,8 @@ import {
   QrCode,
   BookMarked,
   GraduationCap,
+  Sigma,
+  FolderCode,
 } from 'lucide-react'
 
 const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
@@ -120,19 +122,19 @@ export const nav: Nav[] = [
         title: 'MathCAD 14',
         href: '/software/mathcad-14',
         description: 'Calculo técnico',
-        icon: Cpu,
+        icon: Sigma,
       },
       {
         title: 'MathCAD Prime 7',
         href: '/software/mathcad-prime-7',
         description: 'Calculo técnico',
-        icon: Cpu,
+        icon: Sigma,
       },
       {
         title: 'PSeInt',
         href: '/software/pseint',
         description: 'Programación',
-        icon: Cpu,
+        icon: FolderCode,
       },
     ],
   },
