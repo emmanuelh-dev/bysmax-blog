@@ -94,15 +94,15 @@ export default function RootLayout({
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <VercelAnalytics />
           <SpeedInsights />
-            <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
-          <SectionContainer>
+          <div className="flex h-screen flex-col justify-between font-sans">
+            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <Header />
+              <SectionContainer>
                 <main className="mb-auto">{children}</main>
-          </SectionContainer>
-              </SearchProvider>
-              <Footer />
-            </div>
+              </SectionContainer>
+            </SearchProvider>
+            <Footer />
+          </div>
         </ThemeProviders>
       </body>
     </html>
