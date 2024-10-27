@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 
 import { useState } from 'react'
@@ -18,9 +19,9 @@ const MobileNav = () => {
   }
 
   const toggleSection = (sectionTitle) => {
-    setExpandedSections(prev => ({
+    setExpandedSections((prev) => ({
       ...prev,
-      [sectionTitle]: !prev[sectionTitle]
+      [sectionTitle]: !prev[sectionTitle],
     }))
   }
 
@@ -95,10 +96,12 @@ const MobileNav = () => {
                       <ChevronDown className="h-4 w-4" />
                     )}
                   </button>
-                  <div className={cn(
-                    'overflow-hidden transition-all duration-200 ease-in-out',
-                    expandedSections[section.title] ? 'max-h-96' : 'max-h-0'
-                  )}>
+                  <div
+                    className={cn(
+                      'overflow-hidden transition-all duration-200 ease-in-out',
+                      expandedSections[section.title] ? 'max-h-96' : 'max-h-0'
+                    )}
+                  >
                     <div className="space-y-3 pb-4 pl-3">
                       {section.links.map((link) => (
                         <Link

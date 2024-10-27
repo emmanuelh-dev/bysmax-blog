@@ -56,7 +56,7 @@ export default function Navigation() {
 const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
   ({ className, title, children, icon: Icon, ...props }, ref) => {
     return (
-      <li className='flex items-center'>
+      <li className="flex items-center">
         <NavigationMenuLink asChild>
           <a
             ref={ref}
