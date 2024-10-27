@@ -35,7 +35,7 @@ export default function Navigation() {
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                 {item.links.map((item) => (
                   <ListItem
-                    className="flex items-center text-xs"
+                    className="flex items-center text-xs "
                     key={item.title}
                     title={item.title}
                     icon={item.icon || undefined}
@@ -56,12 +56,12 @@ export default function Navigation() {
 const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
   ({ className, title, children, icon: Icon, ...props }, ref) => {
     return (
-      <li className="flex items-center">
+      <li className="flex items-center py-1">
         <NavigationMenuLink asChild>
           <a
             ref={ref}
             className={cn(
-              'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors',
+              'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md leading-none no-underline outline-none transition-colors ',
               className
             )}
             {...props}
