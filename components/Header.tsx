@@ -62,7 +62,7 @@ export default function Header() {
                 <Link
                   key={link.title}
                   href={`/${locale}${link.href}`}
-                  className="font-medium text-gray-900 dark:text-gray-100"
+                  className="text-sm font-medium text-neutral-400 transition-colors duration-200 hover:text-black dark:hover:text-white"
                 >
                   {link.title}
                 </Link>
