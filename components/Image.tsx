@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NextImage, { ImageProps } from 'next/image'
 import { IoClose } from 'react-icons/io5'
 import ReactDOM from 'react-dom'
@@ -9,10 +10,12 @@ const Image = ({ className, ...rest }: ImageProps) => {
 
   const openModal = () => {
     setIsModalOpen(true)
+    document.body.classList.add('overflow-hidden')
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
+    document.body.classList.remove('overflow-hidden')
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
@@ -20,6 +23,13 @@ const Image = ({ className, ...rest }: ImageProps) => {
       closeModal()
     }
   }
+
+  useEffect(() => {
+    return () => {
+      // Remove the class if the component unmounts while the modal is open
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [])
 
   const modalContent = (
     <dialog
@@ -29,12 +39,7 @@ const Image = ({ className, ...rest }: ImageProps) => {
     >
       <div className="-mt-20 flex w-full flex-col items-center justify-center p-6">
         <div className="flex w-full flex-col items-end justify-center p-6">
-          <button
-            className="inline-block text-left text-white"
-            onClick={closeModal}
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus
-          >
+          <button className="inline-block text-left text-white" onClick={closeModal} autoFocus>
             <IoClose className="size-16" />
           </button>
         </div>
