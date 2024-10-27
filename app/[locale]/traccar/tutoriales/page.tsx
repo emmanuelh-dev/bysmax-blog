@@ -97,7 +97,7 @@ export default function page() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <div
-              className="group relative overflow-hidden rounded-3xl shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-md shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
               key={post.title}
             >
               <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10" prefetch={false}>

@@ -29,7 +29,7 @@ export default function Filter() {
               <button
                 key={categoria.nombre}
                 onClick={() => setCategoriaSeleccionada(categoria.nombre)}
-                className={`flex flex-col items-center justify-center gap-2 rounded-3xl  ${
+                className={`flex flex-col items-center justify-center gap-2 rounded-md  ${
                   categoriaSeleccionada === categoria.nombre
                     ? 'bg-neutral-100 p-4 text-black transition-colors dark:bg-neutral-900 dark:text-white'
                     : 'bg-neutral-900 p-4 text-white transition-colors dark:bg-white dark:text-black'
@@ -50,7 +50,7 @@ export default function Filter() {
             return (
               <div
                 key={curso.title}
-                className="group relative overflow-hidden rounded-3xl bg-neutral-100 p-6 transition-all hover:shadow-md dark:bg-neutral-900"
+                className="group relative overflow-hidden rounded-md bg-neutral-100 p-6 transition-all hover:shadow-md dark:bg-neutral-900"
               >
                 <div className="from-primary to-secondary absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity group-hover:opacity-10"></div>
                 <div className="relative z-10">

@@ -114,7 +114,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               </svg>
             </button>
             {showMenu && (
-              <div className="absolute right-0 top-8 w-32 rounded-3xl bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+              <div className="absolute right-0 top-8 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
                 <p className={`${copied ? 'text-primary-500 dark:text-primary-400' : ''}`}>
                   {copied ? t('urlcopied') : t('copyurl')}
                 </p>

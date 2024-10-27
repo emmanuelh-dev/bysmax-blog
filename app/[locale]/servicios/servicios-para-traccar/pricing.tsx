@@ -22,7 +22,7 @@ export default function pricing() {
           </p>
         </div>
         <div className="grid justify-center gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <Card className="bg-card rounded-3xl p-6 shadow-sm">
+          <Card className="bg-card rounded-md p-6 shadow-sm">
             <CardHeader>
               <CardTitle>Básico</CardTitle>
               <CardDescription>Ideal para flotas pequeñas</CardDescription>
@@ -63,7 +63,7 @@ export default function pricing() {
               </Link>
             </CardFooter>
           </Card>
-          <Card className="bg-card rounded-3xl p-6 shadow-sm">
+          <Card className="bg-card rounded-md p-6 shadow-sm">
             <CardHeader>
               <CardTitle>Pro</CardTitle>
               <CardDescription>Ideal para flotas grandes</CardDescription>
@@ -104,7 +104,7 @@ export default function pricing() {
               </Link>
             </CardFooter>
           </Card>
-          <Card className="bg-card rounded-3xl p-6 shadow-sm">
+          <Card className="bg-card rounded-md p-6 shadow-sm">
             <CardHeader>
               <CardTitle>Advanced</CardTitle>
               <CardDescription>Ideal para Empresas</CardDescription>

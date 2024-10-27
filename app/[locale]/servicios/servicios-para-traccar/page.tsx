@@ -83,7 +83,7 @@ export default function Page() {
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="bg-card rounded-3xl p-6 shadow-sm">
+            <div className="bg-card rounded-md p-6 shadow-sm">
               <ServerIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Servidor Seguro</h3>
               <p className="text-muted-foreground mt-2">
@@ -91,7 +91,7 @@ export default function Page() {
                 accesibilidad de tus datos.
               </p>
             </div>
-            <div className="bg-card rounded-3xl p-6 shadow-sm">
+            <div className="bg-card rounded-md p-6 shadow-sm">
               <ComputerIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Dispositivos de Seguimiento</h3>
               <p className="text-muted-foreground mt-2">
@@ -99,7 +99,7 @@ export default function Page() {
                 tus necesidades específicas.
               </p>
             </div>
-            <div className="bg-card rounded-3xl p-6 shadow-sm">
+            <div className="bg-card rounded-md p-6 shadow-sm">
               <PowerIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Soporte Experto</h3>
               <p className="text-muted-foreground mt-2">
@@ -107,7 +107,7 @@ export default function Page() {
                 pregunta o problema.
               </p>
             </div>
-            <div className="bg-card rounded-3xl p-6 shadow-sm">
+            <div className="bg-card rounded-md p-6 shadow-sm">
               <ReplaceIcon className="text-primary h-12 w-12" />
               <h3 className="mt-4 text-xl font-bold">Personalización</h3>
               <p className="text-muted-foreground mt-2">

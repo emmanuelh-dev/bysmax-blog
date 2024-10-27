@@ -12,7 +12,7 @@ export default function SuspencePosts() {
 
 const Card = () => (
   <div className="animate-pulse">
-    <div className="mb-16 aspect-video transform rounded-3xl bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
-    <div className="-mt-5 h-8 transform rounded-3xl bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
+    <div className="mb-16 aspect-video transform rounded-md bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
+    <div className="-mt-5 h-8 transform rounded-md bg-neutral-400 transition-transform duration-500 hover:scale-105 dark:bg-neutral-900" />
   </div>
 )

@@ -52,7 +52,7 @@ export default function Reparacion({ children, site }) {
               alt="Reparación de computadoras"
               width={500}
               height={400}
-              className="rounded-3xl"
+              className="rounded-md"
             />
           </div>
         </div>

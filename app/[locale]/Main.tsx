@@ -22,20 +22,20 @@ export default function Home({ posts, locale, title = '', service = false, curso
                 <div className="block w-full lg:col-span-2">
                   {images ? (
                     <Image
-                      className="aspect-[384/246] h-full rounded-3xl bg-center object-cover"
+                      className="aspect-[384/246] h-full rounded-md bg-center object-cover"
                       width={600}
                       height={400}
                       src={image}
                       alt="The Time Traveler's Notebook"
                     />
                   ) : (
-                    <div className="aspect-[384/246] h-full rounded-3xl bg-amber-200 bg-center object-cover dark:bg-amber-400" />
+                    <div className="aspect-[384/246] h-full rounded-md bg-amber-200 bg-center object-cover dark:bg-amber-400" />
                   )}
                 </div>
                 <div className="-mt-20 flex w-full flex-col items-start justify-between p-4">
                   <div className="flex h-full w-full flex-col justify-between text-balance p-4">
                     <div>
-                      <div className="rounded-3xl bg-black/50 px-4 py-2.5 text-white">
+                      <div className="rounded-md bg-black/50 px-4 py-2.5 text-white">
                         <h3>
                           <Link
                             className="font-medium uppercase"

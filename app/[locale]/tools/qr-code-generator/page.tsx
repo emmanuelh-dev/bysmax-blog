@@ -44,7 +44,7 @@ export default function Page() {
               alt="Ejemplo de un código QR"
               width={500}
               height={500}
-              className="size-72 max-w-72 rounded-3xl shadow-md"
+              className="size-72 max-w-72 rounded-md shadow-md"
             />
           </div>
         </section>

@@ -26,7 +26,7 @@ export default function Page() {
             width={800}
             height={600}
             alt="Hero Image"
-            className="aspect-video h-full w-full rounded-3xl object-cover"
+            className="aspect-video h-full w-full rounded-md object-cover"
           />
         </div>
       </section>

@@ -51,7 +51,7 @@ function Page() {
         <div className=" ">
           <div className="flex flex-col space-y-4">
             <div className="space-y-2">
-              <div className="inline-block rounded-3xl bg-neutral-100 px-3 py-1 text-sm dark:bg-neutral-800">
+              <div className="inline-block rounded-md bg-neutral-100 px-3 py-1 text-sm dark:bg-neutral-800">
                 Nuestra Historia
               </div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">

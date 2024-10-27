@@ -17,7 +17,7 @@ export default function Page() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Escribir guías</h3>
             <p className="text-muted-foreground">
               Comparte tu conocimiento y experiencia escribiendo guías para el blog de BysMax.
@@ -31,7 +31,7 @@ export default function Page() {
               <ArrowRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </div>
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Reportar errores</h3>
             <p className="text-muted-foreground">
               Ayúdanos a mejorar la plataforma reportando cualquier error o problema que encuentres.
@@ -45,7 +45,7 @@ export default function Page() {
               <ArrowRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </div>
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Mejorar la documentación</h3>
             <p className="text-muted-foreground">
               Ayúdanos a hacer que la documentación sea más clara y completa para todos los
@@ -60,7 +60,7 @@ export default function Page() {
               <ArrowRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </div>
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Traducir contenido</h3>
             <p className="text-muted-foreground">
               Ayúdanos a hacer que BysMax sea accesible para más personas traduciendo contenido a
@@ -75,7 +75,7 @@ export default function Page() {
               <ArrowRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </div>
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Mejorar el currículo</h3>
             <p className="text-muted-foreground">
               Ayúdanos a mejorar la experiencia de aprendizaje mejorando el currículo y los
@@ -90,7 +90,7 @@ export default function Page() {
               <ArrowRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </div>
-          <div className="bg-muted rounded-3xl border p-4 shadow-sm">
+          <div className="bg-muted rounded-md border p-4 shadow-sm">
             <h3 className="text-lg font-semibold">Donar</h3>
             <p className="text-muted-foreground">Si deseas donar, puedes hacerlo aquí.</p>
             <Link
