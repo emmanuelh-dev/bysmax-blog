@@ -1,20 +1,27 @@
-/* eslint-disable  */
 'use client'
 
 import { useState } from 'react'
 import Link from './Link'
 import headerNavLinks, { nav } from '@/data/headerNavLinks'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
+  const [expandedSections, setExpandedSections] = useState({})
 
   const onToggleNav = () => {
     setNavShow((status) => {
       document.body.style.overflow = !status ? 'hidden' : 'auto'
       return !status
     })
+  }
+
+  const toggleSection = (sectionTitle) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionTitle]: !prev[sectionTitle]
+    }))
   }
 
   return (
@@ -74,31 +81,44 @@ const MobileNav = () => {
             </div>
 
             {/* Nav Sections */}
-            <div className="space-y-8">
+            <div className="space-y-4">
               {nav.map((section) => (
-                <div key={section.title} className="space-y-4">
-                  <div className="text-sm font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    {section.title}
-                  </div>
-                  <div className="space-y-3 pl-3">
-                    {section.links.map((link) => (
-                      <Link
-                        key={link.title}
-                        href={link.href}
-                        onClick={onToggleNav}
-                        className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base text-gray-900 dark:text-gray-100"
-                      >
-                        {link.icon && <link.icon className="mr-3 h-5 w-5" />}
-                        <div>
-                          <div>{link.title}</div>
-                          {link.description && (
-                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                              {link.description}
-                            </p>
-                          )}
-                        </div>
-                      </Link>
-                    ))}
+                <div key={section.title} className="border-b dark:border-gray-700">
+                  <button
+                    onClick={() => toggleSection(section.title)}
+                    className="flex w-full items-center justify-between py-3 text-sm font-bold uppercase tracking-wide text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                  >
+                    <span>{section.title}</span>
+                    {expandedSections[section.title] ? (
+                      <ChevronUp className="h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4" />
+                    )}
+                  </button>
+                  <div className={cn(
+                    'overflow-hidden transition-all duration-200 ease-in-out',
+                    expandedSections[section.title] ? 'max-h-96' : 'max-h-0'
+                  )}>
+                    <div className="space-y-3 pb-4 pl-3">
+                      {section.links.map((link) => (
+                        <Link
+                          key={link.title}
+                          href={link.href}
+                          onClick={onToggleNav}
+                          className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base text-gray-900 dark:text-gray-100"
+                        >
+                          {link.icon && <link.icon className="mr-3 h-5 w-5" />}
+                          <div>
+                            <div>{link.title}</div>
+                            {link.description && (
+                              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                {link.description}
+                              </p>
+                            )}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
