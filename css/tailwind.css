@@ -47,3 +47,15 @@ input:-webkit-autofill:focus {
 #ez-toc-container{
   display: none;
 }
+.responsive-grid {
+  background-image: 
+    linear-gradient(to right, #3333337e 1px, transparent 1px),
+    linear-gradient(to bottom, #3333337e 1px, transparent 1px);
+  background-size: 50% 50%;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    background-size: 33% 33%;
+  }
+}

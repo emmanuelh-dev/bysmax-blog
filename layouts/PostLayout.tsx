@@ -9,6 +9,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { ArrowLeft, Clock } from 'lucide-react'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -36,42 +37,36 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   return (
     <SectionContainerWithAds>
       <ScrollTopAndComment />
-      <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
-                  </dd>
-                </div>
-              </dl>
-              <div>
-                <PageTitle>{title}</PageTitle>
-              </div>
-            </div>
-          </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
-            <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+
+      {/* Fondo con cuadrados */}
+      <div className="responsive-grid min-h-screen bg-black text-white mt-20">
+        <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
+          <div className="mb-12">
+            <a href="/" className="flex items-center text-sm text-gray-400 hover:text-white">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Blog / Engineering
+            </a>
+          </div>
+          <h1 className="mb-12 text-3xl font-normal leading-tight md:text-6xl lg:text-5xl">
+            {title}
+          </h1>
+          <div className="flex items-center space-x-1">
+            <dl>
               <dt className="sr-only">Authors</dt>
               <dd>
-                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-6">
+                <ul className="mb-4 flex items-center space-x-1">
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>
                       {author.avatar && (
                         <Image
                           src={author.avatar}
-                          width={38}
-                          height={38}
+                          width={24}
+                          height={24}
                           alt="avatar"
-                          className="h-10 w-10 rounded-full"
+                          className="h-6 w-6 rounded-full bg-gray-600"
                         />
                       )}
-                      <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                      <dl className="sr-only">
                         <dt className="sr-only">Name</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
                         <dt className="sr-only">Twitter</dt>
@@ -93,104 +88,102 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </ul>
               </dd>
             </dl>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div>
-                <ins
-                  className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-3646138644530578"
-                  data-ad-slot="6395288197"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
+          </div>
+          <div className="mb-12 flex items-center text-sm text-gray-400">
+            <div className="flex items-center">
+              <Clock className="mr-2 h-4 w-4" />
+              <span>14 min read</span>
+            </div>
+            <span className="mx-8 text-gray-600">·</span>
+            <dt className="sr-only">Published on</dt>
+            <dd className="leading-6 text-gray-500 dark:text-gray-400">
+              <time dateTime={date}>
+                {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+              </time>
+            </dd>
+          </div>
+          <div>
+            <ins
+              className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-3646138644530578"
+              data-ad-slot="6395288197"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </div>
+          <div className="prose max-w-5xl pb-8 pt-10 dark:prose-invert">{children}</div>
+
+          {/* Footer */}
+          <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+            <div className="text-md divide-gray-200 font-medium leading-5 dark:divide-gray-700 xl:divide-y">
+              <div className="flex items-center justify-center py-4 xl:py-6">
+                <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+                  <Image
+                    width={200}
+                    height={200}
+                    src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
+                    alt="DigitalOcean Referral Badge"
+                  />
+                </a>
               </div>
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="text-md pb-6 pt-6 text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
-                </Link>
-                {` • `}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
-              </div>
-              {siteMetadata.comments && (
-                <div
-                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
-                  <Comments slug={slug} />
+              {tags && (
+                <div className="py-4 xl:py-6">
+                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Tags
+                  </h2>
+                  <div className="flex flex-wrap">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {(next || prev) && (
+                <div className="flex justify-between py-4 text-sm xl:block xl:space-y-6 xl:py-6">
+                  {prev && prev.path && (
+                    <div>
+                      <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        Previous Article
+                      </h2>
+                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <Link href={`/${prev.path}`}>{prev.title}</Link>
+                      </div>
+                    </div>
+                  )}
+                  {next && next.path && (
+                    <div>
+                      <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        Next Article
+                      </h2>
+                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <Link href={`/${next.path}`}>{next.title}</Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-            <footer>
-              <div className="text-md divide-gray-200 font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                <div className="flex items-center justify-center py-4 xl:py-6">
-                  <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
-                    <Image
-                      width={200}
-                      height={200}
-                      src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
-                      alt="DigitalOcean Referral Badge"
-                    />
-                  </a>
-                </div>
-                {tags && (
-                  <div className="py-4 xl:py-6">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 text-sm xl:block xl:space-y-6 xl:py-6">
-                    {prev && prev.path && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Previous Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && next.path && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Next Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label="Back to the blog"
-                >
-                  &larr; Back to the blog
-                </Link>
-              </div>
-              <ins
-                className="adsbygoogle sticky top-10 mt-6  h-[600px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="9734184827"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </footer>
-          </div>
-        </div>
-      </article>
+            <div className="pt-4 xl:pt-8">
+              <Link
+                href={`/${basePath}`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label="Back to the blog"
+              >
+                &larr; Back to the blog
+              </Link>
+            </div>
+            <ins
+              className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full bg-white dark:bg-black"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-3646138644530578"
+              data-ad-slot="9734184827"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </footer>
+        </article>
+      </div>
     </SectionContainerWithAds>
   )
 }
