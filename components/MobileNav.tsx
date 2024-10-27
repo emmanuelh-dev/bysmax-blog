@@ -1,103 +1,108 @@
+/* eslint-disable  */
 'use client'
 
 import { useState } from 'react'
 import Link from './Link'
 import headerNavLinks, { nav } from '@/data/headerNavLinks'
+import { Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
 
   const onToggleNav = () => {
     setNavShow((status) => {
-      if (status) {
-        document.body.style.overflow = 'auto'
-      } else {
-        // Prevent scrolling
-        document.body.style.overflow = 'hidden'
-      }
+      document.body.style.overflow = !status ? 'hidden' : 'auto'
       return !status
     })
   }
 
   return (
     <>
-      <button aria-label="Toggle Menu" onClick={onToggleNav} className="sm:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="h-8 w-8 text-gray-900 dark:text-gray-100"
-        >
-          <path
-            fillRule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
-      <div
-        className={`fixed left-0 top-0 z-10 h-full w-full transform bg-white opacity-95 duration-300 ease-in-out dark:bg-black dark:opacity-[0.98] ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      <button
+        aria-label="Toggle Menu"
+        onClick={onToggleNav}
+        className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-gray-100 dark:hover:bg-gray-800 sm:hidden"
       >
-        <div className="flex justify-end">
-          <button className="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu" onClick={onToggleNav}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+        <Menu className="h-6 w-6" />
+      </button>
+
+      {/* Overlay */}
+      <div
+        className={cn(
+          'fixed inset-0 z-40 bg-gray-600/20 backdrop-blur-sm dark:bg-black/40',
+          navShow ? 'block' : 'hidden'
+        )}
+        onClick={onToggleNav}
+      />
+
+      {/* Mobile menu */}
+      <div
+        className={cn(
+          'fixed right-0 top-0 z-50 h-full w-full max-w-xs overflow-y-auto bg-white pb-12 shadow-xl dark:bg-black',
+          'transform transition-transform duration-300 ease-in-out',
+          navShow ? 'translate-x-0' : 'translate-x-full'
+        )}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b px-4 py-4 dark:border-gray-700">
+          <span className="text-lg font-semibold">Menú</span>
+          <button
+            className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-gray-100 dark:hover:bg-gray-800"
+            onClick={onToggleNav}
+          >
+            <X className="h-6 w-6" />
           </button>
         </div>
-        <nav className="fixed mt-8 h-full overflow-y-scroll">
-          <div className="space-y-6 px-12 py-4">
-            {headerNavLinks.map((link) => (
-              <div key={link.title}>
+
+        {/* Navigation content */}
+        <nav className="px-4 py-6">
+          <div className="space-y-6">
+            {/* Header Links */}
+            <div className="space-y-3">
+              {headerNavLinks.map((link) => (
                 <Link
+                  key={link.title}
                   href={link.href}
-                  className="tracking-widest text-gray-900 dark:text-gray-100"
                   onClick={onToggleNav}
+                  className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-gray-900 dark:text-gray-100"
                 >
+                  {link.icon && <link.icon className="mr-3 h-5 w-5" />}
                   {link.title}
                 </Link>
-              </div>
-            ))}
-            <div>
-              <Link
-                href="/software"
-                className="tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={onToggleNav}
-              >
-                Software
-              </Link>
+              ))}
             </div>
-            {nav.map((section) => (
-              <div key={section.title}>
-                <div className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
-                  {section.title}
-                </div>
-                <div className="space-y-6">
-                  {section.links.map((link) => (
-                    <div key={link.title}>
+
+            {/* Nav Sections */}
+            <div className="space-y-8">
+              {nav.map((section) => (
+                <div key={section.title} className="space-y-4">
+                  <div className="text-sm font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    {section.title}
+                  </div>
+                  <div className="space-y-3 pl-3">
+                    {section.links.map((link) => (
                       <Link
+                        key={link.title}
                         href={link.href}
-                        className="tracking-widest text-gray-900 dark:text-gray-100"
                         onClick={onToggleNav}
+                        className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base text-gray-900 dark:text-gray-100"
                       >
-                        {link.title}
+                        {link.icon && <link.icon className="mr-3 h-5 w-5" />}
+                        <div>
+                          <div>{link.title}</div>
+                          {link.description && (
+                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                              {link.description}
+                            </p>
+                          )}
+                        </div>
                       </Link>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </nav>
       </div>
