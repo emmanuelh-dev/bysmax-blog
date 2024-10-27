@@ -11,7 +11,9 @@ interface ResultItemProps {
 const ResultItem: React.FC<ResultItemProps> = ({ item, active }) => (
   <div
     className={`flex cursor-pointer justify-between px-4 py-2 ${
-      active ? 'bg-primary-600 text-neutral-100' : 'bg-transparent text-neutral-700 dark:text-neutral-100'
+      active
+        ? 'bg-primary-600 text-neutral-100'
+        : 'bg-transparent text-neutral-700 dark:text-neutral-100'
     }`}
   >
     <div className="flex space-x-2">
