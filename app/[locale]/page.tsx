@@ -37,7 +37,7 @@ export default async function Page({ params: { locale } }) {
             </Link>
           </div>
         </div>
-        <Image alt="Sonrie" width="400" height="400" src={'/static/notes/02.png'} />
+        <Image alt="Sonrie" width="480" height="480" src={'/static/notes/02.png'} />
       </section>
       <Filter />
 
