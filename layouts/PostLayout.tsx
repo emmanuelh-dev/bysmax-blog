@@ -41,7 +41,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       {/* Fondo con cuadrados */}
       <div className="mt-20 h-full min-h-screen w-full bg-[linear-gradient(to_right,_#88888839_1px,_transparent_1px),_linear-gradient(to_bottom,_#88888839_1px,_transparent_1px)] bg-[length:50%_33%] dark:bg-black dark:bg-[linear-gradient(to_right,_#5e5e5e3c_1px,_transparent_1px),_linear-gradient(to_bottom,_#5e5e5e3c_1px,_transparent_1px)] dark:text-white lg:bg-[length:33%_33%]">
         <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
-          <div className="mb-12">
+          <div className="mb-12 flex justify-center">
             <a
               href="/"
               className="flex items-center text-sm text-neutral-400 hover:text-black dark:hover:text-white"
@@ -50,10 +50,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               Blog / Engineering
             </a>
           </div>
-          <h1 className="mb-12 text-3xl font-normal leading-tight md:text-6xl lg:text-5xl">
+          <h1 className="mb-12 text-balance text-center text-3xl font-medium leading-tight md:text-6xl lg:text-5xl">
             {title}
           </h1>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center justify-center space-x-1">
             <dl>
               <dt className="sr-only">Authors</dt>
               <dd>
@@ -92,7 +92,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
           </div>
-          <div className="mb-12 flex items-center text-sm text-neutral-400">
+          <div className="mb-12 flex items-center justify-between text-sm text-neutral-400">
             <div className="flex items-center">
               <Clock className="mr-2 h-4 w-4" />
               <span>14 min read</span>
@@ -115,7 +115,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               data-full-width-responsive="true"
             ></ins>
           </div>
-          <div className="prose max-w-5xl pb-8 pt-10 dark:prose-invert">{children}</div>
+          <div className="prose max-w-5xl text-pretty pb-8 pt-10 text-lg dark:prose-invert">
+            {children}
+          </div>
 
           {/* Footer */}
           <footer className="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-700">
