@@ -39,7 +39,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
       <ScrollTopAndComment />
 
       {/* Fondo con cuadrados */}
-      <div className="mt-20 h-full min-h-screen w-full bg-[linear-gradient(to_right,_#adadad3a_1px,_transparent_1px),_linear-gradient(to_bottom,_#9494943b_1px,_transparent_1px)] bg-[length:50%_33%] dark:bg-black dark:bg-[linear-gradient(to_right,_#3131313d_1px,_transparent_1px),_linear-gradient(to_bottom,_#2e2e2e3d_1px,_transparent_1px)] dark:text-white lg:bg-[length:3350_33%]">
+      <div className="mt-20 h-full min-h-screen w-full bg-[linear-gradient(to_right,_#adadad3a_1px,_transparent_1px),_linear-gradient(to_bottom,_#9494943b_1px,_transparent_1px)] bg-[length:50%_33%] dark:bg-black dark:bg-[linear-gradient(to_right,_#3131313d_1px,_transparent_1px),_linear-gradient(to_bottom,_#2e2e2e3d_1px,_transparent_1px)] dark:text-white lg:bg-[length:33%_33%]">
         <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
           <div className="mb-12">
             <a
