@@ -98,8 +98,8 @@ const MobileNav = () => {
                   </button>
                   <div
                     className={cn(
-                      'overflow-hidden transition-all duration-200 ease-in-out',
-                      expandedSections[section.title] ? 'max-h-96' : 'max-h-0'
+                      'overflow-scroll transition-all duration-200 ease-in-out',
+                      expandedSections[section.title] ? 'max-h-[600px]' : 'max-h-0'
                     )}
                   >
                     <div className="space-y-3 pb-4 pl-3">
