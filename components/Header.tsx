@@ -40,7 +40,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="container mx-auto flex items-center justify-between px-6 py-4 max-md:mt-20">
+    <header className="container mx-auto flex items-center justify-between px-6 py-4 max-md:mt-24">
       <div>
         <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
