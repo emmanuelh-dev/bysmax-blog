@@ -35,11 +35,11 @@ export default function PostLayout({
       <article>
         <div>
           <header>
-            <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+            <div className="space-y-1 border-b border-neutral-200 pb-10 text-center dark:border-neutral-700">
               <dl>
                 <div>
                   <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <dd className="text-base font-medium leading-6 text-neutral-500 dark:text-neutral-400">
                     <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                   </dd>
                 </div>
@@ -49,8 +49,8 @@ export default function PostLayout({
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0">
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+          <div className="grid-rows-[auto_1fr] divide-y divide-neutral-200 pb-8 dark:divide-neutral-700 xl:divide-y-0">
+            <div className="divide-y divide-neutral-200 dark:divide-neutral-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <ins
                 className="adsbygoogle"
                 style={{ display: 'block' }}
@@ -62,7 +62,7 @@ export default function PostLayout({
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
             </div>
             {siteMetadata.comments && (
-              <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+              <div className="pb-6 pt-6 text-center text-neutral-700 dark:text-neutral-300" id="comment">
                 <Comments slug={slug} />
               </div>
             )}

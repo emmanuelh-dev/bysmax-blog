@@ -36,7 +36,7 @@ const TocBody = ({ toc }: TocBodyProps) => {
   return (
     <div className="fixed left-0 top-0 z-50 h-screen md:flex">
       <div
-        className={`fixed left-0 top-0 z-50 flex h-screen ${sidebarOpen ? 'w-72' : 'w-0 -translate-x-10'} flex-col border-r border-neutral-100 bg-gray-100  px-2 py-4 transition-all duration-300 dark:border-neutral-800 dark:bg-black`}
+        className={`fixed left-0 top-0 z-50 flex h-screen ${sidebarOpen ? 'w-72' : 'w-0 -translate-x-10'} flex-col border-r border-neutral-100 bg-neutral-100  px-2 py-4 transition-all duration-300 dark:border-neutral-800 dark:bg-black`}
       >
         <div className="mt-40">
           <div className="my-auto mt-5 max-h-[38rem]  overflow-y-auto pt-4">

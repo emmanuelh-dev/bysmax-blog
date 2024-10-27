@@ -37,7 +37,7 @@ module.exports = {
           ...colors.blue,
           500: '#007deb',
         },
-        gray: colors.gray,
+        neutral: colors.neutral,
       },
       keyframes: {
         'accordion-down': {
@@ -85,7 +85,7 @@ module.exports = {
               code: { color: theme('colors.primary.400') },
             },
             'h1,h2,h3,h4,h5,h6': {
-              color: theme('colors.gray.100'),
+              color: theme('colors.neutral.100'),
             },
           },
         },

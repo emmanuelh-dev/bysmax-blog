@@ -27,7 +27,7 @@ export default async function Page({ params: { locale } }) {
           <h1 className="text-6xl font-semibold leading-tight md:max-w-[40rem] md:text-7xl">
             {t('title')}
           </h1>
-          <p className="pt-2 text-lg text-gray-500 dark:text-gray-400">{t('description')}</p>
+          <p className="pt-2 text-lg text-neutral-500 dark:text-neutral-400">{t('description')}</p>
           <div className="flex gap-4">
             <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
               Blog y Tutoriales
@@ -42,11 +42,11 @@ export default async function Page({ params: { locale } }) {
       <Filter />
 
       <section className="py-12">
-        <div className=" divide-gray-200 dark:divide-gray-700">
-          <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+        <div className=" divide-neutral-200 dark:divide-neutral-700">
+          <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Blog
           </h2>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+          <p className="text-lg leading-7 text-neutral-500 dark:text-neutral-400">
             {/*siteMetadata.description*/}
           </p>
           <Blog posts={posts} locale={locale} />

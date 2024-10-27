@@ -80,25 +80,25 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
   return (
     <>
       <KBarPortal>
-        <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
+        <KBarPositioner className="bg-neutral-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
           <KBarAnimator className="w-full max-w-xl">
             <div
               style={{ zIndex: '100' }}
-              className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]"
+              className="overflow-hidden rounded-2xl border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-[#1c1c1c]"
             >
               <div className="flex items-center space-x-4 p-4">
                 <span className="block w-5">
-                  <SearchIcon className="text-gray-400 dark:text-gray-300" />
+                  <SearchIcon className="text-neutral-400 dark:text-neutral-300" />
                 </span>
                 {showEmailForm || showSettings ? (
                   <div className="h-8 w-full bg-transparent" />
                 ) : (
                   <KBarSearch
                     defaultPlaceholder={t('kbarplaceholder')}
-                    className="h-8 w-full bg-transparent text-gray-600 placeholder-gray-400 focus:outline-none dark:text-gray-200 dark:placeholder-gray-500"
+                    className="h-8 w-full bg-transparent text-neutral-600 placeholder-neutral-400 focus:outline-none dark:text-neutral-200 dark:placeholder-neutral-500"
                   />
                 )}
-                <kbd className="inline-block whitespace-nowrap rounded border border-gray-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-gray-400">
+                <kbd className="inline-block whitespace-nowrap rounded border border-neutral-400 px-1.5 align-middle text-xs font-medium leading-4 tracking-wide text-neutral-400">
                   ESC
                 </kbd>
               </div>
@@ -143,7 +143,7 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
               )}
               {!isLoading && !showEmailForm && !showSettings && <RenderResults />}
               {isLoading && (
-                <div className="block border-t border-gray-100 px-4 py-8 text-center text-gray-400 dark:border-gray-800 dark:text-gray-600">
+                <div className="block border-t border-neutral-100 px-4 py-8 text-center text-neutral-400 dark:border-neutral-800 dark:text-neutral-600">
                   {t('loading')}
                 </div>
               )}

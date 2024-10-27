@@ -82,7 +82,7 @@ const ColorCodeMain = () => {
                   <SelectItem value="7" className="bg-violet-500 text-white">
                     Violeta
                   </SelectItem>
-                  <SelectItem value="8" className="bg-gray-500 text-white">
+                  <SelectItem value="8" className="bg-neutral-500 text-white">
                     Gris
                   </SelectItem>
                   <SelectItem value="9" className="bg-white text-black">
@@ -121,7 +121,7 @@ const ColorCodeMain = () => {
                   <SelectItem value="7" className="bg-violet-500 text-white">
                     Violeta
                   </SelectItem>
-                  <SelectItem value="8" className="bg-gray-500 text-white">
+                  <SelectItem value="8" className="bg-neutral-500 text-white">
                     Gris
                   </SelectItem>
                   <SelectItem value="9" className="bg-white text-black">
@@ -161,7 +161,7 @@ const ColorCodeMain = () => {
                     <SelectItem value="7" className="bg-violet-500 text-white">
                       Violeta
                     </SelectItem>
-                    <SelectItem value="8" className="bg-gray-500 text-white">
+                    <SelectItem value="8" className="bg-neutral-500 text-white">
                       Gris
                     </SelectItem>
                     <SelectItem value="9" className="bg-white text-black">
@@ -226,7 +226,7 @@ const ColorCodeMain = () => {
                     <SelectItem value="0.10" className="bg-violet-500 text-white">
                       Violeta
                     </SelectItem>
-                    <SelectItem value="0.05" className="bg-gray-500 text-white">
+                    <SelectItem value="0.05" className="bg-neutral-500 text-white">
                       Gris
                     </SelectItem>
                     <SelectItem
@@ -270,7 +270,7 @@ const ColorCodeMain = () => {
                     <SelectItem value="5" className="bg-violet-500 text-white">
                       Violeta
                     </SelectItem>
-                    <SelectItem value="1" className="bg-gray-500 text-white">
+                    <SelectItem value="1" className="bg-neutral-500 text-white">
                       Gris
                     </SelectItem>
                   </SelectContent>

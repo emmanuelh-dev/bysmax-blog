@@ -106,7 +106,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               onMouseEnter={() => setShowMenu(true)}
               onMouseLeave={() => setShowMenu(false)}
               onClick={handleCopy}
-              className="fill-current text-gray-700 outline-none hover:text-primary-500 focus:outline-none dark:text-gray-200 dark:hover:text-primary-400"
+              className="fill-current text-neutral-700 outline-none hover:text-primary-500 focus:outline-none dark:text-neutral-200 dark:hover:text-primary-400"
             >
               <svg height="24" viewBox="0 0 24 24" width="24">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -114,7 +114,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               </svg>
             </button>
             {showMenu && (
-              <div className="absolute right-0 top-8 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+              <div className="absolute right-0 top-8 w-32 rounded-md bg-white p-2 text-center shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-800">
                 <p className={`${copied ? 'text-primary-500 dark:text-primary-400' : ''}`}>
                   {copied ? t('urlcopied') : t('copyurl')}
                 </p>

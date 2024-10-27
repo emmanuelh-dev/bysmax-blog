@@ -24,7 +24,7 @@ export default function BlogPage() {
     <div>
       <div className="pb-6 pt-6">
         <h1 className="py-8 text-5xl font-bold">Conoce a Nuestros Autores</h1>
-        <p className="text-gray-400">
+        <p className="text-neutral-400">
           Descubre las historias y las pasiones de las mentes creativas detrás de nuestro contenido.
           Cada autor aporta su propia perspectiva y experiencia, enriqueciendo nuestro blog con una
           diversidad de voces y conocimientos.
@@ -47,14 +47,14 @@ export default function BlogPage() {
                     <div>
                       <h2 className="text-2xl font-bold leading-8 tracking-tight">
                         <Link
-                          className="text-gray-900 dark:text-gray-100"
+                          className="text-neutral-900 dark:text-neutral-100"
                           href={`/author/${author.slug}`}
                         >
                           {author.name}
                         </Link>
                       </h2>
                     </div>
-                    <div className="prose  text-gray-500 dark:text-gray-400">
+                    <div className="prose  text-neutral-500 dark:text-neutral-400">
                       {author.occupation}
                       <span className="block font-bold">{getTotalPosts(author.slug)} Posts</span>
                     </div>
@@ -66,7 +66,7 @@ export default function BlogPage() {
         </div>
         <section className="mt-10">
           <h2 className="py-8 text-5xl font-bold">Nuestro Blog es de Código Abierto</h2>
-          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+          <p className="mt-4 text-lg text-neutral-500 dark:text-neutral-400">
             Nos enorgullece que nuestro blog sea completamente de código abierto. Esto significa que
             cualquier persona puede contribuir modificando el contenido existente o agregando nuevas
             entradas. Si deseas colaborar, simplemente haz un{' '}
@@ -79,7 +79,7 @@ export default function BlogPage() {
         </section>
         <section className="mt-10">
           <h2 className="py-8 text-5xl font-bold">¿Tienes alguna idea o sugerencia?</h2>
-          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+          <p className="mt-4 text-lg text-neutral-500 dark:text-neutral-400">
             Nos encantaría escucharte. Si tienes alguna idea o sugerencia para mejorar nuestro blog,
             no dudes en compartirla con nosotros. Puedes enviarnos un{' '}
             <Link href="/contact" className="text-primary-500 hover:underline">

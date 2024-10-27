@@ -44,7 +44,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           <div className="mb-12">
             <a
               href="/"
-              className="flex items-center text-sm text-gray-400 hover:text-black dark:hover:text-white"
+              className="flex items-center text-sm text-neutral-400 hover:text-black dark:hover:text-white"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Blog / Engineering
@@ -66,12 +66,12 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           width={24}
                           height={24}
                           alt="avatar"
-                          className="h-6 w-6 rounded-full bg-gray-600"
+                          className="h-6 w-6 rounded-full bg-neutral-600"
                         />
                       )}
                       <dl className="sr-only">
                         <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                        <dd className="text-neutral-900 dark:text-neutral-100">{author.name}</dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           {author.twitter && (
@@ -92,14 +92,14 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
           </div>
-          <div className="mb-12 flex items-center text-sm text-gray-400">
+          <div className="mb-12 flex items-center text-sm text-neutral-400">
             <div className="flex items-center">
               <Clock className="mr-2 h-4 w-4" />
               <span>14 min read</span>
             </div>
-            <span className="mx-8 text-gray-600">·</span>
+            <span className="mx-8 text-neutral-600">·</span>
             <dt className="sr-only">Published on</dt>
-            <dd className="leading-6 text-gray-500 dark:text-gray-400">
+            <dd className="leading-6 text-neutral-500 dark:text-neutral-400">
               <time dateTime={date}>
                 {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
               </time>
@@ -118,8 +118,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
           <div className="prose max-w-5xl pb-8 pt-10 dark:prose-invert">{children}</div>
 
           {/* Footer */}
-          <footer className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
-            <div className="text-md divide-gray-200 font-medium leading-5 dark:divide-gray-700 xl:divide-y">
+          <footer className="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-700">
+            <div className="text-md divide-neutral-200 font-medium leading-5 dark:divide-neutral-700 xl:divide-y">
               <div className="flex items-center justify-center py-4 xl:py-6">
                 <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
                   <Image
@@ -132,7 +132,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </div>
               {tags && (
                 <div className="py-4 xl:py-6">
-                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                     Tags
                   </h2>
                   <div className="flex flex-wrap">
@@ -146,7 +146,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 <div className="flex justify-between py-4 text-sm xl:block xl:space-y-6 xl:py-6">
                   {prev && prev.path && (
                     <div>
-                      <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                         Previous Article
                       </h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
@@ -156,7 +156,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   )}
                   {next && next.path && (
                     <div>
-                      <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
                         Next Article
                       </h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">

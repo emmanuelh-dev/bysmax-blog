@@ -30,7 +30,7 @@ You can easily modify the theme color by changing the primary attribute in the t
 theme: {
     colors: {
       primary: colors.teal,
-      gray: colors.neutral,
+      neutral: colors.neutral,
       ...
     }
   ...
@@ -41,7 +41,7 @@ The primary color attribute should be assigned an object with keys from 50, 100,
 
 Tailwind includes great default color palettes that can be used for theming your own website. Check out [customizing colors documentation page](https://tailwindcss.com/docs/customizing-colors) for the full range of options.
 
-Migrating from v1? You can revert to the previous theme by setting `primary` to `colors.sky` (Tailwind 2.2.2 and above, otherwise `colors.lightBlue`) and changing gray to `colors.gray`.
+Migrating from v1? You can revert to the previous theme by setting `primary` to `colors.sky` (Tailwind 2.2.2 and above, otherwise `colors.lightBlue`) and changing neutral to `colors.neutral`.
 
 From v1.1.2+, you can also customize the style of your code blocks easily by modifying the `css/prism.css` stylesheet. Token classnames are compatible with prismjs
 so you can copy and adapt token styles from a prismjs stylesheet e.g. [prism themes](https://github.com/PrismJS/prism-themes).
@@ -333,11 +333,11 @@ To modify the styles, change the following class selectors in the `prism.css` fi
 }
 
 .highlight-line {
-  @apply -mx-4 border-l-4 border-primary-500 bg-gray-700 bg-opacity-50;
+  @apply -mx-4 border-l-4 border-primary-500 bg-neutral-700 bg-opacity-50;
 }
 
 .line-number::before {
-  @apply -ml-2 mr-4 inline-block w-4 text-right text-gray-400;
+  @apply -ml-2 mr-4 inline-block w-4 text-right text-neutral-400;
   content: attr(line);
 }
 ```

@@ -46,7 +46,7 @@ export const CModal: React.FC<cModalProps> = ({
       initial="hidden"
       animate="enter"
       transition={{ type: 'linear' }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-neutralral-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50"
     >
       <div className="relative mx-auto my-3 h-full w-full sm:h-auto sm:w-2/5 sm:max-w-xl">
         <div

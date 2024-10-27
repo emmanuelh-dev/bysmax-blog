@@ -33,7 +33,7 @@ export default function Page() {
               <h2 className="mb-4 text-3xl font-semibold text-primary-500">
                 ¿Qué son los Códigos QR?
               </h2>
-              <p className="mb-4 flex-1 text-gray-600 md:mb-0 md:mr-8">
+              <p className="mb-4 flex-1 text-neutral-600 md:mb-0 md:mr-8">
                 Los códigos QR (Quick Response) son matrices bidimensionales que almacenan gran
                 cantidad de información alfanumérica. Se reconocen por su forma cuadrada y los tres
                 cuadrados en las esquinas superiores e inferior izquierda.
@@ -51,7 +51,7 @@ export default function Page() {
 
         <section className="bg-blue-50 p-8">
           <h2 className="mb-4 text-3xl font-semibold text-primary-500">Generación de Códigos QR</h2>
-          <p className="text-gray-600">
+          <p className="text-neutral-600">
             Crear un código QR es sencillo y gratuito. Nuestra página web ofrece un generador que te
             permite crear todos los que necesites con solo rellenar un formulario simple. Úsalos en
             proyectos, sitios web, tarjetas de visita y más.
@@ -61,7 +61,7 @@ export default function Page() {
 
         <section className="p-8">
           <h2 className="mb-4 text-3xl font-semibold text-primary-500">Usos de los Códigos QR</h2>
-          <p className="mb-4 text-gray-600">
+          <p className="mb-4 text-neutral-600">
             Aunque originalmente se desarrollaron para la industria automotriz, los códigos QR ahora
             tienen innumerables aplicaciones:
           </p>

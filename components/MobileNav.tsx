@@ -30,7 +30,7 @@ const MobileNav = () => {
       <button
         aria-label="Toggle Menu"
         onClick={onToggleNav}
-        className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-gray-100 dark:hover:bg-gray-800 sm:hidden"
+        className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-neutral-100 dark:hover:bg-neutral-800 sm:hidden"
       >
         <Menu className="h-6 w-6" />
       </button>
@@ -38,7 +38,7 @@ const MobileNav = () => {
       {/* Overlay */}
       <div
         className={cn(
-          'fixed -inset-10 z-40 bg-gray-600/20 backdrop-blur-sm dark:bg-black/40',
+          'fixed -inset-10 z-40 bg-neutral-600/20 backdrop-blur-sm dark:bg-black/40',
           navShow ? 'block' : 'hidden'
         )}
         onClick={onToggleNav}
@@ -53,10 +53,10 @@ const MobileNav = () => {
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-4 py-4 dark:border-gray-700  max-md:mt-24">
+        <div className="flex items-center justify-between border-b px-4 py-4 dark:border-neutral-700  max-md:mt-24">
           <span className="text-lg font-semibold">Menú</span>
           <button
-            className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-gray-100 dark:hover:bg-gray-800"
+            className="focus:ring-primary inline-flex items-center justify-center rounded-md p-2.5 text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset dark:text-neutral-100 dark:hover:bg-neutral-800"
             onClick={onToggleNav}
           >
             <X className="h-6 w-6" />
@@ -69,10 +69,10 @@ const MobileNav = () => {
             {/* Nav Sections */}
             <div className="space-y-4">
               {nav.map((section) => (
-                <div key={section.title} className="border-b dark:border-gray-700">
+                <div key={section.title} className="border-b dark:border-neutral-700">
                   <button
                     onClick={() => toggleSection(section.title)}
-                    className="flex w-full items-center justify-between py-3 text-sm font-bold uppercase tracking-wide text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                    className="flex w-full items-center justify-between py-3 text-sm font-bold uppercase tracking-wide text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
                   >
                     <span>{section.title}</span>
                     {expandedSections[section.title] ? (
@@ -93,13 +93,13 @@ const MobileNav = () => {
                           key={link.title}
                           href={link.href}
                           onClick={onToggleNav}
-                          className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base text-gray-900 dark:text-gray-100"
+                          className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base text-neutral-900 dark:text-neutral-100"
                         >
                           {link.icon && <link.icon className="mr-3 h-5 w-5" />}
                           <div>
                             <div>{link.title}</div>
                             {link.description && (
-                              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                              <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                                 {link.description}
                               </p>
                             )}
@@ -118,7 +118,7 @@ const MobileNav = () => {
                   key={link.title}
                   href={link.href}
                   onClick={onToggleNav}
-                  className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-gray-900 dark:text-gray-100"
+                  className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-neutral-900 dark:text-neutral-100"
                 >
                   {link.icon && <link.icon className="mr-3 h-5 w-5" />}
                   {link.title}

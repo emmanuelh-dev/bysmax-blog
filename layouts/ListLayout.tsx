@@ -85,7 +85,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             className={`inline px-3 py-2 text-sm font-medium uppercase ${
               useTagStore.getState().selectedTag === postTag
                 ? 'text-primary-500'
-                : 'text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500'
+                : 'text-neutral-500 hover:text-primary-500 dark:text-neutral-300 dark:hover:text-primary-500'
             }`}
           >
             {' '}
@@ -100,16 +100,16 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
     <>
       <section>
         <div className="pb-6 pt-6">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
         <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
+          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-neutral-50 pt-5 shadow-md dark:bg-neutral-900/70 dark:shadow-neutral-800/40 sm:flex">
             <div className="px-6 py-4">
               <button
                 onClick={() => setSelectedTag('')}
-                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-500 dark:text-heading-400' : 'text-gray-500 dark:text-gray-400'} font-bold uppercase`}
+                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-500 dark:text-heading-400' : 'text-neutral-500 dark:text-neutral-400'} font-bold uppercase`}
               >
                 {t('all')}
               </button>
@@ -126,7 +126,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         <dl>
                           <dt className="sr-only">{t('pub')}</dt>
-                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                          <dd className="text-base font-medium leading-6 text-neutral-500 dark:text-neutral-400">
                             <time dateTime={date}>{formatDate(date, language)}</time>
                           </dd>
                         </dl>
@@ -135,7 +135,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             <div className="text-2xl font-bold leading-8 tracking-tight">
                               <Link
                                 href={`/${locale}/blog/${slug}`}
-                                className="text-gray-900 dark:text-gray-100"
+                                className="text-neutral-900 dark:text-neutral-100"
                                 aria-labelledby={title}
                               >
                                 <h2>{title}</h2>
@@ -159,7 +159,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                               ))}
                             </ul>
                           </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                          <div className="prose max-w-none text-neutral-500 dark:text-neutral-400">
                             {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                           </div>
                         </div>

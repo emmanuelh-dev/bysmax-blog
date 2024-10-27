@@ -27,7 +27,7 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
 
   return (
     <div className="hidden h-full xl:block">
-      <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+      <dl className="pb-10 pt-6 xl:border-b xl:border-neutral-200 xl:pt-11 xl:dark:border-neutral-700">
         <dt className="sr-only">Authors</dt>
         <dd>
           <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
@@ -53,7 +53,7 @@ export default function Sidebar({ authorDetails, next, prev, content, locale }) 
                   )}
                   <dl className="whitespace-nowrap text-sm font-medium leading-5">
                     <dt className="sr-only">Name</dt>
-                    <dd className="text-gray-900 dark:text-gray-100">
+                    <dd className="text-neutral-900 dark:text-neutral-100">
                       <Link href={`${author.url ? author.url : '/author/' + author.slug}`}>
                         {author.name}
                       </Link>
