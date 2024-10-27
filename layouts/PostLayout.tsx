@@ -96,7 +96,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div>
                 <ins
-                  className="adsbygoogle"
+                  className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="6395288197"
@@ -180,7 +180,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </Link>
               </div>
               <ins
-                className="adsbygoogle sticky top-10 mt-6"
+                className="adsbygoogle sticky top-10 mt-6  h-[600px] w-full bg-white dark:bg-black"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-3646138644530578"
                 data-ad-slot="9734184827"

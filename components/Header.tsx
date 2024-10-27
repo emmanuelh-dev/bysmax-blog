@@ -1,29 +1,42 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useMediaQuery } from 'react-responsive'
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import Link from './Link'
+import dynamic from 'next/dynamic'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Link from './Link'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
+
 import ThemeSwitch from './ThemeSwitch'
 import LangSwitch from './langswitch'
-import { useParams } from 'next/navigation'
-import { LocaleTypes } from '@/app/[locale]/i18n/settings'
-import dynamic from 'next/dynamic'
 
-const Navigation = dynamic(() => import('./NavigationMenu'))
-const MobileNav = dynamic(() => import('./MobileNav'))
-const SearchButton = dynamic(() => import('./search/SearchButton'))
+const Navigation = dynamic(() => import('./NavigationMenu'), { ssr: false })
+const MobileNav = dynamic(() => import('./MobileNav'), { ssr: false })
+const SearchButton = dynamic(() => import('./search/SearchButton'), { ssr: false })
 
-export default function Component() {
+export default function Header() {
   const locale = useParams()?.locale as LocaleTypes
-  const [isClient, setIsClient] = useState(false)
-  const isDesktop = useMediaQuery({ minWidth: 768 }, undefined, (matches) => {
-    if (isClient) setIsClient(matches)
-  })
+  const [isMobile, setIsMobile] = useState(true)
 
   useEffect(() => {
-    setIsClient(true)
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    handleResize()
+
+    let timeoutId: NodeJS.Timeout
+    const debouncedResize = () => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(handleResize, 100)
+    }
+
+    window.addEventListener('resize', debouncedResize)
+    return () => {
+      window.removeEventListener('resize', debouncedResize)
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   return (
@@ -40,28 +53,26 @@ export default function Component() {
         </Link>
       </div>
       <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-        {isClient ? (
-          isDesktop ? (
-            <>
-              <Navigation />
-              {headerNavLinks
-                .filter((link) => link.href !== '/')
-                .map((link) => (
-                  <Link
-                    key={link.title}
-                    href={`/${locale}${link.href}`}
-                    className="font-medium text-gray-900 dark:text-gray-100"
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-            </>
-          ) : null
-        ) : null}
+        {!isMobile && (
+          <>
+            <Navigation />
+            {headerNavLinks
+              .filter((link) => link.href !== '/')
+              .map((link) => (
+                <Link
+                  key={link.title}
+                  href={`/${locale}${link.href}`}
+                  className="font-medium text-gray-900 dark:text-gray-100"
+                >
+                  {link.title}
+                </Link>
+              ))}
+          </>
+        )}
         <SearchButton />
         <ThemeSwitch />
         <LangSwitch />
-        {isClient ? !isDesktop ? <MobileNav /> : null : null}
+        {isMobile && <MobileNav />}
       </div>
     </header>
   )
