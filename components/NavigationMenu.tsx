@@ -48,24 +48,6 @@ export default function Navigation() {
             </NavigationMenuContent>
           </NavigationMenuItem>
         ))}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Software</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[400px] ">
-              <ListItem title="Todos" href={`/${locale}/software`} className="font-bold"></ListItem>
-              {/* {(t('cards', { returnObjects: true }) as unknown as any[]).map((item) => (
-                <ListItem key={item.title} title={item.title} href={item.link}></ListItem>
-              ))} */}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          {/* <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
-            </NavigationMenuLink>
-          </Link> */}
-        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )
@@ -74,7 +56,7 @@ export default function Navigation() {
 const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
   ({ className, title, children, icon: Icon, ...props }, ref) => {
     return (
-      <li>
+      <li className='flex items-center'>
         <NavigationMenuLink asChild>
           <a
             ref={ref}
@@ -92,7 +74,7 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, ListItemProps>(
               )}
               <div>
                 <div className="text-sm font-medium leading-none">{title}</div>
-                <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                <p className="text-muted-foreground line-clamp-2 text-sm leading-snug text-neutral-400">
                   {children}
                 </p>
               </div>

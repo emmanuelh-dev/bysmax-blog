@@ -43,6 +43,20 @@ interface Nav {
 
 export const nav: Nav[] = [
   {
+    title: 'Herramientas',
+    links: [
+      {
+        title: 'Todas',
+        href: '/tools',
+      },
+      {
+        title: 'Generador de QR',
+        href: '/tools/qr-code-generator',
+        icon: QrCode,
+      },
+    ],
+  },
+  {
     title: 'Servicios',
     links: [
       {
@@ -87,6 +101,42 @@ export const nav: Nav[] = [
     ],
   },
   {
+    title: 'Software',
+    links: [
+      { title: 'Todos', href: '/software' },
+      {
+        title: 'Proteus 8.8',
+        description: 'Circuitos electrónicos',
+        href: '/software/proteus',
+        icon: Cpu,
+      },
+      {
+        title: 'NI Multisim',
+        description: 'Circuitos electrónicos',
+        href: '/software/multisim',
+        icon: Cpu,
+      },
+      {
+        title: 'MathCAD 14',
+        href: '/software/mathcad-14',
+        description: 'Calculo técnico',
+        icon: Cpu,
+      },
+      {
+        title: 'MathCAD Prime 7',
+        href: '/software/mathcad-prime-7',
+        description: 'Calculo técnico',
+        icon: Cpu,
+      },
+      {
+        title: 'PSeInt',
+        href: '/software/pseint',
+        description: 'Programación',
+        icon: Cpu,
+      },
+    ],
+  },
+  {
     title: 'Guias',
     links: [
       {
@@ -96,20 +146,6 @@ export const nav: Nav[] = [
       {
         title: 'Tutoriales de arduino',
         href: '/arduino/tutoriales',
-      },
-    ],
-  },
-  {
-    title: 'Herramientas',
-    links: [
-      {
-        title: 'Todas',
-        href: '/tools',
-      },
-      {
-        title: 'Generador de QR',
-        href: '/tools/qr-code-generator',
-        icon: QrCode,
       },
     ],
   },
