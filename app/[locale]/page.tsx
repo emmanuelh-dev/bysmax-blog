@@ -22,13 +22,11 @@ export default async function Page({ params: { locale } }) {
   const { t } = await createTranslation(locale, 'home')
   return (
     <div>
-      <section className="flex w-full items-center justify-between py-12 max-sm:flex-col-reverse max-sm:font-semibold">
+      <main className="mx-auto flex w-full max-w-4xl items-center justify-center py-20 max-sm:flex-col-reverse max-sm:font-semibold lg:text-center 2xl:py-40">
         <div className="space-y-4">
-          <h1 className="text-6xl font-semibold leading-tight md:max-w-[40rem] md:text-7xl">
-            {t('title')}
-          </h1>
+          <h1 className="text-5xl font-semibold leading-tight lg:text-6xl">{t('title')}</h1>
           <p className="pt-2 text-lg text-neutral-500 dark:text-neutral-400">{t('description')}</p>
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-4">
             <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
               Blog y Tutoriales
             </Link>
@@ -37,8 +35,7 @@ export default async function Page({ params: { locale } }) {
             </Link>
           </div>
         </div>
-        <Image alt="Sonrie" width="480" height="480" src={'/static/notes/02.png'} />
-      </section>
+      </main>
       <Filter />
 
       <section className="py-12">
