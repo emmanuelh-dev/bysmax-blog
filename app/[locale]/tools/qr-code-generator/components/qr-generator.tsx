@@ -16,12 +16,14 @@ import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { HexColorPicker } from 'react-colorful'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Textarea } from '@/components/ui/textarea'
 
 export default function QRGenerator() {
   const [qrType, setQRType] = useState('url')
   const [qrData, setQRData] = useState({
-    url: '',
+    url: 'https://emmanuelh.dev',
     phone: '',
+    whatsapp: { phone: '', message: '' },
     contact: { name: '', phone: '', email: '' },
     email: '',
     sms: { number: '', message: '' },
@@ -80,6 +82,8 @@ export default function QRGenerator() {
         return qrData.url
       case 'phone':
         return `tel:${qrData.phone}`
+      case 'whatsapp':
+        return `https://wa.me/${qrData.whatsapp.phone}?text=${qrData.whatsapp.message}`
       case 'contact':
         return `BEGIN:VCARD\nVERSION:3.0\nN:${qrData.contact.name}\nTEL:${qrData.contact.phone}\nEMAIL:${qrData.contact.email}\nEND:VCARD`
       case 'email':
@@ -94,7 +98,7 @@ export default function QRGenerator() {
   }
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     nestedKey: string | null = null
   ) => {
     const { name, value } = e.target
@@ -144,6 +148,28 @@ export default function QRGenerator() {
               value={qrData.phone}
               onChange={handleInputChange}
               placeholder="+1234567890"
+            />
+          </div>
+        )
+      case 'whatsapp':
+        return (
+          <div className="grid w-full items-center gap-4">
+            <Label htmlFor="whatsapp">Número de teléfono</Label>
+            <Input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={qrData.whatsapp.phone}
+              onChange={(e) => handleInputChange(e, 'whatsapp')}
+              placeholder="+1234567890"
+            />
+            <Label htmlFor="whatsapp">Mensaje</Label>
+            <Textarea
+              id="message"
+              name="message"
+              value={qrData.whatsapp.message}
+              onChange={(e) => handleInputChange(e, 'whatsapp')}
+              placeholder="Tu mensaje aquí"
             />
           </div>
         )
@@ -277,6 +303,7 @@ export default function QRGenerator() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="url">URL</SelectItem>
+                  <SelectItem value="whatsapp">WhatsApp</SelectItem>
                   <SelectItem value="phone">Teléfono</SelectItem>
                   <SelectItem value="contact">Contacto</SelectItem>
                   <SelectItem value="email">Email</SelectItem>
@@ -338,7 +365,7 @@ export default function QRGenerator() {
                 </div>
               </RadioGroup>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <Label htmlFor="qrFrame">Marco del QR</Label>
               <Select value={qrFrame} onValueChange={setQrFrame}>
                 <SelectTrigger>
@@ -351,7 +378,7 @@ export default function QRGenerator() {
                   <SelectItem value="fancy">Marco decorativo</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
             <div>
               <div className="flex w-full gap-8">
                 <div className="space-y-2">

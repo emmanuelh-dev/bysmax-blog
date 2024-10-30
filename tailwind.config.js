@@ -37,6 +37,8 @@ module.exports = {
           ...colors.blue,
           500: '#007deb',
         },
+        white: '#f4f4f4',
+        black: '#121212',
         neutral: colors.neutral,
       },
       keyframes: {
