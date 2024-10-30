@@ -59,35 +59,6 @@ export const nav: Nav[] = [
     ],
   },
   {
-    title: 'Servicios',
-    links: [
-      {
-        title: 'Mantenimiento de Computadoras en Monterrey',
-        description: '',
-        href: '/servicios/reparacion-de-computadoras-en-monterrey',
-        icon: Wrench,
-      },
-      {
-        title: 'Mantenimiento de Computadoras en Guadalupe',
-        description: '',
-        href: '/servicios/reparacion-de-computadoras-en-guadalupe',
-        icon: Wrench,
-      },
-      {
-        title: 'Mantenimiento de Computadoras en San Nicolas',
-        description: '',
-        href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
-        icon: Wrench,
-      },
-      {
-        title: 'Servicios GPS y Rastreo',
-        description: '',
-        href: '/servicios/plataforma-de-rastreo-gps',
-        icon: MapPin,
-      },
-    ],
-  },
-  {
     title: 'Cursos',
     links: [
       {
@@ -99,6 +70,19 @@ export const nav: Nav[] = [
         title: 'Curso Gratis de Arduino',
         href: '/arduino',
         icon: Cpu,
+      },
+    ],
+  },
+  {
+    title: 'Guias',
+    links: [
+      {
+        title: 'Compuertas Logicas',
+        href: '/compuertas-logicas',
+      },
+      {
+        title: 'Tutoriales de arduino',
+        href: '/arduino/tutoriales',
       },
     ],
   },
@@ -139,15 +123,31 @@ export const nav: Nav[] = [
     ],
   },
   {
-    title: 'Guias',
+    title: 'Servicios',
     links: [
       {
-        title: 'Compuertas Logicas',
-        href: '/compuertas-logicas',
+        title: 'Mantenimiento de Computadoras en Monterrey',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-monterrey',
+        icon: Wrench,
       },
       {
-        title: 'Tutoriales de arduino',
-        href: '/arduino/tutoriales',
+        title: 'Mantenimiento de Computadoras en Guadalupe',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-guadalupe',
+        icon: Wrench,
+      },
+      {
+        title: 'Mantenimiento de Computadoras en San Nicolas',
+        description: '',
+        href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
+        icon: Wrench,
+      },
+      {
+        title: 'Servicios GPS y Rastreo',
+        description: '',
+        href: '/servicios/plataforma-de-rastreo-gps',
+        icon: MapPin,
       },
     ],
   },

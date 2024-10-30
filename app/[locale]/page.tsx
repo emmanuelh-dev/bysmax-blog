@@ -22,7 +22,7 @@ export default async function Page({ params: { locale } }) {
   const { t } = await createTranslation(locale, 'home')
   return (
     <div>
-      <header className="flex w-full items-center justify-between py-12 max-sm:flex-col-reverse max-sm:font-semibold">
+      <section className="flex w-full items-center justify-between py-12 max-sm:flex-col-reverse max-sm:font-semibold">
         <div className="space-y-4">
           <h1 className="text-6xl font-semibold leading-tight md:max-w-[40rem] md:text-7xl">
             {t('title')}
@@ -38,7 +38,7 @@ export default async function Page({ params: { locale } }) {
           </div>
         </div>
         <Image alt="Sonrie" width="480" height="480" src={'/static/notes/02.png'} />
-      </header>
+      </section>
       <Filter />
 
       <section className="py-12">
