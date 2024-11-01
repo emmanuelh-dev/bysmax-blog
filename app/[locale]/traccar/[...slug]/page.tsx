@@ -132,6 +132,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       title={post.title}
       description={post.summary}
       authorDetails={[]}
+      toc={post.toc}
       path={{ title: 'Traccar', href: '/traccar' }}
     >
       <script

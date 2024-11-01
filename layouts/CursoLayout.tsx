@@ -17,9 +17,9 @@ import {
 import Link from 'next/link'
 import { useState } from 'react'
 
-export function CursoLayout({ children, sidebar, title, description, authorDetails, path }) {
+export function CursoLayout({ children, sidebar, title, description, authorDetails, path, toc }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+  console.log(toc)
   return (
     <div className="container my-12 grid grid-cols-1 md:grid-cols-[250px_1fr_250px]">
       {/* Left Sidebar - Fixed with scroll */}
@@ -69,14 +69,12 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
               <span>•</span>
               <Badge
                 variant="secondary"
-                className="bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
               >
                 Intermediate
               </Badge>
               <span>•</span>
               <Badge
                 variant="secondary"
-                className="bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
               >
                 Short
               </Badge>
@@ -94,51 +92,17 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
 
       {/* Right Sidebar - Fixed with scroll */}
       <aside className="sticky top-10 h-[calc(100vh-4rem)] overflow-y-auto border-l border-gray-800 max-sm:hidden">
-        <nav className="space-y-6 p-4">
-          <div className="space-y-2">
-            <h2 className="flex items-center text-sm font-semibold">
-              Getting Started <ChevronDown className="ml-2 h-4 w-4" />
-            </h2>
-            <div className="ml-4 space-y-1">
-              <Link
-                className="block text-sm text-gray-400 transition-colors hover:text-white"
-                href="/arduino"
-              >
-                Introduction
-              </Link>
-              <Link
-                className="block text-sm text-gray-400 transition-colors hover:text-white"
-                href="/arduino"
-              >
-                Hardware Setup
-              </Link>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <h2 className="flex items-center text-sm font-semibold">
-              Projects <ChevronDown className="ml-2 h-4 w-4" />
-            </h2>
-            <div className="ml-4 space-y-1">
-              <Link
-                className="block text-sm text-gray-400 transition-colors hover:text-white"
-                href="/arduino"
-              >
-                LED Control
-              </Link>
-              <Link
-                className="block text-sm text-gray-400 transition-colors hover:text-white"
-                href="/arduino"
-              >
-                Sensors
-              </Link>
-              <Link
-                className="block text-sm text-gray-400 transition-colors hover:text-white"
-                href="/arduino"
-              >
-                Motors
-              </Link>
-            </div>
-          </div>
+        <nav className="space-y-2 p-4">
+          <h2 className="flex items-center text-sm font-semibold">
+            Tabla de contenido
+          </h2>
+          {toc.map(item => (
+            <Link
+              className="block text-sm text-gray-400 transition-colors hover:text-white"
+              href={item.url}
+            >
+              {item.value}
+            </Link>))}
         </nav>
       </aside>
     </div>

@@ -97,6 +97,7 @@ export function Home() {
           'Te guiará desde la configuración inicial de tu propio servidor de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'
         }
         path={{ title: 'Traccar', href: '/traccar' }}
+        toc={[]}
         authorDetails={[]}
       >
         <div className="bg-background text-foreground flex min-h-screen flex-col">
