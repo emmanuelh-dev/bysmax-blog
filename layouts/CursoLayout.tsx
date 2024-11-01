@@ -88,6 +88,7 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
           <h2 className="flex items-center text-sm font-semibold">Tabla de contenido</h2>
           {toc.map((item) => (
             <Link
+              key={item.value}
               className="block text-sm text-gray-400 transition-colors hover:text-white"
               href={item.url}
             >
