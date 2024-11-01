@@ -35,6 +35,7 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
                       className="flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
                       href={section.link}
                       key={section.title}
+                      target={section.type === 'video' ? '_blank' : '_self'}
                     >
                       {section.type === 'doc' && <BookText className="size-4" />}
                       {section.type === 'video' && <Play className="size-4" />}
