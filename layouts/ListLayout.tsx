@@ -13,6 +13,7 @@ import tagData from 'app/[locale]/tag-data.json'
 import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import SectionContainer from '@/components/SectionContainer'
 
 interface PaginationProps {
   totalPages: number
@@ -97,7 +98,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   })
 
   return (
-    <>
+    <SectionContainer>
       <section>
         <div className="pb-6 pt-6">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
@@ -180,6 +181,6 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           </div>
         </div>
       </section>
-    </>
+    </SectionContainer>
   )
 }

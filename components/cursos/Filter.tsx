@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui/button'
 import { BookOpenIcon } from 'lucide-react'
+import SectionContainer from '../SectionContainer'
 
 export default function Filter() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
@@ -14,7 +15,7 @@ export default function Filter() {
       ? cursos
       : cursos.filter((curso) => curso.categoria === categoriaSeleccionada)
   return (
-    <>
+    <SectionContainer>
       <section>
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Categorías</h2>
@@ -75,6 +76,6 @@ export default function Filter() {
           })}
         </div>
       </section>
-    </>
+    </SectionContainer>
   )
 }

@@ -10,6 +10,7 @@ import SuspencePosts from '@/layouts/components/SuspencePosts'
 import getAllPosts from '@/lib/allPosts'
 import Filter from '@/components/cursos/Filter'
 import dynamic from 'next/dynamic'
+import SectionContainer from '@/components/SectionContainer'
 
 const Blog = dynamic(() => import('./Main'), {
   loading: () => <SuspencePosts />,
@@ -38,8 +39,8 @@ export default async function Page({ params: { locale } }) {
       </main>
       <Filter />
 
-      <section className="py-12">
-        <div className=" divide-neutral-200 dark:divide-neutral-700">
+      <SectionContainer>
+        <div className="divide-neutral-200 dark:divide-neutral-700">
           <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Blog
           </h2>
@@ -48,7 +49,7 @@ export default async function Page({ params: { locale } }) {
           </p>
           <Blog posts={posts} locale={locale} />
         </div>
-      </section>
+      </SectionContainer>
       <Services />
     </div>
   )
