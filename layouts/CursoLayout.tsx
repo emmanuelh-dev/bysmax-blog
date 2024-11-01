@@ -67,17 +67,9 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
             <div className="flex items-center gap-2 text-sm text-gray-400">
               <span>May 25, 2024</span>
               <span>•</span>
-              <Badge
-                variant="secondary"
-              >
-                Intermediate
-              </Badge>
+              <Badge variant="secondary">Intermediate</Badge>
               <span>•</span>
-              <Badge
-                variant="secondary"
-              >
-                Short
-              </Badge>
+              <Badge variant="secondary">Short</Badge>
             </div>
           </div>
 
@@ -93,16 +85,15 @@ export function CursoLayout({ children, sidebar, title, description, authorDetai
       {/* Right Sidebar - Fixed with scroll */}
       <aside className="sticky top-10 h-[calc(100vh-4rem)] overflow-y-auto border-l border-gray-800 max-sm:hidden">
         <nav className="space-y-2 p-4">
-          <h2 className="flex items-center text-sm font-semibold">
-            Tabla de contenido
-          </h2>
-          {toc.map(item => (
+          <h2 className="flex items-center text-sm font-semibold">Tabla de contenido</h2>
+          {toc.map((item) => (
             <Link
               className="block text-sm text-gray-400 transition-colors hover:text-white"
               href={item.url}
             >
               {item.value}
-            </Link>))}
+            </Link>
+          ))}
         </nav>
       </aside>
     </div>
