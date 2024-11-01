@@ -163,6 +163,47 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+export const Curso = defineDocumentType(() => ({
+  name: 'Curso',
+  filePathPattern: 'cursos/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    series: { type: 'nested', of: Series },
+    date: { type: 'date', required: true },
+    language: { type: 'string', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    featured: { type: 'boolean' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    authors: { type: 'list', of: { type: 'string' }, required: true },
+    layout: { type: 'string' },
+    wpBlog: { type: 'boolean', default: false },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
+    content: { type: 'string' },
+  },
+  computedFields: {
+    ...computedFields,
+
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/${doc.language}/blog/${doc.slug}`,
+      }),
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
