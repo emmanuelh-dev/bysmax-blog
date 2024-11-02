@@ -106,11 +106,11 @@ const Contacto = async ({ locale }) => {
       </a>
       <a
         className="block py-4 text-primary-500"
-        href="https://wa.me/528126060795"
+        href="https://wa.me/528111913676"
         target="_blank"
         rel="noopener noreferrer"
       >
-        8126060795
+        8111913676
       </a>
       <div className="flex gap-6 ">
         <form className="w-full space-y-4">

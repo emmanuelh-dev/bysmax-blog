@@ -122,6 +122,20 @@ export const Series = defineNestedType(() => ({
   },
 }))
 
+export const Sections = defineNestedType(() => ({
+  name: 'Sections',
+  fields: {
+    title: {
+      type: 'string',
+      required: true,
+    },
+    position: {
+      type: 'number',
+      required: true,
+    },
+  },
+}))
+
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -144,9 +158,9 @@ export const Blog = defineDocumentType(() => ({
     canonicalUrl: { type: 'string' },
     content: { type: 'string' },
   },
+
   computedFields: {
     ...computedFields,
-
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -169,7 +183,10 @@ export const Curso = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    shortTitle: { type: 'string', required: true },
+    id: { type: 'string', required: true },
     series: { type: 'nested', of: Series },
+    section: { type: 'nested', of: Sections },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
@@ -226,7 +243,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Authors, Curso],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

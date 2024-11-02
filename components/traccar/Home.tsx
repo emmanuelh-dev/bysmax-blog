@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/accordion'
 import { BookText, Play } from 'lucide-react'
 import { CursoLayout } from '@/layouts/CursoLayout'
-import { TEMARIO } from '@/data/cursoTraccar'
+import useTemario from '@/data/cursoTraccar'
 
 export const metadata = genPageMetadata({
   title: 'Curso Gratuito de Traccar desde Cero hasta Avanzado en español',
@@ -81,13 +81,14 @@ const jsonLd = () => {
     teaches: ['Traccar'],
     inLanguage: 'es',
     availableLanguage: ['es', 'en'],
-    syllabusSections: TEMARIO.map((section) => ({
-      name: section.title,
-      description: section.description,
-    })),
+    // syllabusSections: TEMARIO.map((section) => ({
+    //   name: section.title,
+    //   description: section.description,
+    // })),
   }
 }
 export function Home() {
+  const TEMARIO = useTemario('es', 'traccar')
   return (
     <>
       <CursoLayout
@@ -144,9 +145,6 @@ export function Home() {
                               {item.sections.map((section) => (
                                 <li key={section.title}>
                                   <div className="flex items-center">
-                                    <Link href={section.link}>
-                                      {section.type !== 'doc' ? <Play /> : <BookText />}
-                                    </Link>
                                     <Link
                                       href={section.link}
                                       className={` ${buttonVariants({ variant: 'link' })}`}
