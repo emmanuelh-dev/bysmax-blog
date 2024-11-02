@@ -6,32 +6,7 @@ import SectionContainer from './SectionContainer'
 import { nav } from '@/data/headerNavLinks'
 
 const Footer = async () => {
-  const footerLinks = [
-    {
-      title: 'Mantente actualizado',
-      links: [
-        {
-          title: 'Curso Gratis de Traccar',
-          href: '/traccar',
-        },
-      ],
-    },
-
-    {
-      title: 'Cursos',
-      links: [
-        {
-          title: 'Curso Gratis de Traccar',
-          href: '/traccar',
-        },
-        {
-          title: 'Curso Gratis de Arduino',
-          href: '/arduino',
-        },
-      ],
-    },
-    ...nav,
-  ]
+  const footerLinks = [...nav]
 
   return (
     <SectionContainer>

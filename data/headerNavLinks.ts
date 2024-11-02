@@ -62,7 +62,7 @@ export const nav: Nav[] = [
     title: 'Cursos',
     links: [
       {
-        title: 'Curso Gratis de Traccar',
+        title: 'Curso de Traccar',
         href: '/traccar',
         icon: Navigation,
       },
