@@ -90,7 +90,7 @@ const Contacto = async ({ locale }) => {
   const { t } = await createTranslation(locale, 'contact')
 
   return (
-    <section className="mx-auto max-w-xl">
+    <section className="mx-auto max-w-xl p-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

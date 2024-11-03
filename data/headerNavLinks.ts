@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Sigma,
   FolderCode,
+  ShoppingBag,
 } from 'lucide-react'
 
 const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
@@ -25,8 +26,10 @@ interface HeaderLink {
 }
 
 const headerNavLinks: HeaderLink[] = [
-  { href: '/blog', title: 'Blog', icon: BookMarked },
   { href: '/donate', title: 'Donate or Contribute', icon: GraduationCap },
+  { href: '/blog', title: 'Blog', icon: BookMarked },
+  { href: '/contacto', title: 'Contacto', icon: Lightbulb },
+  { href: '/store', title: 'Tienda', icon: ShoppingBag },
 ]
 
 export default headerNavLinks
