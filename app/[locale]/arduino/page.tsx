@@ -1,4 +1,5 @@
 import CursoLayout from '@/layouts/CursoLayout'
+
 export default function page() {
   return (
     <CursoLayout
@@ -8,6 +9,7 @@ export default function page() {
       toc={[]}
       description={''}
       authorDetails={[]}
+      slug={'/arduino'}
     >
       <div>Hola</div>
     </CursoLayout>

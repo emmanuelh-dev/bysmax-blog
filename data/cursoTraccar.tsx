@@ -40,6 +40,8 @@ const useTemario = (locale: string, curso: string): Section[] => {
     return (a.position || 0) - (b.position || 0)
   })
 
+  const traccar = curso === 'traccar'
+
   return [
     {
       title: 'Inicio',
@@ -48,12 +50,16 @@ const useTemario = (locale: string, curso: string): Section[] => {
       sections: [{ title: 'Introducción', link: '/' + curso }],
     },
     ...sidebar,
-    {
-      title: 'Necesito un servidor',
-      show: true,
-      description: '',
-      sections: [{ title: 'Contactanos', link: '/contacto' }],
-    },
+    ...(traccar
+      ? [
+          {
+            title: 'Necesito un servidor',
+            show: true,
+            description: '',
+            sections: [{ title: 'Contáctanos', link: '/contacto' }],
+          },
+        ]
+      : []),
   ]
 }
 

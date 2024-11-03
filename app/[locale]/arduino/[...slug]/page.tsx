@@ -97,7 +97,7 @@ export async function generateMetadata({
 export default async function Page({ params: { slug, locale } }: CursoPageProps) {
   const dslug = decodeURI(slug.join('/'))
   const curso = 'traccar'
-  // Filter out drafts in production + locale filtering
+
   const sortedCoreContents = sortPosts(allCursos)
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === dslug)
 
