@@ -140,6 +140,7 @@ export default async function Page({ params: { slug, locale } }: CursoPageProps)
       authorDetails={[]}
       toc={post.toc}
       path={{ title: 'Traccar', href: '/traccar' }}
+      slug="/arduino"
     >
       <script
         type="application/ld+json"
