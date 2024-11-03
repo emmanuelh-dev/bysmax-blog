@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui/button'
 import { BookOpenIcon } from 'lucide-react'
-import SectionContainer from '../SectionContainer'
 
 export default function Filter() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todas')
@@ -15,7 +14,7 @@ export default function Filter() {
       ? cursos
       : cursos.filter((curso) => curso.categoria === categoriaSeleccionada)
   return (
-    <SectionContainer>
+    <div className="mx-auto max-w-7xl px-8">
       <section>
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Categorías</h2>
@@ -43,7 +42,7 @@ export default function Filter() {
           })}
         </div>
       </section>
-      <section className="mt-12">
+      <section className="py-12">
         <h2 className="mb-6 text-2xl font-bold">{categoriaSeleccionada}</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {cursosFiltrados.map((curso) => {
@@ -76,6 +75,6 @@ export default function Filter() {
           })}
         </div>
       </section>
-    </SectionContainer>
+    </div>
   )
 }

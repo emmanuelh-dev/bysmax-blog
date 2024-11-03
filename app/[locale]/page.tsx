@@ -10,7 +10,6 @@ import SuspencePosts from '@/layouts/components/SuspencePosts'
 import getAllPosts from '@/lib/allPosts'
 import Filter from '@/components/cursos/Filter'
 import dynamic from 'next/dynamic'
-import SectionContainer from '@/components/SectionContainer'
 
 const Blog = dynamic(() => import('./Main'), {
   loading: () => <SuspencePosts />,
@@ -23,8 +22,8 @@ export default async function Page({ params: { locale } }) {
   const { t } = await createTranslation(locale, 'home')
   return (
     <>
-      <SectionContainer>
-        <header className="mx-auto flex w-full max-w-4xl items-center justify-center py-20 max-sm:flex-col-reverse max-sm:font-semibold lg:text-center 2xl:py-40">
+      <section>
+        <header className="mx-auto flex w-full max-w-4xl items-center justify-center px-8 py-20 max-sm:flex-col-reverse max-sm:font-semibold lg:text-center 2xl:py-40">
           <div className="space-y-4">
             <h1 className="text-5xl font-semibold leading-tight lg:text-6xl">{t('title')}</h1>
             <p className="pt-2 text-lg text-neutral-500 dark:text-neutral-400">
@@ -40,10 +39,10 @@ export default async function Page({ params: { locale } }) {
             </div>
           </div>
         </header>
-      </SectionContainer>
+      </section>
       <Filter />
 
-      <SectionContainer>
+      <div className="mx-auto max-w-7xl px-8">
         <div className="divide-neutral-200 dark:divide-neutral-700">
           <h2 className="text-3xl font-extrabold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Blog
@@ -53,7 +52,7 @@ export default async function Page({ params: { locale } }) {
           </p>
           <Blog posts={posts} locale={locale} />
         </div>
-      </SectionContainer>
+      </div>
       <Services />
     </>
   )
