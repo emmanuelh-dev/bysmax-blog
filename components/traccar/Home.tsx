@@ -100,6 +100,7 @@ export function Home() {
         path={{ title: 'Traccar', href: '/traccar' }}
         toc={[]}
         authorDetails={[]}
+        slug={'/traccar'}
       >
         <div className="bg-background text-foreground flex min-h-screen flex-col">
           <main className="flex-1">

@@ -94,7 +94,17 @@ function createTagCount(allBlogs) {
 
   writeFileSync('./app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
-
+const LinksProperties = defineNestedType(() => ({
+  name: 'LinksProperties',
+  fields: {
+    doc: {
+      type: 'string',
+    },
+    api: {
+      type: 'string',
+    },
+  },
+}))
 function createSearchIndex(allBlogs) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
@@ -241,9 +251,49 @@ export const Authors = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const Doc = defineDocumentType(() => ({
+  name: 'Doc',
+  filePathPattern: `docs/**/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    title: {
+      type: 'string',
+      required: true,
+    },
+    description: {
+      type: 'string',
+      required: true,
+    },
+    published: {
+      type: 'boolean',
+      default: true,
+    },
+    links: {
+      type: 'nested',
+      of: LinksProperties,
+    },
+    featured: {
+      type: 'boolean',
+      default: false,
+      required: false,
+    },
+    component: {
+      type: 'boolean',
+      default: false,
+      required: false,
+    },
+    toc: {
+      type: 'boolean',
+      default: true,
+      required: false,
+    },
+  },
+  computedFields,
+}))
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Curso],
+  documentTypes: [Blog, Authors, Curso, Doc],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

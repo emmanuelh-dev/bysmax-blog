@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import QRGenerator from './components/qr-generator'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import Image from '@/components/Image'
+import SectionContainer from '@/components/SectionContainer'
+import Link from 'next/link'
 
 const SITE_NAME = 'QR Code Generator'
 const TITLE = 'Crea códigos QR gratis'
@@ -37,17 +39,19 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <main className="mb-12 text-pretty text-center text-neutral-600 dark:text-neutral-400">
-        <div className="mx-auto max-w-5xl pb-6">
-          <h1 className="mb-4 text-balance pb-4 pt-16 text-4xl font-medium tracking-tight text-black dark:text-white lg:text-5xl">
-            {FULL_TITLE}
-          </h1>
-          <p>{DESCRIPTION}</p>
-        </div>
-        <QRGenerator />
-      </main>
+      <SectionContainer>
+        <main className="mb-12 text-pretty text-center text-neutral-600 dark:text-neutral-400">
+          <div className="mx-auto max-w-5xl pb-6">
+            <h1 className="mb-4 text-balance pb-4 pt-16 text-4xl font-medium tracking-tight text-black dark:text-white lg:text-5xl">
+              {FULL_TITLE}
+            </h1>
+            <p>{DESCRIPTION}</p>
+          </div>
+          <QRGenerator />
+        </main>
+      </SectionContainer>
 
-      <section className="p-8">
+      <SectionContainer>
         <div className="flex flex-col items-center md:flex-row">
           <div className="lg:w-2/3">
             <h2 className="mb-4 text-3xl font-semibold text-primary-500">
@@ -67,17 +71,19 @@ export default function Page() {
             className="size-72 w-full max-w-72 rounded-md shadow-md"
           />
         </div>
-      </section>
+      </SectionContainer>
 
-      <section className="rounded-3xl bg-blue-50 p-8">
+      <SectionContainer>
         <h2 className="mb-4 text-3xl font-semibold text-primary-500">Generación de Códigos QR</h2>
-        <p className="text-neutral-600">
+        <p className="">
           Crear un código QR es sencillo y gratuito. Nuestra página web ofrece un generador que te
           permite crear todos los que necesites con solo rellenar un formulario simple. Úsalos en
           proyectos, sitios web, tarjetas de visita y más.
         </p>
-        <Button className="mt-4">Generar Código QR</Button>
-      </section>
+        <Link className={buttonVariants({ variant: 'default' })} href="#generator">
+          Generar Código QR
+        </Link>
+      </SectionContainer>
 
       <section className="p-8">
         <h2 className="mb-4 text-3xl font-semibold text-primary-500">Usos de los Códigos QR</h2>

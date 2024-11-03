@@ -22,21 +22,25 @@ export default async function Page({ params: { locale } }) {
 
   const { t } = await createTranslation(locale, 'home')
   return (
-    <div>
-      <main className="mx-auto flex w-full max-w-4xl items-center justify-center py-20 max-sm:flex-col-reverse max-sm:font-semibold lg:text-center 2xl:py-40">
-        <div className="space-y-4">
-          <h1 className="text-5xl font-semibold leading-tight lg:text-6xl">{t('title')}</h1>
-          <p className="pt-2 text-lg text-neutral-500 dark:text-neutral-400">{t('description')}</p>
-          <div className="flex justify-center gap-4">
-            <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
-              Blog y Tutoriales
-            </Link>
-            <Link href="/servicios" className={buttonVariants({ variant: 'outline' })}>
-              Nuestros Servicios
-            </Link>
+    <>
+      <SectionContainer>
+        <header className="mx-auto flex w-full max-w-4xl items-center justify-center py-20 max-sm:flex-col-reverse max-sm:font-semibold lg:text-center 2xl:py-40">
+          <div className="space-y-4">
+            <h1 className="text-5xl font-semibold leading-tight lg:text-6xl">{t('title')}</h1>
+            <p className="pt-2 text-lg text-neutral-500 dark:text-neutral-400">
+              {t('description')}
+            </p>
+            <div className="flex justify-center gap-4">
+              <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
+                Blog y Tutoriales
+              </Link>
+              <Link href="/servicios" className={buttonVariants({ variant: 'outline' })}>
+                Nuestros Servicios
+              </Link>
+            </div>
           </div>
-        </div>
-      </main>
+        </header>
+      </SectionContainer>
       <Filter />
 
       <SectionContainer>
@@ -51,6 +55,6 @@ export default async function Page({ params: { locale } }) {
         </div>
       </SectionContainer>
       <Services />
-    </div>
+    </>
   )
 }

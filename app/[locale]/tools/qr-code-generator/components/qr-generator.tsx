@@ -288,7 +288,7 @@ export default function QRGenerator() {
   }
 
   return (
-    <Card>
+    <Card id="generator">
       <CardHeader>
         <CardTitle>Generador de Código QR Gratis</CardTitle>
       </CardHeader>
