@@ -83,7 +83,7 @@ export default async function Page({ params: { locale } }: PageProps) {
   ]
 
   return (
-    <SectionContainerWithAds>
+    <div className="container mx-auto max-w-7xl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -243,6 +243,6 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
         <Recommended tags={['proteus']} locale={locale} />
       </section> */}
-    </SectionContainerWithAds>
+    </div>
   )
 }

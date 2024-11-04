@@ -1,62 +1,69 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 'use client'
-import { useState, useEffect } from 'react'
+
+import { useState, useEffect, useCallback } from 'react'
 import NextImage, { ImageProps } from 'next/image'
 import { IoClose } from 'react-icons/io5'
-import ReactDOM from 'react-dom'
+import { createPortal } from 'react-dom'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
-const Image = ({ className, ...rest }: ImageProps) => {
+export default function ImageViewer({ className, alt, ...rest }: ImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true)
-    document.body.classList.add('overflow-hidden')
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    document.body.classList.remove('overflow-hidden')
-  }
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
-    if (event.keyCode === 27) {
-      closeModal()
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      // Remove the class if the component unmounts while the modal is open
-      document.body.classList.remove('overflow-hidden')
-    }
+    document.body.style.overflow = 'hidden'
   }, [])
 
-  const modalContent = (
-    <dialog
-      className="fixed left-0 top-0 z-[100] flex h-screen w-screen items-center justify-center bg-black bg-opacity-75"
-      open={isModalOpen}
-      onKeyDown={handleKeyDown}
-    >
-      <div className="-mt-20 flex w-full flex-col items-center justify-center p-6">
-        <div className="flex w-full flex-col items-end justify-center p-6">
-          <button className="inline-block text-left text-white" onClick={closeModal} autoFocus>
-            <IoClose className="size-16" />
-          </button>
-        </div>
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false)
+    document.body.style.overflow = ''
+  }, [])
 
-        <NextImage {...rest} className="z-[100] max-h-[40rem] max-w-full object-contain" />
-      </div>
-    </dialog>
-  )
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeModal()
+      }
+    }
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [isModalOpen, closeModal])
 
   return (
-    <div>
-      <button className="z-1 relative m-0 w-full cursor-pointer" onClick={openModal}>
-        <NextImage {...rest} className={`h-auto w-full ${className}`} />
-      </button>
-      {isModalOpen && ReactDOM.createPortal(modalContent, document.body)}
-    </div>
+    <>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogTrigger asChild>
+          <Button variant="ghost" className="h-auto w-full p-0" onClick={openModal}>
+            <NextImage {...rest} alt={alt} className={`h-auto w-full ${className}`} />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="h-auto max-h-[95vh] w-auto max-w-[95vw] border-none bg-transparent p-0">
+          <div className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-2 bg-black bg-opacity-50 text-white hover:bg-opacity-75"
+              onClick={closeModal}
+              aria-label="Close image viewer"
+            >
+              <IoClose className="h-6 w-6" />
+            </Button>
+            <NextImage
+              {...rest}
+              alt={alt}
+              className="h-auto max-h-[calc(95vh-4rem)] w-auto max-w-[95vw] object-contain"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
-
-export default Image

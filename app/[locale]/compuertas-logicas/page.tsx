@@ -35,7 +35,7 @@ export const metadata = genPageMetadata({
 
 export default function page() {
   return (
-    <SectionContainerWithAds>
+    <div className="container mx-auto max-w-7xl">
       <Sidebar>
         <div>
           <h1 className="pb-8 text-4xl font-bold">
@@ -191,6 +191,6 @@ export default function page() {
           </div>
         </div>
       </Sidebar>
-    </SectionContainerWithAds>
+    </div>
   )
 }
