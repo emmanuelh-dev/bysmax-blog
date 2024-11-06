@@ -64,7 +64,7 @@ export function CursoLayout({
       </div>
 
       {/* Main Content - Scrollable */}
-      <main className="mx-auto max-w-3xl space-y-8 xl:p-10">
+      <main className="mx-auto max-w-3xl space-y-8 lg:p-10">
         <div className="space-y-8">
           {/* Back Link */}
           <Link
