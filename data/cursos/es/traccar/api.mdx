@@ -1,0 +1,114 @@
+---
+title: "API de Traccar: Lo básico para empezar"
+shortTitle: Conociendo la API
+id: 'traccar'
+section:
+    title: 'API'
+    position: 4
+date: 2024-11-06
+tags: ["traccar"]
+draft: false
+authors: ["emmanuelhdev"]
+language: es
+images: ["/static/images/traccar.png"]
+summary: Conoce el API de Traccar, una herramienta de seguimiento GPS de código abierto que ofrece capacidades de filtrado potentes para mejorar la precisión de los datos de ubicación y la eficiencia del sistema.
+---
+
+### Configuración de Autenticación
+Traccar permite autenticación básica (nombre de usuario y contraseña) o por token. En los headers, usa `Authorization`.
+
+```javascript
+const username = "YOUR_USERNAME";
+const password = "YOUR_PASSWORD";
+const headers = {
+  "Content-Type": "application/json",
+  "Authorization": `Basic ${btoa(username + ":" + password)}`, // Codificación Base64
+};
+```
+
+### Obtener todos los dispositivos
+Para listar todos los dispositivos, realiza una solicitud `GET`:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/devices", { headers })
+  .then(response => response.json())
+  .then(data => console.log("Devices:", data))
+  .catch(error => console.error("Error:", error));
+```
+
+### Crear un dispositivo
+Agrega un dispositivo mediante `POST`:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/devices", {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    name: "New Device",
+    uniqueId: "DEVICE_UNIQUE_ID",
+    status: "online",
+    // Otros parámetros opcionales
+  }),
+})
+  .then(response => response.json())
+  .then(data => console.log("Created Device:", data))
+  .catch(error => console.error("Error:", error));
+```
+
+### Obtener datos de posición
+Para obtener la última posición de un dispositivo específico:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/positions", {
+  headers,
+})
+  .then(response => response.json())
+  .then(data => console.log("Positions:", data))
+  .catch(error => console.error("Error:", error));
+```
+
+### Actualizar información de un dispositivo
+Puedes actualizar los detalles de un dispositivo con `PUT`:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/devices/DEVICE_ID", {
+  method: "PUT",
+  headers,
+  body: JSON.stringify({ name: "Updated Device Name" }),
+})
+  .then(response => response.json())
+  .then(data => console.log("Updated Device:", data))
+  .catch(error => console.error("Error:", error));
+```
+
+### Eliminar un dispositivo
+Para eliminar un dispositivo por su ID:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/devices/DEVICE_ID", {
+  method: "DELETE",
+  headers,
+})
+  .then(() => console.log("Device deleted"))
+  .catch(error => console.error("Error:", error));
+```
+
+### Crear una geocerca
+Para agregar una nueva geocerca:
+
+```javascript
+fetch("https://YOUR_TRACCAR_URL/api/geofences", {
+  method: "POST",
+  headers,
+  body: JSON.stringify({
+    name: "Home Zone",
+    area: "CIRCLE (latitude longitude, radius)", // Especifica el área de la geocerca
+  }),
+})
+  .then(response => response.json())
+  .then(data => console.log("Created Geofence:", data))
+  .catch(error => console.error("Error:", error));
+```
+
+### Notificaciones, Eventos y Otras Características
+Si necesitas mas información sobre la API, consulta la documentación oficial de [Traccar API](https://www.traccar.org/api-reference/) o pregunta en el [foro de soporte](https://www.traccar.org/forum/). Esta es solo una pequeña parte de lo que puedes hacer con Traccar o si necesitas una guia basica, si necesitas algo mas avanzado visita la [documentación de Traccar](https://www.traccar.org/api-reference/).
