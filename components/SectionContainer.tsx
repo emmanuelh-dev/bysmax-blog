@@ -1,17 +1,16 @@
-import { ReactNode } from 'react'
-import GoogleAds from './GoogleAds'
+'use client'
+import { ReactNode, useEffect } from 'react'
 
 interface Props {
   children: ReactNode
 }
 
 export function SectionContainerWithAds({ children }: Props) {
-  return (
-    <>
-      {children}
-      <GoogleAds />
-    </>
-  )
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({})
+  }, [])
+  return <>{children}</>
 }
 
 export default function SectionContainer({ children }: Props) {
