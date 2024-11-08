@@ -16,7 +16,7 @@ export default function Page() {
 }
 
 const Visitanos = () => (
-  <section id="map" className="py-12 md:py-20">
+  <section id="map" className="container mx-auto py-12 md:py-20">
     <div className=" mx-auto ">
       <div className="space-y-6 md:space-y-8">
         <div className="">

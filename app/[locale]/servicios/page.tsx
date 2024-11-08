@@ -14,7 +14,7 @@ export const metadata = genPageMetadata({
 
 function Page() {
   return (
-    <main className="flex-1">
+    <main className="container mx-auto flex-1">
       <section className="w-full py-12 sm:py-24 lg:py-32">
         <div className=" ">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
