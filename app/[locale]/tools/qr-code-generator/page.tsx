@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: '/static/images/qr-code-emmanuel.jpg',
+        url: '/static/images/qrcode-page.png',
         width: 1200,
         height: 630,
         alt: 'Generador de códigos QR',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: FULL_TITLE,
     description: DESCRIPTION,
-    images: ['/static/images/qr-code-emmanuel.jpg'],
+    images: ['/static/images/qrcode-page.png'],
   },
 }
 export default function Page() {
@@ -42,12 +42,15 @@ export default function Page() {
       <SectionContainer>
         <main className="mb-12 text-pretty text-center text-neutral-600 dark:text-neutral-400">
           <div className="mx-auto max-w-5xl pb-6">
-            <h1 className="mb-4 text-balance pb-4 pt-16 text-4xl font-medium tracking-tight text-black dark:text-white lg:text-5xl">
-              {FULL_TITLE}
-            </h1>
+            <h2 className="mb-4 text-balance pb-4 pt-16 text-4xl font-bold tracking-tight text-black dark:text-white lg:text-6xl">
+              Generador de Códigos QR
+            </h2>
+            <h1>{FULL_TITLE}</h1>
             <p>{DESCRIPTION}</p>
           </div>
-          <QRGenerator />
+          <div className="mx-auto max-w-6xl">
+            <QRGenerator />
+          </div>
         </main>
       </SectionContainer>
 
@@ -85,8 +88,10 @@ export default function Page() {
         </Link>
       </SectionContainer>
 
-      <section className="p-8">
-        <h2 className="mb-4 text-3xl font-semibold text-primary-500">Usos de los Códigos QR</h2>
+      <SectionContainer>
+        <h2 className="mb-4 mt-12 text-3xl font-semibold text-primary-500">
+          Usos de los Códigos QR
+        </h2>
         <p className="mb-4 ">
           Aunque originalmente se desarrollaron para la industria automotriz, los códigos QR ahora
           tienen innumerables aplicaciones:
@@ -116,7 +121,7 @@ export default function Page() {
             </li>
           ))}
         </ul>
-      </section>
+      </SectionContainer>
     </>
   )
 }
