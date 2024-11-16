@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/accordion'
 import { BookText, Play } from 'lucide-react'
 import { CursoLayout } from '@/layouts/CursoLayout'
-import useTemario from '@/data/cursoTraccar'
+import TRACCAR from '@/data/traccar'
 
 export const metadata = genPageMetadata({
   title: 'Curso Gratuito de Traccar desde Cero hasta Avanzado en español',
@@ -88,11 +88,10 @@ const jsonLd = () => {
   }
 }
 export function Home() {
-  const TEMARIO = useTemario('es', 'traccar')
   return (
     <>
       <CursoLayout
-        sidebar={TEMARIO}
+        sidebar={TRACCAR}
         title={'Curso Gratuito de Traccar desde Cero hasta Avanzado en español'}
         description={
           'Te guiará desde la configuración inicial de tu propio servidor de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'
@@ -133,7 +132,7 @@ export function Home() {
                   </p>
                   <div className="mt-8 space-y-4">
                     <Accordion type="single" collapsible className="w-full space-y-4">
-                      {TEMARIO.filter((item) => item.show == !false).map((item, i) => (
+                      {TRACCAR.filter((item) => item.show == !false).map((item, i) => (
                         <AccordionItem key={item.title} value={`item-${i + 1}`}>
                           <AccordionTrigger>
                             <div className="text-left">

@@ -46,3 +46,7 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+# Angolia
+app/[locale]/tag-data.json
+/app/[locale]/tag-data.json
