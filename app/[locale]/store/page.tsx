@@ -40,7 +40,7 @@ function ProductCard({ product }) {
       <a className="group" href={product.link}>
         <div>
           <div className="bg-ui-bg-subtle shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover relative aspect-[11/14] w-full overflow-hidden rounded-lg p-4 transition-shadow duration-150 ease-in-out">
-            <img
+            <Image
               alt="Thumbnail"
               draggable="false"
               loading="lazy"
