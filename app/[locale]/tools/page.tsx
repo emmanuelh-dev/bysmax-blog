@@ -7,8 +7,6 @@ import { QrCode } from 'lucide-react'
 import Link from 'next/link'
 import TOOLS from '@/data/tools'
 
-
-
 export default function Page() {
   const [searchTerm, setSearchTerm] = useState('')
 
