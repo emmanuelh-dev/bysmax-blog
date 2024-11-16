@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { ZapIcon, GaugeIcon, ActivityIcon, BoltIcon } from 'lucide-react'
+import Image from 'next/image'
 
 export default function CalculadoraLeyOhm() {
   const [isAdvanced, setIsAdvanced] = useState(false)
@@ -124,7 +125,7 @@ export default function CalculadoraLeyOhm() {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-md">
+    <Card className="mx-auto w-full max-w-4xl">
       <CardHeader>
         <CardTitle>Calculadora de la Ley de Ohm</CardTitle>
         <CardDescription>Calcula voltaje, corriente, resistencia y potencia</CardDescription>
@@ -134,109 +135,122 @@ export default function CalculadoraLeyOhm() {
         </div>
       </CardHeader>
       <CardContent>
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="voltage">Voltaje (V)</Label>
-            <div className="flex items-center space-x-2">
-              <ZapIcon className="text-yellow-500" />
-              <Input
-                id="voltage"
-                type="number"
-                placeholder="Voltaje"
-                value={voltage}
-                onChange={(e) => setVoltage(e.target.value ? Number(e.target.value) : '')}
-                disabled={calculate === 'voltage'}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="current">Corriente (A)</Label>
-            <div className="flex items-center space-x-2">
-              <ActivityIcon className="text-blue-500" />
-              <Input
-                id="current"
-                type="number"
-                placeholder="Corriente"
-                value={current}
-                onChange={(e) => setCurrent(e.target.value ? Number(e.target.value) : '')}
-                disabled={calculate === 'current'}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="resistance">Resistencia (Ω)</Label>
-            <div className="flex items-center space-x-2">
-              <GaugeIcon className="text-red-500" />
-              <Input
-                id="resistance"
-                type="number"
-                placeholder="Resistencia"
-                value={resistance}
-                onChange={(e) => setResistance(e.target.value ? Number(e.target.value) : '')}
-                disabled={calculate === 'resistance'}
-              />
-            </div>
-          </div>
-          {isAdvanced && (
-            <div className="space-y-2">
-              <Label htmlFor="power">Potencia (W)</Label>
-              <div className="flex items-center space-x-2">
-                <BoltIcon className="text-green-500" />
-                <Input
-                  id="power"
-                  type="number"
-                  placeholder="Potencia"
-                  value={power}
-                  onChange={(e) => setPower(e.target.value ? Number(e.target.value) : '')}
-                  disabled={calculate === 'power'}
-                />
+        <div className="flex flex-col lg:flex-row">
+          <div className="lg:w-1/2">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="voltage">Voltaje (V)</Label>
+                <div className="flex items-center space-x-2">
+                  <ZapIcon className="text-yellow-500" />
+                  <Input
+                    id="voltage"
+                    type="number"
+                    placeholder="Voltaje"
+                    value={voltage}
+                    onChange={(e) => setVoltage(e.target.value ? Number(e.target.value) : '')}
+                    disabled={calculate === 'voltage'}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-          <RadioGroup
-            value={calculate}
-            onValueChange={(value: 'voltage' | 'current' | 'resistance' | 'power') =>
-              setCalculate(value)
-            }
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="voltage" id="calc-voltage" />
-              <Label htmlFor="calc-voltage">Calcular Voltaje</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="current" id="calc-current" />
-              <Label htmlFor="calc-current">Calcular Corriente</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="resistance" id="calc-resistance" />
-              <Label htmlFor="calc-resistance">Calcular Resistencia</Label>
-            </div>
-            {isAdvanced && (
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="power" id="calc-power" />
-                <Label htmlFor="calc-power">Calcular Potencia</Label>
+              <div className="space-y-2">
+                <Label htmlFor="current">Corriente (A)</Label>
+                <div className="flex items-center space-x-2">
+                  <ActivityIcon className="text-blue-500" />
+                  <Input
+                    id="current"
+                    type="number"
+                    placeholder="Corriente"
+                    value={current}
+                    onChange={(e) => setCurrent(e.target.value ? Number(e.target.value) : '')}
+                    disabled={calculate === 'current'}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="resistance">Resistencia (Ω)</Label>
+                <div className="flex items-center space-x-2">
+                  <GaugeIcon className="text-red-500" />
+                  <Input
+                    id="resistance"
+                    type="number"
+                    placeholder="Resistencia"
+                    value={resistance}
+                    onChange={(e) => setResistance(e.target.value ? Number(e.target.value) : '')}
+                    disabled={calculate === 'resistance'}
+                  />
+                </div>
+              </div>
+              {isAdvanced && (
+                <div className="space-y-2">
+                  <Label htmlFor="power">Potencia (W)</Label>
+                  <div className="flex items-center space-x-2">
+                    <BoltIcon className="text-green-500" />
+                    <Input
+                      id="power"
+                      type="number"
+                      placeholder="Potencia"
+                      value={power}
+                      onChange={(e) => setPower(e.target.value ? Number(e.target.value) : '')}
+                      disabled={calculate === 'power'}
+                    />
+                  </div>
+                </div>
+              )}
+              <RadioGroup
+                value={calculate}
+                onValueChange={(value: 'voltage' | 'current' | 'resistance' | 'power') =>
+                  setCalculate(value)
+                }
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="voltage" id="calc-voltage" />
+                  <Label htmlFor="calc-voltage">Calcular Voltaje</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="current" id="calc-current" />
+                  <Label htmlFor="calc-current">Calcular Corriente</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="resistance" id="calc-resistance" />
+                  <Label htmlFor="calc-resistance">Calcular Resistencia</Label>
+                </div>
+                {isAdvanced && (
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="power" id="calc-power" />
+                    <Label htmlFor="calc-power">Calcular Potencia</Label>
+                  </div>
+                )}
+              </RadioGroup>
+            </form>
+            {result !== null && (
+              <div className="bg-secondary mt-4 rounded-md p-4">
+                <p className="text-lg font-semibold">Resultado:</p>
+                <p className="text-2xl font-bold">
+                  {result.toFixed(2)}{' '}
+                  {calculate === 'voltage'
+                    ? 'V'
+                    : calculate === 'current'
+                      ? 'A'
+                      : calculate === 'resistance'
+                        ? 'Ω'
+                        : 'W'}
+                </p>
               </div>
             )}
-          </RadioGroup>
-        </form>
-        {result !== null && (
-          <div className="bg-secondary mt-4 rounded-md p-4">
-            <p className="text-lg font-semibold">Resultado:</p>
-            <p className="text-2xl font-bold">
-              {result.toFixed(2)}{' '}
-              {calculate === 'voltage'
-                ? 'V'
-                : calculate === 'current'
-                  ? 'A'
-                  : calculate === 'resistance'
-                    ? 'Ω'
-                    : 'W'}
-            </p>
           </div>
-        )}
-        <div className="bg-muted mt-4 rounded-md p-4">
-          <p className="text-sm font-medium">Fórmulas utilizadas:</p>
-          <p className="text-lg font-semibold">{renderFormula()}</p>
+          <div className="bg-muted mt-4 rounded-md p-4">
+            <div>
+              <Image
+                src="/static/images/ohm.svg"
+                alt="calculadora de la ley de ohm"
+                className="w-full max-w-full text-white lg:max-w-sm"
+                width={300}
+                height={300}
+              />
+            </div>{' '}
+            <p className="text-sm font-medium">Fórmulas utilizadas:</p>
+            <p className="text-lg font-semibold">{renderFormula()}</p>
+          </div>
         </div>
       </CardContent>
     </Card>

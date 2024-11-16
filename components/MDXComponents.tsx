@@ -11,6 +11,7 @@ import HeaderGenerator from './HeaderGenerator'
 import SoftwareDownload from './SoftwareDownload'
 import CursoTraccar from '@/app/[locale]/(cursos)/traccar/page'
 import CompuertasNav from './compuertas/Nav'
+import CalculadoraLeyOhm from './calculadoras/CalculadoraLeyOhm'
 
 export const components: MDXComponents = {
   Image,
@@ -25,4 +26,5 @@ export const components: MDXComponents = {
   SoftwareDownload,
   CursoTraccar,
   CompuertasNav,
+  CalculadoraLeyOhm,
 }

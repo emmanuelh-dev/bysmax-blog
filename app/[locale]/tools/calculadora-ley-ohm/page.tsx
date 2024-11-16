@@ -12,7 +12,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   const posts = allBlogs
   const post = posts
     .filter((p) => p.language === 'es')
-    .find((p) => p.slug === 'traccar/como-personalizar-traccar-web') as Blog
+    .find((p) => p.slug === 'calculadora-ley-ohm') as Blog
 
   return genPageMetadata({
     title: post.title,
@@ -38,22 +38,25 @@ export default function Page() {
   const posts = allBlogs
   const post = posts
     .filter((p) => p.language === 'es')
-    .find((p) => p.slug === 'traccar/como-personalizar-traccar-web') as Blog
+    .find((p) => p.slug === 'calculadora-ley-ohm') as Blog
 
   return (
-    <CursoLayout
-      sidebar={TRACCAR}
-      title={post.title}
-      description={post.summary}
-      authorDetails={post.authors || []}
-      path={{ title: 'Traccar', href: '/traccar' }}
-      toc={post.toc}
-      slug={post.slug}
-    >
-      <CalculadoraLeyOhm />
-      <div className="prose text-lg dark:prose-invert">
+    <div>
+      <main className="mx-auto mb-12 w-full text-pretty text-center text-neutral-600 dark:text-neutral-400">
+        <div className="mx-auto max-w-5xl px-4 pb-6">
+          <h2 className="mb-4 text-balance pb-4 pt-16 text-4xl font-bold tracking-tight text-black dark:text-white lg:text-6xl">
+            Calculadora de la Ley de Ohm
+          </h2>
+          <h1>{post.title}</h1>
+          <p>{post.summary}</p>
+        </div>
+        <div className="mx-auto max-w-6xl">
+          <CalculadoraLeyOhm />
+        </div>
+      </main>
+      <div className="prose mx-auto px-8 text-lg dark:prose-invert">
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </div>
-    </CursoLayout>
+    </div>
   )
 }

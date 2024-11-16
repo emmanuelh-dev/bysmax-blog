@@ -39,9 +39,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <SectionContainer>
-        <main className="mb-12 text-pretty text-center text-neutral-600 dark:text-neutral-400">
-          <div className="mx-auto max-w-5xl pb-6">
+      <>
+        <main className="mx-auto mb-12 w-full text-pretty text-center text-neutral-600 dark:text-neutral-400">
+          <div className="mx-auto max-w-5xl px-4 pb-6">
             <h2 className="mb-4 text-balance pb-4 pt-16 text-4xl font-bold tracking-tight text-black dark:text-white lg:text-6xl">
               Generador de Códigos QR
             </h2>
@@ -52,7 +52,7 @@ export default function Page() {
             <QRGenerator />
           </div>
         </main>
-      </SectionContainer>
+      </>
 
       <SectionContainer>
         <div className="flex flex-col items-center md:flex-row">
