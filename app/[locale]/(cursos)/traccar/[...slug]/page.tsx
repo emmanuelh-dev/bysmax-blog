@@ -16,7 +16,6 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import getAllPosts from '@/lib/allPosts'
 import { coreContent, sortPosts } from 'pliny/utils/contentlayer'
 import CursoLayout from '@/layouts/CursoLayout'
-import useTemario from '@/data/cursoTraccar'
 import TRACCAR from '@/data/traccar'
 
 interface CursoPageProps {
@@ -130,8 +129,6 @@ export default async function Page({ params: { slug, locale } }: CursoPageProps)
       name: author.name,
     }
   })
-
-  const TEMARIO = useTemario(locale, curso)
 
   return (
     <CursoLayout
