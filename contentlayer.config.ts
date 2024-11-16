@@ -132,20 +132,6 @@ export const Series = defineNestedType(() => ({
   },
 }))
 
-export const Sections = defineNestedType(() => ({
-  name: 'Sections',
-  fields: {
-    title: {
-      type: 'string',
-      required: true,
-    },
-    position: {
-      type: 'number',
-      required: true,
-    },
-  },
-}))
-
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -195,8 +181,6 @@ export const Curso = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     shortTitle: { type: 'string', required: true },
     id: { type: 'string', required: true },
-    series: { type: 'nested', of: Series },
-    section: { type: 'nested', of: Sections },
     date: { type: 'date', required: true },
     language: { type: 'string', required: true },
     tags: { type: 'list', of: { type: 'string' }, default: [] },
@@ -206,8 +190,6 @@ export const Curso = defineDocumentType(() => ({
     summary: { type: 'string' },
     images: { type: 'json' },
     authors: { type: 'list', of: { type: 'string' }, required: true },
-    layout: { type: 'string' },
-    wpBlog: { type: 'boolean', default: false },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
     content: { type: 'string' },
