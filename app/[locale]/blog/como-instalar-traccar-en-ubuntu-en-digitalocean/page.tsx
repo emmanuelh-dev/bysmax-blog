@@ -38,7 +38,8 @@ export default function Page() {
       authorDetails={[]}
       path={{ title: 'Traccar', href: '/traccar' }}
       toc={[]}
-      slug={'/traccar/traccar/como-instalar-traccar-en-ubuntu-en-digitalocean'}>
+      slug={'/traccar/traccar/como-instalar-traccar-en-ubuntu-en-digitalocean'}
+    >
       <Content />
     </CursoLayout>
   )
@@ -46,7 +47,9 @@ export default function Page() {
 
 const Content = async ({ locale = 'es' }) => {
   const posts = allBlogs
-  const post = posts.filter(p => p.language === locale).find(p => p.slug === 'como-instalar-traccar-en-ubuntu-en-digitalocean') as Blog
+  const post = posts
+    .filter((p) => p.language === locale)
+    .find((p) => p.slug === 'como-instalar-traccar-en-ubuntu-en-digitalocean') as Blog
   return (
     <div className="prose text-lg dark:prose-invert">
       <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />

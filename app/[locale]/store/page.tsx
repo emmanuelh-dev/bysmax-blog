@@ -45,7 +45,7 @@ function ProductCard({ product }) {
               draggable="false"
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 object-cover object-center aspect-[16-9]  w-full"
+              className="absolute inset-0 aspect-[16-9] w-full object-cover  object-center"
               src={product.imageUrl}
             />
           </div>
