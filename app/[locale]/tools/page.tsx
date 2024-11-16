@@ -5,22 +5,16 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { QrCode } from 'lucide-react'
 import Link from 'next/link'
+import TOOLS from '@/data/tools'
 
-const tools = [
-  {
-    icon: QrCode,
-    name: 'Generador de QR',
-    url: '/tools/qr-code-generator',
-    description: 'Crea códigos QR personalizados para cualquier enlace o texto',
-  },
-]
+
 
 export default function Page() {
   const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredTools = tools.filter(
+  const filteredTools = TOOLS.filter(
     (tool) =>
-      tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       tool.description.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
@@ -34,7 +28,7 @@ export default function Page() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
         {filteredTools.map((tool, index) => (
           <Card key={index} className="transition-shadow duration-300 hover:shadow-lg">
             <CardHeader className="flex flex-row items-center space-x-4 pb-2">
@@ -42,7 +36,7 @@ export default function Page() {
                 <tool.icon className="text-primary h-6 w-6" />
               </div>
               <CardTitle>
-                <Link href={tool.url}>{tool.name}</Link>
+                <Link href={tool.href}>{tool.title}</Link>
               </CardTitle>
             </CardHeader>
             <CardContent>

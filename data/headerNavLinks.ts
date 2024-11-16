@@ -16,6 +16,7 @@ import {
   FolderCode,
   ShoppingBag,
 } from 'lucide-react'
+import TOOLS from './tools'
 
 const createUrl = `${siteMetadata.siteRepo}/new/main/data/blog`
 
@@ -36,7 +37,7 @@ export default headerNavLinks
 
 interface Links {
   title: string
-  description?: string
+  description?: string | undefined
   icon?: LucideIcon
   href: string
 }
@@ -49,17 +50,7 @@ interface Nav {
 export const nav: Nav[] = [
   {
     title: 'Herramientas',
-    links: [
-      {
-        title: 'Todas',
-        href: '/tools',
-      },
-      {
-        title: 'Generador de QR',
-        href: '/tools/qr-code-generator',
-        icon: QrCode,
-      },
-    ],
+    links: [...TOOLS],
   },
   {
     title: 'Cursos',
