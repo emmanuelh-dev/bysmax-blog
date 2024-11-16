@@ -1,21 +1,23 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Switch } from "@/components/ui/switch"
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Switch } from '@/components/ui/switch'
 import { ZapIcon, GaugeIcon, ActivityIcon, BoltIcon } from 'lucide-react'
 
 export default function CalculadoraLeyOhm() {
   const [isAdvanced, setIsAdvanced] = useState(false)
-  const [voltage, setVoltage] = useState<number | "">("")
-  const [current, setCurrent] = useState<number | "">("")
-  const [resistance, setResistance] = useState<number | "">("")
-  const [power, setPower] = useState<number | "">("")
-  const [calculate, setCalculate] = useState<"voltage" | "current" | "resistance" | "power">("voltage")
+  const [voltage, setVoltage] = useState<number | ''>('')
+  const [current, setCurrent] = useState<number | ''>('')
+  const [resistance, setResistance] = useState<number | ''>('')
+  const [power, setPower] = useState<number | ''>('')
+  const [calculate, setCalculate] = useState<'voltage' | 'current' | 'resistance' | 'power'>(
+    'voltage'
+  )
   const [result, setResult] = useState<number | null>(null)
 
   useEffect(() => {
@@ -25,45 +27,45 @@ export default function CalculadoraLeyOhm() {
   const handleCalculate = () => {
     if (isAdvanced) {
       switch (calculate) {
-        case "voltage":
-          if (current !== "" && resistance !== "") {
+        case 'voltage':
+          if (current !== '' && resistance !== '') {
             setResult(Number(current) * Number(resistance))
-          } else if (power !== "" && current !== "") {
+          } else if (power !== '' && current !== '') {
             setResult(Number(power) / Number(current))
-          } else if (power !== "" && resistance !== "") {
+          } else if (power !== '' && resistance !== '') {
             setResult(Math.sqrt(Number(power) * Number(resistance)))
           } else {
             setResult(null)
           }
           break
-        case "current":
-          if (voltage !== "" && resistance !== "") {
+        case 'current':
+          if (voltage !== '' && resistance !== '') {
             setResult(Number(voltage) / Number(resistance))
-          } else if (power !== "" && voltage !== "") {
+          } else if (power !== '' && voltage !== '') {
             setResult(Number(power) / Number(voltage))
-          } else if (power !== "" && resistance !== "") {
+          } else if (power !== '' && resistance !== '') {
             setResult(Math.sqrt(Number(power) / Number(resistance)))
           } else {
             setResult(null)
           }
           break
-        case "resistance":
-          if (voltage !== "" && current !== "") {
+        case 'resistance':
+          if (voltage !== '' && current !== '') {
             setResult(Number(voltage) / Number(current))
-          } else if (voltage !== "" && power !== "") {
+          } else if (voltage !== '' && power !== '') {
             setResult(Math.pow(Number(voltage), 2) / Number(power))
-          } else if (power !== "" && current !== "") {
+          } else if (power !== '' && current !== '') {
             setResult(Number(power) / Math.pow(Number(current), 2))
           } else {
             setResult(null)
           }
           break
-        case "power":
-          if (voltage !== "" && current !== "") {
+        case 'power':
+          if (voltage !== '' && current !== '') {
             setResult(Number(voltage) * Number(current))
-          } else if (voltage !== "" && resistance !== "") {
+          } else if (voltage !== '' && resistance !== '') {
             setResult(Math.pow(Number(voltage), 2) / Number(resistance))
-          } else if (current !== "" && resistance !== "") {
+          } else if (current !== '' && resistance !== '') {
             setResult(Math.pow(Number(current), 2) * Number(resistance))
           } else {
             setResult(null)
@@ -72,22 +74,22 @@ export default function CalculadoraLeyOhm() {
       }
     } else {
       switch (calculate) {
-        case "voltage":
-          if (current !== "" && resistance !== "") {
+        case 'voltage':
+          if (current !== '' && resistance !== '') {
             setResult(Number(current) * Number(resistance))
           } else {
             setResult(null)
           }
           break
-        case "current":
-          if (voltage !== "" && resistance !== "") {
+        case 'current':
+          if (voltage !== '' && resistance !== '') {
             setResult(Number(voltage) / Number(resistance))
           } else {
             setResult(null)
           }
           break
-        case "resistance":
-          if (voltage !== "" && current !== "") {
+        case 'resistance':
+          if (voltage !== '' && current !== '') {
             setResult(Number(voltage) / Number(current))
           } else {
             setResult(null)
@@ -100,38 +102,34 @@ export default function CalculadoraLeyOhm() {
   const renderFormula = () => {
     if (isAdvanced) {
       switch (calculate) {
-        case "voltage":
-          return "V = I × R, V = P ÷ I, V = √(P × R)"
-        case "current":
-          return "I = V ÷ R, I = P ÷ V, I = √(P ÷ R)"
-        case "resistance":
-          return "R = V ÷ I, R = V² ÷ P, R = P ÷ I²"
-        case "power":
-          return "P = V × I, P = V² ÷ R, P = I² × R"
+        case 'voltage':
+          return 'V = I × R, V = P ÷ I, V = √(P × R)'
+        case 'current':
+          return 'I = V ÷ R, I = P ÷ V, I = √(P ÷ R)'
+        case 'resistance':
+          return 'R = V ÷ I, R = V² ÷ P, R = P ÷ I²'
+        case 'power':
+          return 'P = V × I, P = V² ÷ R, P = I² × R'
       }
     } else {
       switch (calculate) {
-        case "voltage":
-          return "V = I × R"
-        case "current":
-          return "I = V ÷ R"
-        case "resistance":
-          return "R = V ÷ I"
+        case 'voltage':
+          return 'V = I × R'
+        case 'current':
+          return 'I = V ÷ R'
+        case 'resistance':
+          return 'R = V ÷ I'
       }
     }
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="mx-auto w-full max-w-md">
       <CardHeader>
         <CardTitle>Calculadora de la Ley de Ohm</CardTitle>
         <CardDescription>Calcula voltaje, corriente, resistencia y potencia</CardDescription>
         <div className="flex items-center space-x-2">
-          <Switch
-            id="advanced-mode"
-            checked={isAdvanced}
-            onCheckedChange={setIsAdvanced}
-          />
+          <Switch id="advanced-mode" checked={isAdvanced} onCheckedChange={setIsAdvanced} />
           <Label htmlFor="advanced-mode">Modo Avanzado</Label>
         </div>
       </CardHeader>
@@ -146,8 +144,8 @@ export default function CalculadoraLeyOhm() {
                 type="number"
                 placeholder="Voltaje"
                 value={voltage}
-                onChange={(e) => setVoltage(e.target.value ? Number(e.target.value) : "")}
-                disabled={calculate === "voltage"}
+                onChange={(e) => setVoltage(e.target.value ? Number(e.target.value) : '')}
+                disabled={calculate === 'voltage'}
               />
             </div>
           </div>
@@ -160,8 +158,8 @@ export default function CalculadoraLeyOhm() {
                 type="number"
                 placeholder="Corriente"
                 value={current}
-                onChange={(e) => setCurrent(e.target.value ? Number(e.target.value) : "")}
-                disabled={calculate === "current"}
+                onChange={(e) => setCurrent(e.target.value ? Number(e.target.value) : '')}
+                disabled={calculate === 'current'}
               />
             </div>
           </div>
@@ -174,8 +172,8 @@ export default function CalculadoraLeyOhm() {
                 type="number"
                 placeholder="Resistencia"
                 value={resistance}
-                onChange={(e) => setResistance(e.target.value ? Number(e.target.value) : "")}
-                disabled={calculate === "resistance"}
+                onChange={(e) => setResistance(e.target.value ? Number(e.target.value) : '')}
+                disabled={calculate === 'resistance'}
               />
             </div>
           </div>
@@ -189,15 +187,17 @@ export default function CalculadoraLeyOhm() {
                   type="number"
                   placeholder="Potencia"
                   value={power}
-                  onChange={(e) => setPower(e.target.value ? Number(e.target.value) : "")}
-                  disabled={calculate === "power"}
+                  onChange={(e) => setPower(e.target.value ? Number(e.target.value) : '')}
+                  disabled={calculate === 'power'}
                 />
               </div>
             </div>
           )}
-          <RadioGroup 
-            value={calculate} 
-            onValueChange={(value: "voltage" | "current" | "resistance" | "power") => setCalculate(value)}
+          <RadioGroup
+            value={calculate}
+            onValueChange={(value: 'voltage' | 'current' | 'resistance' | 'power') =>
+              setCalculate(value)
+            }
           >
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="voltage" id="calc-voltage" />
@@ -220,14 +220,21 @@ export default function CalculadoraLeyOhm() {
           </RadioGroup>
         </form>
         {result !== null && (
-          <div className="mt-4 p-4 bg-secondary rounded-md">
+          <div className="bg-secondary mt-4 rounded-md p-4">
             <p className="text-lg font-semibold">Resultado:</p>
             <p className="text-2xl font-bold">
-              {result.toFixed(2)} {calculate === "voltage" ? "V" : calculate === "current" ? "A" : calculate === "resistance" ? "Ω" : "W"}
+              {result.toFixed(2)}{' '}
+              {calculate === 'voltage'
+                ? 'V'
+                : calculate === 'current'
+                  ? 'A'
+                  : calculate === 'resistance'
+                    ? 'Ω'
+                    : 'W'}
             </p>
           </div>
         )}
-        <div className="mt-4 p-4 bg-muted rounded-md">
+        <div className="bg-muted mt-4 rounded-md p-4">
           <p className="text-sm font-medium">Fórmulas utilizadas:</p>
           <p className="text-lg font-semibold">{renderFormula()}</p>
         </div>
