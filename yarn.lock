@@ -3464,6 +3464,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-progress@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@radix-ui/react-progress@npm:1.1.0"
+  dependencies:
+    "@radix-ui/react-context": 1.1.0
+    "@radix-ui/react-primitive": 2.0.0
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 2045df6a0a50a3c3b18c4893949b7ca01ded9a5df03baa9e760d47f7af0d7ef3c442f0a91505f7849fb03b40a8a1747035ef05c55a01c5573bc98a5e8cd4d41f
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-radio-group@npm:^1.2.1":
   version: 1.2.1
   resolution: "@radix-ui/react-radio-group@npm:1.2.1"
@@ -8197,6 +8217,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"install@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "install@npm:0.13.0"
+  checksum: 645bad1253115309c64d791c901caa8acd61a4012731015e3ee5eef88baaca026f3a48dc15a73a2827f7f5b05609804968ea1e3c6525dc0b3a21241837b9cf59
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.0.4, internal-slot@npm:^1.0.7":
   version: 1.0.7
   resolution: "internal-slot@npm:1.0.7"
@@ -12781,6 +12808,7 @@ __metadata:
     "@radix-ui/react-label": ^2.1.0
     "@radix-ui/react-navigation-menu": ^1.2.1
     "@radix-ui/react-popover": ^1.1.2
+    "@radix-ui/react-progress": ^1.1.0
     "@radix-ui/react-radio-group": ^1.2.1
     "@radix-ui/react-select": ^2.1.2
     "@radix-ui/react-separator": ^1.1.0
@@ -12821,6 +12849,7 @@ __metadata:
     i18next-browser-languagedetector: ^7.2.1
     i18next-resources-to-backend: ^1.2.1
     image-size: 1.1.1
+    install: ^0.13.0
     lint-staged: ^13.3.0
     lucide-react: ^0.453.0
     next: ^14.2.17

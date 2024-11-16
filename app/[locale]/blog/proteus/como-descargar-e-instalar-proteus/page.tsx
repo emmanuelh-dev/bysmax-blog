@@ -14,6 +14,8 @@ import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import Loading from '@/components/software/Loading'
+import SoftwareLayout from '@/layouts/SoftwareLayout'
+import SOFTWARE from '@/data/software'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -69,7 +71,15 @@ export default async function Page({ params: { locale } }: PageProps) {
   const { t } = await createTranslation(locale, 'downloadproteus')
 
   return (
-    <div className="container mx-auto max-w-7xl">
+    <SoftwareLayout
+      sidebar={SOFTWARE}
+      title={''}
+      description={''}
+      authorDetails={[]}
+      path={{ title: 'Software', href: '/software' }}
+      toc={[]}
+      slug={'proteus'}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -189,6 +199,6 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
         <Recommended tags={['proteus']} locale={locale} />
       </section> */}
-    </div>
+    </SoftwareLayout>
   )
 }
