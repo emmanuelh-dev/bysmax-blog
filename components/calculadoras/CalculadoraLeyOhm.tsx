@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { ZapIcon, GaugeIcon, ActivityIcon, BoltIcon } from 'lucide-react'
-import Image from 'next/image'
+import OhmIcon from '/public/static/images/ohm.svg'
 
 export default function CalculadoraLeyOhm() {
   const [isAdvanced, setIsAdvanced] = useState(false)
@@ -239,15 +239,7 @@ export default function CalculadoraLeyOhm() {
             )}
           </div>
           <div className="bg-muted mt-4 rounded-md p-4">
-            <div>
-              <Image
-                src="/static/images/ohm.svg"
-                alt="calculadora de la ley de ohm"
-                className="w-full max-w-full text-white lg:max-w-sm"
-                width={300}
-                height={300}
-              />
-            </div>{' '}
+            <OhmIcon className="w-full max-w-full fill-black dark:fill-white lg:max-w-sm" />
             <p className="text-sm font-medium">Fórmulas utilizadas:</p>
             <p className="text-lg font-semibold">{renderFormula()}</p>
           </div>
