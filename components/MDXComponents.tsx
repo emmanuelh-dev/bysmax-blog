@@ -9,7 +9,7 @@ import TransformatorCalculator from './TransformatorCalculator'
 import ColorCodeMain from './colorCodeCalculator/ColorCodeMain'
 import HeaderGenerator from './HeaderGenerator'
 import SoftwareDownload from './SoftwareDownload'
-import CursoTraccar from '@/app/[locale]/traccar/page'
+import CursoTraccar from '@/app/[locale]/(cursos)/traccar/page'
 import CompuertasNav from './compuertas/Nav'
 
 export const components: MDXComponents = {

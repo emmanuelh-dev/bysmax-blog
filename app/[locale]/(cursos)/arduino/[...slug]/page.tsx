@@ -130,7 +130,6 @@ export default async function Page({ params: { slug, locale } }: CursoPageProps)
     }
   })
 
-
   return (
     <CursoLayout
       sidebar={TRACCAR}
