@@ -1,0 +1,80 @@
+---
+title: "Como compilar y desplegar traccar"
+shortTitle: Compilar y desplegar
+id: 'traccar'
+date: 2024-11-06
+tags: ["traccar"]
+draft: false
+authors: ["emmanuelhdev"]
+language: es
+images: ["/static/images/traccar.png"]
+summary: Te voy a mostrar como compilar y desplegar traccar en un servidor como digital ocean, aws, etc.
+---
+## Compilar y desplegar el servidor de Traccar
+Si tienes una version personalizada y quieres desplegarla en tu propio servidor, puedes seguir estos pasos, en este caso usamos el github de Traccar, pero puedes usar el tuyo propio:
+
+1. **Clonar el repositorio**:  
+   Abre un terminal y escribe:  
+   ```bash
+   git clone --recursive https://github.com/traccar/traccar.git
+   cd traccar
+   ```
+
+2. **Compilar el servidor**:  
+   Ejecuta:  
+   ```bash
+   ./gradlew assemble
+   ```  
+   Esto generará `tracker-server.jar` en la carpeta `target`.
+
+3. **Reemplazar el archivo original**:  
+   Detén el servicio de Traccar:  
+   ```bash
+   sudo systemctl stop traccar
+   ```  
+   Reemplaza el archivo original:  
+   ```bash
+   sudo cp target/tracker-server.jar /opt/traccar/lib/tracker-server.jar
+   ```  
+   Reinicia Traccar:  
+   ```bash
+   sudo systemctl start traccar
+   ```
+
+Y listo, ya tienes tu customización de Traccar funcionando en tu servidor.
+
+**Enlace oficial**: [Traccar Build Guide](https://www.traccar.org/build/)
+
+
+## Como compilar y desplegar el frontend de Traccar
+
+Si tienes una version personalizada de la apariencia web de Traccar y quieres desplegarla en tu servidor, puedes seguir estos pasos, en este caso usamos el github de Traccar, pero puedes usar el tuyo propio:
+
+1. **Clonar el repositorio**: 
+   Clona y navega al repositorio: 
+   ```bash
+   git clone https://github.com/traccar/traccar-web.git
+   cd traccar-web
+   ```
+
+2. **Instala las dependencias**: 
+   Instala las dependencias necesarias:  
+   ```bash
+   npm install
+   ```
+3. **Compila el frontend**:  
+   Compila el frontend
+   ```bash
+   npm run build
+   ```
+
+4. **Copia y reemplaza los archivos**:  
+   Reemplaza los archivos existentes en `/opt/traccar/web/` con los nuevos:  
+   ```bash
+   sudo cp -r build/* /opt/traccar/web/
+   ```
+
+5. **Actualizar el navegador**:  
+   En las ultimas versiones de Traccar, no es necesario detener el servicio ni eliminar la cache de Traccar para reemplazar el frontend, solo recarga la pagina y tendras tus cambios.
+
+Y listo, ya tienes tu customización de la apariencia web de Traccar funcionando en tu servidor, no es necesario detener el servicio de Traccar para reemplazar el frontend.

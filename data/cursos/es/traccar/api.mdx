@@ -2,9 +2,6 @@
 title: "API de Traccar: Lo básico para empezar"
 shortTitle: Conociendo la API
 id: 'traccar'
-section:
-    title: 'API'
-    position: 4
 date: 2024-11-06
 tags: ["traccar"]
 draft: false
@@ -14,7 +11,7 @@ images: ["/static/images/traccar.png"]
 summary: Conoce el API de Traccar, una herramienta de seguimiento GPS de código abierto que ofrece capacidades de filtrado potentes para mejorar la precisión de los datos de ubicación y la eficiencia del sistema.
 ---
 
-### Configuración de Autenticación
+## Configuración de Autenticación
 Traccar permite autenticación básica (nombre de usuario y contraseña) o por token. En los headers, usa `Authorization`.
 
 ```javascript
@@ -26,7 +23,7 @@ const headers = {
 };
 ```
 
-### Obtener todos los dispositivos
+## Obtener todos los dispositivos
 Para listar todos los dispositivos, realiza una solicitud `GET`:
 
 ```javascript
@@ -36,7 +33,7 @@ fetch("https://YOUR_TRACCAR_URL/api/devices", { headers })
   .catch(error => console.error("Error:", error));
 ```
 
-### Crear un dispositivo
+## Crear un dispositivo
 Agrega un dispositivo mediante `POST`:
 
 ```javascript
@@ -55,7 +52,7 @@ fetch("https://YOUR_TRACCAR_URL/api/devices", {
   .catch(error => console.error("Error:", error));
 ```
 
-### Obtener datos de posición
+## Obtener datos de posición
 Para obtener la última posición de un dispositivo específico:
 
 ```javascript
@@ -67,7 +64,7 @@ fetch("https://YOUR_TRACCAR_URL/api/positions", {
   .catch(error => console.error("Error:", error));
 ```
 
-### Actualizar información de un dispositivo
+## Actualizar información de un dispositivo
 Puedes actualizar los detalles de un dispositivo con `PUT`:
 
 ```javascript
@@ -81,7 +78,7 @@ fetch("https://YOUR_TRACCAR_URL/api/devices/DEVICE_ID", {
   .catch(error => console.error("Error:", error));
 ```
 
-### Eliminar un dispositivo
+## Eliminar un dispositivo
 Para eliminar un dispositivo por su ID:
 
 ```javascript
@@ -93,7 +90,7 @@ fetch("https://YOUR_TRACCAR_URL/api/devices/DEVICE_ID", {
   .catch(error => console.error("Error:", error));
 ```
 
-### Crear una geocerca
+## Crear una geocerca
 Para agregar una nueva geocerca:
 
 ```javascript
@@ -110,5 +107,5 @@ fetch("https://YOUR_TRACCAR_URL/api/geofences", {
   .catch(error => console.error("Error:", error));
 ```
 
-### Notificaciones, Eventos y Otras Características
+## Notificaciones, Eventos y Otras Características
 Si necesitas mas información sobre la API, consulta la documentación oficial de [Traccar API](https://www.traccar.org/api-reference/) o pregunta en el [foro de soporte](https://www.traccar.org/forum/). Esta es solo una pequeña parte de lo que puedes hacer con Traccar o si necesitas una guia basica, si necesitas algo mas avanzado visita la [documentación de Traccar](https://www.traccar.org/api-reference/).

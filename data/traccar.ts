@@ -44,6 +44,10 @@ const TRACCAR = [
         title: 'Perzonalizacion avanzada',
         link: '/traccar/traccar/como-personalizar-traccar-web',
       },
+      {
+        title: 'Compilar y desplegar',
+        link: '/traccar/traccar/compilar-y-desplegar',
+      },
     ],
   },
   {
