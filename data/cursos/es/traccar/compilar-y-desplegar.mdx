@@ -10,6 +10,14 @@ language: es
 images: ["/static/images/traccar.png"]
 summary: Te voy a mostrar como compilar y desplegar traccar en un servidor como digital ocean, aws, etc.
 ---
+## Requisitos y recomendaciones
+Es recomendable tener un servidor con Traccar instalado, si no, sigue el tutorial de [instalacion](/traccar/traccar/como-instalar-traccar-en-ubuntu-en-digitalocean).
+- Tener un servidor con Traccar instalado.
+- Tener conocimientos basicos de linux.
+- Tener instalado git.
+- Tener instalado java 11 o superior.
+- Tener instalado Nodejs 18 o superior.
+
 ## Compilar y desplegar el servidor de Traccar
 Si tienes una version personalizada y quieres desplegarla en tu propio servidor, puedes seguir estos pasos, en este caso usamos el github de Traccar, pero puedes usar el tuyo propio:
 
@@ -75,6 +83,6 @@ Si tienes una version personalizada de la apariencia web de Traccar y quieres de
    ```
 
 5. **Actualizar el navegador**:  
-   En las ultimas versiones de Traccar, no es necesario detener el servicio ni eliminar la cache de Traccar para reemplazar el frontend, solo recarga la pagina y tendras tus cambios.
+   En las ultimas versiones de Traccar, no es necesario detener el servicio ni eliminar la cache de Traccar para reemplazar el frontend, solo recarga la pagina y tendras tus cambios.  
 
 Y listo, ya tienes tu customización de la apariencia web de Traccar funcionando en tu servidor, no es necesario detener el servicio de Traccar para reemplazar el frontend.
