@@ -78,7 +78,7 @@ export default async function Page({ params: { locale } }: PageProps) {
       authorDetails={[]}
       path={{ title: 'Software', href: '/software' }}
       toc={[]}
-      slug={'proteus'}
+      slug={'/software/proteus'}
     >
       <script
         type="application/ld+json"
