@@ -89,8 +89,9 @@ export default function RootLayout({
         crossOrigin="anonymous"
       ></Script>
       <Script
+        async
         src="https://analytics.ahrefs.com/analytics.js"
-        data-key="tBLkU3Ea6HxUBHJiGObWig" async
+        data-key="tBLkU3Ea6HxUBHJiGObWig"
       ></Script>
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="text-md bg-white text-black antialiased dark:bg-black dark:text-white">
