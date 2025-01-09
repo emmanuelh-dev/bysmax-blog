@@ -14,5 +14,5 @@ export function SectionContainerWithAds({ children }: Props) {
 }
 
 export default function SectionContainer({ children }: Props) {
-  return <section className="container mx-auto space-y-8 px-8 2xl:px-0">{children}</section>
+  return <section className="container mx-auto space-y-8 2xl:px-0">{children}</section>
 }
