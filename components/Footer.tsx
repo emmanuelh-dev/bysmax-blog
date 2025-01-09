@@ -9,7 +9,7 @@ const Footer = async () => {
   const footerLinks = [...nav]
 
   return (
-    <div className='container mx-auto'>
+    <div className="container mx-auto">
       <footer className="py-20">
         {/* <div className="flex flex-col py-6 lg:flex-row lg:justify-between">
           <div>
