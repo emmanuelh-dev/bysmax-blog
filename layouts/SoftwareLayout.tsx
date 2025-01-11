@@ -35,7 +35,7 @@ export function SoftwareLayout({
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-300 dark:border-gray-800">
-            <aside className="sticky top-10 h-[calc(100vh-8rem)] overflow-y-auto max-sm:hidden">
+            <aside className="sticky top-10 lg:h-[90vh] overflow-y-auto">
               <nav className="space-y-6 p-4">
                 <div className="space-y-2">
                   {sidebar.map((item, index) => (
