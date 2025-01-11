@@ -30,7 +30,7 @@ export function SoftwareLayout({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <div className='container mx-auto'>
+    <div className="container mx-auto">
       <div className=" my-12 grid grid-cols-1 border border-neutral-300 dark:border-gray-800 lg:grid-cols-[15%_70%_15%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
