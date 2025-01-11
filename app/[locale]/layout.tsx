@@ -89,11 +89,11 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
           crossOrigin="anonymous"
         ></Script>
-        <script
+        <Script
           async
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="tBLkU3Ea6HxUBHJiGObWig"
-        ></script>
+        ></Script>
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body className="text-md bg-white text-black antialiased dark:bg-black dark:text-white">
