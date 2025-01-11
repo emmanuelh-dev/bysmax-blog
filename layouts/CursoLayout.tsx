@@ -131,7 +131,8 @@ export function CursoLayout({
             </aside>
           </div>
         </SectionContainerWithAds>
-      </div></div>
+      </div>
+    </div>
   )
 }
 
