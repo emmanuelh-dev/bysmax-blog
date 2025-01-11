@@ -35,7 +35,7 @@ export function CursoLayout({
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-300 dark:border-gray-800">
-            <aside className="sticky top-10 overflow-y-auto·lg:h-[90vh]">
+            <aside className="overflow-y-auto lg:h-[90vh] sticky top-10">
               <nav className="space-y-6 p-4">
                 <div className="space-y-2">
                   {sidebar.map((item, index) => (
