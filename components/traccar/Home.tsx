@@ -113,7 +113,7 @@ export function Home() {
                   Comenzar ahora
                 </Link>
                 <Link
-                  href="/servicios/plataforma-de-rastreo-gps"
+                  href="/servicios/https://gpstrackingsystem.bysmax.com/"
                   className={buttonVariants({ variant: 'outline' })}
                 >
                   Necesito un servidor

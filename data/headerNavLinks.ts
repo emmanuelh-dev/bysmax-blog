@@ -140,7 +140,7 @@ export const nav: Nav[] = [
       {
         title: 'Servicios GPS y Rastreo',
         description: '',
-        href: '/servicios/plataforma-de-rastreo-gps',
+        href: '/servicios/https://gpstrackingsystem.bysmax.com/',
         icon: MapPin,
       },
     ],

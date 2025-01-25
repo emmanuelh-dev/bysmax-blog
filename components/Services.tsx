@@ -18,7 +18,7 @@ const services = [
         Icon: Navigation,
         description: 'Datos precisos y en tiempo real, que te ayuda a alcanzar tus objetivos.',
         action: 'Ver más',
-        link: '/servicios/plataforma-de-rastreo-gps',
+        link: '/servicios/https://gpstrackingsystem.bysmax.com/',
       },
     ],
   },
