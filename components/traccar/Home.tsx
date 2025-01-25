@@ -113,7 +113,7 @@ export function Home() {
                   Comenzar ahora
                 </Link>
                 <Link
-                  href="/servicios/https://gpstrackingsystem.bysmax.com/"
+                  href="https://gpstrackingsystem.bysmax.com/"
                   className={buttonVariants({ variant: 'outline' })}
                 >
                   Necesito un servidor
