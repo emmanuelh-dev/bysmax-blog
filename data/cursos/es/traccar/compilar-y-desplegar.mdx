@@ -10,6 +10,18 @@ language: es
 images: ["/static/images/traccar.png"]
 summary: Te voy a mostrar como compilar y desplegar traccar en un servidor como digital ocean, aws, etc.
 ---
+## Introducción
+Traccar es una plataforma de seguimiento GPS de código abierto que permite rastrear dispositivos en tiempo real. Este tutorial te guiará a través del proceso de compilar y desplegar una versión personalizada de Traccar en tu propio servidor.
+
+## Verificación de requisitos
+Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas y en las versiones correctas:
+
+```bash
+java -version  # Debería ser Java 11 o superior
+node -v        # Debería ser Node.js 18 o superior
+npm -v         # Debería ser compatible con Node.js 18
+```
+
 ## Requisitos y recomendaciones
 Es recomendable tener un servidor con Traccar instalado, si no, sigue el tutorial de [instalacion](/traccar/traccar/como-instalar-traccar-en-ubuntu-en-digitalocean).
 - Tener un servidor con Traccar instalado.
@@ -40,16 +52,23 @@ Si tienes una version personalizada y quieres desplegarla en tu propio servidor,
    ```bash
    sudo systemctl stop traccar
    ```  
-   Reemplaza el archivo original:  
+   Reemplaza el archivo `tracker-server.jar` con el nuevo:
    ```bash
    sudo cp target/tracker-server.jar /opt/traccar/tracker-server.jar
    ```  
+4. Opcional: Si modificaste el archivo schema.xml, reemplaza el archivo `schema.xml` con el nuevo:
+   ```bash
+   sudo cp -r ./schema/* /opt/traccar/schema
+   ```
    Reinicia Traccar:  
    ```bash
    sudo systemctl start traccar
    ```
 
 Y listo, ya tienes tu customización de Traccar funcionando en tu servidor.
+
+### Errores comunes 
+Si el servicio no inicia puedes ejecutar `sudo journalctl -u traccar` para ver el log del servicio y ver si hay algún error.
 
 **Enlace oficial**: [Traccar Build Guide](https://www.traccar.org/build/)
 
