@@ -54,7 +54,7 @@ Si tienes una version personalizada y quieres desplegarla en tu propio servidor,
    ```  
    Reemplaza el archivo `tracker-server.jar` con el nuevo:
    ```bash
-   sudo cp target/tracker-server.jar /opt/traccar/tracker-server.jar
+   sudo cp -r ./target/* /opt/traccar/
    ```  
 4. Opcional: Si modificaste el archivo schema.xml, reemplaza el archivo `schema.xml` con el nuevo:
    ```bash
