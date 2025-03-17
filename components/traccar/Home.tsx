@@ -87,6 +87,7 @@ const jsonLd = () => {
     // })),
   }
 }
+
 export function Home({ params }: { params: { locale: string } }) {
   const courseContent = traccarContent[params?.locale || 'es'].content
   return (
@@ -130,32 +131,34 @@ export function Home({ params }: { params: { locale: string } }) {
                   </p>
                   <div className="mt-8 space-y-4">
                     <Accordion type="single" collapsible className="w-full space-y-4">
-                      {courseContent.filter((item) => item.show == !false).map((item, i) => (
-                        <AccordionItem key={item.title} value={`item-${i + 1}`}>
-                          <AccordionTrigger>
-                            <div className="text-left">
-                              <h3 className="text-lg font-bold">{item.title}</h3>
-                              <p className="text-neutral-400">{item.description}</p>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="px-4 py-3">
-                            <ul className="space-y-4 ">
-                              {item.sections.map((section) => (
-                                <li key={section.title}>
-                                  <div className="flex items-center">
-                                    <Link
-                                      href={section.link}
-                                      className={` ${buttonVariants({ variant: 'link' })}`}
-                                    >
-                                      {section.title}
-                                    </Link>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
+                      {courseContent
+                        .filter((item) => item.show == !false)
+                        .map((item, i) => (
+                          <AccordionItem key={item.title} value={`item-${i + 1}`}>
+                            <AccordionTrigger>
+                              <div className="text-left">
+                                <h3 className="text-lg font-bold">{item.title}</h3>
+                                <p className="text-neutral-400">{item.description}</p>
+                              </div>
+                            </AccordionTrigger>
+                            <AccordionContent className="px-4 py-3">
+                              <ul className="space-y-4 ">
+                                {item.sections.map((section) => (
+                                  <li key={section.title}>
+                                    <div className="flex items-center">
+                                      <Link
+                                        href={section.link}
+                                        className={` ${buttonVariants({ variant: 'link' })}`}
+                                      >
+                                        {section.title}
+                                      </Link>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+                            </AccordionContent>
+                          </AccordionItem>
+                        ))}
                     </Accordion>
                   </div>
                 </div>

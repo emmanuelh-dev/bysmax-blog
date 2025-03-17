@@ -31,7 +31,7 @@ export function CursoLayout({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="my-8 lg:my-12 grid grid-cols-1 rounded-lg border border-neutral-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black lg:grid-cols-[20%_60%_20%]">
+      <div className="my-8 grid grid-cols-1 rounded-lg border border-neutral-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black lg:my-12 lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-200 dark:border-gray-800">
@@ -40,7 +40,9 @@ export function CursoLayout({
                 <div className="space-y-3">
                   {sidebar.map((item, index) => (
                     <div key={index} className="space-y-3">
-                      <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h2>
+                      <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">
+                        {item.title}
+                      </h2>
                       <div className="ml-4 space-y-2">
                         {item.sections.map((section) => {
                           const active = slug === section.link
@@ -76,20 +78,36 @@ export function CursoLayout({
 
               {/* Author Info */}
               <div className="space-y-2 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
-                <h2 className="text-lg font-medium text-gray-900 dark:text-white">Emmanuel Hernandez</h2>
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white">
+                  Emmanuel Hernandez
+                </h2>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                   <span>May 25, 2024</span>
                   <span>•</span>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Intermediate</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                  >
+                    Intermediate
+                  </Badge>
                   <span>•</span>
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">Short</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                  >
+                    Short
+                  </Badge>
                 </div>
               </div>
 
               {/* Title and Description */}
               <div className="space-y-4">
-                <h1 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-gray-400">{title}</h1>
-                <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
+                <h1 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-gray-400">
+                  {title}
+                </h1>
+                <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-400">
+                  {description}
+                </p>
               </div>
             </div>
 
@@ -109,9 +127,11 @@ export function CursoLayout({
 
           <div className="border-l border-neutral-200 dark:border-gray-800">
             {/* Right Sidebar - Fixed with scroll */}
-            <aside className="h-[calc(100vh-4rem)] max-sm:hidden sticky top-10">
+            <aside className="sticky top-10 h-[calc(100vh-4rem)] max-sm:hidden">
               <nav className="space-y-3 p-6">
-                <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">Tabla de contenido</h2>
+                <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">
+                  Tabla de contenido
+                </h2>
                 <div className="space-y-2">
                   {toc.map((item) => (
                     <Link
