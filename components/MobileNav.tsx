@@ -6,8 +6,13 @@ import Link from './Link'
 import headerNavLinks, { nav } from '@/data/headerNavLinks'
 import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useParams } from 'next/navigation'
+import { LocaleTypes } from '@/app/[locale]/i18n/settings'
+import { useTranslation } from '@/app/[locale]/i18n/client'
 
 const MobileNav = () => {
+  const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, 'common')
   const [navShow, setNavShow] = useState(false)
   const [expandedSections, setExpandedSections] = useState({})
 
@@ -74,7 +79,7 @@ const MobileNav = () => {
                     onClick={() => toggleSection(section.title)}
                     className="flex w-full items-center justify-between py-3 text-sm font-bold uppercase tracking-wide text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
                   >
-                    <span>{section.title}</span>
+                    <span>{t(section.title)}</span>
                     {expandedSections[section.title] ? (
                       <ChevronUp className="h-4 w-4" />
                     ) : (
@@ -97,7 +102,7 @@ const MobileNav = () => {
                         >
                           {link.icon && <link.icon className="mr-3 h-5 w-5" />}
                           <div>
-                            <div>{link.title}</div>
+                            <div>{t(link.title)}</div>
                             {link.description && (
                               <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                                 {link.description}
@@ -121,7 +126,7 @@ const MobileNav = () => {
                   className="hover:text-primary dark:hover:text-primary flex items-center py-2 text-base font-medium text-neutral-900 dark:text-neutral-100"
                 >
                   {link.icon && <link.icon className="mr-3 h-5 w-5" />}
-                  {link.title}
+                  {t(link.title)}
                 </Link>
               ))}
             </div>

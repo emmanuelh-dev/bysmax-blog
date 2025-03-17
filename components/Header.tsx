@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
+import { useTranslation } from '@/app/[locale]/i18n/client'
 
 import ThemeSwitch from './ThemeSwitch'
 import LangSwitch from './langswitch'
@@ -17,6 +18,7 @@ const SearchButton = dynamic(() => import('./search/SearchButton'), { ssr: false
 
 export default function Header() {
   const locale = useParams()?.locale as LocaleTypes
+  const { t } = useTranslation(locale, 'common')
   const [isMobile, setIsMobile] = useState(true)
 
   useEffect(() => {
@@ -64,7 +66,7 @@ export default function Header() {
                   href={`/${locale}${link.href}`}
                   className="text-sm font-medium text-neutral-400 transition-colors duration-200 hover:text-black dark:hover:text-white"
                 >
-                  {link.title}
+                  {t(link.title)}
                 </Link>
               ))}
           </>

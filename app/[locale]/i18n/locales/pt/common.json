@@ -44,5 +44,21 @@
   "language": "Idioma",
   "french": "Francês",
   "english": "Inglês",
-  "sidetoc": "Nesta página:"
+  "sidetoc": "Nesta página:",
+  "donate": "Doar",
+  "store": "Loja",
+  "tools": "Ferramentas",
+  "all": "Todos",
+  "traccar_course": "Curso Traccar",
+  "arduino_course": "Curso Arduino Gratuito",
+  "logic_gates": "Portas Lógicas",
+  "arduino_tutorials": "Tutoriais Arduino",
+  "proteus_desc": "Circuitos Eletrônicos",
+  "multisim_desc": "Circuitos Eletrônicos",
+  "mathcad_desc": "Cálculo Técnico",
+  "pseint_desc": "Programação",
+  "computer_repair_mty": "Manutenção de Computadores em Monterrey",
+  "computer_repair_gdl": "Manutenção de Computadores em Guadalupe",
+  "computer_repair_sn": "Manutenção de Computadores em San Nicolas",
+  "gps_services": "Serviços de GPS e Rastreamento"
 }

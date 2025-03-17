@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/accordion'
 import { BookText, Play } from 'lucide-react'
 import { CursoLayout } from '@/layouts/CursoLayout'
-import TRACCAR from '@/data/traccar'
+import { traccarContent } from '@/data/i18n/traccar'
 
 export const metadata = genPageMetadata({
   title: 'Curso Gratuito de Traccar desde Cero hasta Avanzado en español',
@@ -87,15 +87,14 @@ const jsonLd = () => {
     // })),
   }
 }
-export function Home() {
+export function Home({ params }: { params: { locale: string } }) {
+  const courseContent = traccarContent[params?.locale || 'es'].content
   return (
     <>
       <CursoLayout
-        sidebar={TRACCAR}
-        title={'Curso Gratuito de Traccar desde Cero hasta Avanzado en español'}
-        description={
-          'Te guiará desde la configuración inicial de tu propio servidor de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'
-        }
+        sidebar={courseContent}
+        title={traccarContent[params?.locale || 'es'].metadata.title}
+        description={traccarContent[params?.locale || 'es'].metadata.description}
         path={{ title: 'Traccar', href: '/traccar' }}
         toc={[]}
         authorDetails={[]}
@@ -110,13 +109,13 @@ export function Home() {
             <div>
               <div className="flex gap-4">
                 <Link className={buttonVariants({ variant: 'default' })} href="#course">
-                  Comenzar ahora
+                  {traccarContent[params?.locale || 'es'].ui.startNow}
                 </Link>
                 <Link
                   href="https://gpstrackingsystem.bysmax.com/"
                   className={buttonVariants({ variant: 'outline' })}
                 >
-                  Necesito un servidor
+                  {traccarContent[params?.locale || 'es'].ui.needServer}
                 </Link>
               </div>
             </div>
@@ -124,15 +123,14 @@ export function Home() {
               <div className="">
                 <div className="mx-auto ">
                   <h2 id="course" className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    Temario
+                    {traccarContent[params?.locale || 'es'].ui.courseContent}
                   </h2>
                   <p className="text-muted-foreground md: mt-4">
-                    Comienza instalando tu propio servidor hasta darle mantenimiento para albergar
-                    más de 5k equipos.
+                    {traccarContent[params?.locale || 'es'].ui.courseDescription}
                   </p>
                   <div className="mt-8 space-y-4">
                     <Accordion type="single" collapsible className="w-full space-y-4">
-                      {TRACCAR.filter((item) => item.show == !false).map((item, i) => (
+                      {courseContent.filter((item) => item.show == !false).map((item, i) => (
                         <AccordionItem key={item.title} value={`item-${i + 1}`}>
                           <AccordionTrigger>
                             <div className="text-left">
@@ -167,19 +165,19 @@ export function Home() {
               <div className="">
                 <div className="mx-auto  text-center">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    Sobre el Curso
+                    {traccarContent[params?.locale || 'es'].ui.aboutCourse}
                   </h2>
                   <p className="text-muted-foreground md: mt-4">
-                    Te guiará desde la configuración inicial de tu propio servidor Traccar de
-                    rastreo hasta la gestión avanzada de dispositivos y la personalización de la
-                    plataforma.{' '}
+                    {params?.locale === 'en'
+                      ? 'This course will guide you from the initial setup of your own Traccar tracking server to advanced device management and platform customization.'
+                      : 'Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'}{' '}
                   </p>
                   <div className="mt-8 flex justify-center gap-4">
                     <Link className={buttonVariants({ variant: 'default' })} href="#course">
-                      Comenzar ahora
+                      {traccarContent[params?.locale || 'es'].ui.startNow}
                     </Link>{' '}
                     <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
-                      Necesito un servidor
+                      {traccarContent[params?.locale || 'es'].ui.needServer}
                     </Link>
                   </div>
                 </div>
