@@ -79,7 +79,7 @@ export function CursoLayout({
               {/* Author Info */}
               <div className="space-y-2 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
                 <h2 className="text-lg font-medium text-gray-900 dark:text-white">
-                  Emmanuel Hernandez
+                  Emmanuel Díaz Leal Hernández
                 </h2>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                   <span>May 25, 2024</span>
