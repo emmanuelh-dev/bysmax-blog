@@ -30,23 +30,23 @@ export function CursoLayout({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <div className="container mx-auto">
-      <div className="my-12 grid grid-cols-1 border border-neutral-300 dark:border-gray-800 lg:grid-cols-[15%_70%_15%]">
+    <div className="container mx-auto px-4 lg:px-8">
+      <div className="my-8 lg:my-12 grid grid-cols-1 rounded-lg border border-neutral-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
-          <div className="border-r border-neutral-300 dark:border-gray-800">
+          <div className="border-r border-neutral-200 dark:border-gray-800">
             <aside className="sticky top-10 overflow-y-auto lg:h-[90vh]">
-              <nav className="space-y-6 p-4">
-                <div className="space-y-2">
+              <nav className="space-y-4 p-6">
+                <div className="space-y-3">
                   {sidebar.map((item, index) => (
-                    <div key={index} className="space-y-2">
-                      <h2 className="flex items-center font-semibold">{item.title}</h2>
-                      <div className="ml-4 space-y-1">
+                    <div key={index} className="space-y-3">
+                      <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h2>
+                      <div className="ml-4 space-y-2">
                         {item.sections.map((section) => {
                           const active = slug === section.link
                           return (
                             <Link
-                              className={`hover:font-semi-bold flex items-center gap-2 text-gray-500 transition-colors hover:text-black dark:hover:text-white ${active ? 'font-bold text-[#000] dark:text-white' : ''}`}
+                              className={`group flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-800 ${active ? 'bg-blue-50 font-medium text-blue-600 dark:bg-gray-800 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`}
                               href={section.link}
                               key={section.title}
                             >
@@ -63,36 +63,37 @@ export function CursoLayout({
           </div>
 
           {/* Main Content - Scrollable */}
-          <main className="mx-auto w-full max-w-3xl space-y-8 py-8">
+          <main className="mx-auto w-full max-w-4xl space-y-8 p-8">
             <div className="space-y-8">
               {/* Back Link */}
               <Link
                 href={path.href}
-                className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
+                className="inline-flex items-center rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 {path.title}
               </Link>
 
               {/* Author Info */}
-              <div className="space-y-1">
-                <h2 className="text-lg font-medium text-gray-500">Emmanuel Hernandez</h2>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="space-y-2 rounded-lg bg-gray-50 p-6 dark:bg-gray-800/50">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white">Emmanuel Hernandez</h2>
+                <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                   <span>May 25, 2024</span>
                   <span>•</span>
-                  <Badge variant="secondary">Intermediate</Badge>
+                  <Badge variant="secondary" className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Intermediate</Badge>
                   <span>•</span>
-                  <Badge variant="secondary">Short</Badge>
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">Short</Badge>
                 </div>
               </div>
 
               {/* Title and Description */}
               <div className="space-y-4">
-                <h1 className="text-4xl font-bold">{title}</h1>
-                <p className="text-xl text-gray-400">{description}</p>
+                <h1 className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-4xl font-bold text-transparent dark:from-white dark:to-gray-400">{title}</h1>
+                <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
               </div>
             </div>
-            <div>
+
+            <div className="rounded-lg border border-neutral-200 p-4 dark:border-gray-800">
               <ins
                 className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
                 style={{ display: 'block' }}
@@ -102,32 +103,37 @@ export function CursoLayout({
                 data-full-width-responsive="true"
               ></ins>
             </div>
-            <div>{children}</div>
+
+            <div className="prose prose-gray max-w-none dark:prose-invert">{children}</div>
           </main>
 
-          <div className="border-l border-neutral-300 dark:border-gray-800">
+          <div className="border-l border-neutral-200 dark:border-gray-800">
             {/* Right Sidebar - Fixed with scroll */}
-            <aside className="h-[calc(100vh-4rem)]max-sm:hidden sticky top-10">
-              <nav className="space-y-2 p-4">
-                <h2 className="flex items-center text-sm font-semibold">Tabla de contenido</h2>
-                {toc.map((item) => (
-                  <Link
-                    key={item.value}
-                    className="block text-sm text-gray-400 transition-colors hover:text-white"
-                    href={item.url}
-                  >
-                    {item.value}
-                  </Link>
-                ))}
+            <aside className="h-[calc(100vh-4rem)] max-sm:hidden sticky top-10">
+              <nav className="space-y-3 p-6">
+                <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">Tabla de contenido</h2>
+                <div className="space-y-2">
+                  {toc.map((item) => (
+                    <Link
+                      key={item.value}
+                      className="block rounded-md px-3 py-2 text-sm text-gray-600 transition-all hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                      href={item.url}
+                    >
+                      {item.value}
+                    </Link>
+                  ))}
+                </div>
               </nav>
-              <ins
-                className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="9734184827"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
+              <div className="p-6">
+                <ins
+                  className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full rounded-lg bg-white dark:bg-black"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-3646138644530578"
+                  data-ad-slot="9734184827"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
+              </div>
             </aside>
           </div>
         </SectionContainerWithAds>
