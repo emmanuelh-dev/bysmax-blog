@@ -10,6 +10,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { ArrowLeft, Clock } from 'lucide-react'
+import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -115,10 +116,12 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               data-full-width-responsive="true"
             ></ins>
           </div>
-          <div className="prose max-w-5xl text-pretty pb-8 pt-10 text-lg dark:prose-invert">
-            {children}
+          <div>
+            <div className="prose max-w-5xl text-pretty pb-8 pt-10 text-lg dark:prose-invert">
+              {children}
+            </div>
+            <SupabaseCommentsWrapper slug={path} />
           </div>
-
           {/* Footer */}
           <footer className="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-700">
             <div className="text-md divide-neutral-200 font-medium leading-5 dark:divide-neutral-700 xl:divide-y">
