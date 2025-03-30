@@ -7,5 +7,9 @@
   "emailPlaceholder": "Ingresa tu correo electrónico",
   "messageLabel": "Mensaje",
   "messagePlaceholder": "Escribe tu mensaje aquí...",
-  "sendMessageButton": "Enviar mensaje"
+  "sendMessageButton": "Enviar mensaje",
+  "sending": "Enviando...",
+  "thanks": "¡Gracias por tu mensaje! Te responderemos lo antes posible.",
+  "error": "Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.",
+  "fillAllFields": "Por favor completa todos los campos."
 }

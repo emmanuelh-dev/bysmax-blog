@@ -1,6 +1,6 @@
-# Configuración de Supabase para el sistema de comentarios
+# Configuración de Supabase para el sistema de comentarios y formulario de contacto
 
-Este documento proporciona instrucciones para configurar Supabase como backend para el sistema de comentarios del blog.
+Este documento proporciona instrucciones para configurar Supabase como backend para el sistema de comentarios del blog y el formulario de contacto.
 
 ## Paso 1: Crear una cuenta en Supabase
 
