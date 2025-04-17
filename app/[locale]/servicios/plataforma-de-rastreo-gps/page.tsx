@@ -1,4 +1,3 @@
-import Globe from '@/components/magicui/globe'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
@@ -68,7 +67,6 @@ export default function Page() {
           </div>
           <div className="flex aspect-square justify-center">
             <div className="relative flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden px-40 pb-40 pt-8 md:pb-60">
-              <Globe />
             </div>
           </div>
         </div>
