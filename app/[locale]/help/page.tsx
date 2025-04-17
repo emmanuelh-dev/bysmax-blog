@@ -190,14 +190,10 @@ export default function Page() {
               experiencia limpia y enfocada mientras apoyas nuestra misión. Además, obtendrás acceso
               prioritario a nuestras nuevas herramientas y funciones.
             </p>
-            <Link
-              href="#"
-              className="text-primary mt-2 inline-flex items-center text-sm font-medium hover:underline"
-              prefetch={false}
-            >
+            <button className="text-primary mt-2 inline-flex items-center text-sm font-medium hover:underline">
               ¡Quiero aprender sin distracciones!
               <ArrowRightIcon className="ml-1 h-4 w-4" />
-            </Link>
+            </button>
           </div>
 
           {/* Sección de Impacto */}
