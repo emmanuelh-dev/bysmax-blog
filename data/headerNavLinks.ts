@@ -27,7 +27,7 @@ interface HeaderLink {
 }
 
 const headerNavLinks: HeaderLink[] = [
-  { href: '/donate', title: 'common:donate', icon: GraduationCap },
+  { href: '/help', title: 'Ayudanos', icon: GraduationCap },
   { href: '/blog', title: 'common:blog', icon: BookMarked },
   { href: '/contacto', title: 'common:contact', icon: Lightbulb },
   { href: '/store', title: 'common:store', icon: ShoppingBag },
