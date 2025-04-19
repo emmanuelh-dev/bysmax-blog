@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import Contribuye from './components/Contribuye'
 
 export function CursoLayout({
   children,
@@ -29,28 +30,48 @@ export function CursoLayout({
   slug,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="my-8 grid grid-cols-1 rounded-lg border border-neutral-200 bg-white shadow-sm dark:border-gray-800 dark:bg-black lg:my-12 lg:grid-cols-[20%_60%_20%]">
+      <div className="my-8 grid grid-cols-1 rounded-lg dark:bg-black lg:my-12 lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-200 dark:border-gray-800">
-            <aside className="sticky top-10 overflow-y-auto lg:h-[90vh]">
+            <Button
+              className="fixed bottom-4 right-4 z-50 rounded-full p-3 lg:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+            <aside
+              className={`
+                fixed inset-0 z-40 transform bg-white transition-transform
+                duration-300 ease-in-out dark:bg-black lg:sticky
+                ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+                overflow-y-auto
+                lg:h-[90vh] lg:translate-x-0
+              `}
+            >
               <nav className="space-y-4 p-6">
                 <div className="space-y-3">
                   {sidebar.map((item, index) => (
-                    <div key={index} className="space-y-3">
+                    <div key={index} className="space-y-1">
                       <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">
                         {item.title}
                       </h2>
-                      <div className="ml-4 space-y-2">
+                      <div className="ml-4">
                         {item.sections.map((section) => {
                           const active = slug === section.link
                           return (
                             <Link
-                              className={`group flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-800 ${active ? 'bg-blue-50 font-medium text-blue-600 dark:bg-gray-800 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`}
+                              className={`group flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-800 ${
+                                active
+                                  ? 'bg-blue-50 font-medium text-blue-600 dark:bg-gray-800 dark:text-blue-400'
+                                  : 'text-gray-600 dark:text-gray-400'
+                              }`}
                               href={section.link}
                               key={section.title}
+                              onClick={() => setIsMenuOpen(false)}
                             >
                               {section.title}
                             </Link>
@@ -65,7 +86,7 @@ export function CursoLayout({
           </div>
 
           {/* Main Content - Scrollable */}
-          <main className="mx-auto w-full max-w-4xl space-y-8 p-8">
+          <main className="mx-auto w-full max-w-4xl space-y-8 px-4">
             <div className="space-y-8">
               {/* Back Link */}
               <Link
@@ -132,17 +153,7 @@ export function CursoLayout({
                 <h2 className="flex items-center text-lg font-semibold text-gray-900 dark:text-white">
                   Tabla de contenido
                 </h2>
-                <div className="space-y-2">
-                  {toc.map((item) => (
-                    <Link
-                      key={item.value}
-                      className="block rounded-md px-3 py-2 text-sm text-gray-600 transition-all hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                      href={item.url}
-                    >
-                      {item.value}
-                    </Link>
-                  ))}
-                </div>
+                <Contribuye url="https://github.com/emmanuelh-dev/bysmax-blog/tree/main/data/cursos/es/traccar" />
               </nav>
               <div className="p-6">
                 <ins

@@ -15,6 +15,7 @@ import LangSwitch from './langswitch'
 const Navigation = dynamic(() => import('./NavigationMenu'), { ssr: false })
 const MobileNav = dynamic(() => import('./MobileNav'), { ssr: false })
 const SearchButton = dynamic(() => import('./search/SearchButton'), { ssr: false })
+const NotificationBell = dynamic(() => import('./NotificationBell'), { ssr: false })
 
 export default function Header() {
   const locale = useParams()?.locale as LocaleTypes
@@ -42,7 +43,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="container mx-auto flex items-center justify-between px-6 py-4 max-md:mt-24">
+    <header className="container mx-auto flex items-center justify-between px-6 py-4">
       <div>
         <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
@@ -54,7 +55,7 @@ export default function Header() {
           </div>
         </Link>
       </div>
-      <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+      <nav className="flex items-center space-x-4 leading-5 sm:space-x-6" role="navigation">
         {!isMobile && (
           <>
             <Navigation />
@@ -74,8 +75,9 @@ export default function Header() {
         <SearchButton />
         <ThemeSwitch />
         <LangSwitch />
+        <NotificationBell />
         {isMobile && <MobileNav />}
-      </div>
+      </nav>
     </header>
   )
 }
