@@ -17,11 +17,11 @@ import { SectionContainerWithAds } from '@/components/SectionContainer'
 export const metadata = genPageMetadata({
   title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
   description:
-    'Las compuertas lógicas se implementan en circuitos integrados para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.',
+    'Explora nuestra guía completa sobre las compuertas lógicas 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND) y 7486 (XOR). Aprende sobre sus tablas de verdad, funciones booleanas, aplicaciones y cómo se usan en circuitos integrados.',
   openGraph: {
     title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
     description:
-      'Las compuertas lógicas se implementan en circuitos integrados para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.',
+      'Explora nuestra guía completa sobre las compuertas lógicas 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND) y 7486 (XOR). Aprende sobre sus tablas de verdad, funciones booleanas, aplicaciones y cómo se usan en circuitos integrados.',
     images: '/static/images/compuertas.png',
     locale: 'es_MX',
     type: 'website',
@@ -73,7 +73,15 @@ export default function page() {
                     <Link href={`/compuertas-logicas/${gate.url}`}>{gate.heading}</Link>
                   </h2>
                   <p>{gate.description}</p>
-                  <p>{gate.configuration}</p>
+                  <p>
+                    <strong>Configuración:</strong> {gate.configuration}
+                  </p>
+                  <p>
+                    <strong>Función Booleana:</strong> <code>{gate.booleanFunction}</code>
+                  </p>
+                  <p>
+                    <strong>Aplicaciones Comunes:</strong> {gate.applications.join(', ')}
+                  </p>
                 </header>
                 <section className="flex w-full flex-col justify-around gap-6 py-6 md:flex-row">
                   <div className="md:w-1/3">

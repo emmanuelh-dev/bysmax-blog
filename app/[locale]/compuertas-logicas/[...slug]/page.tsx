@@ -32,12 +32,14 @@ export async function generateMetadata({
 
   if (!page) return
 
+  const description = `Aprende todo sobre la compuerta lógica ${page.heading}. Descubre su tabla de verdad (${page.truthTable.length} combinaciones), función booleana (${page.booleanFunction}), y aplicaciones comunes como ${page.applications.join(', ')}. Datasheet incluido.`
+
   return {
     title: page.heading,
-    description: page.description,
+    description: description,
     openGraph: {
       title: page.heading,
-      description: page.description,
+      description: description,
       siteName: page.heading,
       locale: 'es_MX',
       type: 'article',
@@ -47,7 +49,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: page.heading,
-      description: page.description,
+      description: description,
       images: page.datasheet,
     },
   }
@@ -73,10 +75,18 @@ export default async function Page({ params: { locale, slug } }: Props) {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
-            {/* <h2 className="mb-2 text-lg font-bold">Funcion Booleana</h2>
-          <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-            <p className="text-muted-foreground">Y = A AND B</p>
-          </div> */}
+            <h2 className="mb-2 text-lg font-bold">Función Booleana</h2>
+            <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
+              <code>{page.booleanFunction}</code>
+            </div>
+            <h2 className="mb-2 text-lg font-bold">Aplicaciones Comunes</h2>
+            <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
+              <ul className="list-disc pl-5">
+                {page.applications.map((app) => (
+                  <li key={app}>{app}</li>
+                ))}
+              </ul>
+            </div>
             <section className="mb-4">
               <h2 className="mb-2 text-lg font-bold">Tabla de Verdad</h2>
               <div className="rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
@@ -90,10 +100,13 @@ export default async function Page({ params: { locale, slug } }: Props) {
                   </TableHeader>
                   <TableBody>
                     {page.truthTable.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell>{row['Entrada A']}</TableCell>
-                        <TableCell>{row['Entrada B']}</TableCell>
-                        <TableCell>{row.salida}</TableCell>
+                      <TableRow
+                        key={index}
+                        className={index % 2 === 0 ? 'bg-neutral-100 dark:bg-neutral-700' : ''}
+                      >
+                        <TableCell className="text-center">{row['Entrada A']}</TableCell>
+                        <TableCell className="text-center">{row['Entrada B']}</TableCell>
+                        <TableCell className="text-center">{row.salida}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
