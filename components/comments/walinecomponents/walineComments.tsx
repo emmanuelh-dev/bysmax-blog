@@ -21,7 +21,7 @@ export default function WalineComments() {
       init({
         el: '#waline',
         lang: locale,
-        reaction: true,
+        reaction: ['1'],
         serverURL: siteMetadata.walineServer,
         emoji: [
           'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
