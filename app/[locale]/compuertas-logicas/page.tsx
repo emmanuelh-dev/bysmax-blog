@@ -14,6 +14,8 @@ import Sidebar from './components/Sidebar'
 import { genPageMetadata } from '@/app/[locale]/seo'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import Script from 'next/script'
+import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 export const metadata = genPageMetadata({
   title: 'Guía Completa sobre las Compuertas Lógicas 7408, 7432, 7404, 7400 y 7486',
@@ -159,6 +161,10 @@ export default function page() {
               </article>
             </div>
           ))}
+
+          <SupabaseCommentsWrapper slug="/compuertas-logicas" />
+          <ScrollTopAndComment />
+
           <div className="prose dark:prose-invert">
             <h2>Cómo Funcionan las Compuertas Lógicas</h2>
             <p>

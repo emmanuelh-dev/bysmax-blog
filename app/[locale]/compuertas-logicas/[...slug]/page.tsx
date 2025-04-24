@@ -16,6 +16,8 @@ import { LocaleTypes } from '../../i18n/settings' // Assuming this path is corre
 import dynamic from 'next/dynamic'
 import Script from 'next/script' // <-- Added missing import for Script component
 import SuspencePosts from '@/layouts/components/SuspencePosts' // Assuming this path is correct
+import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
   // Assuming this path is correct
@@ -307,6 +309,8 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
             </div>
           </div>
         </div>
+        <SupabaseCommentsWrapper slug={decodeSlug} />
+        <ScrollTopAndComment />
         {/* Additional Info Section */}
         <section className="mt-8">
           <h2 className="text-2xl font-bold">Información Adicional</h2>
