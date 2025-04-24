@@ -20,6 +20,7 @@ import { useState } from 'react'
 import Contribuye from './components/Contribuye'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { IoClose } from 'react-icons/io5'
 
 export function CursoLayout({
   children,
@@ -41,10 +42,10 @@ export function CursoLayout({
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-200 dark:border-gray-800">
             <Button
-              className="fixed bottom-4 right-4 z-50 rounded-full p-3 lg:hidden"
+              className="fixed bottom-6 left-4 z-50 aspect-square rounded-full p-2 lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <Menu className="h-6 w-6" />
+              {isMenuOpen ? <IoClose className="size-4" /> : <Menu className="size-4" />}
             </Button>
             <aside
               className={`
