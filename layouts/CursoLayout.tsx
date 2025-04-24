@@ -18,6 +18,8 @@ import {
 import Link from 'next/link'
 import { useState } from 'react'
 import Contribuye from './components/Contribuye'
+import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 export function CursoLayout({
   children,
@@ -33,6 +35,7 @@ export function CursoLayout({
 
   return (
     <div className="container mx-auto px-4 lg:px-8">
+      <ScrollTopAndComment />
       <div className="my-8 grid grid-cols-1 rounded-lg dark:bg-black lg:my-12 lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
@@ -144,6 +147,8 @@ export function CursoLayout({
             </div>
 
             <div className="prose prose-gray max-w-none dark:prose-invert">{children}</div>
+
+            <SupabaseCommentsWrapper slug={slug} />
           </main>
 
           <div className="border-l border-neutral-200 dark:border-gray-800">

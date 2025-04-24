@@ -12,18 +12,12 @@ type SupabaseCommentsWrapperProps = {
 }
 
 export default function SupabaseCommentsWrapper({ slug }: SupabaseCommentsWrapperProps) {
-  const [loadComments, setLoadComments] = useState(false)
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'home')
 
   return (
     <div className="py-4" id="comment">
-      {!loadComments && (
-        <Button onClick={() => setLoadComments(true)} className="w-full text-center">
-          {t('comment') || 'Mostrar comentarios'}
-        </Button>
-      )}
-      {loadComments && <SupabaseComments slug={slug} />}
+      <SupabaseComments slug={slug} />
     </div>
   )
 }
