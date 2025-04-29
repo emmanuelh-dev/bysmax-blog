@@ -20,7 +20,6 @@ import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapp
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
-  // Assuming this path is correct
   loading: () => <SuspencePosts />,
   ssr: false,
 })
@@ -29,8 +28,6 @@ interface Props {
   params: { slug: string[]; locale: LocaleTypes }
 }
 
-// Define a type for the LOGICGATE entry for better type safety (optional but recommended)
-// Adjust this type according to the actual structure of your LOGICGATES data
 interface LogicGate {
   url: string
   heading: string
@@ -38,23 +35,20 @@ interface LogicGate {
   truthTable: Array<{ 'Entrada A': number; 'Entrada B': number; salida: number }>
   booleanFunction: string
   applications: string[]
-  datasheet: string // Assuming this is a URL or path string
-  configuration: string // Added based on usage in the component
+  datasheet: string
+  configuration: string
   electricalCharacteristics?: {
-    // Made optional
     voltage?: string
     inputCurrent?: string
     outputCurrent?: string
     propagationDelay?: string
   }
   packageInfo?: {
-    // Made optional
     type?: string
     pinSpacing?: string
     width?: string
     length?: string
   }
-  // Add any other properties used from LOGICGATES
 }
 
 export async function generateMetadata({
@@ -63,39 +57,54 @@ export async function generateMetadata({
   params: { slug: string[] }
 }): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join('/'))
-  const page: LogicGate | undefined = LOGICGATES.find((p) => p.url === slug) // Use LogicGate type
+  const page: LogicGate | undefined = LOGICGATES.find((p) => p.url === slug)
 
   if (!page) return
 
-  const description = `Aprende todo sobre la compuerta lógica ${page.heading}. Descubre su tabla de verdad (${page.truthTable.length} combinaciones), función booleana (${page.booleanFunction}), y aplicaciones comunes como ${page.applications.join(', ')}. Datasheet incluido.`
+  const title = `${page.heading} (${page.configuration}) - Datasheet, Tabla de Verdad y Diagrama`
+  const description = `Información completa sobre la ${page.heading} (circuito integrado ${page.configuration}). Encuentra su datasheet, tabla de verdad (${page.truthTable.length} combinaciones), función booleana (${page.booleanFunction}), diagrama de pines y aplicaciones como ${page.applications.join(', ')}. Ideal para estudiantes y profesionales de electrónica.`
   const imageUrl = page.datasheet.startsWith('http')
     ? page.datasheet
     : `https://bysmax.com${page.datasheet}` // Ensure absolute URL
 
   return {
-    title: page.heading,
-    description: description,
+    title: title, // Use optimized title
+    description: description, // Use optimized description
+    keywords: [
+      page.heading,
+      page.configuration,
+      'compuerta lógica',
+      'circuito integrado',
+      'datasheet',
+      'tabla de verdad',
+      'función booleana',
+      'diagrama',
+      'pines',
+      'aplicaciones',
+      'electrónica digital',
+      ...page.applications,
+    ],
     openGraph: {
-      title: page.heading,
-      description: description,
-      siteName: 'Bysmax', // Use consistent site name
+      title: title, // Use optimized title
+      description: description, // Use optimized description
+      siteName: 'Bysmax',
       locale: 'es_MX',
       type: 'article',
-      url: `https://bysmax.com/es/compuertas-logicas/${page.url}`, // Construct full canonical URL
+      url: `https://bysmax.com/es/compuertas-logicas/${page.url}`,
       images: [
         {
-          url: imageUrl, // Use absolute URL
-          width: 1100, // Optional: Specify image dimensions if known
-          height: 400, // Optional: Specify image dimensions if known
-          alt: `Datasheet ${page.heading}`,
+          url: imageUrl,
+          width: 1100,
+          height: 400,
+          alt: `Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`, // Optimized alt text
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: page.heading,
-      description: description,
-      images: [imageUrl], // Use absolute URL
+      title: title, // Use optimized title
+      description: description, // Use optimized description
+      images: [imageUrl],
     },
   }
 }
@@ -124,9 +133,23 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: page.heading,
-    description: `Aprende todo sobre la compuerta lógica ${page.heading}. Descubre su tabla de verdad, función booleana (${page.booleanFunction}), y aplicaciones comunes. Datasheet incluido.`,
+    headline: `Todo sobre la ${page.heading} (${page.configuration})`, // Optimized headline
+    description: `Información detallada sobre la ${page.heading}, incluyendo su datasheet, tabla de verdad, función booleana (${page.booleanFunction}), diagrama de pines y aplicaciones comunes. Aprende sobre el circuito integrado ${page.configuration}.`, // Optimized description
     image: imageUrl,
+    keywords: [
+      page.heading,
+      page.configuration,
+      'compuerta lógica',
+      'circuito integrado',
+      'datasheet',
+      'tabla de verdad',
+      'función booleana',
+      'diagrama',
+      'pines',
+      'aplicaciones',
+      'electrónica digital',
+      ...page.applications,
+    ].join(', '),
     author: {
       '@type': 'Organization',
       name: 'Bysmax',
@@ -140,9 +163,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
         url: logoUrl,
       },
     },
-    // Consider using a fixed build date or a date from your data source if available
-    datePublished: new Date().toISOString(), // Or page.publishDate if available
-    // dateModified: new Date().toISOString(), // Add if you track modifications
+    datePublished: new Date().toISOString(),
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
@@ -161,154 +182,160 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
       />
 
       <Sidebar>
-        {' '}
-        {/* Assuming Sidebar handles its own layout/styling */}
-        <h1 className="text-4xl font-bold">{page.heading}</h1>
-        <p className="mt-2 text-lg">{page.description}</p>
-        <p className="mt-4">
-          La compuerta <strong>{page.heading}</strong> es un componente esencial en la electrónica
-          digital, perteneciente a la familia de circuitos integrados {page.configuration}. Su
-          función principal se define mediante la operación lógica{' '}
-          <strong>{page.booleanFunction.split('=')[0].trim()}</strong>. A continuación, exploraremos
-          sus características clave, incluyendo su tabla de verdad, función booleana detallada, y
-          sus aplicaciones más frecuentes en el diseño de circuitos.
-        </p>
-        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Left Column: Function, Applications, Truth Table */}
-          <div>
-            <h2 className="mb-2 text-xl font-semibold">Función Booleana</h2>
-            <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-              <code>{page.booleanFunction}</code>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Esta expresión define la salida (generalmente 'Y' o 'Q') en función de las entradas
-                (generalmente 'A' y 'B').
-              </p>
-            </div>
+        <ScrollTopAndComment />
+        <article>
+          <h1 className="text-4xl font-bold">{`${page.heading} (${page.configuration})`}</h1>
+          <p className="mt-2 text-lg">{page.description}</p>
+          <p className="mt-4">
+            La compuerta <strong>{page.heading}</strong> es un componente fundamental en la
+            electrónica digital, parte de la familia de circuitos integrados (CI){' '}
+            <strong>{page.configuration}</strong>. Su operación se basa en la función lógica{' '}
+            <strong>{page.booleanFunction.split('=')[0].trim()}</strong>. En esta página, detallamos
+            sus características esenciales: la <strong>tabla de verdad</strong>, la{' '}
+            <strong>función booleana</strong>, el <strong>diagrama de pines</strong> (datasheet), y
+            sus <strong>aplicaciones</strong> más comunes en el diseño de circuitos digitales.
+          </p>
 
-            <h2 className="mb-2 text-xl font-semibold">Aplicaciones Comunes</h2>
-            <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-              <ul className="list-disc pl-5">
-                {page.applications.map((app) => (
-                  <li key={app}>{app}</li>
-                ))}
-              </ul>
-            </div>
-
-            <section className="mb-4">
-              <h2 className="mb-2 text-xl font-semibold">Tabla de Verdad</h2>
-              <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-                La tabla de verdad muestra todas las posibles combinaciones de entrada y la salida
-                resultante para la compuerta {page.heading}.
-              </p>
-              <div className="overflow-x-auto rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      {/* Dynamically generate headers based on truthTable keys if needed, or keep fixed */}
-                      <TableHead className="text-center">Entrada A</TableHead>
-                      <TableHead className="text-center">Entrada B</TableHead>
-                      <TableHead className="text-center">Salida</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {page.truthTable.map((row, index) => (
-                      <TableRow
-                        key={index}
-                        className={index % 2 === 0 ? 'bg-neutral-100 dark:bg-neutral-700' : ''}
-                      >
-                        <TableCell className="text-center">{row['Entrada A']}</TableCell>
-                        <TableCell className="text-center">{row['Entrada B']}</TableCell>
-                        <TableCell className="text-center">{row.salida}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </section>
-          </div>
-
-          {/* Right Column: Datasheet, Electrical, Package */}
-          <div>
-            <h2 className="mb-2 text-2xl font-bold">Datasheet</h2>
-            <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-              El datasheet proporciona información técnica detallada sobre la compuerta{' '}
-              {page.heading}, incluyendo sus características eléctricas y encapsulado.
+          {/* Datasheet Image Section */}
+          <section className="my-8">
+            <h2 className="mb-4 text-2xl font-semibold">
+              Datasheet y Diagrama de Pines ({page.configuration})
+            </h2>
+            <p className="mb-4">
+              El <strong>datasheet</strong> proporciona información técnica crucial sobre el
+              circuito integrado {page.configuration}, incluyendo el{' '}
+              <strong>diagrama de pines</strong>, características eléctricas y encapsulado. Consulta
+              la imagen a continuación para ver la disposición de los pines.
             </p>
-            <figure className="pb-4">
-              {/* Ensure the Image component handles external URLs correctly or use a standard img tag */}
-              <Image
-                src={page.datasheet} // Use the original path/URL from data
-                width={1100} // Adjust as needed
-                height={400} // Adjust as needed
-                alt={`datasheet ${page.heading}`}
-                className="w-full rounded-md object-contain" // Added object-contain
-              />
-              <figcaption className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-                {`Datasheet para la compuerta ${page.heading}`}
-              </figcaption>
-            </figure>
+            <Image
+              src={page.datasheet} // Use the datasheet path from your data
+              alt={`Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`} // Optimized alt text
+              width={1100} // Adjust width as needed
+              height={400} // Adjust height as needed
+              className="rounded-md shadow-md"
+            />
+          </section>
 
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+            {/* Left Column: Function, Applications, Truth Table */}
             <div>
-              <h2 className="mb-2 text-xl font-semibold">Características Eléctricas</h2>
+              <h2 className="mb-2 text-xl font-semibold">Función Booleana</h2>
               <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">
-                      Voltaje de Operación
-                    </p>
-                    <p>{page.electricalCharacteristics?.voltage || 'No especificado'}</p>{' '}
-                    {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">
-                      Corriente de Entrada Máx.
-                    </p>
-                    <p>{page.electricalCharacteristics?.inputCurrent || 'No especificado'}</p>{' '}
-                    {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">
-                      Corriente de Salida Máx.
-                    </p>
-                    <p>{page.electricalCharacteristics?.outputCurrent || 'No especificado'}</p>{' '}
-                    {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">
-                      Retardo de Propagación
-                    </p>
-                    <p>{page.electricalCharacteristics?.propagationDelay || 'No especificado'}</p>{' '}
-                    {/* Use fallback */}
+                <code>{page.booleanFunction}</code>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  Esta expresión matemática define cómo la salida (Y o Q) de la compuerta{' '}
+                  {page.heading} depende de sus entradas (A, B, etc.).
+                </p>
+              </div>
+
+              <h2 className="mb-2 text-xl font-semibold">
+                Aplicaciones Comunes del CI {page.configuration}
+              </h2>
+              <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
+                <ul className="list-disc pl-5">
+                  {page.applications.map((app) => (
+                    <li key={app}>{app}</li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  El circuito integrado {page.configuration} se utiliza en diversas aplicaciones de
+                  lógica digital.
+                </p>
+              </div>
+
+              <section className="mb-4">
+                <h2 className="mb-2 text-xl font-semibold">Tabla de Verdad - {page.heading}</h2>
+                <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  La <strong>tabla de verdad</strong> ilustra la salida de la compuerta{' '}
+                  {page.heading} para cada combinación posible de sus entradas lógicas (0 o 1).
+                </p>
+              </section>
+            </div>
+
+            {/* Right Column: Datasheet, Electrical, Package */}
+            <div>
+              <h2 className="mb-2 text-2xl font-bold">Datasheet</h2>
+              <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+                El datasheet proporciona información técnica detallada sobre la compuerta{' '}
+                {page.heading}, incluyendo sus características eléctricas y encapsulado.
+              </p>
+              <figure className="pb-4">
+                {/* Ensure the Image component handles external URLs correctly or use a standard img tag */}
+                <Image
+                  src={page.datasheet} // Use the original path/URL from data
+                  width={1100} // Adjust as needed
+                  height={400} // Adjust as needed
+                  alt={`datasheet ${page.heading}`}
+                  className="w-full rounded-md object-contain" // Added object-contain
+                />
+                <figcaption className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+                  {`Datasheet para la compuerta ${page.heading}`}
+                </figcaption>
+              </figure>
+
+              <div>
+                <h2 className="mb-2 text-xl font-semibold">Características Eléctricas</h2>
+                <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">
+                        Voltaje de Operación
+                      </p>
+                      <p>{page.electricalCharacteristics?.voltage || 'No especificado'}</p>{' '}
+                      {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">
+                        Corriente de Entrada Máx.
+                      </p>
+                      <p>{page.electricalCharacteristics?.inputCurrent || 'No especificado'}</p>{' '}
+                      {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">
+                        Corriente de Salida Máx.
+                      </p>
+                      <p>{page.electricalCharacteristics?.outputCurrent || 'No especificado'}</p>{' '}
+                      {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">
+                        Retardo de Propagación
+                      </p>
+                      <p>{page.electricalCharacteristics?.propagationDelay || 'No especificado'}</p>{' '}
+                      {/* Use fallback */}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <h2 className="mb-2 text-xl font-semibold">Información del Encapsulado</h2>
-              <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">Tipo</p>
-                    <p>{page.packageInfo?.type || 'No especificado'}</p> {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">Paso de Pines</p>
-                    <p>{page.packageInfo?.pinSpacing || 'No especificado'}</p> {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">Ancho</p>
-                    <p>{page.packageInfo?.width || 'No especificado'}</p> {/* Use fallback */}
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground text-sm font-medium">Longitud</p>
-                    <p>{page.packageInfo?.length || 'No especificado'}</p> {/* Use fallback */}
+              <div>
+                <h2 className="mb-2 text-xl font-semibold">Información del Encapsulado</h2>
+                <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">Tipo</p>
+                      <p>{page.packageInfo?.type || 'No especificado'}</p> {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">Paso de Pines</p>
+                      <p>{page.packageInfo?.pinSpacing || 'No especificado'}</p>{' '}
+                      {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">Ancho</p>
+                      <p>{page.packageInfo?.width || 'No especificado'}</p> {/* Use fallback */}
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground text-sm font-medium">Longitud</p>
+                      <p>{page.packageInfo?.length || 'No especificado'}</p> {/* Use fallback */}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </article>
         <SupabaseCommentsWrapper slug={decodeSlug} />
         <ScrollTopAndComment />
         {/* Additional Info Section */}

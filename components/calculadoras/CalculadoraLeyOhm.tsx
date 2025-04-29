@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,11 +21,7 @@ export default function CalculadoraLeyOhm() {
   )
   const [result, setResult] = useState<number | null>(null)
 
-  useEffect(() => {
-    handleCalculate()
-  }, [voltage, current, resistance, power, calculate, isAdvanced])
-
-  const handleCalculate = () => {
+  const handleCalculate = useCallback(() => {
     if (isAdvanced) {
       switch (calculate) {
         case 'voltage':
@@ -98,7 +94,11 @@ export default function CalculadoraLeyOhm() {
           break
       }
     }
-  }
+  }, [isAdvanced, calculate, current, resistance, power, voltage])
+
+  useEffect(() => {
+    handleCalculate()
+  }, [handleCalculate])
 
   const renderFormula = () => {
     if (isAdvanced) {
