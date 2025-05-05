@@ -631,15 +631,15 @@ export const VehicleSelector = () => {
                             </div>
                             <div className="flex-1">
                               <p className="text-gray-700 dark:text-gray-200">{step.description}</p>
-                              {step.image && (
-                                <img
-                                  src={step.image}
-                                  alt={`Paso ${index + 1}`}
-                                  className="mt-2 w-full rounded-lg object-cover"
-                                />
-                              )}
                             </div>
                           </div>
+                          {step.image && (
+                            <img
+                              src={step.image}
+                              alt={`Paso ${index + 1}`}
+                              className="mt-2 w-full rounded-lg object-cover"
+                            />
+                          )}
                         </div>
                       ))}
 
