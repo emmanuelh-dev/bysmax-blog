@@ -9,15 +9,8 @@ import {
   fetchYearsByModel,
   checkCutExists,
   createModel,
+  createBrand,
 } from '@/app/[locale]/(gps)/gps-cuts/cuts-endpoints'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import {
   Select,
   SelectContent,
@@ -53,8 +46,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { StepConnector, StepIndicator } from './utils'
+import { supabase } from '@/lib/supabase'
 
-// Define the interface for the selected vehicle
 interface SelectedVehicle {
   brand: string
   model: string
@@ -63,10 +56,25 @@ interface SelectedVehicle {
   modelId?: string
 }
 
-// Define the interface for the years data
 interface YearData {
   id: string
   year: string
+}
+
+interface CutInfo {
+  cut_info: {
+    notes: string
+    cut_info: Array<{
+      image: string
+      description: string
+    }>
+    created_at: string
+  }
+  id: string
+  model_id: string
+  year: number
+  created_at: string
+  updated_at: string
 }
 
 export const VehicleSelector = () => {
@@ -91,6 +99,8 @@ export const VehicleSelector = () => {
   })
   const [cutFound, setCutFound] = useState(true)
   const [showCreateCutDialog, setShowCreateCutDialog] = useState(false)
+  const [cutInfo, setCutInfo] = useState<CutInfo | null>(null)
+  const [totalCuts, setTotalCuts] = useState(0)
 
   const currentYear = new Date().getFullYear()
 
@@ -99,14 +109,12 @@ export const VehicleSelector = () => {
   }, [])
 
   useEffect(() => {
-    if (selectedModel) {
-      const yearsList: YearData[] = []
-      for (let year = 1990; year <= currentYear; year++) {
-        yearsList.push({ id: year.toString(), year: year.toString() })
-      }
-      setGeneratedYears(yearsList)
+    const yearsList: YearData[] = []
+    for (let year = 1990; year <= currentYear; year++) {
+      yearsList.push({ id: year.toString(), year: year.toString() })
     }
-  }, [selectedModel, currentYear])
+    setGeneratedYears(yearsList)
+  }, [currentYear])
 
   useEffect(() => {
     if (selectedBrand && selectedModel && selectedYear) {
@@ -130,16 +138,46 @@ export const VehicleSelector = () => {
     }
   }, [selectedBrand, selectedModel, selectedYear, brands, models])
 
+  useEffect(() => {
+    fetchTotalCuts()
+  }, [])
+
   const checkIfCutExists = async (modelId: string, year: string) => {
     setLoading((prev) => ({ ...prev, cutCheck: true }))
     try {
-      const exists = await checkCutExists(modelId, parseInt(year))
-      setCutFound(exists)
+      const { data, error } = await supabase
+        .from('cuts_vehicles')
+        .select('*')
+        .eq('model_id', modelId)
+        .eq('year', parseInt(year))
+        .single()
+
+      if (error) {
+        setCutFound(false)
+        setCutInfo(null)
+      } else {
+        setCutFound(true)
+        setCutInfo(data)
+      }
     } catch (error) {
       console.error('Error checking if cut exists:', error)
       setCutFound(false)
+      setCutInfo(null)
     } finally {
       setLoading((prev) => ({ ...prev, cutCheck: false }))
+    }
+  }
+
+  const fetchTotalCuts = async () => {
+    try {
+      const { count, error } = await supabase
+        .from('cuts_vehicles')
+        .select('*', { count: 'exact', head: true })
+
+      if (error) throw error
+      setTotalCuts(count || 0)
+    } catch (error) {
+      console.error('Error fetching total cuts:', error)
     }
   }
 
@@ -164,7 +202,6 @@ export const VehicleSelector = () => {
       setModels(data)
       setSelectedModel('')
       setSelectedYear('')
-      setYears([])
       setIsComplete(false)
     } catch (error) {
       console.error('Error loading models:', error)
@@ -179,7 +216,6 @@ export const VehicleSelector = () => {
     setLoading((prev) => ({ ...prev, years: true }))
     try {
       const data = await fetchYearsByModel(modelId)
-      // Convert Vehicle[] to YearData[]
       const yearsData: YearData[] = data.map((item) => ({
         id: item.id.toString(),
         year: item.year.toString(),
@@ -187,7 +223,6 @@ export const VehicleSelector = () => {
       setYears(yearsData)
     } catch (error) {
       console.error('Error loading years:', error)
-      // Fallback to generated years if API fails
     } finally {
       setLoading((prev) => ({ ...prev, years: false }))
     }
@@ -235,21 +270,13 @@ export const VehicleSelector = () => {
     setShowCreateCutDialog(true)
   }
 
-  // Mover funciones handlers dentro del componente
   const handleCreateBrand = async () => {
     setLoading((prev) => ({ ...prev, brands: true }))
     try {
-      const response = await fetch('/api/cuts/brands', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newBrandName }),
-      })
-
-      if (!response.ok) throw new Error('Error en la respuesta')
-
-      await loadBrands()
+      const response = await createBrand(newBrandName)
       setShowCreateBrandDialog(false)
       setNewBrandName('')
+      await loadBrands()
     } catch (error) {
       console.error('Error creando marca:', error)
     } finally {
@@ -264,10 +291,11 @@ export const VehicleSelector = () => {
         name: newModelName,
         brandId: selectedBrand,
       })
-      await loadModels(selectedBrand)
       setShowCreateModelDialog(false)
       setNewModelName('')
+      await loadModels(selectedBrand)
     } catch (error) {
+      await loadModels(selectedBrand)
       console.error('Error creando modelo:', error)
     } finally {
       setLoading((prev) => ({ ...prev, models: false }))
@@ -276,6 +304,15 @@ export const VehicleSelector = () => {
 
   return (
     <>
+      <div className="mb-4 text-center">
+        <Badge
+          variant="outline"
+          className="bg-emerald-50 px-3 py-1 text-lg font-medium text-black dark:text-black"
+        >
+          + de {totalCuts} cortes disponibles
+        </Badge>
+      </div>
+
       <div className="mb-6">
         <div className="mb-8 flex items-center justify-between">
           <StepIndicator
@@ -325,21 +362,21 @@ export const VehicleSelector = () => {
                           {brand.name}
                         </SelectItem>
                       ))}
-                      <Separator className="my-2" />
-                      <div>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start font-normal text-emerald-600"
-                          onClick={() => setShowCreateBrandDialog(true)}
-                        >
-                          <Plus className="mr-2 h-4 w-4" />
-                          Añadir nueva marca
-                        </Button>
-                      </div>
                     </>
                   )}
                 </SelectContent>
               </Select>
+              <Separator className="my-2" />
+              <div>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start font-normal text-emerald-600"
+                  onClick={() => setShowCreateBrandDialog(true)}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Añadir nueva marca
+                </Button>
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -365,21 +402,21 @@ export const VehicleSelector = () => {
                           {model.name}
                         </SelectItem>
                       ))}
-                      <Separator className="my-2" />
-                      <div>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start font-normal text-emerald-600"
-                          onClick={() => setShowCreateModelDialog(true)}
-                        >
-                          <Plus className="mr-2 h-4 w-4" />
-                          Añadir nuevo modelo
-                        </Button>
-                      </div>
                     </>
                   )}
                 </SelectContent>
               </Select>
+              <Separator className="my-2" />
+              <div>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start font-normal text-emerald-600"
+                  onClick={() => setShowCreateModelDialog(true)}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Añadir nuevo modelo
+                </Button>
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -387,24 +424,17 @@ export const VehicleSelector = () => {
               <Select
                 value={selectedYear}
                 onValueChange={handleYearChange}
-                disabled={!selectedModel || loading.years}
+                disabled={!selectedModel}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Selecciona un año" />
                 </SelectTrigger>
                 <SelectContent>
-                  {loading.years ? (
-                    <div className="flex items-center justify-center py-2">
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      <span>Cargando años...</span>
-                    </div>
-                  ) : (
-                    (years.length > 0 ? years : generatedYears).map((year) => (
-                      <SelectItem key={year.id} value={year.id}>
-                        {year.year}
-                      </SelectItem>
-                    ))
-                  )}
+                  {generatedYears.map((year) => (
+                    <SelectItem key={year.year} value={year.year}>
+                      {year.year}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -447,6 +477,60 @@ export const VehicleSelector = () => {
                 </div>
               </div>
             </div>
+
+            {cutFound && cutInfo && (
+              <div className="mt-6 space-y-4">
+                <div className="rounded-lg bg-white p-4 shadow-sm dark:bg-emerald-800">
+                  <h4 className="mb-4 text-lg font-medium text-emerald-800 dark:text-white">
+                    Información del Corte GPS
+                  </h4>
+
+                  <div className="space-y-6">
+                    {cutInfo.cut_info?.cut_info &&
+                      cutInfo.cut_info.cut_info.map((step, index) => (
+                        <div
+                          key={index}
+                          className="rounded-lg border border-emerald-100 p-4 dark:border-emerald-700"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-sm font-medium text-emerald-800">
+                              {index + 1}
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-gray-700 dark:text-gray-200">{step.description}</p>
+                              {step.image && (
+                                <img
+                                  src={step.image}
+                                  alt={`Paso ${index + 1}`}
+                                  className="mt-2 w-full rounded-lg object-cover"
+                                />
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                    {cutInfo.cut_info?.notes && (
+                      <div className="rounded-lg bg-emerald-50 p-4 dark:bg-emerald-900/50">
+                        <h5 className="mb-2 font-medium text-emerald-800 dark:text-emerald-100">
+                          Notas Adicionales
+                        </h5>
+                        <p className="text-emerald-700 dark:text-emerald-200">
+                          {cutInfo.cut_info.notes}
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <span>Creado: {new Date(cutInfo.created_at).toLocaleDateString()}</span>
+                      <span>
+                        Última actualización: {new Date(cutInfo.updated_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {!cutFound && (
               <Alert
@@ -508,6 +592,7 @@ export const VehicleSelector = () => {
             <CreateCutForm
               selectedVehicle={selectedVehicle}
               onClose={() => setShowCreateCutDialog(false)}
+              checkIfCutExists={checkIfCutExists}
             />
           )}
         </DialogContent>
@@ -538,7 +623,7 @@ export const VehicleSelector = () => {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={showCreateBrandDialog} onOpenChange={setShowCreateBrandDialog}>
+      <Dialog open={showCreateModelDialog} onOpenChange={setShowCreateModelDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Nuevo Modelo</DialogTitle>

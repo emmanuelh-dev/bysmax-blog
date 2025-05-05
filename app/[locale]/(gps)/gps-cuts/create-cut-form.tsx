@@ -1,6 +1,7 @@
 'use client'
 
 import { Badge } from '@/components/ui/badge'
+import { compressImage, formatFileSize } from '@/lib/image-compressor'
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -30,6 +31,7 @@ interface CreateCutFormProps {
     modelId?: string
   }
   onClose: () => void
+  checkIfCutExists: (modelId: string, year: string) => Promise<void>
 }
 
 interface CutStep {
@@ -37,7 +39,7 @@ interface CutStep {
   image?: string
 }
 
-export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) {
+export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: CreateCutFormProps) {
   const { toast } = useToast()
   const [formData, setFormData] = useState({
     brand: selectedVehicle?.brand || '',
@@ -51,28 +53,36 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
   const [images, setImages] = useState<{ [key: number]: ImageUpload }>({})
 
   const handleImageUpload = async (index: number, file: File) => {
-    const preview = URL.createObjectURL(file)
-
-    setImages((prev) => ({
-      ...prev,
-      [index]: {
-        file,
-        preview,
-        uploading: true,
-        uploaded: false,
-        error: false,
-        url: null,
-      },
-    }))
-
     try {
-      const fileName = `${Date.now()}-${file.name}`
-      const { data, error } = await supabase.storage.from('cuts-images').upload(fileName, file)
+      // Show initial size
+      const initialSize = formatFileSize(file.size)
+
+      setImages((prev) => ({
+        ...prev,
+        [index]: {
+          file,
+          preview: URL.createObjectURL(file),
+          uploading: true,
+          uploaded: false,
+          error: false,
+          url: null,
+        },
+      }))
+
+      // Compress image
+      const compressedFile = await compressImage(file)
+      const compressedSize = formatFileSize(compressedFile.size)
+
+      const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9-.]/g, '_')}`
+      const { data, error } = await supabase.storage
+        .from('cuts-images')
+        .upload(fileName, compressedFile)
 
       if (error) throw error
 
       const { data: publicUrlData } = supabase.storage.from('cuts-images').getPublicUrl(data.path)
 
+      // Update steps with the new image URL
       const newSteps = [...steps]
       newSteps[index] = {
         ...newSteps[index],
@@ -92,7 +102,7 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
 
       toast({
         title: 'Imagen subida exitosamente',
-        description: 'La imagen se ha adjuntado al paso correctamente.',
+        description: `Tamaño original: ${initialSize} → Comprimido: ${compressedSize}`,
         variant: 'default',
       })
     } catch (error) {
@@ -105,9 +115,11 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
           error: true,
         },
       }))
+
+      const errorMessage = error instanceof Error ? error.message : 'Error al subir la imagen'
       toast({
         title: 'Error al subir la imagen',
-        description: 'No se pudo subir la imagen. Por favor, intente nuevamente.',
+        description: errorMessage,
         variant: 'destructive',
       })
     }
@@ -175,8 +187,10 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
       const { error: vehicleError } = await supabase.from('cuts_vehicles').insert({
         model_id: selectedVehicle.modelId,
         year: parseInt(selectedVehicle.year),
-        cut_data: cutData,
+        cut_info: cutData,
       })
+
+      checkIfCutExists(selectedVehicle.modelId as any, selectedVehicle.year)
 
       if (vehicleError) throw vehicleError
 
