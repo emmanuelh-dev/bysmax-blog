@@ -1,8 +1,8 @@
 export default function GPSCutsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="container mx-auto py-8">
+    <section>
       <div className="mb-8">
-        <nav className="breadcrumbs text-sm">
+        <nav className="breadcrumbs text-sm px-4">
           <ul className="flex items-center space-x-2 text-gray-500">
             <li>
               <a href="/" className="hover:text-gray-900">

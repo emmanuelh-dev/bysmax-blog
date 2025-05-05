@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const GPSCutsPage = () => {
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-4">
+    <div className="mx-auto max-w-4xl space-y-6 lg:p-4">
       <Card className="shadow-lg">
         <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
           <h1 className="text-2xl font-bold">Buscador de Cortes GPS</h1>
