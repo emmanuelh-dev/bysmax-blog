@@ -32,6 +32,7 @@ import {
   Copy,
   Check,
   AlertCircle,
+  Pencil,
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -45,6 +46,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { CreateCutForm } from './create-cut-form'
+import { EditCutForm } from './edit-cut-form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -105,6 +107,7 @@ export const VehicleSelector = () => {
   })
   const [cutFound, setCutFound] = useState(true)
   const [showCreateCutDialog, setShowCreateCutDialog] = useState(false)
+  const [showEditCutDialog, setShowEditCutDialog] = useState(false)
   const [cutInfo, setCutInfo] = useState<CutInfo | null>(null)
   const [totalCuts, setTotalCuts] = useState(0)
   const [copied, setCopied] = useState(false)
@@ -591,9 +594,15 @@ export const VehicleSelector = () => {
             {cutFound && cutInfo && (
               <div className="mt-6 space-y-4">
                 <div className="rounded-lg bg-white p-4 shadow-sm dark:bg-emerald-800">
-                  <h4 className="mb-4 text-lg font-medium text-emerald-800 dark:text-white">
-                    Información del Corte GPS
-                  </h4>
+                  <div className="mb-4 flex items-center justify-between">
+                    <h4 className="text-lg font-medium text-emerald-800 dark:text-white">
+                      Información del Corte GPS
+                    </h4>
+                    <Button variant="outline" size="sm" onClick={() => setShowEditCutDialog(true)}>
+                      <Pencil className="mr-2 h-4 w-4" />
+                      Editar Corte
+                    </Button>
+                  </div>
 
                   <div className="space-y-6">
                     {cutInfo.cut_info?.cut_info &&
@@ -712,6 +721,29 @@ export const VehicleSelector = () => {
             <CreateCutForm
               selectedVehicle={selectedVehicle}
               onClose={() => setShowCreateCutDialog(false)}
+              checkIfCutExists={checkIfCutExists}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showEditCutDialog} onOpenChange={setShowEditCutDialog}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Editar corte GPS</DialogTitle>
+            <DialogDescription>
+              Modifica la información del corte GPS para este vehículo.
+            </DialogDescription>
+          </DialogHeader>
+
+          {selectedVehicle && cutInfo && (
+            <EditCutForm
+              cutInfo={cutInfo}
+              selectedVehicle={{
+                ...selectedVehicle,
+                year: selectedVehicle.year,
+              }}
+              onClose={() => setShowEditCutDialog(false)}
               checkIfCutExists={checkIfCutExists}
             />
           )}

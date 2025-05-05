@@ -1,17 +1,16 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
-import { compressImage, formatFileSize } from '@/lib/image-compressor'
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { DialogFooter } from '@/components/ui/dialog'
 import { Upload, X, Plus, CheckCircle, Loader2 } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 import { supabase } from '@/lib/supabase'
 import { useToast } from 'components/ui/use-toast'
+import { compressImage, formatFileSize } from '@/lib/image-compressor'
 
 interface ImageUpload {
   file: File
@@ -22,7 +21,8 @@ interface ImageUpload {
   url: string | null
 }
 
-interface CreateCutFormProps {
+interface EditCutFormProps {
+  cutInfo: any
   selectedVehicle: {
     brand: string
     model: string
@@ -39,22 +39,27 @@ interface CutStep {
   image?: string
 }
 
-export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: CreateCutFormProps) {
+export function EditCutForm({
+  cutInfo,
+  selectedVehicle,
+  onClose,
+  checkIfCutExists,
+}: EditCutFormProps) {
   const { toast } = useToast()
-  const [formData, setFormData] = useState({
-    brand: selectedVehicle?.brand || '',
-    model: selectedVehicle?.model || '',
-    year: selectedVehicle?.year || '',
-    cut_info: [] as CutStep[],
-    notes: '',
-  })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [steps, setSteps] = useState<CutStep[]>([{ description: '', image: '' }])
+  const [steps, setSteps] = useState<CutStep[]>([])
+  const [notes, setNotes] = useState('')
   const [images, setImages] = useState<{ [key: number]: ImageUpload }>({})
+
+  useEffect(() => {
+    if (cutInfo?.cut_info) {
+      setSteps(cutInfo.cut_info.cut_info || [])
+      setNotes(cutInfo.cut_info.notes || '')
+    }
+  }, [cutInfo])
 
   const handleImageUpload = async (index: number, file: File) => {
     try {
-      // Show initial size
       const initialSize = formatFileSize(file.size)
 
       setImages((prev) => ({
@@ -69,7 +74,6 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
         },
       }))
 
-      // Compress image
       const compressedFile = await compressImage(file)
       const compressedSize = formatFileSize(compressedFile.size)
 
@@ -82,7 +86,6 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
 
       const { data: publicUrlData } = supabase.storage.from('cuts-images').getPublicUrl(data.path)
 
-      // Update steps with the new image URL
       const newSteps = [...steps]
       newSteps[index] = {
         ...newSteps[index],
@@ -101,9 +104,8 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
       }))
 
       toast({
-        title: 'Imagen subida exitosamente',
+        title: 'Imagen actualizada exitosamente',
         description: `Tamaño original: ${initialSize} → Comprimido: ${compressedSize}`,
-        variant: 'default',
       })
     } catch (error) {
       console.error('Error uploading image:', error)
@@ -116,10 +118,9 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
         },
       }))
 
-      const errorMessage = error instanceof Error ? error.message : 'Error al subir la imagen'
       toast({
         title: 'Error al subir la imagen',
-        description: errorMessage,
+        description: 'No se pudo subir la imagen. Por favor, intente nuevamente.',
         variant: 'destructive',
       })
     }
@@ -133,12 +134,14 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
     }
     setSteps(newSteps)
 
-    const newImages = { ...images }
-    delete newImages[index]
-    setImages(newImages)
+    if (images[index]) {
+      const newImages = { ...images }
+      delete newImages[index]
+      setImages(newImages)
 
-    if (images[index]?.preview) {
-      URL.revokeObjectURL(images[index].preview)
+      if (images[index].preview) {
+        URL.revokeObjectURL(images[index].preview)
+      }
     }
   }
 
@@ -147,9 +150,7 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
   }
 
   const removeStep = (index: number) => {
-    const newSteps = steps.filter((_, i) => i !== index)
-    setSteps(newSteps)
-
+    setSteps(steps.filter((_, i) => i !== index))
     if (images[index]) {
       removeImage(index)
     }
@@ -169,7 +170,7 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
     if (steps.length === 0 || !steps[0].description) {
       toast({
         title: 'Pasos requeridos',
-        description: 'Debe agregar al menos un paso de instalación',
+        description: 'Debe tener al menos un paso de instalación',
         variant: 'destructive',
       })
       return
@@ -180,29 +181,28 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
     try {
       const cutData = {
         cut_info: steps,
-        notes: formData.notes,
-        created_at: new Date().toISOString(),
+        notes: notes,
+        updated_at: new Date().toISOString(),
       }
 
-      const { error: vehicleError } = await supabase.from('cuts_vehicles').insert({
-        model_id: selectedVehicle.modelId,
-        year: parseInt(selectedVehicle.year),
-        cut_info: cutData,
-      })
+      const { error } = await supabase
+        .from('cuts_vehicles')
+        .update({ cut_info: cutData })
+        .eq('id', cutInfo.id)
 
-      if (vehicleError) throw vehicleError
+      if (error) throw error
 
       toast({
-        title: 'Corte GPS creado',
-        description: '¡Gracias por contribuir! Tu información ayudará a otros instaladores.',
+        title: 'Corte actualizado',
+        description: 'Los cambios han sido guardados exitosamente.',
       })
 
       await checkIfCutExists(selectedVehicle.modelId!, selectedVehicle.year)
       onClose()
     } catch (error) {
-      console.error('Error creating cut:', error)
+      console.error('Error updating cut:', error)
       toast({
-        title: 'Error al crear el corte',
+        title: 'Error al actualizar',
         description: 'Ha ocurrido un error. Por favor, intenta nuevamente.',
         variant: 'destructive',
       })
@@ -250,7 +250,7 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
                         className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
                       >
                         <Upload className="h-4 w-4" />
-                        <span>Agregar imagen (opcional)</span>
+                        <span>Actualizar imagen</span>
                         <input
                           id={`image-${index}`}
                           type="file"
@@ -269,7 +269,7 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
                         </div>
                       )}
 
-                      {images[index]?.uploaded && (
+                      {(images[index]?.uploaded || step.image) && (
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="bg-green-50 text-green-700">
                             <CheckCircle className="mr-1 h-3 w-3" />
@@ -288,11 +288,11 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
                       )}
                     </div>
 
-                    {images[index]?.preview && (
+                    {(images[index]?.preview || step.image) && (
                       <div className="relative mt-2 inline-block">
                         <img
-                          src={images[index].preview}
-                          alt={`Preview ${index + 1}`}
+                          src={images[index]?.preview || step.image}
+                          alt={`Paso ${index + 1}`}
                           className="max-h-32 rounded-lg"
                         />
                       </div>
@@ -323,8 +323,8 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
           <Label htmlFor="notes">Notas Adicionales</Label>
           <Textarea
             id="notes"
-            value={formData.notes}
-            onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
             placeholder="Consejos o precauciones importantes..."
             rows={3}
           />
@@ -345,7 +345,7 @@ export function CreateCutForm({ selectedVehicle, onClose, checkIfCutExists }: Cr
               Guardando...
             </>
           ) : (
-            'Guardar Corte'
+            'Guardar Cambios'
           )}
         </Button>
       </DialogFooter>
