@@ -1,4 +1,4 @@
-import { Calculator, LucideIcon, QrCode } from "lucide-react";
+import { Calculator, LucideIcon, QrCode, Truck  } from "lucide-react";
 interface Links {
   title: string
   description: string
@@ -6,6 +6,12 @@ interface Links {
   href: string
 }
 const TOOLS = [
+  {
+    icon: Truck,
+    title: 'Cortes GPS',
+    href: '/gps-cuts',
+    description: 'Aplicación de cortes GPS para el transporte en tierra, mar y aire',
+  },
   {
     icon: QrCode,
     title: 'Generador de QR',
