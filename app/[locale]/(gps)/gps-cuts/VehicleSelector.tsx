@@ -116,7 +116,7 @@ export const VehicleSelector = () => {
 
   useEffect(() => {
     const yearsList: YearData[] = []
-    for (let year = 1990; year <= currentYear; year++) {
+    for (let year = currentYear; year >= 1990; year--) {
       yearsList.push({ id: year.toString(), year: year.toString() })
     }
     setGeneratedYears(yearsList)
@@ -530,11 +530,38 @@ export const VehicleSelector = () => {
                   <SelectValue placeholder="Selecciona un año" />
                 </SelectTrigger>
                 <SelectContent>
-                  {generatedYears.map((year) => (
-                    <SelectItem key={year.year} value={year.year}>
-                      {year.year}
-                    </SelectItem>
-                  ))}
+                  {years.length > 0 ? (
+                    <>
+                      <div className="px-2 py-1.5">
+                        <p className="text-sm font-medium text-emerald-600">Años disponibles</p>
+                      </div>
+                      {years.map((year) => (
+                        <SelectItem key={year.year} value={year.year}>
+                          {year.year}
+                        </SelectItem>
+                      ))}
+                      <Separator className="my-2" />
+                      <div className="px-2 py-1.5">
+                        <p className="text-sm font-medium text-gray-500">Otros años</p>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="px-2 py-1.5">
+                      <p className="text-sm font-medium text-gray-500">Todos los años</p>
+                    </div>
+                  )}
+                  {generatedYears
+                    .filter((year) => !years.some((y) => y.year === year.year))
+                    .map((year) => (
+                      <SelectItem key={year.year} value={year.year}>
+                        <div className="flex w-full items-center justify-between">
+                          <span>{year.year}</span>
+                          <Badge variant="outline" className="ml-2 text-xs">
+                            Agregar corte
+                          </Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             </div>
