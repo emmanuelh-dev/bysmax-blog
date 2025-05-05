@@ -22,7 +22,7 @@ const GPSCutsPage = () => {
             Selecciona tu vehículo para encontrar información detallada sobre el corte GPS
           </p>
         </div>
-        <div className="p-6">
+        <div>
           <VehicleSelector />
         </div>
       </Card>

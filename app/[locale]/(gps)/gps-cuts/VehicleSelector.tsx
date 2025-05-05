@@ -381,20 +381,7 @@ export const VehicleSelector = () => {
   const handleShare = async () => {
     const url = generateShareableLink()
     if (!url) return
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Corte GPS',
-          text: `Corte GPS para ${selectedVehicle?.brand} ${selectedVehicle?.model} ${selectedVehicle?.year}`,
-          url,
-        })
-      } catch (err) {
-        copyToClipboard(url)
-      }
-    } else {
-      copyToClipboard(url)
-    }
+    copyToClipboard(url)
   }
 
   const copyToClipboard = async (text: string) => {
@@ -417,7 +404,7 @@ export const VehicleSelector = () => {
 
   return (
     <>
-      <div className="mb-4 text-center">
+      <div className="mb-4 p-6 text-center">
         <Badge
           variant="outline"
           className="bg-emerald-50 px-3 py-1 text-lg font-medium text-black dark:text-black"
@@ -426,7 +413,7 @@ export const VehicleSelector = () => {
         </Badge>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 p-6">
         <div className="mb-8 flex items-center justify-between">
           <StepIndicator
             step={1}
@@ -673,14 +660,12 @@ export const VehicleSelector = () => {
               </Alert>
             )}
 
-            <div className="mt-4 flex items-center justify-between">
+            <div className="mt-4 flex flex-col items-center justify-between gap-4 lg:flex-row">
               {cutFound ? (
                 <Badge
                   variant="outline"
-                  className="bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
-                >
-                  Listo para consultar
-                </Badge>
+                  className="size-5 bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                ></Badge>
               ) : (
                 <Badge
                   variant="outline"
@@ -700,7 +685,7 @@ export const VehicleSelector = () => {
                   ) : (
                     <Share2 className="mr-2 h-4 w-4" />
                   )}
-                  Compartir
+                  Copiar Link
                 </Button>
               </div>
             </div>
