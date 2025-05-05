@@ -120,51 +120,43 @@ export const VehicleSelector = () => {
   }, [currentYear])
 
   useEffect(() => {
+    loadBrands()
+  }, [])
+
+  useEffect(() => {
     const initializeFromUrl = async () => {
       const brandId = searchParams.get('brand')
       const modelId = searchParams.get('model')
       const year = searchParams.get('year')
 
-      if (brandId) {
-        try {
-          // Load brands first
-          const brandsData = await fetchBrands()
-          setBrands(brandsData)
-          setSelectedBrand(brandId)
+      if (brandId && brands.length > 0) {
+        setSelectedBrand(brandId)
 
-          // If we have a model ID, load models for this brand
-          if (modelId) {
-            const modelsData = await fetchModelsByBrand(brandId)
-            setModels(modelsData)
-            setSelectedModel(modelId)
+        if (modelId) {
+          const modelsData = await fetchModelsByBrand(brandId)
+          setModels(modelsData)
+          setSelectedModel(modelId)
 
-            // If we have a year, set it and check for cuts
-            if (year) {
-              setSelectedYear(year)
-              const { data } = await supabase
-                .from('cuts_vehicles')
-                .select('*')
-                .eq('model_id', modelId)
-                .eq('year', parseInt(year))
-                .single()
+          if (year) {
+            setSelectedYear(year)
+            const { data } = await supabase
+              .from('cuts_vehicles')
+              .select('*')
+              .eq('model_id', modelId)
+              .eq('year', parseInt(year))
+              .single()
 
-              if (data) {
-                setCutFound(true)
-                setCutInfo(data)
-              } else {
-                setCutFound(false)
-                setCutInfo(null)
-              }
+            if (data) {
+              setCutFound(true)
+              setCutInfo(data)
             }
           }
-        } catch (error) {
-          console.error('Error initializing from URL:', error)
         }
       }
     }
 
     initializeFromUrl()
-  }, [searchParams])
+  }, [searchParams, brands])
 
   useEffect(() => {
     if (selectedBrand && selectedModel && selectedYear) {
