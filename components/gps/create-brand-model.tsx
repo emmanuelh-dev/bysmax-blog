@@ -1,17 +1,17 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { DialogFooter } from "@/components/ui/dialog"
-import { Loader2, Check } from "lucide-react"
-import { supabase } from "@/lib/supabase"
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { DialogFooter } from '@/components/ui/dialog'
+import { Loader2, Check } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 import { useToast } from 'components/ui/use-toast'
 
 export function CreateBrandForm({ onSuccess, onCancel }) {
   const { toast } = useToast()
-  const [brandName, setBrandName] = useState("")
+  const [brandName, setBrandName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
@@ -20,23 +20,27 @@ export function CreateBrandForm({ onSuccess, onCancel }) {
 
     setIsSubmitting(true)
     try {
-      const { data, error } = await supabase.from("cuts_brands").insert({ name: brandName.trim() }).select().single()
+      const { data, error } = await supabase
+        .from('cuts_brands')
+        .insert({ name: brandName.trim() })
+        .select()
+        .single()
 
       if (error) throw error
 
       toast({
-        title: "Marca creada",
+        title: 'Marca creada',
         description: `La marca "${brandName}" ha sido creada exitosamente.`,
-        variant: "default",
+        variant: 'default',
       })
 
       onSuccess(data)
     } catch (error) {
-      console.error("Error creating brand:", error)
+      console.error('Error creating brand:', error)
       toast({
-        title: "Error al crear la marca",
-        description: "Ha ocurrido un error. Por favor, intenta nuevamente.",
-        variant: "destructive",
+        title: 'Error al crear la marca',
+        description: 'Ha ocurrido un error. Por favor, intenta nuevamente.',
+        variant: 'destructive',
       })
     } finally {
       setIsSubmitting(false)
@@ -65,12 +69,12 @@ export function CreateBrandForm({ onSuccess, onCancel }) {
         <Button type="submit" disabled={isSubmitting || !brandName.trim()}>
           {isSubmitting ? (
             <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Creando...
             </>
           ) : (
             <>
-              <Check className="h-4 w-4 mr-2" />
+              <Check className="mr-2 h-4 w-4" />
               Crear Marca
             </>
           )}
@@ -82,7 +86,7 @@ export function CreateBrandForm({ onSuccess, onCancel }) {
 
 export function CreateModelForm({ brandId, onSuccess, onCancel }) {
   const { toast } = useToast()
-  const [modelName, setModelName] = useState("")
+  const [modelName, setModelName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
@@ -92,7 +96,7 @@ export function CreateModelForm({ brandId, onSuccess, onCancel }) {
     setIsSubmitting(true)
     try {
       const { data, error } = await supabase
-        .from("cuts_models")
+        .from('cuts_models')
         .insert({
           name: modelName.trim(),
           brand_id: brandId,
@@ -103,18 +107,18 @@ export function CreateModelForm({ brandId, onSuccess, onCancel }) {
       if (error) throw error
 
       toast({
-        title: "Modelo creado",
+        title: 'Modelo creado',
         description: `El modelo "${modelName}" ha sido creado exitosamente.`,
-        variant: "default",
+        variant: 'default',
       })
 
       onSuccess(data)
     } catch (error) {
-      console.error("Error creating model:", error)
+      console.error('Error creating model:', error)
       toast({
-        title: "Error al crear el modelo",
-        description: "Ha ocurrido un error. Por favor, intenta nuevamente.",
-        variant: "destructive",
+        title: 'Error al crear el modelo',
+        description: 'Ha ocurrido un error. Por favor, intenta nuevamente.',
+        variant: 'destructive',
       })
     } finally {
       setIsSubmitting(false)
@@ -143,12 +147,12 @@ export function CreateModelForm({ brandId, onSuccess, onCancel }) {
         <Button type="submit" disabled={isSubmitting || !modelName.trim()}>
           {isSubmitting ? (
             <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Creando...
             </>
           ) : (
             <>
-              <Check className="h-4 w-4 mr-2" />
+              <Check className="mr-2 h-4 w-4" />
               Crear Modelo
             </>
           )}

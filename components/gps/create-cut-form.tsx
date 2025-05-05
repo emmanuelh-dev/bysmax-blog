@@ -1,52 +1,52 @@
-"use client"
+'use client'
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from '@/components/ui/badge'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent } from "@/components/ui/card"
-import { DialogFooter } from "@/components/ui/dialog"
-import { Upload, X, Plus, Check, Loader2 } from "lucide-react"
-import { supabase } from "@/lib/supabase"
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Card, CardContent } from '@/components/ui/card'
+import { DialogFooter } from '@/components/ui/dialog'
+import { Upload, X, Plus, Check, Loader2 } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 import { useToast } from 'components/ui/use-toast'
 
 interface ImageUpload {
-  file: File;
-  preview: string;
-  uploading: boolean;
-  uploaded: boolean;
-  error: boolean;
-  url: string | null;
+  file: File
+  preview: string
+  uploading: boolean
+  uploaded: boolean
+  error: boolean
+  url: string | null
 }
 
 interface CreateCutFormProps {
   selectedVehicle: {
-    brand: string;
-    model: string;
-    year: string;
-    brandId?: string;
-    modelId?: string;
-  };
-  onClose: () => void;
+    brand: string
+    model: string
+    year: string
+    brandId?: string
+    modelId?: string
+  }
+  onClose: () => void
 }
 
 interface CutStep {
-  description: string;
-  image?: string;
+  description: string
+  image?: string
 }
 
 export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) {
   const { toast } = useToast()
   const [formData, setFormData] = useState({
-    brand: selectedVehicle?.brand || "",
-    model: selectedVehicle?.model || "",
-    year: selectedVehicle?.year || "",
+    brand: selectedVehicle?.brand || '',
+    model: selectedVehicle?.model || '',
+    year: selectedVehicle?.year || '',
     cut_info: [] as CutStep[],
-    notes: "",
+    notes: '',
   })
   const [isNewBrand, setIsNewBrand] = useState(false)
   const [isNewModel, setIsNewModel] = useState(false)
@@ -58,24 +58,24 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (formData.cut_info.length === 0) {
       toast({
         title: 'Pasos requeridos',
         description: 'Debe agregar al menos un paso de instalación',
-        variant: 'destructive'
-      });
-      return;
+        variant: 'destructive',
+      })
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const cutData = {
         cut_info: formData.cut_info,
         notes: formData.notes,
         created_at: new Date().toISOString(),
-      };
+      }
 
       // 3. Insert data into database (simplified example)
       // In a real implementation, you would need to:
@@ -89,7 +89,7 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
       // Create brand if needed
       if (isNewBrand) {
         const { data: brandData, error: brandError } = await supabase
-          .from("cuts_brands")
+          .from('cuts_brands')
           .insert({ name: formData.brand })
           .select()
           .single()
@@ -101,7 +101,7 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
       // Create model if needed
       if (isNewModel) {
         const { data: modelData, error: modelError } = await supabase
-          .from("cuts_models")
+          .from('cuts_models')
           .insert({
             name: formData.model,
             brand_id: brandId,
@@ -114,7 +114,7 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
       }
 
       // Create vehicle cut
-      const { error: vehicleError } = await supabase.from("cuts_vehicles").insert({
+      const { error: vehicleError } = await supabase.from('cuts_vehicles').insert({
         model_id: modelId,
         year: formData.year,
         cut_data: cutData,
@@ -123,58 +123,54 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
       if (vehicleError) throw vehicleError
 
       toast({
-        title: "Corte GPS creado",
-        description: "¡Gracias por contribuir! Tu información ayudará a otros instaladores.",
-        variant: "default",
+        title: 'Corte GPS creado',
+        description: '¡Gracias por contribuir! Tu información ayudará a otros instaladores.',
+        variant: 'default',
       })
 
       onClose()
     } catch (error) {
-      console.error("Error creating cut:", error)
+      console.error('Error creating cut:', error)
       toast({
-        title: "Error al crear el corte",
-        description: "Ha ocurrido un error. Por favor, intenta nuevamente.",
-        variant: "destructive",
+        title: 'Error al crear el corte',
+        description: 'Ha ocurrido un error. Por favor, intenta nuevamente.',
+        variant: 'destructive',
       })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
-  const [uploadingImages, setUploadingImages] = useState<{[key: string]: boolean}>({});
+  const [uploadingImages, setUploadingImages] = useState<{ [key: string]: boolean }>({})
 
   const handleImageUpload = async (stepIndex: number, file: File) => {
-    const fileKey = `step-${stepIndex}`;
-    setUploadingImages(prev => ({...prev, [fileKey]: true}));
-    
+    const fileKey = `step-${stepIndex}`
+    setUploadingImages((prev) => ({ ...prev, [fileKey]: true }))
+
     try {
-      const fileName = `${Date.now()}-${file.name}`;
-      const { data, error } = await supabase.storage
-        .from('cut-images')
-        .upload(fileName, file);
-  
-      if (error) throw error;
-  
-      const { data: publicUrlData } = supabase.storage
-        .from('cut-images')
-        .getPublicUrl(data.path);
-  
-      setFormData(prev => ({
+      const fileName = `${Date.now()}-${file.name}`
+      const { data, error } = await supabase.storage.from('cut-images').upload(fileName, file)
+
+      if (error) throw error
+
+      const { data: publicUrlData } = supabase.storage.from('cut-images').getPublicUrl(data.path)
+
+      setFormData((prev) => ({
         ...prev,
-        cut_info: prev.cut_info.map((step, idx) => 
+        cut_info: prev.cut_info.map((step, idx) =>
           idx === stepIndex ? { ...step, image: publicUrlData.publicUrl } : step
-        )
-      }));
+        ),
+      }))
     } catch (error) {
       toast({
         title: 'Error subiendo imagen',
         description: 'No se pudo subir la imagen. Intente nuevamente.',
-        variant: 'destructive'
-      });
+        variant: 'destructive',
+      })
     } finally {
-      setUploadingImages(prev => ({...prev, [fileKey]: false}));
+      setUploadingImages((prev) => ({ ...prev, [fileKey]: false }))
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -220,39 +216,44 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
           <Label>Instrucciones de Instalación *</Label>
           <div className="space-y-4">
             {formData.cut_info.map((step, index) => (
-              <div key={index} className="flex gap-2 items-start group">
-                <div className="flex-1 space-y-1 relative">
-                  <div className="flex gap-2 items-center">
+              <div key={index} className="group flex items-start gap-2">
+                <div className="relative flex-1 space-y-1">
+                  <div className="flex items-center gap-2">
                     <Input
                       value={step.description}
                       onChange={(e) => {
-                        const newSteps = [...formData.cut_info];
-                        newSteps[index].description = e.target.value;
-                        setFormData(prev => ({...prev, cut_info: newSteps}));
+                        const newSteps = [...formData.cut_info]
+                        newSteps[index].description = e.target.value
+                        setFormData((prev) => ({ ...prev, cut_info: newSteps }))
                       }}
                       placeholder={`Paso ${index + 1}`}
                       className="pr-10"
                     />
-                    <Label htmlFor={`image-${index}`} className="cursor-pointer p-2 hover:bg-gray-100 rounded">
+                    <Label
+                      htmlFor={`image-${index}`}
+                      className="cursor-pointer rounded p-2 hover:bg-gray-100"
+                    >
                       <Upload className="h-4 w-4" />
                       <input
                         id={`image-${index}`}
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => e.target.files?.[0] && handleImageUpload(index, e.target.files[0])}
+                        onChange={(e) =>
+                          e.target.files?.[0] && handleImageUpload(index, e.target.files[0])
+                        }
                       />
                     </Label>
                   </div>
-                  
+
                   {uploadingImages[`step-${index}`] && (
                     <div className="absolute right-12 top-2">
-                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                      <Loader2 className="text-muted-foreground h-4 w-4 animate-spin" />
                     </div>
                   )}
-                  
+
                   {step.image && !uploadingImages[`step-${index}`] && (
-                    <div className="mt-1 text-sm text-green-600 flex items-center gap-1">
+                    <div className="mt-1 flex items-center gap-1 text-sm text-green-600">
                       <Check className="h-4 w-4" />
                       <span className="text-xs">Imagen adjunta</span>
                     </div>
@@ -262,13 +263,13 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="opacity-0 transition-opacity group-hover:opacity-100"
                   onClick={() => {
-                    const newSteps = formData.cut_info.filter((_, i) => i !== index);
-                    setFormData(prev => ({...prev, cut_info: newSteps}));
+                    const newSteps = formData.cut_info.filter((_, i) => i !== index)
+                    setFormData((prev) => ({ ...prev, cut_info: newSteps }))
                   }}
                 >
-                  <X className="h-4 w-4 text-destructive" />
+                  <X className="text-destructive h-4 w-4" />
                 </Button>
               </div>
             ))}
@@ -293,11 +294,7 @@ export function CreateCutForm({ selectedVehicle, onClose }: CreateCutFormProps) 
           Cancelar
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-          ) : (
-            'Guardar Corte'
-          )}
+          {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Guardar Corte'}
         </Button>
       </DialogFooter>
     </form>

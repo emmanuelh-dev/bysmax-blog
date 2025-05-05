@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { supabase } from "@/lib/supabase"
-import { SupabaseClient } from "@supabase/supabase-js"
+import { supabase } from '@/lib/supabase'
+import { SupabaseClient } from '@supabase/supabase-js'
 
 // Type definitions for better type safety
 export interface Brand {
@@ -39,7 +39,7 @@ export const fetchBrands = async (): Promise<Brand[]> => {
       .from('cuts_brands')
       .select('*')
       .order('name', { ascending: true })
-    
+
     if (error) throw error
     return data || []
   } catch (err) {
@@ -55,7 +55,7 @@ export const fetchModelsByBrand = async (brandId: string): Promise<Model[]> => {
       .select('*')
       .eq('brand_id', brandId)
       .order('name', { ascending: true })
-    
+
     if (error) throw error
     return data || []
   } catch (err) {
@@ -71,7 +71,7 @@ export const fetchYearsByModel = async (modelId: string): Promise<Vehicle[]> => 
       .select('*')
       .eq('model_id', modelId)
       .order('year', { ascending: false })
-    
+
     if (error) throw error
     return data || []
   } catch (err) {
@@ -87,7 +87,7 @@ export const fetchVehiclesByBrand = async (brandId: string): Promise<Vehicle[]> 
       .select('*')
       .eq('brand_id', brandId)
       .order('year', { ascending: true })
-    
+
     if (error) throw error
     return data || []
   } catch (err) {
@@ -99,45 +99,47 @@ export const fetchVehiclesByBrand = async (brandId: string): Promise<Vehicle[]> 
 // Create functions with proper typing
 export const createBrand = async (name: string): Promise<Brand> => {
   try {
-    const { data, error } = await supabase
-      .from("cuts_brands")
-      .insert({ name })
-      .select()
-      .single()
-    
+    const { data, error } = await supabase.from('cuts_brands').insert({ name }).select().single()
+
     if (error) throw error
     return data
   } catch (err) {
-    return handleError("creating brand", err)
+    return handleError('creating brand', err)
   }
 }
 
-export const createModel = async (name: string, brandId: string): Promise<Model> => {
+export const createModel = async ({
+  name,
+  brandId,
+}: {
+  name: string
+  brandId: string
+}): Promise<Model> => {
   try {
     const { data, error } = await supabase
-      .from("cuts_models")
+      .from('cuts_models')
       .insert({
         name,
         brand_id: brandId,
       })
       .select()
       .single()
-    
+
     if (error) throw error
     return data
   } catch (err) {
-    return handleError("creating model", err)
+    return handleError('creating model', err)
   }
 }
 
 export const createVehicleCut = async (
-  modelId: string, 
-  year: number, 
+  modelId: string,
+  year: number,
   cutData: any
 ): Promise<Vehicle> => {
   try {
     const { data, error } = await supabase
-      .from("cuts_vehicles")
+      .from('cuts_vehicles')
       .insert({
         model_id: modelId,
         year,
@@ -145,59 +147,52 @@ export const createVehicleCut = async (
       })
       .select()
       .single()
-    
+
     if (error) throw error
     return data
   } catch (err) {
-    return handleError("creating vehicle cut", err)
+    return handleError('creating vehicle cut', err)
   }
 }
 
 // Improved file upload function with type safety
 export const uploadImage = async (file: File, path: string): Promise<string> => {
   try {
-    const fileExt = file.name.split(".").pop()
+    const fileExt = file.name.split('.').pop()
     const fileName = `${Date.now()}.${fileExt}`
     const filePath = `${path}/${fileName}`
 
-    const { error } = await supabase.storage
-      .from("images")
-      .upload(filePath, file, {
-        cacheControl: "3600",
-        upsert: false,
-      })
-    
+    const { error } = await supabase.storage.from('images').upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false,
+    })
+
     if (error) throw error
 
-    const { data: urlData } = supabase.storage
-      .from("images")
-      .getPublicUrl(filePath)
-    
+    const { data: urlData } = supabase.storage.from('images').getPublicUrl(filePath)
+
     if (!urlData.publicUrl) {
-      throw new Error("Failed to get public URL")
+      throw new Error('Failed to get public URL')
     }
-    
+
     return urlData.publicUrl
   } catch (err) {
-    return handleError("uploading image", err)
+    return handleError('uploading image', err)
   }
 }
 
-export const checkCutExists = async (
-  modelId: string, 
-  year: number
-): Promise<boolean> => {
+export const checkCutExists = async (modelId: string, year: number): Promise<boolean> => {
   try {
     const { count, error } = await supabase
-      .from("cuts_vehicles")
-      .select("*", { count: "exact", head: true })
-      .eq("model_id", modelId)
-      .eq("year", year)
-    
+      .from('cuts_vehicles')
+      .select('*', { count: 'exact', head: true })
+      .eq('model_id', modelId)
+      .eq('year', year)
+
     if (error) throw error
     return count !== null && count > 0
   } catch (err) {
-    console.error("Error checking if cut exists:", err)
+    console.error('Error checking if cut exists:', err)
     return false
   }
 }
