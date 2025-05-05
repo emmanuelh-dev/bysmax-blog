@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 import {
   Brand,
   Model,
@@ -27,7 +28,9 @@ import {
   Loader2,
   RefreshCw,
   Plus,
-  Search,
+  Share2,
+  Copy,
+  Check,
   AlertCircle,
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -47,6 +50,7 @@ import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { StepConnector, StepIndicator } from './utils'
 import { supabase } from '@/lib/supabase'
+import { toast } from '@/components/ui/use-toast'
 
 interface SelectedVehicle {
   brand: string
@@ -78,6 +82,8 @@ interface CutInfo {
 }
 
 export const VehicleSelector = () => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [newBrandName, setNewBrandName] = useState('')
   const [newModelName, setNewModelName] = useState('')
   const [brands, setBrands] = useState<Brand[]>([])
@@ -101,12 +107,9 @@ export const VehicleSelector = () => {
   const [showCreateCutDialog, setShowCreateCutDialog] = useState(false)
   const [cutInfo, setCutInfo] = useState<CutInfo | null>(null)
   const [totalCuts, setTotalCuts] = useState(0)
+  const [copied, setCopied] = useState(false)
 
   const currentYear = new Date().getFullYear()
-
-  useEffect(() => {
-    loadBrands()
-  }, [])
 
   useEffect(() => {
     const yearsList: YearData[] = []
@@ -115,6 +118,53 @@ export const VehicleSelector = () => {
     }
     setGeneratedYears(yearsList)
   }, [currentYear])
+
+  useEffect(() => {
+    const initializeFromUrl = async () => {
+      const brandId = searchParams.get('brand')
+      const modelId = searchParams.get('model')
+      const year = searchParams.get('year')
+
+      if (brandId) {
+        try {
+          // Load brands first
+          const brandsData = await fetchBrands()
+          setBrands(brandsData)
+          setSelectedBrand(brandId)
+
+          // If we have a model ID, load models for this brand
+          if (modelId) {
+            const modelsData = await fetchModelsByBrand(brandId)
+            setModels(modelsData)
+            setSelectedModel(modelId)
+
+            // If we have a year, set it and check for cuts
+            if (year) {
+              setSelectedYear(year)
+              const { data } = await supabase
+                .from('cuts_vehicles')
+                .select('*')
+                .eq('model_id', modelId)
+                .eq('year', parseInt(year))
+                .single()
+
+              if (data) {
+                setCutFound(true)
+                setCutInfo(data)
+              } else {
+                setCutFound(false)
+                setCutInfo(null)
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error initializing from URL:', error)
+        }
+      }
+    }
+
+    initializeFromUrl()
+  }, [searchParams])
 
   useEffect(() => {
     if (selectedBrand && selectedModel && selectedYear) {
@@ -228,18 +278,37 @@ export const VehicleSelector = () => {
     }
   }
 
-  const handleBrandChange = (value: string) => {
-    setSelectedBrand(value)
-    loadModels(value)
+  const updateUrl = (updates: { brand?: string; model?: string; year?: string }) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) {
+        current.set(key, value)
+      } else {
+        current.delete(key)
+      }
+    })
+
+    const search = current.toString()
+    const query = search ? `?${search}` : ''
+    router.push(`${window.location.pathname}${query}`, { scroll: false })
   }
 
-  const handleModelChange = (value: string) => {
+  const handleBrandChange = async (value: string) => {
+    setSelectedBrand(value)
+    updateUrl({ brand: value, model: '', year: '' })
+    await loadModels(value)
+  }
+
+  const handleModelChange = async (value: string) => {
     setSelectedModel(value)
-    loadYears(value)
+    updateUrl({ ...Object.fromEntries(searchParams), model: value, year: '' })
+    await loadYears(value)
   }
 
   const handleYearChange = (value: string) => {
     setSelectedYear(value)
+    updateUrl({ ...Object.fromEntries(searchParams), year: value })
   }
 
   const resetSelection = () => {
@@ -251,6 +320,7 @@ export const VehicleSelector = () => {
     setIsComplete(false)
     setSelectedVehicle(null)
     setCutFound(true)
+    router.push(window.location.pathname)
   }
 
   const getStepStatus = (step: number) => {
@@ -299,6 +369,54 @@ export const VehicleSelector = () => {
       console.error('Error creando modelo:', error)
     } finally {
       setLoading((prev) => ({ ...prev, models: false }))
+    }
+  }
+
+  const generateShareableLink = () => {
+    if (!selectedVehicle) return
+
+    const params = new URLSearchParams()
+    if (selectedVehicle.brandId) params.set('brand', selectedVehicle.brandId)
+    if (selectedVehicle.modelId) params.set('model', selectedVehicle.modelId)
+    if (selectedVehicle.year) params.set('year', selectedVehicle.year)
+
+    return `${window.location.origin}${window.location.pathname}?${params.toString()}`
+  }
+
+  const handleShare = async () => {
+    const url = generateShareableLink()
+    if (!url) return
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Corte GPS',
+          text: `Corte GPS para ${selectedVehicle?.brand} ${selectedVehicle?.model} ${selectedVehicle?.year}`,
+          url,
+        })
+      } catch (err) {
+        copyToClipboard(url)
+      }
+    } else {
+      copyToClipboard(url)
+    }
+  }
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      toast({
+        title: '¡Enlace copiado!',
+        description: 'El enlace ha sido copiado al portapapeles',
+      })
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      toast({
+        title: 'Error al copiar',
+        description: 'No se pudo copiar el enlace',
+        variant: 'destructive',
+      })
     }
   }
 
@@ -554,7 +672,7 @@ export const VehicleSelector = () => {
               </Alert>
             )}
 
-            <div className="flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between">
               {cutFound ? (
                 <Badge
                   variant="outline"
@@ -570,10 +688,20 @@ export const VehicleSelector = () => {
                   Corte no disponible
                 </Badge>
               )}
-              <Button variant="outline" onClick={resetSelection} className="flex items-center">
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Reiniciar Selección
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={resetSelection}>
+                  <RefreshCw className="mr-2 h-4 w-4" />
+                  Reiniciar Selección
+                </Button>
+                <Button variant="outline" onClick={handleShare}>
+                  {copied ? (
+                    <Check className="mr-2 h-4 w-4" />
+                  ) : (
+                    <Share2 className="mr-2 h-4 w-4" />
+                  )}
+                  Compartir
+                </Button>
+              </div>
             </div>
           </div>
         </div>
