@@ -31,7 +31,6 @@ export function CreateBrandForm({ onSuccess, onCancel }) {
       toast({
         title: 'Marca creada',
         description: `La marca "${brandName}" ha sido creada exitosamente.`,
-        variant: 'default',
       })
 
       onSuccess(data)
@@ -48,21 +47,20 @@ export function CreateBrandForm({ onSuccess, onCancel }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="brandName">Nombre de la Marca</Label>
-          <Input
-            id="brandName"
-            value={brandName}
-            onChange={(e) => setBrandName(e.target.value)}
-            placeholder="Ingresa el nombre de la marca"
-            required
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="brandName">Nombre de la Marca</Label>
+        <Input
+          id="brandName"
+          value={brandName}
+          onChange={(e) => setBrandName(e.target.value)}
+          placeholder="Ingresa el nombre de la marca"
+          className="w-full"
+          required
+        />
       </div>
 
-      <DialogFooter className="mt-6">
+      <DialogFooter>
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancelar
         </Button>
@@ -109,7 +107,6 @@ export function CreateModelForm({ brandId, onSuccess, onCancel }) {
       toast({
         title: 'Modelo creado',
         description: `El modelo "${modelName}" ha sido creado exitosamente.`,
-        variant: 'default',
       })
 
       onSuccess(data)
@@ -126,21 +123,20 @@ export function CreateModelForm({ brandId, onSuccess, onCancel }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="modelName">Nombre del Modelo</Label>
-          <Input
-            id="modelName"
-            value={modelName}
-            onChange={(e) => setModelName(e.target.value)}
-            placeholder="Ingresa el nombre del modelo"
-            required
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="modelName">Nombre del Modelo</Label>
+        <Input
+          id="modelName"
+          value={modelName}
+          onChange={(e) => setModelName(e.target.value)}
+          placeholder="Ingresa el nombre del modelo"
+          className="w-full"
+          required
+        />
       </div>
 
-      <DialogFooter className="mt-6">
+      <DialogFooter>
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancelar
         </Button>
