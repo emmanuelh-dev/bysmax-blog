@@ -1,4 +1,4 @@
-import { VehicleSelector } from '@/components/gps/VehicleSelector'
+import { VehicleSelector } from './VehicleSelector'
 
 const GPSCutsPage = () => {
   return <VehicleSelector />

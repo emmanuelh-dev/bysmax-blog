@@ -49,9 +49,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { CreateCutForm } from './create-cut-form'
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 // Define the interface for the selected vehicle
 interface SelectedVehicle {
@@ -80,6 +80,7 @@ export const VehicleSelector = () => {
   const [generatedYears, setGeneratedYears] = useState<YearData[]>([])
   const [selectedVehicle, setSelectedVehicle] = useState<SelectedVehicle | null>(null)
   const [showCreateBrandDialog, setShowCreateBrandDialog] = useState(false)
+  const [showCreateModelDialog, setShowCreateModelDialog] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [loading, setLoading] = useState({
     brands: true,
@@ -263,7 +264,7 @@ export const VehicleSelector = () => {
         brandId: selectedBrand,
       })
       await loadModels(selectedBrand)
-      setShowCreateBrandDialog(false)
+      setShowCreateModelDialog(false)
       setNewModelName('')
     } catch (error) {
       console.error('Error creando modelo:', error)
@@ -378,7 +379,7 @@ export const VehicleSelector = () => {
                           <Button
                             variant="ghost"
                             className="w-full justify-start font-normal text-emerald-600"
-                            onClick={() => setShowCreateBrandDialog(true)}
+                            onClick={() => setShowCreateModelDialog(true)}
                           >
                             <Plus className="mr-2 h-4 w-4" />
                             Añadir nuevo modelo

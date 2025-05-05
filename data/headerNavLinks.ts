@@ -27,10 +27,10 @@ interface HeaderLink {
 }
 
 const headerNavLinks: HeaderLink[] = [
-  { href: '/help', title: 'Ayudanos', icon: GraduationCap },
-  { href: '/blog', title: 'common:blog', icon: BookMarked },
-  { href: '/contacto', title: 'common:contact', icon: Lightbulb },
-  { href: '/store', title: 'common:store', icon: ShoppingBag },
+  { href: '/help', title: 'Ayúdanos', icon: GraduationCap },
+  { href: '/blog', title: 'Blog', icon: BookMarked },
+  { href: '/contacto', title: 'Contacto', icon: Lightbulb },
+  { href: '/store', title: 'Tienda', icon: ShoppingBag },
 ]
 
 export default headerNavLinks
@@ -49,97 +49,93 @@ interface Nav {
 
 export const nav: Nav[] = [
   {
-    title: 'common:tools',
+    title: 'Herramientas',
     links: [...TOOLS],
   },
   {
-    title: 'common:courses',
+    title: 'Cursos',
     links: [
       {
-        title: 'common:traccar_course',
+        title: 'Curso de Traccar',
         href: '/traccar',
         icon: Navigation,
       },
       {
-        title: 'common:arduino_course',
+        title: 'Curso de Arduino',
         href: '/arduino',
         icon: Cpu,
       },
     ],
   },
   {
-    title: 'common:guides',
+    title: 'Guías',
     links: [
       {
-        title: 'common:logic_gates',
+        title: 'Compuertas Lógicas',
         href: '/compuertas-logicas',
       },
       {
-        title: 'common:arduino_tutorials',
+        title: 'Tutoriales de Arduino',
         href: '/arduino/tutoriales',
       },
     ],
   },
   {
-    title: 'common:software',
+    title: 'Software',
     links: [
-      { title: 'common:all', href: '/software' },
+      { title: 'Todos', href: '/software' },
       {
         title: 'Proteus 8.8',
-        description: 'proteus_desc',
+        description: 'Simulador de circuitos electrónicos',
         href: '/software/proteus',
         icon: Cpu,
       },
       {
         title: 'NI Multisim',
-        description: 'multisim_desc',
+        description: 'Diseño y simulación de circuitos eléctricos',
         href: '/software/multisim',
         icon: Cpu,
       },
       {
         title: 'MathCAD 14',
+        description: 'Software de cálculo matemático',
         href: '/software/mathcad-14',
-        description: 'mathcad_desc',
         icon: Sigma,
       },
       {
         title: 'MathCAD Prime 7',
+        description: 'Software de cálculo matemático',
         href: '/software/mathcad-prime-7',
-        description: 'mathcad_desc',
         icon: Sigma,
       },
       {
         title: 'PSeInt',
+        description: 'Pseudocódigo para principiantes',
         href: '/software/pseint',
-        description: 'pseint_desc',
         icon: FolderCode,
       },
     ],
   },
   {
-    title: 'common:services',
+    title: 'Servicios',
     links: [
       {
-        title: 'common:computer_repair_mty',
-        description: '',
+        title: 'Reparación de computadoras en Monterrey',
         href: '/servicios/reparacion-de-computadoras-en-monterrey',
         icon: Wrench,
       },
       {
-        title: 'common:computer_repair_gdl',
-        description: '',
+        title: 'Reparación de computadoras en Guadalupe',
         href: '/servicios/reparacion-de-computadoras-en-guadalupe',
         icon: Wrench,
       },
       {
-        title: 'common:computer_repair_sn',
-        description: '',
+        title: 'Reparación de computadoras en San Nicolás',
         href: '/servicios/reparacion-de-computadoras-en-san-nicolas',
         icon: Wrench,
       },
       {
-        title: 'common:gps_services',
-        description: '',
+        title: 'Servicios GPS',
         href: 'https://gpstrackingsystem.bysmax.com/',
         icon: MapPin,
       },
