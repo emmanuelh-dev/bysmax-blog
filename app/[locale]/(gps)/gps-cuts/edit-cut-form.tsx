@@ -21,6 +21,15 @@ interface ImageUpload {
   url: string | null
 }
 
+interface VideoUpload {
+  file: File
+  preview: string
+  uploading: boolean
+  uploaded: boolean
+  error: boolean
+  url: string | null
+}
+
 interface EditCutFormProps {
   cutInfo: any
   selectedVehicle: {
@@ -37,6 +46,7 @@ interface EditCutFormProps {
 interface CutStep {
   description: string
   image?: string
+  video?: string
 }
 
 export function EditCutForm({
@@ -50,6 +60,7 @@ export function EditCutForm({
   const [steps, setSteps] = useState<CutStep[]>([])
   const [notes, setNotes] = useState('')
   const [images, setImages] = useState<{ [key: number]: ImageUpload }>({})
+  const [videos, setVideos] = useState<{ [key: number]: VideoUpload }>({})
 
   useEffect(() => {
     if (cutInfo?.cut_info) {
@@ -126,6 +137,67 @@ export function EditCutForm({
     }
   }
 
+  const handleVideoUpload = async (index: number, file: File) => {
+    try {
+      setVideos((prev) => ({
+        ...prev,
+        [index]: {
+          file,
+          preview: URL.createObjectURL(file),
+          uploading: true,
+          uploaded: false,
+          error: false,
+          url: null,
+        },
+      }))
+
+      const fileName = `video-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9-.]/g, '_')}`
+      const { data, error } = await supabase.storage.from('cuts-images').upload(fileName, file)
+
+      if (error) throw error
+
+      const { data: publicUrlData } = supabase.storage.from('cuts-images').getPublicUrl(data.path)
+
+      const newSteps = [...steps]
+      newSteps[index] = {
+        ...newSteps[index],
+        video: publicUrlData.publicUrl,
+      }
+      setSteps(newSteps)
+
+      setVideos((prev) => ({
+        ...prev,
+        [index]: {
+          ...prev[index],
+          uploading: false,
+          uploaded: true,
+          url: publicUrlData.publicUrl,
+        },
+      }))
+
+      toast({
+        title: 'Video actualizado exitosamente',
+        description: 'El video se ha subido correctamente',
+      })
+    } catch (error) {
+      console.error('Error uploading video:', error)
+      setVideos((prev) => ({
+        ...prev,
+        [index]: {
+          ...prev[index],
+          uploading: false,
+          error: true,
+        },
+      }))
+
+      toast({
+        title: 'Error al subir el video',
+        description: 'No se pudo subir el video. Por favor, intente nuevamente.',
+        variant: 'destructive',
+      })
+    }
+  }
+
   const removeImage = (index: number) => {
     const newSteps = [...steps]
     newSteps[index] = {
@@ -145,14 +217,36 @@ export function EditCutForm({
     }
   }
 
+  const removeVideo = (index: number) => {
+    const newSteps = [...steps]
+    newSteps[index] = {
+      ...newSteps[index],
+      video: '',
+    }
+    setSteps(newSteps)
+
+    if (videos[index]) {
+      const newVideos = { ...videos }
+      delete newVideos[index]
+      setVideos(newVideos)
+
+      if (videos[index].preview) {
+        URL.revokeObjectURL(videos[index].preview)
+      }
+    }
+  }
+
   const addStep = () => {
-    setSteps([...steps, { description: '', image: '' }])
+    setSteps([...steps, { description: '', image: '', video: '' }])
   }
 
   const removeStep = (index: number) => {
     setSteps(steps.filter((_, i) => i !== index))
     if (images[index]) {
       removeImage(index)
+    }
+    if (videos[index]) {
+      removeVideo(index)
     }
   }
 
@@ -244,23 +338,44 @@ export function EditCutForm({
                       placeholder={`Paso ${index + 1}`}
                     />
 
-                    <div className="flex items-center gap-2">
-                      <Label
-                        htmlFor={`image-${index}`}
-                        className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
-                      >
-                        <Upload className="h-4 w-4" />
-                        <span>Actualizar imagen</span>
-                        <input
-                          id={`image-${index}`}
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) =>
-                            e.target.files?.[0] && handleImageUpload(index, e.target.files[0])
-                          }
-                        />
-                      </Label>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <Label
+                          htmlFor={`image-${index}`}
+                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+                        >
+                          <Upload className="h-4 w-4" />
+                          <span>Imagen</span>
+                          <input
+                            id={`image-${index}`}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) =>
+                              e.target.files?.[0] && handleImageUpload(index, e.target.files[0])
+                            }
+                          />
+                        </Label>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Label
+                          htmlFor={`video-${index}`}
+                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+                        >
+                          <Upload className="h-4 w-4" />
+                          <span>Video</span>
+                          <input
+                            id={`video-${index}`}
+                            type="file"
+                            accept="video/*"
+                            className="hidden"
+                            onChange={(e) =>
+                              e.target.files?.[0] && handleVideoUpload(index, e.target.files[0])
+                            }
+                          />
+                        </Label>
+                      </div>
 
                       {images[index]?.uploading && (
                         <div className="flex items-center text-sm text-gray-500">
@@ -286,6 +401,24 @@ export function EditCutForm({
                           </Button>
                         </div>
                       )}
+
+                      {(videos[index]?.uploaded || step.video) && (
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="bg-blue-50 text-blue-700">
+                            <CheckCircle className="mr-1 h-3 w-3" />
+                            Video adjunto
+                          </Badge>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-auto p-1 text-red-600 hover:text-red-700"
+                            onClick={() => removeVideo(index)}
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
                     </div>
 
                     {(images[index]?.preview || step.image) && (
@@ -294,6 +427,16 @@ export function EditCutForm({
                           src={images[index]?.preview || step.image}
                           alt={`Paso ${index + 1}`}
                           className="max-h-32 rounded-lg"
+                        />
+                      </div>
+                    )}
+
+                    {(videos[index]?.preview || step.video) && (
+                      <div className="relative mt-2 inline-block">
+                        <video
+                          src={videos[index]?.preview || step.video}
+                          controls
+                          className="max-h-48 rounded-lg"
                         />
                       </div>
                     )}

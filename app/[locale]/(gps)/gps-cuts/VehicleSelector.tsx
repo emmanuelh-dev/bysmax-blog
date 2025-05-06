@@ -72,6 +72,7 @@ interface CutInfo {
     notes: string
     cut_info: Array<{
       image: string
+      video?: string
       description: string
     }>
     created_at: string
@@ -633,13 +634,27 @@ export const VehicleSelector = () => {
                               <p className="text-gray-700 dark:text-gray-200">{step.description}</p>
                             </div>
                           </div>
-                          {step.image && (
-                            <img
-                              src={step.image}
-                              alt={`Paso ${index + 1}`}
-                              className="mt-2 w-full rounded-lg object-cover"
-                            />
-                          )}
+                          <div className="mt-4 grid gap-4 md:grid-cols-2">
+                            {step.image && (
+                              <div>
+                                <p className="mb-2 text-sm font-medium text-gray-500">Imagen</p>
+                                <img
+                                  src={step.image}
+                                  alt={`Paso ${index + 1}`}
+                                  className="w-full rounded-lg object-cover"
+                                />
+                              </div>
+                            )}
+                            {step.video && (
+                              <div>
+                                <p className="mb-2 text-sm font-medium text-gray-500">Video</p>
+                                <video width="600" controls>
+                                  <source src={step.video} />
+                                  Your browser does not support the video tag.
+                                </video>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       ))}
 
