@@ -21,6 +21,11 @@ const GPSCutsPage = () => {
           <p className="text-emerald-50">
             Selecciona tu vehículo para encontrar información detallada sobre el corte GPS
           </p>
+          <p className="mt-3 text-sm text-white">
+            ¿Tienes experiencia instalando cortes GPS? ¡Comparte tus conocimientos! Ayuda a otros
+            instaladores agregando nuevos cortes o mejorando los existentes. Juntos hacemos crecer
+            la comunidad.
+          </p>
         </div>
         <div>
           <VehicleSelector />
@@ -38,7 +43,7 @@ const GPSCutsPage = () => {
           </AlertDescription>
         </Alert>
 
-        <div className="prose max-w-none dark:prose-invert">
+        <div className="prose max-w-none dark:prose-invert max-sm:p-4">
           <h2>¿Por qué es importante un corte GPS profesional?</h2>
           <p>
             Un corte GPS profesional requiere conocimiento específico del sistema eléctrico de cada
