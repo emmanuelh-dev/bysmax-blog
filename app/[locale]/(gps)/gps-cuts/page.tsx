@@ -3,14 +3,15 @@ import { Card } from '@/components/ui/card'
 import { VehicleSelector } from './VehicleSelector'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
+import { genPageMetadata } from '../../seo'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = genPageMetadata({
   title: 'Buscador de Cortes GPS | Guía Profesional de Instalación',
   description:
     'Herramienta profesional para encontrar información precisa sobre cortes GPS en vehículos. Incluye diagramas e instrucciones paso a paso para instaladores.',
   keywords:
     'cortes GPS, instalación GPS, vehículos, diagrama eléctrico, guía instalación, corte ignición',
-}
+})
 
 const GPSCutsPage = () => {
   return (
