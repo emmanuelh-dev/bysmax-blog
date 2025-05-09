@@ -57,10 +57,10 @@ export default async function Page({ params: { locale } }: PageProps) {
     {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
-      image: 'https://www.bysmax.com/static/images/mathcad/1.jpg',
+      image: 'https://electronica.bysmax.com/static/images/mathcad/1.jpg',
       name: 'Mathcad',
       applicationCategory: 'BusinessApplication',
-      downloadUrl: 'https://www.bysmax.com/software/mathcad-prime-7',
+      downloadUrl: 'https://electronica.bysmax.com/software/mathcad-prime-7',
       description:
         'Mathcad es una potente herramienta para cálculos matemáticos y análisis numéricos. Permite modelar y resolver ecuaciones, realizar gráficos, y trabajar con fórmulas y expresiones matemáticas.',
       offers: {

@@ -7,7 +7,7 @@ const siteMetadata = {
     'Accede a tutoriales detallados, guías prácticas y proyectos innovadores que te ayudarán a dominar el mundo de la electrónica',
   language: 'es-MX',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://www.bysmax.com',
+  siteUrl: 'https://electronica.bysmax.com/',
   siteRepo: 'https://github.com/emmanuelh-dev/bysmax-blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',

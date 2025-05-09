@@ -39,10 +39,10 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    image: 'https://www.bysmax.com/static/images/proteus/3.png',
+    image: 'https://electronica.bysmax.com/static/images/proteus/3.png',
     name: 'Proteus',
     applicationCategory: 'BusinessApplication',
-    downloadUrl: 'https://www.bysmax.com/software/proteus',
+    downloadUrl: 'https://electronica.bysmax.com/software/proteus',
     description:
       'Proteus Design Suite es uno de los programas de dise\u00f1o electr\u00f3nico m\u00e1s utilizados del mercado. Sus versiones m\u00e1s recientes, adem\u00e1s, nos permiten crear simulaciones de dispositivos f\u00e1cilmente en nuestro PC utilizando las herramientas de Arduino.',
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
