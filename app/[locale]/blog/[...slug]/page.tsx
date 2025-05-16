@@ -1,13 +1,10 @@
 import 'css/prism.css'
 import 'katex/dist/katex.css'
+import { Suspense, lazy } from 'react'
 import { Metadata } from 'next'
 import { components } from '@/components/MDXComponents'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Authors, Blog } from 'contentlayer/generated'
-import PostSimple from '@/layouts/PostSimple'
-import PostLayout from '@/layouts/PostLayout'
-import PostBanner from '@/layouts/PostBanner'
 import siteMetadata from '@/data/siteMetadata'
 import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
@@ -15,15 +12,25 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import getAllPosts from '@/lib/allPosts'
 import { coreContent } from 'pliny/utils/contentlayer'
 
+// Lazy load pesados componentes
+const MDXLayoutRenderer = lazy(() =>
+  import('pliny/mdx-components').then((mod) => ({
+    default: mod.MDXLayoutRenderer,
+  }))
+)
+const PostLayout = lazy(() => import('@/layouts/PostLayout'))
+const PostBanner = lazy(() => import('@/layouts/PostBanner'))
+const PostSimple = lazy(() => import('@/layouts/PostSimple'))
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="flex h-48 items-center justify-center">
+    <div className="border-primary h-8 w-8 animate-spin rounded-full border-4"></div>
+  </div>
+)
+
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
-}
-
-const defaultLayout = 'PostLayout'
-const layouts = {
-  PostSimple,
-  PostLayout,
-  PostBanner,
 }
 
 export async function generateMetadata({
@@ -85,67 +92,39 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params: { slug, locale } }: BlogPageProps) {
-  const dslug = decodeURI(slug.join('/'))
-  // Filter out drafts in production + locale filtering
-  const sortedCoreContents = await getAllPosts({ locale })
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === dslug)
-  if (postIndex === -1) {
-    return notFound()
-  }
-
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
-  let post = sortedCoreContents.filter((p) => p.language === locale).find((p) => p.slug === dslug)
+export default async function BlogPage({ params }: BlogPageProps) {
+  const slug = params?.slug?.join('/')
+  const locale = params?.locale as LocaleTypes
+  const posts = await getAllPosts({ locale })
+  const postIndex = posts.findIndex((p) => p.slug === slug)
+  const prev = posts[postIndex + 1] || null
+  const next = posts[postIndex - 1] || null
+  const post = posts.find((p) => p.slug === slug)
 
   if (!post) {
     return notFound()
   }
 
-  if (!post.wpBlog) {
-    post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+  const authorList = post?.authors || ['default']
+  const authorDetails = allAuthors.filter((author) => authorList.includes(author.slug))
+  const mainContent = coreContent(post)
+  const Layout = post?.layout || 'PostLayout'
+
+  const layoutMap = {
+    PostSimple: PostSimple,
+    PostLayout: PostLayout,
+    PostBanner: PostBanner,
   }
 
-  const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
+  const LayoutComponent = layoutMap[Layout]
 
-  const authorList = post.authors || author
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors
-      .filter((a) => a.language === locale)
-      .find((a) => a.slug.includes(author))
-    return coreContent(authorResults as Authors)
-  })
-  const mainContent = !post.wpBlog ? coreContent(post) : post
-  const jsonLd = post.structuredData
-  jsonLd['author'] = authorDetails.map((author) => {
-    return {
-      '@type': 'Person',
-      name: author.name,
-    }
-  })
-
-  const Layout = layouts[post.layout || defaultLayout]
-
-  post
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Layout
-        content={mainContent}
-        authorDetails={authorDetails}
-        next={next}
-        prev={prev}
-        params={{ locale: locale }}
-      >
-        {!post.wpBlog ? (
+    <Suspense fallback={<LoadingFallback />}>
+      <LayoutComponent content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
+        <Suspense fallback={<LoadingFallback />}>
           <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
-        )}
-      </Layout>
-    </>
+        </Suspense>
+      </LayoutComponent>
+    </Suspense>
   )
 }

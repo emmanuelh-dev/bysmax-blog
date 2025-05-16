@@ -1,46 +1,50 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense, lazy } from 'react'
 import { useParams } from 'next/navigation'
 import Link from './Link'
-import dynamic from 'next/dynamic'
 import siteMetadata from '@/data/siteMetadata'
-import headerNavLinks from '@/data/headerNavLinks'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import { useTranslation } from '@/app/[locale]/i18n/client'
+import { Button } from './ui/button'
+import headerNavLinks from '@/data/headerNavLinks'
 
-import ThemeSwitch from './ThemeSwitch'
-import LangSwitch from './langswitch'
+// Lazy load componentes no esenciales
+const ThemeSwitch = lazy(() => import('./ThemeSwitch'))
+const LangSwitch = lazy(() => import('./langswitch'))
+const Navigation = lazy(() => import('./NavigationMenu'))
+const MobileNav = lazy(() => import('./MobileNav'))
+const SearchButton = lazy(() => import('./search/SearchButton'))
+const NotificationBell = lazy(() => import('./NotificationBell'))
 
-const Navigation = dynamic(() => import('./NavigationMenu'), { ssr: false })
-const MobileNav = dynamic(() => import('./MobileNav'), { ssr: false })
-const SearchButton = dynamic(() => import('./search/SearchButton'), { ssr: false })
-const NotificationBell = dynamic(() => import('./NotificationBell'), { ssr: false })
+// Loading fallback simple
+const LoadingButton = () => <Button variant="ghost" size="icon" />
 
 export default function Header() {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
+  const [isMounted, setIsMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(true)
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
+    setIsMounted(true)
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+
+    let resizeTimer: NodeJS.Timeout
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(handleResize, 100)
     }
 
     handleResize()
-
-    let timeoutId: NodeJS.Timeout
-    const debouncedResize = () => {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(handleResize, 100)
-    }
-
     window.addEventListener('resize', debouncedResize)
     return () => {
       window.removeEventListener('resize', debouncedResize)
-      clearTimeout(timeoutId)
+      clearTimeout(resizeTimer)
     }
   }, [])
+
+  if (!isMounted) return <header className="h-16" />
 
   return (
     <header className="container mx-auto flex items-center justify-between px-6 py-4">
@@ -58,7 +62,9 @@ export default function Header() {
       <nav className="flex items-center space-x-4 leading-5 sm:space-x-6" role="navigation">
         {!isMobile && (
           <>
-            <Navigation />
+            <Suspense fallback={<LoadingButton />}>
+              <Navigation />
+            </Suspense>
             {headerNavLinks
               .filter((link) => link.href !== '/')
               .map((link) => (
@@ -72,11 +78,23 @@ export default function Header() {
               ))}
           </>
         )}
-        <SearchButton />
-        <ThemeSwitch />
-        <LangSwitch />
-        <NotificationBell />
-        {isMobile && <MobileNav />}
+        <Suspense fallback={<LoadingButton />}>
+          <SearchButton />
+        </Suspense>
+        <Suspense fallback={<LoadingButton />}>
+          <ThemeSwitch />
+        </Suspense>
+        <Suspense fallback={<LoadingButton />}>
+          <LangSwitch />
+        </Suspense>
+        <Suspense fallback={<LoadingButton />}>
+          <NotificationBell />
+        </Suspense>
+        {isMobile && (
+          <Suspense fallback={<LoadingButton />}>
+            <MobileNav />
+          </Suspense>
+        )}
       </nav>
     </header>
   )
