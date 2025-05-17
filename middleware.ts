@@ -2,39 +2,46 @@ import { NextResponse, NextRequest } from 'next/server'
 import { locales } from 'app/[locale]/i18n/settings'
 import { fallbackLng } from 'app/[locale]/i18n/locales'
 
-export function middleware(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
-  const pathname = request.nextUrl.pathname
+// Cache los paths de locales para mejor rendimiento
+const localePrefix = {} as { [key: string]: boolean }
+locales.forEach(locale => {
+  localePrefix[`/${locale}`] = true
+})
 
-  // Check if the default locale is in the pathname
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  
+  // Comprobación rápida usando el objeto en caché
   if (pathname.startsWith(`/${fallbackLng}/`) || pathname === `/${fallbackLng}`) {
-    // e.g. incoming request is /en/about
-    // The new URL is now /about
-    return NextResponse.redirect(
-      new URL(
-        pathname.replace(`/${fallbackLng}`, pathname === `/${fallbackLng}` ? '/' : ''),
-        request.url
-      )
-    )
+    const newPath = pathname === `/${fallbackLng}` ? '/' : pathname.replace(`/${fallbackLng}`, '')
+    return NextResponse.redirect(new URL(newPath, request.url))
   }
 
-  const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  )
+  // Verificación rápida de locale usando el objeto en caché
+  let hasLocale = false
+  for (const prefix of Object.keys(localePrefix)) {
+    if (pathname.startsWith(prefix + '/') || pathname === prefix) {
+      hasLocale = true
+      break
+    }
+  }
 
-  if (pathnameIsMissingLocale) {
-    // We are on the default locale
-    // Rewrite so Next.js understands
-
-    // e.g. incoming request is /about
-    // Tell Next.js it should pretend it's /en/about
+  // Solo reescribir si no tiene locale
+  if (!hasLocale) {
     return NextResponse.rewrite(new URL(`/${fallbackLng}${pathname}`, request.url))
   }
 }
 
 export const config = {
-  // Do not run the middleware on the following paths
-  // prettier-ignore
-  matcher:
-  '/((?!api|static|track|data|css|scripts|.*\\..*|_next).*|sitemap.xml)',
+  matcher: [
+    // Excluir recursos estáticos, API routes, etc
+    '/((?!api|static|track|_next|.*\\.[^/]*$).*)',
+    
+    // Incluir solo las rutas principales que necesitan procesamiento de locale
+    '/',
+    '/(blog|about|servicios|cursos)/:path*',
+    
+    // Sitemap y archivos específicos que necesitan locale
+    '/sitemap.xml',
+  ]
 }

@@ -7,22 +7,27 @@ module.exports = {
   content: [
     './node_modules/pliny/**/*.js',
     './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,tsx}',
     './components/**/*.{js,ts,tsx}',
     './layouts/**/*.{js,ts,tsx}',
     './data/**/*.mdx',
   ],
   darkMode: 'class',
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     container: {
       center: true,
-      padding: '1.4rem',
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+      },
       screens: {
-        sm: '85%',
-        md: '85%',
-        lg: '85%',
-        xl: '85%',
-        '2xl': '85%',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
       },
     },
     extend: {
@@ -36,14 +41,12 @@ module.exports = {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
-        main: '#007deb',
-        primary: {
-          ...colors.blue,
-          500: '#007deb',
-        },
-        white: '#f4f4f4',
-        black: '#121212',
+        primary: colors.blue,
         neutral: colors.neutral,
+        bg: {
+          light: '#f4f4f4',
+          dark: '#121212'
+        }
       },
       keyframes: {
         'accordion-down': {

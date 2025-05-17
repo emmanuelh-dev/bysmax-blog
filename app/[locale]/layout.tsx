@@ -72,37 +72,38 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
+        <link rel="preload" href="/static/favicons/favicon-32x32.png" as="image" type="image/png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
-        <link rel="manifest" href="/static/favicons/site.webmanifest" />
-        <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <meta name="google-adsense-account" content="ca-pub-3646138644530578" />
         <Script
           async
+          defer
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
           crossOrigin="anonymous"
-        ></Script>
+          strategy="lazyOnload"
+        />
         <Script
           async
+          defer
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="tBLkU3Ea6HxUBHJiGObWig"
-        ></Script>
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+          strategy="lazyOnload"
+        />
+        <link rel="manifest" href="/static/favicons/site.webmanifest" />
       </head>
-      <body className="text-md bg-white text-black antialiased dark:bg-black dark:text-white">
+      <body className="min-h-screen bg-bg-light text-neutral-900 antialiased dark:bg-bg-dark dark:text-neutral-100">
         <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <div className="flex h-screen flex-col justify-between font-sans">
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+          <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+            <div className="flex min-h-screen flex-col">
               <Header />
-              <main className="mb-auto">{children}</main>
-            </SearchProvider>
-            <Footer />
-          </div>
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </SearchProvider>
+          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
         </ThemeProviders>
       </body>
     </html>
