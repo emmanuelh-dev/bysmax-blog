@@ -37,7 +37,7 @@ export function CursoLayout({
   return (
     <div className="container mx-auto px-4 lg:px-8">
       <ScrollTopAndComment />
-      <div className="my-8 grid grid-cols-1 rounded-lg dark:bg-black lg:my-12 lg:grid-cols-[20%_60%_20%]">
+      <div className="my-8 grid grid-cols-1 rounded-lg dark:bg-dark lg:my-12 lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-200 dark:border-gray-800">
@@ -90,7 +90,7 @@ export function CursoLayout({
           </div>
 
           {/* Main Content - Scrollable */}
-          <main className="mx-auto w-full max-w-4xl space-y-8 px-4">
+          <main className="mx-auto w-full max-w-4xl space-y-8 md:px-4">
             <div className="space-y-8">
               {/* Back Link */}
               <Link
@@ -115,13 +115,6 @@ export function CursoLayout({
                   >
                     Intermediate
                   </Badge>
-                  <span>•</span>
-                  <Badge
-                    variant="secondary"
-                    className="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
-                  >
-                    Short
-                  </Badge>
                 </div>
               </div>
 
@@ -136,7 +129,7 @@ export function CursoLayout({
               </div>
             </div>
 
-            <div className="rounded-lg border border-neutral-200 p-4 dark:border-gray-800">
+            <div className="rounded-lg">
               <ins
                 className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
                 style={{ display: 'block' }}

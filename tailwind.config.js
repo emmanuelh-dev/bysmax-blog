@@ -20,14 +20,12 @@ module.exports = {
       center: true,
       padding: {
         DEFAULT: '1rem',
-        sm: '2rem',
-        lg: '4rem',
       },
       screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
+        sm: '90vw',
+        md: '90vw',
+        lg: '90vw',
+        xl: '85vw',
       },
     },
     extend: {
@@ -45,8 +43,10 @@ module.exports = {
         neutral: colors.neutral,
         bg: {
           light: '#f4f4f4',
-          dark: '#121212'
-        }
+          dark: '#121212',
+        },
+        light: '#f4f4f4',
+        dark: '#121212',
       },
       keyframes: {
         'accordion-down': {

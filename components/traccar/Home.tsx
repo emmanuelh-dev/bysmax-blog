@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { genPageMetadata } from '@/app/[locale]/seo'
 import { cn } from 'lib/utils'
 import {
@@ -8,9 +8,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { BookText, Play } from 'lucide-react'
+import {
+  BookText,
+  CheckCircle,
+  ChevronRight,
+  Play,
+  Server,
+  BookOpen,
+  GraduationCapIcon as Graduation,
+  Users,
+} from 'lucide-react'
 import { CursoLayout } from '@/layouts/CursoLayout'
 import { traccarContent } from '@/data/i18n/traccar'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
 
 export const metadata = genPageMetadata({
   title: 'Curso Gratuito de Traccar desde Cero hasta Avanzado en español',
@@ -68,7 +79,6 @@ const jsonLd = () => {
         ],
       },
       {
-        // Online self-paced course that takes 2 days to complete.
         '@type': 'CourseInstance',
         courseMode: 'Online',
         courseWorkload: 'P2D',
@@ -81,15 +91,13 @@ const jsonLd = () => {
     teaches: ['Traccar'],
     inLanguage: 'es',
     availableLanguage: ['es', 'en'],
-    // syllabusSections: TEMARIO.map((section) => ({
-    //   name: section.title,
-    //   description: section.description,
-    // })),
   }
 }
 
 export function Home({ params }: { params: { locale: string } }) {
   const courseContent = traccarContent[params?.locale || 'es'].content
+  const ui = traccarContent[params?.locale || 'es'].ui
+
   return (
     <>
       <CursoLayout
@@ -107,107 +115,207 @@ export function Home({ params }: { params: { locale: string } }) {
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }}
             />
-            <div>
-              <div className="flex gap-4">
-                <Link className={buttonVariants({ variant: 'default' })} href="#course">
-                  {traccarContent[params?.locale || 'es'].ui.startNow}
+
+            {/* Hero Section */}
+            <section className="from-primary/10 to-background bg-gradient-to-b px-4 py-8">
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                <Link
+                  className={cn(
+                    buttonVariants({ variant: 'default', size: 'lg' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
+                  href="#course"
+                >
+                  <Play size={18} />
+                  {ui.startNow}
+                </Link>
+                <Link
+                  className={cn(
+                    buttonVariants({ variant: 'default' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
+                  href="https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV"
+                >
+                  <BookText size={16} />
+                  Ver en YouTube
                 </Link>
                 <Link
                   href="https://gpstrackingsystem.bysmax.com/"
-                  className={buttonVariants({ variant: 'outline' })}
+                  className={cn(
+                    buttonVariants({ variant: 'outline', size: 'lg' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
                 >
-                  {traccarContent[params?.locale || 'es'].ui.needServer}
+                  <Server size={18} />
+                  {ui.needServer}
                 </Link>
               </div>
-            </div>
-            <section className="py-12 md:py-24">
-              <div className="">
-                <div className="mx-auto ">
-                  <h2 id="course" className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    {traccarContent[params?.locale || 'es'].ui.courseContent}
-                  </h2>
-                  <p className="text-muted-foreground md: mt-4">
-                    {traccarContent[params?.locale || 'es'].ui.courseDescription}
-                  </p>
-                  <div className="mt-8 space-y-4">
-                    <Accordion type="single" collapsible className="w-full space-y-4">
-                      {courseContent
-                        .filter((item) => item.show == !false)
-                        .map((item, i) => (
-                          <AccordionItem key={item.title} value={`item-${i + 1}`}>
-                            <AccordionTrigger>
-                              <div className="text-left">
-                                <h3 className="text-lg font-bold">{item.title}</h3>
-                                <p className="text-neutral-400">{item.description}</p>
-                              </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="px-4 py-3">
-                              <ul className="space-y-4 ">
-                                {item.sections.map((section) => (
-                                  <li key={section.title}>
-                                    <div className="flex items-center">
-                                      <Link
-                                        href={section.link}
-                                        className={` ${buttonVariants({ variant: 'link' })}`}
-                                      >
-                                        {section.title}
-                                      </Link>
-                                    </div>
-                                  </li>
-                                ))}
-                              </ul>
-                            </AccordionContent>
-                          </AccordionItem>
-                        ))}
-                    </Accordion>
-                  </div>
-                </div>
+            </section>
+
+            {/* Course Stats */}
+            <section className="px-4 py-6">
+              <div className="grid grid-cols-3 gap-2">
+                <Card className="border-none shadow-sm">
+                  <CardContent className="flex flex-col items-center justify-center p-3">
+                    <BookOpen className="text-primary mb-1 h-5 w-5" />
+                    <span className="text-lg font-bold">10+</span>
+                    <span className="text-muted-foreground text-xs">
+                      {params?.locale === 'en' ? 'Modules' : 'Módulos'}
+                    </span>
+                  </CardContent>
+                </Card>
+                <Card className="border-none shadow-sm">
+                  <CardContent className="flex flex-col items-center justify-center p-3">
+                    <Graduation className="text-primary mb-1 h-5 w-5" />
+                    <span className="text-lg font-bold">100%</span>
+                    <span className="text-muted-foreground text-xs">
+                      {params?.locale === 'en' ? 'Free' : 'Gratis'}
+                    </span>
+                  </CardContent>
+                </Card>
+                <Card className="border-none shadow-sm">
+                  <CardContent className="flex flex-col items-center justify-center p-3">
+                    <Users className="text-primary mb-1 h-5 w-5" />
+                    <span className="text-lg font-bold">12k+</span>
+                    <span className="text-muted-foreground text-xs">
+                      {params?.locale === 'en' ? 'Students' : 'Estudiantes'}
+                    </span>
+                  </CardContent>
+                </Card>
               </div>
             </section>
-            <section className="bg-muted py-12 md:py-24">
-              <div className="">
-                <div className="mx-auto  text-center">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                    {traccarContent[params?.locale || 'es'].ui.aboutCourse}
-                  </h2>
-                  <p className="text-muted-foreground md: mt-4">
-                    {params?.locale === 'en'
-                      ? 'This course will guide you from the initial setup of your own Traccar tracking server to advanced device management and platform customization.'
-                      : 'Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'}{' '}
-                  </p>
-                  <div className="mt-8 flex justify-center gap-4">
-                    <Link className={buttonVariants({ variant: 'default' })} href="#course">
-                      {traccarContent[params?.locale || 'es'].ui.startNow}
-                    </Link>{' '}
-                    <Link href="/contacto" className={buttonVariants({ variant: 'outline' })}>
-                      {traccarContent[params?.locale || 'es'].ui.needServer}
-                    </Link>
+
+            {/* Course Benefits */}
+            <section className="bg-muted/30 px-4 py-6">
+              <h2 className="mb-4 text-xl font-bold tracking-tight">
+                {params?.locale === 'en' ? 'Course Benefits' : 'Beneficios del Curso'}
+              </h2>
+              <div className="space-y-2">
+                {[
+                  params?.locale === 'en'
+                    ? 'Free access to all content'
+                    : 'Acceso gratuito a todo el contenido',
+                  params?.locale === 'en' ? 'Learn at your own pace' : 'Aprende a tu propio ritmo',
+                  params?.locale === 'en' ? 'Practical examples' : 'Ejemplos prácticos',
+                  params?.locale === 'en'
+                    ? 'From beginner to advanced'
+                    : 'De principiante a avanzado',
+                  params?.locale === 'en' ? 'Community support' : 'Soporte de la comunidad',
+                ].map((benefit, i) => (
+                  <div
+                    key={i}
+                    className="bg-background flex items-start gap-3 rounded-lg p-3 shadow-sm"
+                  >
+                    <CheckCircle className="text-primary mt-0.5 h-5 w-5 shrink-0" />
+                    <span className="text-sm font-medium">{benefit}</span>
                   </div>
-                </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Course Content Section */}
+            <section id="course" className="scroll-mt-16 px-4 py-8">
+              <h2 className="mb-3 text-xl font-bold tracking-tight">{ui.courseContent}</h2>
+              <p className="text-muted-foreground mb-6 text-sm">{ui.courseDescription}</p>
+
+              <div className="space-y-4">
+                {courseContent
+                  .filter((item) => item.show !== false)
+                  .map((item, i) => (
+                    <Card key={item.title} className="overflow-hidden">
+                      <div className="bg-primary/5 p-4">
+                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                          <h3 className="text-base font-medium">
+                            <span className="bg-primary inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold text-white">
+                              {i + 1}
+                            </span>
+                            <span className="ml-2">{item.title}</span>
+                          </h3>
+                          <div>
+                            <Badge variant="secondary" className="text-xs">
+                              {item.sections.length}{' '}
+                              {params?.locale === 'en' ? 'lessons' : 'lecciones'}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                      <Accordion type="single" collapsible className="-mt-10 w-full">
+                        <AccordionItem value={`item-${i + 1}`} className="border-0">
+                          <AccordionTrigger className="hover:bg-muted/20 px-4 py-3 text-sm hover:no-underline">
+                            <span className="font-medium">
+                              {params?.locale === 'en' ? 'View Lessons' : 'Ver Lecciones'}
+                            </span>
+                          </AccordionTrigger>
+                          <AccordionContent className="px-4 pb-4 pt-0">
+                            <ul className="space-y-3">
+                              {item.sections.map((section, idx) => (
+                                <li
+                                  key={section.title}
+                                  className="hover:bg-muted/20 group list-none  rounded-lg p-2 transition-colors"
+                                >
+                                  <Link href={section.link} className="flex items-center gap-3">
+                                    <div className="bg-background flex h-7 w-7 shrink-0 items-center justify-center rounded-full  text-xs font-medium">
+                                      {idx + 1}
+                                    </div>
+                                    <span className="group-hover:text-primary flex-1 text-sm font-medium transition-colors">
+                                      {section.title}
+                                    </span>
+                                    <ChevronRight className="text-muted-foreground group-hover:text-primary h-4 w-4 transition-colors" />
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    </Card>
+                  ))}
+              </div>
+            </section>
+
+            {/* About Course CTA Section */}
+            <section className="bg-primary/5 px-4 py-8">
+              <h2 className="text-xl font-bold tracking-tight">{ui.aboutCourse}</h2>
+              <p className="text-muted-foreground text-sm">
+                {params?.locale === 'en'
+                  ? 'This course will guide you from the initial setup of your own Traccar tracking server to advanced device management and platform customization.'
+                  : 'Te guiará desde la configuración inicial de tu propio servidor Traccar de rastreo hasta la gestión avanzada de dispositivos y la personalización de la plataforma.'}{' '}
+              </p>
+              <div className="flex gap-3 pt-2">
+                <Link
+                  className={cn(
+                    buttonVariants({ variant: 'default' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
+                  href="#course"
+                >
+                  <BookText size={16} />
+                  {ui.startNow}
+                </Link>
+                <Link
+                  className={cn(
+                    buttonVariants({ variant: 'default' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
+                  href="https://www.youtube.com/watch?v=ZSVYhKHmXe8&list=PLjsxenlAapaC_gAQtYoUZa4tq5BhXdmWV"
+                >
+                  <BookText size={16} />
+                  Ver en YouTube
+                </Link>
+                <Link
+                  href="/contacto"
+                  className={cn(
+                    buttonVariants({ variant: 'outline' }),
+                    'w-full justify-center gap-2 sm:w-auto'
+                  )}
+                >
+                  {ui.needServer}
+                </Link>
               </div>
             </section>
           </main>
         </div>
       </CursoLayout>
     </>
-  )
-}
-
-function ChevronDownIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
   )
 }

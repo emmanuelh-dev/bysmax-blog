@@ -72,7 +72,7 @@ const TRACCAR = [
     sections: [{ title: 'API de Traccar', link: '/traccar/traccar/api' }],
   },
   {
-    title: 'GPS',
+    title: 'Guias GPS',
     show: true,
     description: '',
     sections: [
@@ -87,6 +87,17 @@ const TRACCAR = [
       {
         title: 'Teltonika BLE Sensor',
         link: '/traccar/traccar/como-configurar-dispositivos-ble-en-equipos-teltonika-como-el-eye-sensor',
+      },
+    ],
+  },
+  {
+    title: 'Contribuciones',
+    show: true,
+    description: '',
+    sections: [
+      {
+        title: 'Contribuye al proyecto',
+        link: '/traccar/traccar/contribute',
       },
     ],
   },
