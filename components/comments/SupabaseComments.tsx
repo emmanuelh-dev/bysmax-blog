@@ -108,99 +108,138 @@ export default function SupabaseComments({ slug, postId }: SupabaseCommentsProps
     return filteredComments.map((comment) => (
       <div
         key={comment.id}
-        className={`mb-4 ${parentId ? 'ml-8 border-l-2 border-neutral-200 pl-4' : ''}`}
+        className={`${parentId ? 'ml-6 border-l border-neutral-200 pl-6 dark:border-neutral-800' : ''}`}
       >
-        <div className="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-800 ">
-          <div className="flex items-start justify-between">
+        <div className="rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
+          <div className="mb-3 flex items-start justify-between">
             <div>
-              <h4 className="font-bold">{comment.author_name}</h4>
-              <p className="text-sm text-neutral-500">{formatDate(comment.created_at)}</p>
+              <h4 className="font-medium text-neutral-900 dark:text-neutral-100">
+                {comment.author_name || 'Anónimo'}
+              </h4>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                {formatDate(comment.created_at)}
+              </p>
             </div>
           </div>
-          <div className="mt-2">{comment.content}</div>
+
+          <div className="mb-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+            {comment.content}
+          </div>
+
           <button
             onClick={() => setReplyTo(comment.id)}
-            className="mt-2 flex items-center gap-1 text-sm text-blue-500"
+            className="inline-flex items-center gap-1.5 text-xs text-neutral-500 transition-colors hover:text-blue-600 dark:text-neutral-400 dark:hover:text-blue-400"
           >
-            <FaReply size={12} /> Responder
+            <FaReply className="h-3 w-3" />
+            Responder
           </button>
         </div>
 
         {/* Renderizar respuestas a este comentario */}
-        <div className="mt-2">{renderComments(comment.id)}</div>
+        {renderComments(comment.id) && (
+          <div className="mt-4 space-y-4">{renderComments(comment.id)}</div>
+        )}
       </div>
     ))
   }
 
   return (
-    <div className="mt-8">
-      <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold">
-        <FaComment /> Comentarios
-      </h3>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h3 className="flex items-center gap-3 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+          <FaComment className="h-5 w-5 text-neutral-400" />
+          Comentarios
+        </h3>
+      </div>
 
-      {/* Formulario para agregar comentario */}
-      <form onSubmit={handleSubmitComment} className="mb-8">
-        <div className="mb-4">
-          <label htmlFor="authorName" className="mb-2 block font-medium">
-            Nombre (opcional)
-          </label>
-          <Input
-            type="text"
-            id="authorName"
-            value={authorName}
-            onChange={(e) => setAuthorName(e.target.value)}
-          />
-        </div>
+      {/* Comment Form */}
+      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/50">
+        <form onSubmit={handleSubmitComment} className="space-y-6">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label
+                htmlFor="authorName"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300"
+              >
+                Nombre (opcional)
+              </label>
+              <Input
+                type="text"
+                id="authorName"
+                value={authorName}
+                onChange={(e) => setAuthorName(e.target.value)}
+                className="border-neutral-300 dark:border-neutral-700"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="authorEmail" className="mb-2 block font-medium">
-            Email{' '}
-            <span className="text-neutral-500 dark:text-neutral-300">
-              (opcional - no se publicará y solo se usará para notificar respuestas)
-            </span>
-          </label>
-          <Input
-            type="email"
-            id="authorEmail"
-            value={authorEmail}
-            onChange={(e) => setAuthorEmail(e.target.value)}
-          />
-        </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="authorEmail"
+                className="text-sm font-medium text-neutral-700 dark:text-neutral-300"
+              >
+                Email{' '}
+                <span className="text-xs font-normal text-neutral-500">
+                  (opcional - solo para notificaciones)
+                </span>
+              </label>
+              <Input
+                type="email"
+                id="authorEmail"
+                value={authorEmail}
+                onChange={(e) => setAuthorEmail(e.target.value)}
+                className="border-neutral-300 dark:border-neutral-700"
+              />
+            </div>
+          </div>
 
-        <div className="mb-4">
-          <label htmlFor="comment" className="mb-2 block font-medium">
-            {replyTo ? 'Tu respuesta *' : 'Tu comentario *'}
-          </label>
-          <Textarea
-            id="comment"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            rows={4}
-            required
-          ></Textarea>
-        </div>
+          <div className="space-y-2">
+            <label
+              htmlFor="comment"
+              className="text-sm font-medium text-neutral-700 dark:text-neutral-300"
+            >
+              {replyTo ? 'Tu respuesta *' : 'Tu comentario *'}
+            </label>
+            <Textarea
+              id="comment"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              rows={4}
+              required
+              className="resize-none border-neutral-300 dark:border-neutral-700"
+              placeholder={replyTo ? 'Escribe tu respuesta...' : 'Escribe tu comentario...'}
+            />
+          </div>
 
-        <div className="flex gap-4">
-          {replyTo && (
-            <Button type="button" onClick={() => setReplyTo(null)} variant={'destructive'}>
-              Cancelar respuesta
-            </Button>
+          {error && (
+            <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+              {error}
+            </div>
           )}
 
-          {error && <p className="mb-4 text-red-500">{error}</p>}
+          <div className="flex gap-3">
+            {replyTo && (
+              <Button type="button" onClick={() => setReplyTo(null)} variant="outline" size="sm">
+                Cancelar respuesta
+              </Button>
+            )}
 
-          <Button type="submit" disabled={loading}>
-            {loading ? 'Enviando...' : 'Publicar comentario'}
-          </Button>
-        </div>
-      </form>
+            <Button type="submit" disabled={loading} size="sm">
+              {loading ? 'Enviando...' : 'Publicar comentario'}
+            </Button>
+          </div>
+        </form>
+      </div>
 
       {/* Lista de comentarios */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {comments.length === 0 ? (
-          <p className="text-neutral-500">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+          <div className="py-12 text-center">
+            <p className="text-neutral-500 dark:text-neutral-400">
+              No hay comentarios aún. ¡Sé el primero en comentar!
+            </p>
+          </div>
         ) : (
-          renderComments()
+          <div className="space-y-4">{renderComments()}</div>
         )}
       </div>
     </div>

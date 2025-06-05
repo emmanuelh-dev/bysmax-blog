@@ -79,42 +79,55 @@ export default async function Page({ params: { locale } }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="grid grid-cols-1 gap-8 py-20 md:grid-cols-2">
-        <div className="flex flex-col items-start justify-center">
-          <h1 className="text-sm text-neutral-400">{t('title')}</h1>
-          <p className="mb-4 text-6xl font-bold">{t('mainHeading')}</p>
-          <p className="text-muted-foreground mb-6">{t('description')}</p>
-          <div className="flex gap-4">
+      <section className="py-24">
+        <div className="space-y-6 text-center">
+          <div className="space-y-4">
+            <p className="text-sm font-medium uppercase tracking-wide text-neutral-500">
+              {t('title')}
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-5xl">
+              {t('mainHeading')}
+            </h1>
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+              {t('description')}
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-center gap-3 pt-8 sm:flex-row">
             <a
-              className={buttonVariants({ variant: 'default' })}
+              className={buttonVariants({ variant: 'default', size: 'lg' })}
               data-umami-event={t('mainHeading')}
               target="_blank"
               href="https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r"
             >
               {t('downloadNowButton')}
             </a>
-            <Link className={buttonVariants({ variant: 'outline' })} href="#requisitos">
+            <Link className={buttonVariants({ variant: 'outline', size: 'lg' })} href="#requisitos">
               {t('systemRequirementsButton')}
             </Link>
           </div>
         </div>
-        <div className="flex aspect-video justify-center">
-          <NextImage
-            src="/static/images/proteus/3.png"
-            alt={t('imageAlt')}
-            width={800}
-            height={800}
-            className="aspect-square rounded-md object-cover shadow-lg"
-          />
+
+        <div className="mt-16 flex justify-center">
+          <div className="relative">
+            <NextImage
+              src="/static/images/proteus/3.png"
+              alt={t('imageAlt')}
+              width={600}
+              height={400}
+              className="rounded-lg border border-neutral-200 shadow-sm dark:border-neutral-800"
+            />
+          </div>
         </div>
       </section>
+
       <section>
-        <div className="py-20">
+        <div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
           <Gallery gallery={images} />
         </div>
       </section>
-      <section className="py-12 md:py-24 lg:py-32" id={t('id')}>
+      <section className="py-12" id={t('id')}>
         <div>
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
             <div>
@@ -150,7 +163,7 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
       </section>
       <Software locale={locale} />
-      <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
+      <section className="bg-muted w-full py-12 ">
         <div>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -182,7 +195,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </div>
       </section>
-      {/* <section id="resources" className="bg-muted py-12 md:py-24 lg:py-32">
+      {/* <section id="resources" className="bg-muted py-12 ">
         <div className="space-y-8">
           <div className="space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
