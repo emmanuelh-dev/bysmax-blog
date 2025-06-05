@@ -1,5 +1,9 @@
 'use client'
+import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
+import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+import { usePathname } from 'next/navigation'
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -17,6 +21,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { CgWindows } from 'react-icons/cg'
 
 export function SoftwareLayout({
   children,
@@ -28,10 +33,16 @@ export function SoftwareLayout({
   toc,
   slug,
 }) {
+  console.log(path)
+  console.log(slug.split('/').pop())
+
+  const router = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
     <div className="container mx-auto">
       <div className=" my-12 grid grid-cols-1 border border-neutral-300 dark:border-gray-800 lg:grid-cols-[15%_70%_15%]">
+        <ScrollTopAndComment />
+
         <SectionContainerWithAds>
           {/* Left Sidebar - Fixed with scroll */}
           <div className="border-r border-neutral-300 dark:border-gray-800">
@@ -43,7 +54,7 @@ export function SoftwareLayout({
                       <h2 className="flex items-center text-sm font-semibold">{item.title}</h2>
                       <div className="ml-4 space-y-1">
                         {item.sections.map((section) => {
-                          const active = slug === section.link
+                          const active = router === section.link
                           return (
                             <Link
                               className={`hover:font-semi-bold flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-black dark:hover:text-white ${active ? 'font-bold text-[#000] dark:text-white' : ''}`}
@@ -102,6 +113,8 @@ export function SoftwareLayout({
               ></ins>
             </div>
             <div>{children}</div>
+
+            <SupabaseCommentsWrapper slug={router} />
           </main>
 
           <div className="border-l border-neutral-300 dark:border-gray-800">
