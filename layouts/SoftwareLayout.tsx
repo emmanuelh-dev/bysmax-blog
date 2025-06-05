@@ -114,10 +114,10 @@ export function SoftwareLayout({
                 ))}
               </nav>
             </div>
-          </aside>{' '}
+          </aside>
           {/* Main Content */}
           <main className="min-w-0 flex-1">
-            <div className="mx-auto max-w-4xl px-4 py-6 lg:px-8 lg:py-8">
+            <div className="mx-auto max-w-4xl py-6 lg:px-8 lg:py-8">
               {/* Back Navigation - Hidden on mobile (shown in mobile header) */}
               <div className="mb-8 hidden lg:block">
                 <Link

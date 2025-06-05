@@ -153,7 +153,7 @@ export default function SupabaseComments({ slug, postId }: SupabaseCommentsProps
       </div>
 
       {/* Comment Form */}
-      <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/50">
+      <div>
         <form onSubmit={handleSubmitComment} className="space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">

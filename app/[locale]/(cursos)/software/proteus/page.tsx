@@ -74,7 +74,7 @@ export default async function Page({ params: { locale } }: PageProps) {
   const { t } = await createTranslation(locale, 'downloadproteus')
 
   return (
-    <div className="container mx-auto max-w-7xl">
+    <div className="mx-auto max-w-7xl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
