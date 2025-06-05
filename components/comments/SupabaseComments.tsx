@@ -108,13 +108,13 @@ export default function SupabaseComments({ slug, postId }: SupabaseCommentsProps
     return filteredComments.map((comment) => (
       <div
         key={comment.id}
-        className={`mb-4 ${parentId ? 'ml-8 border-l-2 border-gray-200 pl-4' : ''}`}
+        className={`mb-4 ${parentId ? 'ml-8 border-l-2 border-neutral-200 pl-4' : ''}`}
       >
-        <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800 ">
+        <div className="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-800 ">
           <div className="flex items-start justify-between">
             <div>
               <h4 className="font-bold">{comment.author_name}</h4>
-              <p className="text-sm text-gray-500">{formatDate(comment.created_at)}</p>
+              <p className="text-sm text-neutral-500">{formatDate(comment.created_at)}</p>
             </div>
           </div>
           <div className="mt-2">{comment.content}</div>
@@ -154,7 +154,10 @@ export default function SupabaseComments({ slug, postId }: SupabaseCommentsProps
 
         <div className="mb-4">
           <label htmlFor="authorEmail" className="mb-2 block font-medium">
-            Email (opcional)
+            Email{' '}
+            <span className="text-neutral-500 dark:text-neutral-300">
+              (opcional - no se publicará y solo se usará para notificar respuestas)
+            </span>
           </label>
           <Input
             type="email"
@@ -195,7 +198,7 @@ export default function SupabaseComments({ slug, postId }: SupabaseCommentsProps
       {/* Lista de comentarios */}
       <div className="space-y-4">
         {comments.length === 0 ? (
-          <p className="text-gray-500">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+          <p className="text-neutral-500">No hay comentarios aún. ¡Sé el primero en comentar!</p>
         ) : (
           renderComments()
         )}

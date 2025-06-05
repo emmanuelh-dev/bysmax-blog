@@ -1,27 +1,11 @@
 'use client'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import { SectionContainerWithAds } from '@/components/SectionContainer'
 import { usePathname } from 'next/navigation'
 
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  ArrowLeft,
-  BookText,
-  ChevronDown,
-  CircuitBoard,
-  Cpu,
-  Database,
-  ExternalLink,
-  Menu,
-  Microchip,
-  Play,
-} from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { CgWindows } from 'react-icons/cg'
 
 export function SoftwareLayout({
   children,
@@ -33,116 +17,175 @@ export function SoftwareLayout({
   toc,
   slug,
 }) {
-  console.log(path)
-  console.log(slug.split('/').pop())
-
   const router = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <div className="container mx-auto">
-      <div className=" my-12 grid grid-cols-1 border border-neutral-300 dark:border-gray-800 lg:grid-cols-[15%_70%_15%]">
-        <ScrollTopAndComment />
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
+      <ScrollTopAndComment />
 
-        <SectionContainerWithAds>
-          {/* Left Sidebar - Fixed with scroll */}
-          <div className="border-r border-neutral-300 dark:border-gray-800">
-            <aside className="sticky top-10 overflow-y-auto lg:h-[90vh]">
-              <nav className="space-y-6 p-4">
-                <div className="space-y-2">
-                  {sidebar.map((item, index) => (
-                    <div key={index} className="space-y-2">
-                      <h2 className="flex items-center text-sm font-semibold">{item.title}</h2>
-                      <div className="ml-4 space-y-1">
-                        {item.sections.map((section) => {
-                          const active = router === section.link
-                          return (
-                            <Link
-                              className={`hover:font-semi-bold flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-black dark:hover:text-white ${active ? 'font-bold text-[#000] dark:text-white' : ''}`}
-                              href={section.link}
-                              key={section.title}
-                            >
-                              {section.title}
-                            </Link>
-                          )
-                        })}
-                      </div>
+      {/* Mobile Navigation Button */}
+      <div className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80 lg:hidden">
+        <div className="flex h-14 items-center justify-between px-4">
+          <Link
+            href={path.href}
+            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {path.title}
+          </Link>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="rounded-md p-2 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsMenuOpen(false)} />
+          <div className="absolute left-0 top-14 h-[calc(100vh-3.5rem)] w-80 border-r border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
+            <div className="h-full overflow-y-auto">
+              <nav className="space-y-1 p-6">
+                {sidebar.map((item, index) => (
+                  <div key={index} className="space-y-3">
+                    <h3 className="text-xs font-medium uppercase tracking-wider text-black dark:text-white">
+                      {item.title}
+                    </h3>
+                    <div className="space-y-0.5">
+                      {item.sections.map((section) => {
+                        const active = router === section.link
+                        return (
+                          <Link
+                            key={section.title}
+                            href={section.link}
+                            onClick={() => setIsMenuOpen(false)}
+                            className={`block rounded-md px-3 py-2 text-sm transition-colors ${
+                              active
+                                ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+                                : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100'
+                            }`}
+                          >
+                            {section.title}
+                          </Link>
+                        )
+                      })}
                     </div>
-                  ))}
-                </div>
-              </nav>
-            </aside>
-          </div>
-
-          {/* Main Content - Scrollable */}
-          <main className="mx-auto w-full max-w-4xl space-y-8 py-8">
-            <div className="space-y-8">
-              {/* Back Link */}
-              <Link
-                href={path.href}
-                className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                {path.title}
-              </Link>
-
-              {/* Author Info */}
-              {/* <div className="space-y-1">
-              <h2 className="text-lg font-medium text-gray-500">Emmanuel Hernandez</h2>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <span>May 25, 2024</span>
-                <span>•</span>
-                <Badge variant="secondary">Intermediate</Badge>
-                <span>•</span>
-                <Badge variant="secondary">Short</Badge>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold">{title}</h1>
-              <p className="text-xl text-gray-400">{description}</p>
-            </div>*/}
-            </div>
-            <div>
-              <ins
-                className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6395288197"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </div>
-            <div>{children}</div>
-
-            <SupabaseCommentsWrapper slug={router} />
-          </main>
-
-          <div className="border-l border-neutral-300 dark:border-gray-800">
-            {/* Right Sidebar - Fixed with scroll */}
-            <aside className="h-[calc(100vh-4rem)]max-sm:hidden sticky top-10">
-              <nav className="space-y-2 p-4">
-                <h2 className="flex items-center text-sm font-semibold">Tabla de contenido</h2>
-                {toc.map((item) => (
-                  <Link
-                    key={item.value}
-                    className="block text-sm text-gray-400 transition-colors hover:text-white"
-                    href={item.url}
-                  >
-                    {item.value}
-                  </Link>
+                  </div>
                 ))}
               </nav>
-              <ins
-                className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="9734184827"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </aside>
+            </div>
           </div>
-        </SectionContainerWithAds>
+        </div>
+      )}
+
+      <div className="container mx-auto">
+        <div className="flex min-h-screen">
+          {/* Left Sidebar - Navigation */}
+          <aside className="hidden w-64 shrink-0 border-r border-neutral-200 dark:border-neutral-800 lg:block">
+            <div className="sticky top-0 h-screen overflow-y-auto">
+              <nav className="space-y-1 p-6 pt-8">
+                {sidebar.map((item, index) => (
+                  <div key={index} className="space-y-3">
+                    <h3 className="text-xs font-medium uppercase tracking-wider text-black dark:text-white">
+                      {item.title}
+                    </h3>
+                    <div className="space-y-0.5">
+                      {item.sections.map((section) => {
+                        const active = router === section.link
+                        return (
+                          <Link
+                            key={section.title}
+                            href={section.link}
+                            className={`block rounded-md px-3 py-2 text-sm transition-colors ${
+                              active
+                                ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+                                : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100'
+                            }`}
+                          >
+                            {section.title}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </nav>
+            </div>
+          </aside>{' '}
+          {/* Main Content */}
+          <main className="min-w-0 flex-1">
+            <div className="mx-auto max-w-4xl px-4 py-6 lg:px-8 lg:py-8">
+              {/* Back Navigation - Hidden on mobile (shown in mobile header) */}
+              <div className="mb-8 hidden lg:block">
+                <Link
+                  href={path.href}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  {path.title}
+                </Link>
+              </div>
+
+              {/* Ad Space */}
+              <div className="mb-8">
+                <ins
+                  className="adsbygoogle block h-[120px] w-full rounded-lg border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900"
+                  style={{ display: 'block' }}
+                  data-ad-client="ca-pub-3646138644530578"
+                  data-ad-slot="6395288197"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20">
+                {children}
+              </div>
+
+              {/* Comments */}
+              <div className="mt-16 border-t border-neutral-200 pt-8 dark:border-neutral-800">
+                <SupabaseCommentsWrapper slug={router} />
+              </div>
+            </div>
+          </main>
+          {/* Right Sidebar - Table of Contents */}
+          <aside className="hidden w-64 shrink-0 border-l border-neutral-200 dark:border-neutral-800 xl:block">
+            <div className="sticky top-0 h-screen overflow-y-auto">
+              <nav className="space-y-3 p-6 pt-8">
+                <h3 className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  Tabla de contenido
+                </h3>
+                <div className="space-y-1">
+                  {toc.map((item) => (
+                    <Link
+                      key={item.value}
+                      href={item.url}
+                      className="block rounded-md px-3 py-1.5 text-sm text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+                    >
+                      {item.value}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Sidebar Ad */}
+                <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+                  <ins
+                    className="adsbygoogle block h-[400px] w-full rounded-lg border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900"
+                    style={{ display: 'block' }}
+                    data-ad-client="ca-pub-3646138644530578"
+                    data-ad-slot="9734184827"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"
+                  />
+                </div>
+              </nav>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   )
