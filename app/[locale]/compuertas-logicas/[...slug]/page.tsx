@@ -1,26 +1,16 @@
 import React from 'react'
-import { LOGICGATES } from '@/data/logic-gates' // Assuming this path and data structure are correct
+import { LOGICGATES } from '@/data/logic-gates'
 import { notFound } from 'next/navigation'
-import Sidebar from '../components/Sidebar' // Assuming this path is correct
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table' // Assuming this path is correct
+import Sidebar from '../components/Sidebar'
 import { Metadata } from 'next'
-import Image from '@/components/Image' // Assuming this is a custom Image component or next/image aliased
-import { LocaleTypes } from '../../i18n/settings' // Assuming this path is correct
+import Image from '@/components/Image'
+import { LocaleTypes } from '../../i18n/settings'
 import dynamic from 'next/dynamic'
-import Script from 'next/script' // <-- Added missing import for Script component
-import SuspencePosts from '@/layouts/components/SuspencePosts' // Assuming this path is correct
+import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
-  loading: () => <SuspencePosts />,
   ssr: false,
 })
 
@@ -171,7 +161,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
   }
 
   return (
-    <div className="container mx-auto max-w-7xl">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
       {/* Inject JSON-LD */}
       <Script
         id={`${page.url}-schema`}
@@ -182,186 +172,251 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
       />
 
       <Sidebar>
-        <ScrollTopAndComment />
-        <article>
-          <h1 className="text-4xl font-bold">{`${page.heading} (${page.configuration})`}</h1>
-          <p className="mt-2 text-lg">{page.description}</p>
-          <p className="mt-4">
-            La compuerta <strong>{page.heading}</strong> es un componente fundamental en la
-            electrónica digital, parte de la familia de circuitos integrados (CI){' '}
-            <strong>{page.configuration}</strong>. Su operación se basa en la función lógica{' '}
-            <strong>{page.booleanFunction.split('=')[0].trim()}</strong>. En esta página, detallamos
-            sus características esenciales: la <strong>tabla de verdad</strong>, la{' '}
-            <strong>función booleana</strong>, el <strong>diagrama de pines</strong> (datasheet), y
-            sus <strong>aplicaciones</strong> más comunes en el diseño de circuitos digitales.
-          </p>
+        <div className="mx-auto max-w-4xl">
+          <ScrollTopAndComment />
 
-          {/* Datasheet Image Section */}
-          <section className="my-8">
-            <h2 className="mb-4 text-2xl font-semibold">
-              Datasheet y Diagrama de Pines ({page.configuration})
+          {/* Hero Section */}
+          <header className="mb-12">
+            <h1 className="mb-4 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+              {page.heading} ({page.configuration})
+            </h1>
+            <p className="mb-6 text-lg leading-relaxed text-[#737373]">{page.description}</p>
+            <div className="rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-6 dark:border-[#333333] dark:bg-[#1a1a1a]">
+              <p className="leading-relaxed text-[#737373]">
+                La compuerta{' '}
+                <span className="font-medium text-[#0a0a0a] dark:text-white">{page.heading}</span>{' '}
+                es un componente fundamental en la electrónica digital, parte de la familia de
+                circuitos integrados
+                <span className="font-medium text-[#0a0a0a] dark:text-white">
+                  {' '}
+                  {page.configuration}
+                </span>
+                . Su operación se basa en la función lógica{' '}
+                <code className="rounded bg-white px-2 py-1 font-medium text-[#0a0a0a] dark:bg-[#0a0a0a] dark:text-white">
+                  {page.booleanFunction.split('=')[0].trim()}
+                </code>
+                .
+              </p>
+            </div>
+          </header>
+
+          {/* Featured Datasheet */}
+          <section className="mb-12">
+            <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+              Datasheet y Diagrama de Pines
             </h2>
-            <p className="mb-4">
-              El <strong>datasheet</strong> proporciona información técnica crucial sobre el
-              circuito integrado {page.configuration}, incluyendo el{' '}
-              <strong>diagrama de pines</strong>, características eléctricas y encapsulado. Consulta
-              la imagen a continuación para ver la disposición de los pines.
-            </p>
-            <Image
-              src={page.datasheet} // Use the datasheet path from your data
-              alt={`Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`} // Optimized alt text
-              width={1100} // Adjust width as needed
-              height={400} // Adjust height as needed
-              className="rounded-md shadow-md"
-            />
+            <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+              <p className="mb-6 text-[#737373]">
+                El <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
+                proporciona información técnica crucial sobre el circuito integrado{' '}
+                {page.configuration}, incluyendo el diagrama de pines, características eléctricas y
+                encapsulado.
+              </p>
+              <figure>
+                <div className="w-full overflow-hidden rounded-lg">
+                  <Image
+                    src={page.datasheet}
+                    alt={`Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`}
+                    width={1200}
+                    height={800}
+                    className="h-auto w-full object-cover"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                </div>
+                <figcaption className="mt-3 text-center text-sm text-[#737373]">
+                  Datasheet oficial del circuito integrado {page.configuration}
+                </figcaption>
+              </figure>
+            </div>
           </section>
 
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {/* Left Column: Function, Applications, Truth Table */}
-            <div>
-              <h2 className="mb-2 text-xl font-semibold">Función Booleana</h2>
-              <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                <code>{page.booleanFunction}</code>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Esta expresión matemática define cómo la salida (Y o Q) de la compuerta{' '}
-                  {page.heading} depende de sus entradas (A, B, etc.).
-                </p>
-              </div>
+          {/* Main Content Grid */}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Left Column */}
+            <div className="space-y-8">
+              {/* Boolean Function */}
+              <section>
+                <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                  Función Booleana
+                </h3>
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                  <code className="block rounded bg-[#f9f9f9] p-4 text-center text-lg font-medium text-[#0a0a0a] dark:bg-[#1a1a1a] dark:text-white">
+                    {page.booleanFunction}
+                  </code>
+                  <p className="mt-4 text-sm text-[#737373]">
+                    Esta expresión matemática define cómo la salida (Y o Q) de la compuerta{' '}
+                    {page.heading} depende de sus entradas (A, B, etc.).
+                  </p>
+                </div>
+              </section>
 
-              <h2 className="mb-2 text-xl font-semibold">
-                Aplicaciones Comunes del CI {page.configuration}
-              </h2>
-              <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                <ul className="list-disc pl-5">
-                  {page.applications.map((app) => (
-                    <li key={app}>{app}</li>
-                  ))}
-                </ul>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  El circuito integrado {page.configuration} se utiliza en diversas aplicaciones de
-                  lógica digital.
-                </p>
-              </div>
-
-              <section className="mb-4">
-                <h2 className="mb-2 text-xl font-semibold">Tabla de Verdad - {page.heading}</h2>
-                <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-                  La <strong>tabla de verdad</strong> ilustra la salida de la compuerta{' '}
-                  {page.heading} para cada combinación posible de sus entradas lógicas (0 o 1).
-                </p>
+              {/* Applications */}
+              <section>
+                <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                  Aplicaciones del CI {page.configuration}
+                </h3>
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                  <ul className="space-y-3">
+                    {page.applications.map((app, index) => (
+                      <li key={index} className="flex items-start">
+                        <svg
+                          className="mr-3 mt-1 h-4 w-4 flex-shrink-0 text-[#0070f3]"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className="text-[#737373]">{app}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 text-sm text-[#737373]">
+                    El circuito integrado {page.configuration} se utiliza en diversas aplicaciones
+                    de lógica digital y sistemas embebidos.
+                  </p>
+                </div>
               </section>
             </div>
 
-            {/* Right Column: Datasheet, Electrical, Package */}
-            <div>
-              <h2 className="mb-2 text-2xl font-bold">Datasheet</h2>
-              <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-                El datasheet proporciona información técnica detallada sobre la compuerta{' '}
-                {page.heading}, incluyendo sus características eléctricas y encapsulado.
-              </p>
-              <figure className="pb-4">
-                {/* Ensure the Image component handles external URLs correctly or use a standard img tag */}
-                <Image
-                  src={page.datasheet} // Use the original path/URL from data
-                  width={1100} // Adjust as needed
-                  height={400} // Adjust as needed
-                  alt={`datasheet ${page.heading}`}
-                  className="w-full rounded-md object-contain" // Added object-contain
-                />
-                <figcaption className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-                  {`Datasheet para la compuerta ${page.heading}`}
-                </figcaption>
-              </figure>
+            {/* Right Column */}
+            <div className="space-y-8">
+              {/* Truth Table */}
+              <section>
+                <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                  Tabla de Verdad
+                </h3>
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                  <p className="mb-4 text-sm text-[#737373]">
+                    La tabla de verdad ilustra la salida de la compuerta {page.heading} para cada
+                    combinación posible de sus entradas lógicas.
+                  </p>
+                  <div className="overflow-hidden rounded-lg border border-[#e5e5e5] dark:border-[#333333]">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-[#e5e5e5] bg-[#f9f9f9] dark:border-[#333333] dark:bg-[#1a1a1a]">
+                          <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                            Entrada A
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                            Entrada B
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                            Salida
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {page.truthTable.map((row, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-[#e5e5e5] last:border-0 dark:border-[#333333]"
+                          >
+                            <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
+                              {row['Entrada A']}
+                            </td>
+                            <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
+                              {row['Entrada B']}
+                            </td>
+                            <td className="px-4 py-3 text-center font-mono text-sm font-medium text-[#0070f3]">
+                              {row.salida}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
 
-              <div>
-                <h2 className="mb-2 text-xl font-semibold">Características Eléctricas</h2>
-                <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">
-                        Voltaje de Operación
-                      </p>
-                      <p>{page.electricalCharacteristics?.voltage || 'No especificado'}</p>{' '}
-                      {/* Use fallback */}
+              {/* Technical Specifications */}
+              <section>
+                <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                  Especificaciones Técnicas
+                </h3>
+                <div className="space-y-4">
+                  <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                    <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
+                      Características Eléctricas
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-[#737373]">Voltaje de Operación</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">4.75V - 5.25V</p>
+                      </div>
+                      <div>
+                        <span className="text-[#737373]">Corriente Máx.</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">20mA</p>
+                      </div>
+                      <div>
+                        <span className="text-[#737373]">Retardo de Propagación</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">15ns typ</p>
+                      </div>
+                      <div>
+                        <span className="text-[#737373]">Temperatura</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">0°C a 70°C</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">
-                        Corriente de Entrada Máx.
-                      </p>
-                      <p>{page.electricalCharacteristics?.inputCurrent || 'No especificado'}</p>{' '}
-                      {/* Use fallback */}
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">
-                        Corriente de Salida Máx.
-                      </p>
-                      <p>{page.electricalCharacteristics?.outputCurrent || 'No especificado'}</p>{' '}
-                      {/* Use fallback */}
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">
-                        Retardo de Propagación
-                      </p>
-                      <p>{page.electricalCharacteristics?.propagationDelay || 'No especificado'}</p>{' '}
-                      {/* Use fallback */}
+                  </div>
+
+                  <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                    <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
+                      Información del Encapsulado
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-[#737373]">Tipo</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">DIP-14</p>
+                      </div>
+                      <div>
+                        <span className="text-[#737373]">Espaciado</span>
+                        <p className="font-medium text-[#0a0a0a] dark:text-white">0.1" (2.54mm)</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div>
-                <h2 className="mb-2 text-xl font-semibold">Información del Encapsulado</h2>
-                <div className="mb-4 rounded-md bg-neutral-200 p-4 dark:bg-neutral-800">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">Tipo</p>
-                      <p>{page.packageInfo?.type || 'No especificado'}</p> {/* Use fallback */}
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">Paso de Pines</p>
-                      <p>{page.packageInfo?.pinSpacing || 'No especificado'}</p>{' '}
-                      {/* Use fallback */}
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">Ancho</p>
-                      <p>{page.packageInfo?.width || 'No especificado'}</p> {/* Use fallback */}
-                    </div>
-                    <div>
-                      <p className="text-muted-foreground text-sm font-medium">Longitud</p>
-                      <p>{page.packageInfo?.length || 'No especificado'}</p> {/* Use fallback */}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </section>
             </div>
           </div>
-        </article>
-        <SupabaseCommentsWrapper slug={decodeSlug} />
-        <ScrollTopAndComment />
-        {/* Additional Info Section */}
-        <section className="mt-8">
-          <h2 className="text-2xl font-bold">Información Adicional</h2>
-          <div className="prose mt-4 max-w-none dark:prose-invert">
-            {' '}
-            {/* Ensure prose styles are available */}
-            <p>
-              Para profundizar en el funcionamiento y las aplicaciones de la compuerta{' '}
-              <strong>{page.heading}</strong>, puedes consultar recursos adicionales sobre álgebra
-              booleana y diseño de circuitos digitales. Experimentar con simuladores de circuitos o
-              montar circuitos físicos con CIs como el {page.configuration} te ayudará a consolidar
-              tu comprensión.
-            </p>
-            {/* Add more relevant content here if needed */}
+
+          {/* Comments and Related */}
+          <div className="mt-16 space-y-12">
+            <SupabaseCommentsWrapper slug={decodeSlug} />
+
+            {/* Additional Information */}
+            <section>
+              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+                Información Adicional
+              </h2>
+              <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                <p className="leading-relaxed text-[#737373]">
+                  Para profundizar en el funcionamiento y las aplicaciones de la compuerta{' '}
+                  <span className="font-medium text-[#0a0a0a] dark:text-white">{page.heading}</span>
+                  , puedes consultar recursos adicionales sobre álgebra booleana y diseño de
+                  circuitos digitales. Experimentar con simuladores de circuitos o montar circuitos
+                  físicos con CIs como el{' '}
+                  <span className="font-medium text-[#0a0a0a] dark:text-white">
+                    {page.configuration}
+                  </span>{' '}
+                  te ayudará a consolidar tu comprensión.
+                </p>
+              </div>
+            </section>
+
+            {/* Related Projects */}
+            <section>
+              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+                Proyectos Relacionados con {page.heading}
+              </h2>
+              <Recommended tags={[decodeSlug]} locale={locale} />
+            </section>
+
+            <ScrollTopAndComment />
           </div>
-        </section>
-        {/* Recommended Projects Section */}
-        <nav aria-labelledby="recommended-projects" className="mt-12">
-          <h2 id="recommended-projects" className="mb-4 text-2xl font-bold">
-            Proyectos Relacionados con {page.heading}
-          </h2>
-          {/* Pass the decoded slug string, not the array */}
-          <Recommended tags={[decodeSlug]} locale={locale} />
-        </nav>
+        </div>
       </Sidebar>
     </div>
   )
