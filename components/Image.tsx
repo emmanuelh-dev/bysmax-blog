@@ -63,14 +63,11 @@ export default function ImageViewer({ className, alt, ...rest }: ImageProps) {
       </button>
 
       {/* Image container */}
-      <div
-        className="relative flex h-full w-full items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="relative flex h-full w-full items-center justify-center">
         <NextImage
           {...rest}
           alt={alt}
-          className="h-auto max-h-[calc(100vh-6rem)] w-auto rounded-lg object-contain shadow-2xl lg:max-w-[calc(100vw-6rem)]"
+          className="h-auto max-h-[calc(100vh-6rem)] w-auto max-w-[calc(100vw-6rem)] rounded-lg object-contain shadow-2xl"
         />
       </div>
     </div>

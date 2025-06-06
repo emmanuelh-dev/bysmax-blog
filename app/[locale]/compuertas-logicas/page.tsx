@@ -203,7 +203,7 @@ export default function page() {
                           width={400}
                           height={250}
                           alt={`Datasheet ${gate.heading}`}
-                          className="rounded-lg"
+                          className="w-full rounded-lg"
                         />
                         <figcaption className="mt-2 text-center text-sm text-[#737373]">
                           Datasheet {gate.heading}
