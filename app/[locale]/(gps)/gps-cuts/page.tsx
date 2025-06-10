@@ -17,6 +17,9 @@ const GPSCutsPage = () => {
   return (
     <div className="mx-auto max-w-4xl space-y-6 lg:p-4">
       <Card className="shadow-lg">
+        <div>
+          <VehicleSelector />
+        </div>
         <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
           <h1 className="text-2xl font-bold">Buscador de Cortes GPS</h1>
           <p className="text-emerald-50">
@@ -27,9 +30,6 @@ const GPSCutsPage = () => {
             instaladores agregando nuevos cortes o mejorando los existentes. Juntos hacemos crecer
             la comunidad.
           </p>
-        </div>
-        <div>
-          <VehicleSelector />
         </div>
       </Card>
 
