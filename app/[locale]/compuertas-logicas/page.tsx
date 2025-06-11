@@ -37,13 +37,13 @@ export default function page() {
         '@type': 'ListItem',
         position: 1,
         name: 'Inicio',
-        item: 'https://bysmax.com/es', // Assuming 'es' locale, adjust if needed
+        item: 'https://bysmax.com/es',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Compuertas Lógicas',
-        item: 'https://bysmax.com/es/compuertas-logicas', // Assuming 'es' locale, adjust if needed
+        item: 'https://bysmax.com/es/compuertas-logicas',
       },
     ],
   }

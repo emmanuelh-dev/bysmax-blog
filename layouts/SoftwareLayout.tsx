@@ -28,13 +28,13 @@ export function SoftwareLayout({
         {/* Mobile Navigation Button */}
         <div className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80 lg:hidden">
           <div className="flex h-14 items-center justify-between px-4">
-            <Link
+            <a
               href={path.href}
               className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
             >
               <ArrowLeft className="h-4 w-4" />
               {path.title}
-            </Link>
+            </a>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="rounded-md p-2 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
@@ -60,7 +60,7 @@ export function SoftwareLayout({
                         {item.sections.map((section) => {
                           const active = router === section.link
                           return (
-                            <Link
+                            <a
                               key={section.title}
                               href={section.link}
                               onClick={() => setIsMenuOpen(false)}
@@ -71,7 +71,7 @@ export function SoftwareLayout({
                               }`}
                             >
                               {section.title}
-                            </Link>
+                            </a>
                           )
                         })}
                       </div>
@@ -98,7 +98,7 @@ export function SoftwareLayout({
                         {item.sections.map((section) => {
                           const active = router === section.link
                           return (
-                            <Link
+                            <a
                               key={section.title}
                               href={section.link}
                               className={`block rounded-md px-3 py-2 text-sm transition-colors ${
@@ -108,7 +108,7 @@ export function SoftwareLayout({
                               }`}
                             >
                               {section.title}
-                            </Link>
+                            </a>
                           )
                         })}
                       </div>

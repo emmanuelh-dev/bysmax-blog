@@ -19,10 +19,10 @@ export default function Sidebar({ children }: Props) {
   const toggleSidebar = () => setIsOpen(!isOpen)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
+    <div className="min-h-screen bg-white dark:bg-dark">
       <button
         onClick={toggleSidebar}
-        className="dark:text-wh text- fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#a1a1a1] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-[#0a0a0a] md:hidden"
+        className="dark:text-wh text- fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#a1a1a1] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-dark md:hidden"
         aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
       >
         {isOpen ? (
@@ -34,14 +34,14 @@ export default function Sidebar({ children }: Props) {
 
       <div className="flex">
         <aside
-          className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-[#0a0a0a] md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-dark md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
         >
           <nav
             aria-label="Navegación de la barra lateral"
             className="flex h-full flex-col overflow-hidden"
           >
             <div className="flex h-16 items-center justify-between border-b border-[#e5e5e5] px-6 dark:border-[#333333] md:justify-start">
-              <h2 className="text-lg font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+              <h2 className="text-lg font-semibold tracking-tight text-dark dark:text-white">
                 Compuertas Lógicas
               </h2>
               <button
@@ -56,33 +56,33 @@ export default function Sidebar({ children }: Props) {
             {/* Navigation links */}
             <div className="flex-1 overflow-y-auto px-3 py-4">
               <div className="space-y-1">
-                <Link
+                <a
                   href={baseLogicGatesPath}
                   onClick={() => setIsOpen(false)}
                   className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                     pathname === baseLogicGatesPath
                       ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                      : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                      : 'text-[#737373] hover:text-dark dark:hover:text-white'
                   }`}
                 >
                   Todas las compuertas
-                </Link>
+                </a>
 
                 {LOGICGATES.map((gate) => {
                   const gatePath = `${baseLogicGatesPath}/${gate.url}`
                   return (
-                    <Link
+                    <a
                       key={gate.heading}
                       href={gatePath}
                       onClick={() => setIsOpen(false)}
                       className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         pathname === gatePath
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
                       }`}
                     >
                       Compuerta {gate.url.toUpperCase()}
-                    </Link>
+                    </a>
                   )
                 })}
               </div>
