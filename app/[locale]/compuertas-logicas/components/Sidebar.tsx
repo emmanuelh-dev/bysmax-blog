@@ -13,8 +13,8 @@ interface Props {
 export default function Sidebar({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
-  const locale = pathname.split('/')[1]
-  const baseLogicGatesPath = `/${locale}`
+  const locale = pathname.split('/')[0]
+  const baseLogicGatesPath = `/compuertas-logicas`
 
   const toggleSidebar = () => setIsOpen(!isOpen)
 
