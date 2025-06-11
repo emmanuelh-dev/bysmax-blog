@@ -83,7 +83,7 @@ export default async function Page({ params: { locale } }: PageProps) {
   ]
 
   return (
-    <div className="container mx-auto max-w-7xl">
+    <SectionContainerWithAds>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -122,17 +122,17 @@ export default async function Page({ params: { locale } }: PageProps) {
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
           <Gallery gallery={images} />
         </div>
-      </section>
-      <section>
+      </section>{' '}
+      <div className="pb-8">
         <ins
-          className="adsbygoogle h-[280px] w-full rounded-md bg-neutral-400 dark:bg-neutral-900 max-sm:aspect-square"
+          className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
           style={{ display: 'block' }}
           data-ad-client="ca-pub-3646138644530578"
           data-ad-slot="6395288197"
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
-      </section>
+      </div>
       <section className="py-12 md:py-24 lg:py-32" id="requisitos">
         <div>
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
@@ -243,6 +243,6 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
         <Recommended tags={['proteus']} locale={locale} />
       </section> */}
-    </div>
+    </SectionContainerWithAds>
   )
 }

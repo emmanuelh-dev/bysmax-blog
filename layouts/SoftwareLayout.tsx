@@ -21,7 +21,7 @@ export function SoftwareLayout({
   const router = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <SectionContainerWithAds>
+    <div>
       <div className="min-h-screen bg-white dark:bg-dark">
         <ScrollTopAndComment />
 
@@ -165,7 +165,7 @@ export function SoftwareLayout({
           </div>
         </div>
       </div>
-    </SectionContainerWithAds>
+    </div>
   )
 }
 

@@ -17,6 +17,7 @@ import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import Loading from '@/components/software/Loading'
+import { SectionContainerWithAds } from '@/components/SectionContainer'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -82,7 +83,7 @@ export default async function Page({ params: { locale } }: PageProps) {
   ]
 
   return (
-    <div className="container mx-auto max-w-7xl">
+    <SectionContainerWithAds>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -202,6 +203,6 @@ export default async function Page({ params: { locale } }: PageProps) {
         </div>
         <Recommended tags={['proteus']} locale={locale} />
       </section>
-    </div>
+    </SectionContainerWithAds>
   )
 }
