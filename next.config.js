@@ -8,8 +8,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com googletagmanager.com https://www.googletagmanager.com clarity.ms https://www.clarity.ms;
-  script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com googletagmanager.com https://www.googletagmanager.com clarity.ms https://www.clarity.ms;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cse.google.com pagead2.googlesyndication.com va.vercel-scripts.com tpc.googlesyndication.com googletagmanager.com https://www.googletagmanager.com clarity.ms https://www.clarity.ms https://ep2.adtrafficquality.google/sodar/sodar2.js;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://ep2.adtrafficquality.google/sodar/sodar2.js;
   img-src * blob: data:;
   media-src *.s3.amazonaws.com *.supabase.co;
   connect-src *;

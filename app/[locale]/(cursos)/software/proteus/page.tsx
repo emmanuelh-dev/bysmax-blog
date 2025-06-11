@@ -79,7 +79,7 @@ export default async function Page({ params: { locale } }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="py-24">
+      <section>
         <div className="space-y-6 text-center">
           <div className="space-y-4">
             <p className="text-sm font-medium uppercase tracking-wide text-neutral-500">
@@ -127,6 +127,14 @@ export default async function Page({ params: { locale } }: PageProps) {
           <Gallery gallery={images} />
         </div>
       </section>
+      <ins
+        className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-3646138644530578"
+        data-ad-slot="6395288197"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
       <section className="py-12" id={t('id')}>
         <div>
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
@@ -134,11 +142,11 @@ export default async function Page({ params: { locale } }: PageProps) {
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {t('requirementsHeader')}
               </h2>
-              <ul className="mt-4 grid gap-4">
+              <ul className="grid gap-4">
                 {(t('requirementsList', { returnObjects: true }) as any[]).map((req, index) => (
-                  <li key={index} className="flex items-start gap-2">
+                  <li key={index} className="flex gap-2">
                     <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                    <div>
+                    <div className="-mt-8">
                       <h3 className="font-medium">{req.title}</h3>
                       <p>{req.description}</p>
                     </div>
@@ -165,8 +173,8 @@ export default async function Page({ params: { locale } }: PageProps) {
       <Software locale={locale} />
       <section className="bg-muted w-full py-12 ">
         <div>
-          <div className="space-y-4">
-            <div className="space-y-2">
+          <div>
+            <div>
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 {t('faqTitle')}
               </h2>
