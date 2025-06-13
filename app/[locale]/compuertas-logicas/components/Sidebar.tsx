@@ -81,7 +81,7 @@ export default function Sidebar({ children }: Props) {
                           : 'text-[#737373] hover:text-dark dark:hover:text-white'
                       }`}
                     >
-                      Compuerta {gate.url.toUpperCase()}
+                      {gate.label}
                     </a>
                   )
                 })}

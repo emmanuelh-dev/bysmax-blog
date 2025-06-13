@@ -21,13 +21,16 @@ interface Props {
 
 interface LogicGate {
   url: string
+  label: string
   heading: string
+  datasheet: string
+  pdf: string
   description: string
-  truthTable: Array<{ 'Entrada A': number; 'Entrada B': number; salida: number }>
+  configuration: string
+  type: string
+  truthTable: Array<{ 'Entrada A': number; 'Entrada B'?: number; salida: number }>
   booleanFunction: string
   applications: string[]
-  datasheet: string
-  configuration: string
   electricalCharacteristics?: {
     voltage?: string
     inputCurrent?: string
@@ -229,6 +232,25 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                     Datasheet oficial del circuito integrado {page.configuration}
                   </figcaption>
                 </figure>
+                {page.pdf && (
+                  <div className="mt-6 text-center">
+                    <a
+                      href={page.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-lg bg-[#0070f3] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#0061d5] focus:outline-none focus:ring-2 focus:ring-[#0070f3] focus:ring-offset-2"
+                    >
+                      <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Descargar Datasheet PDF
+                    </a>
+                  </div>
+                )}
               </div>
             </section>
             <div className="mb-12">
@@ -312,9 +334,11 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                             <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
                               Entrada A
                             </th>
-                            <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                              Entrada B
-                            </th>
+                            {page.truthTable[0]['Entrada B'] !== undefined && (
+                              <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                                Entrada B
+                              </th>
+                            )}
                             <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
                               Salida
                             </th>
@@ -329,9 +353,11 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                               <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
                                 {row['Entrada A']}
                               </td>
-                              <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
-                                {row['Entrada B']}
-                              </td>
+                              {row['Entrada B'] !== undefined && (
+                                <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
+                                  {row['Entrada B']}
+                                </td>
+                              )}
                               <td className="px-4 py-3 text-center font-mono text-sm font-medium text-[#0070f3]">
                                 {row.salida}
                               </td>
@@ -349,6 +375,24 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                     Especificaciones Técnicas
                   </h3>
                   <div className="space-y-4">
+                    <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                      <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
+                        Información General
+                      </h4>
+                      <div className="grid grid-cols-1 gap-4 text-sm">
+                        <div>
+                          <span className="text-[#737373]">Tipo de Compuerta</span>
+                          <p className="font-medium text-[#0a0a0a] dark:text-white">{page.type}</p>
+                        </div>
+                        <div>
+                          <span className="text-[#737373]">Configuración</span>
+                          <p className="font-medium text-[#0a0a0a] dark:text-white">
+                            {page.configuration}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
                       <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
                         Características Eléctricas
