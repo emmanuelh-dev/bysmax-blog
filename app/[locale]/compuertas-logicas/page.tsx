@@ -49,7 +49,7 @@ export default function page() {
   }
 
   return (
-    <div>
+    <SectionContainerWithAds>
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
         <Script
           id="breadcrumb-schema"
@@ -325,6 +325,6 @@ export default function page() {
           </div>
         </Sidebar>
       </div>
-    </div>
+    </SectionContainerWithAds>
   )
 }
