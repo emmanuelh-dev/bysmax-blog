@@ -231,6 +231,16 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 </figure>
               </div>
             </section>
+            <div className="mb-12">
+              <ins
+                className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-3646138644530578"
+                data-ad-slot="6395288197"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </div>
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">
               {/* Left Column */}
