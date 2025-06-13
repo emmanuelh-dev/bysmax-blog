@@ -1,5 +1,11 @@
 import React from 'react'
-import { LOGICGATES } from '@/data/logic-gates'
+import {
+  LOGICGATES,
+  getLogicGateTranslation,
+  type LogicGate,
+  type LogicGateTranslations,
+} from '@/data/logic-gates'
+import { getUITranslation } from '@/data/logic-gates-ui'
 import { notFound } from 'next/navigation'
 import Sidebar from '../components/Sidebar'
 import { Metadata } from 'next'
@@ -19,100 +25,84 @@ interface Props {
   params: { slug: string[]; locale: LocaleTypes }
 }
 
-interface LogicGate {
+interface ExtendedLogicGate extends LogicGateTranslations {
   url: string
-  label: string
-  heading: string
   datasheet: string
   pdf: string
-  description: string
-  configuration: string
-  type: string
-  truthTable: Array<{ 'Entrada A': number; 'Entrada B'?: number; salida: number }>
-  booleanFunction: string
-  applications: string[]
-  electricalCharacteristics?: {
-    voltage?: string
-    inputCurrent?: string
-    outputCurrent?: string
-    propagationDelay?: string
-  }
-  packageInfo?: {
-    type?: string
-    pinSpacing?: string
-    width?: string
-    length?: string
-  }
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] }
+  params: { slug: string[]; locale: LocaleTypes }
 }): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join('/'))
-  const page: LogicGate | undefined = LOGICGATES.find((p) => p.url === slug)
+  const page = getLogicGateTranslation(slug, params.locale as 'es' | 'en' | 'pt')
+  const ui = getUITranslation(params.locale as 'es' | 'en' | 'pt')
 
   if (!page) return
 
-  const title = `${page.heading} (${page.configuration}) - Datasheet, Tabla de Verdad y Diagrama`
-  const description = `Información completa sobre la ${page.heading} (circuito integrado ${page.configuration}). Encuentra su datasheet, tabla de verdad (${page.truthTable.length} combinaciones), función booleana (${page.booleanFunction}), diagrama de pines y aplicaciones como ${page.applications.join(', ')}. Ideal para estudiantes y profesionales de electrónica.`
+  const title = `${page.heading} ${ui.metadata.titleSuffix}`
+  const description = ui.metadata.description(
+    page.heading,
+    page.truthTable.length,
+    page.booleanFunction,
+    page.applications
+  )
   const imageUrl = page.datasheet.startsWith('http')
     ? page.datasheet
     : `https://bysmax.com${page.datasheet}` // Ensure absolute URL
 
   return {
-    title: title, // Use optimized title
-    description: description, // Use optimized description
+    title: title,
+    description: description,
     keywords: [
       page.heading,
-      page.configuration,
-      'compuerta lógica',
-      'circuito integrado',
+      'logic gate',
+      'integrated circuit',
       'datasheet',
-      'tabla de verdad',
-      'función booleana',
-      'diagrama',
-      'pines',
-      'aplicaciones',
-      'electrónica digital',
+      'truth table',
+      'boolean function',
+      'diagram',
+      'pins',
+      'applications',
+      'digital electronics',
       ...page.applications,
     ],
     openGraph: {
-      title: title, // Use optimized title
-      description: description, // Use optimized description
+      title: title,
+      description: description,
       siteName: 'Bysmax',
-      locale: 'es_MX',
+      locale: params.locale === 'en' ? 'en_US' : params.locale === 'pt' ? 'pt_BR' : 'es_MX',
       type: 'article',
-      url: `https://bysmax.com/es/compuertas-logicas/${page.url}`,
+      url: `https://bysmax.com/${params.locale}/compuertas-logicas/${slug}`,
       images: [
         {
           url: imageUrl,
           width: 1100,
           height: 400,
-          alt: `Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`, // Optimized alt text
+          alt: ui.metadata.altText(page.heading),
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: title, // Use optimized title
-      description: description, // Use optimized description
+      title: title,
+      description: description,
       images: [imageUrl],
     },
   }
 }
 
 export const generateStaticParams = async () => {
-  // Ensure LOGICGATES is typed correctly if possible
-  const paths = (LOGICGATES as LogicGate[]).map((p) => ({ slug: p.url.split('/') }))
+  const paths = LOGICGATES.map((p) => ({ slug: p.url.split('/') }))
   return paths
 }
 
 export default async function Page({ params: { locale, slug: slugArray } }: Props) {
   const decodeSlug = decodeURI(slugArray.join('/'))
-
-  const page: LogicGate | undefined = LOGICGATES.find((p) => p.url === decodeSlug) // Use LogicGate type
+  const page = getLogicGateTranslation(decodeSlug, locale as 'es' | 'en' | 'pt')
+  const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
 
   if (!page) return notFound()
 
@@ -127,21 +117,25 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Todo sobre la ${page.heading} (${page.configuration})`, // Optimized headline
-    description: `Información detallada sobre la ${page.heading}, incluyendo su datasheet, tabla de verdad, función booleana (${page.booleanFunction}), diagrama de pines y aplicaciones comunes. Aprende sobre el circuito integrado ${page.configuration}.`, // Optimized description
+    headline: `All about the ${page.heading}`,
+    description: ui.metadata.description(
+      page.heading,
+      page.truthTable.length,
+      page.booleanFunction,
+      page.applications
+    ),
     image: imageUrl,
     keywords: [
       page.heading,
-      page.configuration,
-      'compuerta lógica',
-      'circuito integrado',
+      'logic gate',
+      'integrated circuit',
       'datasheet',
-      'tabla de verdad',
-      'función booleana',
-      'diagrama',
-      'pines',
-      'aplicaciones',
-      'electrónica digital',
+      'truth table',
+      'boolean function',
+      'diagram',
+      'pins',
+      'applications',
+      'digital electronics',
       ...page.applications,
     ].join(', '),
     author: {
@@ -183,20 +177,12 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
             {/* Hero Section */}
             <header className="mb-12">
               <h1 className="mb-4 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                {page.heading} ({page.configuration})
+                {page.heading}
               </h1>
               <p className="mb-6 text-lg leading-relaxed text-[#737373]">{page.description}</p>
               <div className="rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-6 dark:border-[#333333] dark:bg-[#1a1a1a]">
                 <p className="leading-relaxed text-[#737373]">
-                  La compuerta{' '}
-                  <span className="font-medium text-[#0a0a0a] dark:text-white">{page.heading}</span>{' '}
-                  es un componente fundamental en la electrónica digital, parte de la familia de
-                  circuitos integrados
-                  <span className="font-medium text-[#0a0a0a] dark:text-white">
-                    {' '}
-                    {page.configuration}
-                  </span>
-                  . Su operación se basa en la función lógica{' '}
+                  {ui.descriptions.heroIntro(page.label, page.configuration)}{' '}
                   <code className="rounded bg-white px-2 py-1 font-medium text-[#0a0a0a] dark:bg-[#0a0a0a] dark:text-white">
                     {page.booleanFunction.split('=')[0].trim()}
                   </code>
@@ -208,20 +194,18 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
             {/* Featured Datasheet */}
             <section className="mb-12">
               <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                Datasheet y Diagrama de Pines
+                {ui.sections.datasheet}
               </h2>
               <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                 <p className="mb-6 text-[#737373]">
-                  El <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
-                  proporciona información técnica crucial sobre el circuito integrado{' '}
-                  {page.configuration}, incluyendo el diagrama de pines, características eléctricas
-                  y encapsulado.
+                  The <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
+                  {ui.descriptions.datasheet}
                 </p>
                 <figure>
                   <div className="w-full overflow-hidden rounded-lg">
                     <Image
                       src={page.datasheet}
-                      alt={`Datasheet y diagrama de pines de la compuerta ${page.heading} (${page.configuration})`}
+                      alt={ui.metadata.altText(page.heading)}
                       width={1200}
                       height={800}
                       className="h-auto w-full object-cover"
@@ -229,7 +213,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                     />
                   </div>
                   <figcaption className="mt-3 text-center text-sm text-[#737373]">
-                    Datasheet oficial del circuito integrado {page.configuration}
+                    {ui.descriptions.datasheetOfficial}
                   </figcaption>
                 </figure>
                 {page.pdf && (
@@ -247,7 +231,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                           clipRule="evenodd"
                         />
                       </svg>
-                      Descargar Datasheet PDF
+                      {ui.labels.downloadPdf}
                     </a>
                   </div>
                 )}
@@ -270,15 +254,14 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 {/* Boolean Function */}
                 <section>
                   <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    Función Booleana
+                    {ui.sections.booleanFunction}
                   </h3>
                   <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                     <code className="block rounded bg-[#f9f9f9] p-4 text-center text-lg font-medium text-[#0a0a0a] dark:bg-[#1a1a1a] dark:text-white">
                       {page.booleanFunction}
                     </code>
                     <p className="mt-4 text-sm text-[#737373]">
-                      Esta expresión matemática define cómo la salida (Y o Q) de la compuerta{' '}
-                      {page.heading} depende de sus entradas (A, B, etc.).
+                      {ui.descriptions.booleanFunction(page.label)}
                     </p>
                   </div>
                 </section>
@@ -286,7 +269,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 {/* Applications */}
                 <section>
                   <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    Aplicaciones del CI {page.configuration}
+                    {ui.sections.applications}
                   </h3>
                   <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                     <ul className="space-y-3">
@@ -307,10 +290,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-4 text-sm text-[#737373]">
-                      El circuito integrado {page.configuration} se utiliza en diversas aplicaciones
-                      de lógica digital y sistemas embebidos.
-                    </p>
+                    <p className="mt-4 text-sm text-[#737373]">{ui.descriptions.applications}</p>
                   </div>
                 </section>
               </div>
@@ -320,28 +300,24 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 {/* Truth Table */}
                 <section>
                   <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    Tabla de Verdad
+                    {ui.sections.truthTable}
                   </h3>
                   <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                     <p className="mb-4 text-sm text-[#737373]">
-                      La tabla de verdad ilustra la salida de la compuerta {page.heading} para cada
-                      combinación posible de sus entradas lógicas.
+                      {ui.descriptions.truthTable(page.label)}
                     </p>
                     <div className="overflow-hidden rounded-lg border border-[#e5e5e5] dark:border-[#333333]">
                       <table className="w-full">
                         <thead>
                           <tr className="border-b border-[#e5e5e5] bg-[#f9f9f9] dark:border-[#333333] dark:bg-[#1a1a1a]">
-                            <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                              Entrada A
-                            </th>
-                            {page.truthTable[0]['Entrada B'] !== undefined && (
-                              <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                                Entrada B
+                            {Object.keys(page.truthTable[0]).map((key, index) => (
+                              <th
+                                key={index}
+                                className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white"
+                              >
+                                {key}
                               </th>
-                            )}
-                            <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                              Salida
-                            </th>
+                            ))}
                           </tr>
                         </thead>
                         <tbody>
@@ -350,17 +326,18 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                               key={index}
                               className="border-b border-[#e5e5e5] last:border-0 dark:border-[#333333]"
                             >
-                              <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
-                                {row['Entrada A']}
-                              </td>
-                              {row['Entrada B'] !== undefined && (
-                                <td className="px-4 py-3 text-center font-mono text-sm text-[#0a0a0a] dark:text-white">
-                                  {row['Entrada B']}
+                              {Object.values(row).map((value, cellIndex) => (
+                                <td
+                                  key={cellIndex}
+                                  className={`px-4 py-3 text-center font-mono text-sm ${
+                                    cellIndex === Object.values(row).length - 1
+                                      ? 'font-medium text-[#0070f3]'
+                                      : 'text-[#0a0a0a] dark:text-white'
+                                  }`}
+                                >
+                                  {value}
                                 </td>
-                              )}
-                              <td className="px-4 py-3 text-center font-mono text-sm font-medium text-[#0070f3]">
-                                {row.salida}
-                              </td>
+                              ))}
                             </tr>
                           ))}
                         </tbody>
@@ -372,20 +349,20 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 {/* Technical Specifications */}
                 <section>
                   <h3 className="mb-4 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    Especificaciones Técnicas
+                    {ui.sections.technicalSpecs}
                   </h3>
                   <div className="space-y-4">
                     <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
                       <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
-                        Información General
+                        {ui.sections.generalInfo}
                       </h4>
                       <div className="grid grid-cols-1 gap-4 text-sm">
                         <div>
-                          <span className="text-[#737373]">Tipo de Compuerta</span>
+                          <span className="text-[#737373]">{ui.labels.gateType}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">{page.type}</p>
                         </div>
                         <div>
-                          <span className="text-[#737373]">Configuración</span>
+                          <span className="text-[#737373]">{ui.labels.configuration}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">
                             {page.configuration}
                           </p>
@@ -395,41 +372,47 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
 
                     <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
                       <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
-                        Características Eléctricas
+                        {ui.sections.electricalChars}
                       </h4>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="text-[#737373]">Voltaje de Operación</span>
+                          <span className="text-[#737373]">{ui.labels.operatingVoltage}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">
                             4.75V - 5.25V
                           </p>
                         </div>
                         <div>
-                          <span className="text-[#737373]">Corriente Máx.</span>
+                          <span className="text-[#737373]">{ui.labels.maxCurrent}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">20mA</p>
                         </div>
                         <div>
-                          <span className="text-[#737373]">Retardo de Propagación</span>
+                          <span className="text-[#737373]">{ui.labels.propagationDelay}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">15ns typ</p>
                         </div>
                         <div>
-                          <span className="text-[#737373]">Temperatura</span>
-                          <p className="font-medium text-[#0a0a0a] dark:text-white">0°C a 70°C</p>
+                          <span className="text-[#737373]">{ui.labels.temperature}</span>
+                          <p className="font-medium text-[#0a0a0a] dark:text-white">
+                            {locale === 'en'
+                              ? '0°C to 70°C'
+                              : locale === 'pt'
+                                ? '0°C a 70°C'
+                                : '0°C a 70°C'}
+                          </p>
                         </div>
                       </div>
                     </div>
 
                     <div className="rounded-lg border border-[#e5e5e5] bg-white p-4 dark:border-[#333333] dark:bg-[#0a0a0a]">
                       <h4 className="mb-3 font-medium text-[#0a0a0a] dark:text-white">
-                        Información del Encapsulado
+                        {ui.sections.packageInfo}
                       </h4>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="text-[#737373]">Tipo</span>
+                          <span className="text-[#737373]">{ui.labels.packageType}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">DIP-14</p>
                         </div>
                         <div>
-                          <span className="text-[#737373]">Espaciado</span>
+                          <span className="text-[#737373]">{ui.labels.pinSpacing}</span>
                           <p className="font-medium text-[#0a0a0a] dark:text-white">
                             0.1" (2.54mm)
                           </p>
@@ -448,21 +431,11 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
               {/* Additional Information */}
               <section>
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                  Información Adicional
+                  {ui.sections.additionalInfo}
                 </h2>
                 <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                   <p className="leading-relaxed text-[#737373]">
-                    Para profundizar en el funcionamiento y las aplicaciones de la compuerta{' '}
-                    <span className="font-medium text-[#0a0a0a] dark:text-white">
-                      {page.heading}
-                    </span>
-                    , puedes consultar recursos adicionales sobre álgebra booleana y diseño de
-                    circuitos digitales. Experimentar con simuladores de circuitos o montar
-                    circuitos físicos con CIs como el{' '}
-                    <span className="font-medium text-[#0a0a0a] dark:text-white">
-                      {page.configuration}
-                    </span>{' '}
-                    te ayudará a consolidar tu comprensión.
+                    {ui.descriptions.additionalInfo(page.label)}
                   </p>
                 </div>
               </section>
@@ -470,7 +443,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
               {/* Related Projects */}
               <section>
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                  Proyectos Relacionados con {page.heading}
+                  {ui.sections.relatedProjects} {page.label}
                 </h2>
                 <Recommended tags={[decodeSlug]} locale={locale} />
               </section>
