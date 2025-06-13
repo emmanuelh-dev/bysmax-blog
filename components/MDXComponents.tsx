@@ -10,7 +10,6 @@ import ColorCodeMain from './colorCodeCalculator/ColorCodeMain'
 import HeaderGenerator from './HeaderGenerator'
 import SoftwareDownload from './SoftwareDownload'
 import CursoTraccar from '@/app/[locale]/(cursos)/traccar/page'
-import CompuertasNav from './compuertas/Nav'
 import CalculadoraLeyOhm from './calculadoras/CalculadoraLeyOhm'
 
 export const components: MDXComponents = {
@@ -25,6 +24,5 @@ export const components: MDXComponents = {
   HeaderGenerator,
   SoftwareDownload,
   CursoTraccar,
-  CompuertasNav,
   CalculadoraLeyOhm,
 }
