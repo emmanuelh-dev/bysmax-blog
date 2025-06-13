@@ -11,6 +11,19 @@ locales.forEach(locale => {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
+  // Redirección específica para compuertas lógicas
+  if (pathname === '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' || 
+      pathname === '/es/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' ||
+      pathname === '/en/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486') {
+    let targetPath = '/compuertas-logicas'
+    if (pathname.startsWith('/es/')) {
+      targetPath = '/es/compuertas-logicas'
+    } else if (pathname.startsWith('/en/')) {
+      targetPath = '/en/compuertas-logicas'
+    }
+    return NextResponse.redirect(new URL(targetPath, request.url), 301)
+  }
+  
   // Comprobación rápida usando el objeto en caché
   if (pathname.startsWith(`/${fallbackLng}/`) || pathname === `/${fallbackLng}`) {
     const newPath = pathname === `/${fallbackLng}` ? '/' : pathname.replace(`/${fallbackLng}`, '')
@@ -40,6 +53,11 @@ export const config = {
     // Incluir solo las rutas principales que necesitan procesamiento de locale
     '/',
     '/(blog|about|servicios|cursos)/:path*',
+    
+    // Redirección específica para compuertas lógicas
+    '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
+    '/es/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
+    '/en/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
     
     // Sitemap y archivos específicos que necesitan locale
     '/sitemap.xml',
