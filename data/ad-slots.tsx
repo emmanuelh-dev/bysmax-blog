@@ -18,7 +18,7 @@ export const SLOTS: AdSlot[] = [
 export const AdComponent = ({ slot }: { slot: AdSlot }) => (
   <section className="my-8">
     <ins
-      className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
+      className="adsbygoogle h-[320px] w-full bg-white dark:bg-black"
       style={{ display: 'block' }}
       data-ad-client="ca-pub-3646138644530578"
       data-ad-slot={slot.slotId}

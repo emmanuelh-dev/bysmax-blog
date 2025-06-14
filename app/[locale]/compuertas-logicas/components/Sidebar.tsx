@@ -176,7 +176,7 @@ export default function Sidebar({ children }: Props) {
 
           {/* Main content */}
           <main className="min-h-screen flex-1 overflow-x-hidden">
-            <div className="mx-auto max-w-4xl px-6 py-8 md:px-8">{children}</div>
+            <div className="mx-auto max-w-6xl px-6 py-8 md:px-8">{children}</div>
           </main>
         </div>
       </div>
