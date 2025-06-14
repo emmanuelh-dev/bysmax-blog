@@ -190,8 +190,9 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                   .
                 </p>
               </div>
+              {/* Anuncio después del datasheet */}
+              <AdComponent slot={SLOTS[0]} />
             </header>
-
             {/* Featured Datasheet */}
             <section className="mb-12">
               <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
@@ -238,9 +239,6 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 )}
               </div>
             </section>
-
-            {/* Anuncio después del datasheet */}
-            <AdComponent slot={SLOTS[0]} />
 
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">

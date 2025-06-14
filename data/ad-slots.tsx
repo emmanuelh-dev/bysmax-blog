@@ -16,7 +16,7 @@ export const SLOTS: AdSlot[] = [
 
 // Componente de anuncio reutilizable
 export const AdComponent = ({ slot }: { slot: AdSlot }) => (
-  <div className="my-8">
+  <section className="my-8">
     <ins
       className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
       style={{ display: 'block' }}
@@ -25,5 +25,5 @@ export const AdComponent = ({ slot }: { slot: AdSlot }) => (
       data-ad-format={slot.format === 'in-article' ? 'fluid' : 'auto'}
       data-full-width-responsive="true"
     />
-  </div>
+  </section>
 )
