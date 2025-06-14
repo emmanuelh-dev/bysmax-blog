@@ -16,6 +16,7 @@ import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+import { SLOTS, AdComponent } from '@/data/ad-slots'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
   ssr: false,
@@ -51,7 +52,7 @@ export async function generateMetadata({
   )
   const imageUrl = page.datasheet.startsWith('http')
     ? page.datasheet
-    : `https://bysmax.com${page.datasheet}` // Ensure absolute URL
+    : `https://bysmax.com${page.datasheet}`
 
   return {
     title: title,
@@ -237,16 +238,10 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 )}
               </div>
             </section>
-            <div className="mb-12">
-              <ins
-                className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6395288197"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </div>
+
+            {/* Anuncio después del datasheet */}
+            <AdComponent slot={SLOTS[0]} />
+
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">
               {/* Left Column */}
@@ -293,6 +288,9 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                     <p className="mt-4 text-sm text-[#737373]">{ui.descriptions.applications}</p>
                   </div>
                 </section>
+
+                {/* Anuncio después de aplicaciones */}
+                <AdComponent slot={SLOTS[1]} />
               </div>
 
               {/* Right Column */}
@@ -421,11 +419,17 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                     </div>
                   </div>
                 </section>
+
+                {/* Anuncio después de especificaciones técnicas */}
+                <AdComponent slot={SLOTS[2]} />
               </div>
             </div>
 
             {/* Comments and Related */}
             <div className="mt-16 space-y-12">
+              {/* Anuncio antes de comentarios */}
+              <AdComponent slot={SLOTS[3]} />
+
               <SupabaseCommentsWrapper slug={decodeSlug} />
 
               {/* Additional Information */}
@@ -442,6 +446,9 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
 
               {/* Related Projects */}
               <section>
+                {/* Anuncio antes de proyectos relacionados */}
+                <AdComponent slot={SLOTS[4]} />
+
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
                   {ui.sections.relatedProjects} {page.label}
                 </h2>

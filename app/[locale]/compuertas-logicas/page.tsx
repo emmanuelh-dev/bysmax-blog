@@ -10,6 +10,7 @@ import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { LocaleTypes } from '../i18n/settings'
+import { AdComponent, SLOTS } from '@/data/ad-slots'
 
 interface Props {
   params: { locale: LocaleTypes }
@@ -86,30 +87,25 @@ export default function page({ params: { locale } }: Props) {
               <div className="grid gap-6 md:grid-cols-2">
                 <Image
                   src="/static/images/compuertas.png"
-                  width={550}
-                  height={300}
+                  width={1280}
+                  height={720}
+                  className="h-auto w-full object-cover"
+                  style={{ width: '100%', height: 'auto' }}
                   alt={ui.imageAlts?.featuredImage || 'Logic Gates Guide'}
                 />
                 <Image
                   src="/static/images/datashet-compuertas.jpg"
-                  width={550}
-                  height={300}
+                  width={1280}
+                  height={720}
+                  className="h-auto w-full object-cover"
+                  style={{ width: '100%', height: 'auto' }}
                   alt={ui.imageAlts?.datasheetImage || 'Logic Gates Datasheet Guide'}
                 />
               </div>
             </header>
 
-            {/* Ad Section */}
-            <div>
-              <ins
-                className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6395288197"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </div>
+            {/* Ad Section - Primera vista */}
+            <AdComponent slot={SLOTS[0]} />
 
             {/* Logic Gates Grid */}
             <section className="mb-16">
@@ -117,7 +113,7 @@ export default function page({ params: { locale } }: Props) {
                 {ui.sections.availableGates}
               </h2>
               <div className="grid gap-8">
-                {LOGICGATES.map((gate) => {
+                {LOGICGATES.map((gate, index) => {
                   const gateTranslation = getLogicGateTranslation(
                     gate.url,
                     locale as 'es' | 'en' | 'pt'
@@ -126,148 +122,155 @@ export default function page({ params: { locale } }: Props) {
                   if (!gateTranslation) return null
 
                   return (
-                    <article
-                      key={gate.url}
-                      className="rounded-lg border border-[#e5e5e5] bg-white p-6 transition-all duration-200 hover:border-[#0070f3] hover:shadow-sm dark:border-[#333333] dark:bg-[#0a0a0a] dark:hover:border-[#0070f3]"
-                    >
-                      {/* Gate Header */}
-                      <header className="mb-6">
-                        <h3 className="mb-3 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                          <Link
-                            href={`/${locale}/compuertas-logicas/${gate.url}`}
-                            className="transition-colors hover:text-[#0070f3]"
-                          >
-                            {gateTranslation.heading}
-                          </Link>
-                        </h3>
-                        <p className="mb-4 text-[#737373]">{gateTranslation.description}</p>
+                    <div key={gate.url}>
+                      <article className="rounded-lg border border-[#e5e5e5] bg-white p-6 transition-all duration-200 hover:border-[#0070f3] hover:shadow-sm dark:border-[#333333] dark:bg-[#0a0a0a] dark:hover:border-[#0070f3]">
+                        {/* Gate Header */}
+                        <header className="mb-6">
+                          <h3 className="mb-3 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                            <Link
+                              href={`/${locale}/compuertas-logicas/${gate.url}`}
+                              className="transition-colors hover:text-[#0070f3]"
+                            >
+                              {gateTranslation.heading}
+                            </Link>
+                          </h3>
+                          <p className="mb-4 text-[#737373]">{gateTranslation.description}</p>
 
-                        {/* Gate Info */}
-                        <div className="grid gap-4 md:grid-cols-3">
-                          <div>
-                            <span className="text-sm font-medium text-[#737373]">
-                              {ui.labels.configuration}
-                            </span>
-                            <p className="font-medium text-[#0a0a0a] dark:text-white">
-                              {gateTranslation.configuration}
-                            </p>
+                          {/* Gate Info */}
+                          <div className="grid gap-4 md:grid-cols-3">
+                            <div>
+                              <span className="text-sm font-medium text-[#737373]">
+                                {ui.labels.configuration}
+                              </span>
+                              <p className="font-medium text-[#0a0a0a] dark:text-white">
+                                {gateTranslation.configuration}
+                              </p>
+                            </div>
+                            <div>
+                              <span className="text-sm font-medium text-[#737373]">
+                                {ui.sections.booleanFunction}
+                              </span>
+                              <code className="block rounded bg-[#f9f9f9] px-2 py-1 text-sm font-medium text-[#0a0a0a] dark:bg-[#1a1a1a] dark:text-white">
+                                {gateTranslation.booleanFunction}
+                              </code>
+                            </div>
+                            <div>
+                              <span className="text-sm font-medium text-[#737373]">
+                                {ui.sections.applications}
+                              </span>
+                              <p className="text-sm text-[#0a0a0a] dark:text-white">
+                                {gateTranslation.applications.slice(0, 2).join(', ')}
+                                {gateTranslation.applications.length > 2 && '...'}
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <span className="text-sm font-medium text-[#737373]">
-                              {ui.sections.booleanFunction}
-                            </span>
-                            <code className="block rounded bg-[#f9f9f9] px-2 py-1 text-sm font-medium text-[#0a0a0a] dark:bg-[#1a1a1a] dark:text-white">
-                              {gateTranslation.booleanFunction}
-                            </code>
-                          </div>
-                          <div>
-                            <span className="text-sm font-medium text-[#737373]">
-                              {ui.sections.applications}
-                            </span>
-                            <p className="text-sm text-[#0a0a0a] dark:text-white">
-                              {gateTranslation.applications.slice(0, 2).join(', ')}
-                              {gateTranslation.applications.length > 2 && '...'}
-                            </p>
-                          </div>
-                        </div>
-                      </header>
+                        </header>
 
-                      {/* Content Grid */}
-                      <div className="grid gap-6 lg:grid-cols-2">
-                        {/* Truth Table */}
-                        <div>
-                          <h4 className="mb-3 text-sm font-medium text-[#737373]">
-                            {ui.sections.truthTable}
-                          </h4>
-                          <div className="overflow-hidden rounded-lg border border-[#e5e5e5] dark:border-[#333333]">
-                            <table className="w-full">
-                              <thead>
-                                <tr className="border-b border-[#e5e5e5] bg-[#f9f9f9] dark:border-[#333333] dark:bg-[#1a1a1a]">
-                                  <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                                    {ui.labels.inputA}
-                                  </th>
-                                  <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                                    {ui.labels.inputB}
-                                  </th>
-                                  <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
-                                    {ui.labels.output}
-                                  </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {gateTranslation.truthTable.map((row, index) => (
-                                  <tr
-                                    key={index}
-                                    className="border-b border-[#e5e5e5] last:border-0 dark:border-[#333333]"
-                                  >
-                                    <td className="px-4 py-3 text-sm text-[#0a0a0a] dark:text-white">
-                                      {row[ui.labels.inputA] ||
-                                        row['Entrada A'] ||
-                                        row['Input A'] ||
-                                        row['Entrada A']}
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-[#0a0a0a] dark:text-white">
-                                      {row[ui.labels.inputB] ||
-                                        row['Entrada B'] ||
-                                        row['Input B'] ||
-                                        row['Entrada B']}
-                                    </td>
-                                    <td className="px-4 py-3 text-sm font-medium text-[#0a0a0a] dark:text-white">
-                                      {row[ui.labels.output] ||
-                                        row['salida'] ||
-                                        row['output'] ||
-                                        row['saída']}
-                                    </td>
+                        {/* Content Grid */}
+                        <div className="grid gap-6 lg:grid-cols-2">
+                          {/* Truth Table */}
+                          <div>
+                            <h4 className="mb-3 text-sm font-medium text-[#737373]">
+                              {ui.sections.truthTable}
+                            </h4>
+                            <div className="overflow-hidden rounded-lg border border-[#e5e5e5] dark:border-[#333333]">
+                              <table className="w-full">
+                                <thead>
+                                  <tr className="border-b border-[#e5e5e5] bg-[#f9f9f9] dark:border-[#333333] dark:bg-[#1a1a1a]">
+                                    <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                                      {ui.labels.inputA}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                                      {ui.labels.inputB}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-medium text-[#0a0a0a] dark:text-white">
+                                      {ui.labels.output}
+                                    </th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </table>
+                                </thead>
+                                <tbody>
+                                  {gateTranslation.truthTable.map((row, rowIndex) => (
+                                    <tr
+                                      key={rowIndex}
+                                      className="border-b border-[#e5e5e5] last:border-0 dark:border-[#333333]"
+                                    >
+                                      <td className="px-4 py-3 text-sm text-[#0a0a0a] dark:text-white">
+                                        {row[ui.labels.inputA] ||
+                                          row['Entrada A'] ||
+                                          row['Input A'] ||
+                                          row['Entrada A']}
+                                      </td>
+                                      <td className="px-4 py-3 text-sm text-[#0a0a0a] dark:text-white">
+                                        {row[ui.labels.inputB] ||
+                                          row['Entrada B'] ||
+                                          row['Input B'] ||
+                                          row['Entrada B']}
+                                      </td>
+                                      <td className="px-4 py-3 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                                        {row[ui.labels.output] ||
+                                          row['salida'] ||
+                                          row['output'] ||
+                                          row['saída']}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+                          {/* Datasheet */}
+                          <div>
+                            <h4 className="mb-3 text-sm font-medium text-[#737373]">
+                              {ui.labels.datasheetAndDiagram}
+                            </h4>
+                            <figure>
+                              <Image
+                                src={gateTranslation.datasheet}
+                                width={400}
+                                height={250}
+                                alt={`Datasheet ${gateTranslation.heading}`}
+                                className="h-auto w-full object-cover"
+                                style={{ width: '100%', height: 'auto' }}
+                              />
+                              <figcaption className="mt-2 text-center text-sm text-[#737373]">
+                                Datasheet {gateTranslation.heading}
+                              </figcaption>
+                            </figure>
                           </div>
                         </div>
 
-                        {/* Datasheet */}
-                        <div>
-                          <h4 className="mb-3 text-sm font-medium text-[#737373]">
-                            {ui.labels.datasheetAndDiagram}
-                          </h4>
-                          <figure>
-                            <Image
-                              src={gateTranslation.datasheet}
-                              width={400}
-                              height={250}
-                              alt={`Datasheet ${gateTranslation.heading}`}
-                              className="w-full rounded-lg"
-                            />
-                            <figcaption className="mt-2 text-center text-sm text-[#737373]">
-                              Datasheet {gateTranslation.heading}
-                            </figcaption>
-                          </figure>
-                        </div>
-                      </div>
-
-                      {/* View Details Link */}
-                      <div className="mt-6 flex justify-end">
-                        <a
-                          href={`/${locale}/compuertas-logicas/${gate.url}`}
-                          className="inline-flex items-center rounded-lg border border-[#e5e5e5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
-                        >
-                          {ui.labels.viewDetails}
-                          <svg
-                            className="ml-2 h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                        {/* View Details Link */}
+                        <div className="mt-6 flex justify-end">
+                          <a
+                            href={`/${locale}/compuertas-logicas/${gate.url}`}
+                            className="inline-flex items-center rounded-lg border border-[#e5e5e5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </article>
+                            {ui.labels.viewDetails}
+                            <svg
+                              className="ml-2 h-4 w-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </a>
+                        </div>
+                      </article>
+
+                      {/* Mostrar anuncio cada 2 secciones */}
+                      {(index + 1) % 2 === 0 && index + 1 < LOGICGATES.length && (
+                        <AdComponent
+                          slot={SLOTS[Math.min(Math.floor((index + 1) / 2), SLOTS.length - 1)]}
+                        />
+                      )}
+                    </div>
                   )
                 }).filter(Boolean)}
               </div>
