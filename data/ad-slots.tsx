@@ -22,7 +22,7 @@ export const AdComponent = ({ slot }: { slot: AdSlot }) => (
       style={{ display: 'block' }}
       data-ad-client="ca-pub-3646138644530578"
       data-ad-slot={slot.slotId}
-      data-ad-format={slot.format === 'in-article' ? 'fluid' : 'auto'}
+     data-ad-format="auto"
       data-full-width-responsive="true"
     />
   </section>
