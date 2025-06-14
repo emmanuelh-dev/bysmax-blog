@@ -123,7 +123,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             <SupabaseCommentsWrapper slug={path} />
           </div>
           {/* Footer */}
-          <footer className="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-700">
+          <footer className="border-t border-neutral-200 pt-8 dark:border-neutral-700">
             <div className="text-md divide-neutral-200 font-medium leading-5 dark:divide-neutral-700 xl:divide-y">
               <div className="flex items-center justify-center py-4 xl:py-6">
                 <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">

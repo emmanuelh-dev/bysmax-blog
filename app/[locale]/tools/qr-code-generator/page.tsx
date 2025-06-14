@@ -94,7 +94,7 @@ export default function Page({ params: { locale } }: { params: { locale: string 
       </div>
 
       <div className="mx-auto max-w-5xl px-4 pb-6">
-        <h2 className="mb-4 mt-12 text-3xl font-semibold text-primary-500">
+        <h2 className="mb-4 text-3xl font-semibold text-primary-500">
           Usos de los Códigos QR
         </h2>
         <p className="mb-4 ">

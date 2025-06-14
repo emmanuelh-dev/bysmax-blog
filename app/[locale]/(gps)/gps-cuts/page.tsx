@@ -33,7 +33,7 @@ const GPSCutsPage = () => {
         </div>
       </Card>
 
-      <div className="mt-12 space-y-8">
+      <div className="space-y-8">
         <Alert>
           <Info className="h-4 w-4" />
           <AlertTitle>Herramienta Profesional</AlertTitle>
