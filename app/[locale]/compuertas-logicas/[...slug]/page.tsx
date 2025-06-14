@@ -239,6 +239,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 )}
               </div>
             </section>
+            <AdComponent slot={SLOTS[1]} />
 
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">
