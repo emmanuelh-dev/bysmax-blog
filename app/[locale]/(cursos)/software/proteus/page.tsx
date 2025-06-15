@@ -15,6 +15,8 @@ import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import Loading from '@/components/software/Loading'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+import AdComponent from '@/data/AdComponent'
+import { SLOTS } from '@/data/ad-slots'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -145,7 +147,7 @@ export default async function Page({ params: { locale } }: PageProps) {
                 {t('description')}
               </p>
             </div>
-
+            <AdComponent slot={SLOTS[0]} />
             <div className="flex flex-col justify-center gap-3 pt-8 sm:flex-row">
               <a
                 className={buttonVariants({ variant: 'default', size: 'lg' })}
@@ -175,7 +177,17 @@ export default async function Page({ params: { locale } }: PageProps) {
               />
             </div>
           </div>
+        </section>
 
+        <section>
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
+            <Gallery gallery={images} />
+          </div>
+        </section>
+        <AdComponent slot={SLOTS[1]} />
+
+        <section>
           {/* Nueva sección: Contenido rico en palabras clave */}
           <div className="mx-auto mt-16 max-w-4xl">
             <div className="prose max-w-none dark:prose-invert">
@@ -206,14 +218,6 @@ export default async function Page({ params: { locale } }: PageProps) {
             </div>
           </div>
         </section>
-
-        <section>
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
-            <Gallery gallery={images} />
-          </div>
-        </section>
-
         {/* Nueva sección: Versiones disponibles */}
         <section className="py-12">
           <div>
@@ -244,16 +248,6 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </section>
 
-        <div className="pb-8">
-          <ins
-            className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-            style={{ display: 'block' }}
-            data-ad-client="ca-pub-3646138644530578"
-            data-ad-slot="6395288197"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div>
         <section className="py-12" id={t('id')}>
           <div>
             <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
@@ -310,6 +304,8 @@ export default async function Page({ params: { locale } }: PageProps) {
                   )}
                 </ul>
               </div>
+              <AdComponent slot={SLOTS[2]} />
+
               <div>
                 <h3 className="mb-4 text-xl font-semibold">{t('installStepsTitle')}</h3>
                 <ol className="space-y-3">
