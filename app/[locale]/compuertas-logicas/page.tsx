@@ -264,7 +264,7 @@ export default function page({ params: { locale } }: Props) {
                         </div>
                       </article>
 
-                      <AdComponent slot={SLOTS[index + 1]} />
+                      <AdComponent slot={SLOTS[index < SLOTS.length ? index : SLOTS.length - 1]} />
                     </div>
                   )
                 }).filter(Boolean)}
