@@ -264,12 +264,7 @@ export default function page({ params: { locale } }: Props) {
                         </div>
                       </article>
 
-                      {/* Mostrar anuncio cada 2 secciones */}
-                      {(index + 1) % 2 === 0 && index + 1 < LOGICGATES.length && (
-                        <AdComponent
-                          slot={SLOTS[Math.min(Math.floor((index + 1) / 2), SLOTS.length - 1)]}
-                        />
-                      )}
+                      <AdComponent slot={SLOTS[index + 1]} />
                     </div>
                   )
                 }).filter(Boolean)}
