@@ -16,7 +16,8 @@ import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
-import { SLOTS, AdComponent } from '@/data/ad-slots'
+import { SLOTS } from '@/data/ad-slots'
+import AdComponent from '@/data/AdComponent'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
   ssr: false,
@@ -160,7 +161,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
   }
 
   return (
-    <SectionContainerWithAds>
+    <div>
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
         {/* Inject JSON-LD */}
         <Script
@@ -459,6 +460,6 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
           </div>
         </Sidebar>
       </div>
-    </SectionContainerWithAds>
+    </div>
   )
 }

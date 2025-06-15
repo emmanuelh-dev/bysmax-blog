@@ -10,8 +10,8 @@ import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { LocaleTypes } from '../i18n/settings'
-import { AdComponent, SLOTS } from '@/data/ad-slots'
-
+import { SLOTS } from '@/data/ad-slots'
+import AdComponent from '@/data/AdComponent'
 interface Props {
   params: { locale: LocaleTypes }
 }

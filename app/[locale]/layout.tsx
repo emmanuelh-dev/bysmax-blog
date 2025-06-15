@@ -81,12 +81,6 @@ export default function RootLayout({
         <Script
           async
           defer
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
-          crossOrigin="anonymous"
-        />
-        <Script
-          async
-          defer
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="tBLkU3Ea6HxUBHJiGObWig"
           strategy="lazyOnload"
@@ -104,6 +98,12 @@ export default function RootLayout({
           </SearchProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
         </ThemeProviders>
+        <Script
+          async
+          defer
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646138644530578"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   )
