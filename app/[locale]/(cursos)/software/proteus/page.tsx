@@ -31,6 +31,29 @@ export async function generateMetadata({ params: { slug, locale } }) {
   return {
     title: t('title'),
     description: t('description'),
+    keywords: t('keywords'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      images: [
+        {
+          url: 'https://electronica.bysmax.com/static/images/proteus/3.png',
+          width: 600,
+          height: 400,
+          alt: t('imageAlt'),
+        },
+      ],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['https://electronica.bysmax.com/static/images/proteus/3.png'],
+    },
+    alternates: {
+      canonical: `https://electronica.bysmax.com/${locale}/software/proteus`,
+    },
   }
 }
 
@@ -39,15 +62,18 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     image: 'https://electronica.bysmax.com/static/images/proteus/3.png',
-    name: 'Proteus',
+    name: 'Proteus Design Suite 8.8 Professional',
     applicationCategory: 'BusinessApplication',
     downloadUrl: 'https://electronica.bysmax.com/software/proteus',
     description:
-      'Proteus Design Suite es uno de los programas de dise\u00f1o electr\u00f3nico m\u00e1s utilizados del mercado. Sus versiones m\u00e1s recientes, adem\u00e1s, nos permiten crear simulaciones de dispositivos f\u00e1cilmente en nuestro PC utilizando las herramientas de Arduino.',
+      'Descargar Proteus 8.8 Professional gratis para Windows 10 y 11. Software de diseño y simulación de circuitos electrónicos con soporte para Arduino. Proteus Design Suite es uno de los programas de diseño electrónico más utilizados del mercado.',
     offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
     fileSize: '688,8 Mo',
-    operatingSystem: 'Windows 7,Windows 8,Windows 10,Windows 11',
+    operatingSystem: 'Windows 7, Windows 8, Windows 10, Windows 11',
     softwareVersion: '8.8',
+    releaseNotes: 'Versión Professional con todas las características desbloqueadas',
+    keywords:
+      'proteus 8, descargar proteus, proteus professional, proteus gratis, proteus 8.8, simulador proteus',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingCount: 9,
@@ -55,6 +81,36 @@ const jsonLd = [
       bestRating: 5,
       worstRating: 1,
     },
+    author: {
+      '@type': 'Organization',
+      name: 'Labcenter Electronics',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: '¿Cómo descargar e instalar Proteus 8 Professional gratis?',
+    description:
+      'Guía paso a paso para descargar e instalar Proteus 8 Professional en Windows 10 y 11',
+    image: 'https://electronica.bysmax.com/static/images/proteus/3.png',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Descargar Proteus',
+        text: 'Haz clic en el botón de descarga para obtener Proteus 8 Professional',
+        url: 'https://electronica.bysmax.com/software/proteus',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Ejecutar instalador',
+        text: 'Ejecuta el archivo proteus.exe como administrador',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Completar instalación',
+        text: 'Sigue las instrucciones en pantalla para instalar Proteus',
+      },
+    ],
   },
 ]
 
@@ -62,11 +118,6 @@ const jsonLd = [
 //   loading: () => <SuspencePosts />,
 //   ssr: false,
 // })
-
-const Software = dynamic(() => import('@/components/software/Software'), {
-  loading: () => <Loading />,
-  ssr: false,
-})
 
 const Gallery = dynamic(() => import('@/components/Gallery'), {
   ssr: false,
@@ -124,12 +175,72 @@ export default async function Page({ params: { locale } }: PageProps) {
               />
             </div>
           </div>
+
+          {/* Nueva sección: Contenido rico en palabras clave */}
+          <div className="mx-auto mt-16 max-w-4xl">
+            <div className="prose max-w-none dark:prose-invert">
+              <h2 className="mb-6 text-2xl font-semibold">{t('aboutProteusTitle')}</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <p className="mb-4 text-neutral-600 dark:text-neutral-400">
+                    {t('aboutProteusDescription1')}
+                  </p>
+                  <p className="text-neutral-600 dark:text-neutral-400">
+                    {t('aboutProteusDescription2')}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="mb-3 text-lg font-medium">{t('keyFeaturesTitle')}</h3>
+                  <ul className="space-y-2">
+                    {(t('keyFeaturesList', { returnObjects: true }) as any[]).map(
+                      (feature, index) => (
+                        <li key={index} className="flex gap-2 text-sm">
+                          <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                          <span>{feature}</span>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section>
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
             <Gallery gallery={images} />
+          </div>
+        </section>
+
+        {/* Nueva sección: Versiones disponibles */}
+        <section className="py-12">
+          <div>
+            <h2 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
+              {t('versionsTitle')}
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {(t('availableVersions', { returnObjects: true }) as any[]).map((version, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800"
+                >
+                  <h3 className="mb-2 text-xl font-semibold">{version.name}</h3>
+                  <p className="mb-4 text-neutral-600 dark:text-neutral-400">
+                    {version.description}
+                  </p>
+                  <ul className="space-y-1 text-sm">
+                    {version.features.map((feature, fIndex) => (
+                      <li key={fIndex} className="flex items-center gap-2">
+                        <CheckIcon className="h-4 w-4 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -154,7 +265,7 @@ export default async function Page({ params: { locale } }: PageProps) {
                   {(t('requirementsList', { returnObjects: true }) as any[]).map((req, index) => (
                     <li key={index} className="flex gap-2">
                       <CheckIcon className="mt-1 h-4 w-4 shrink-0" />
-                      <div className="-mt-8">
+                      <div>
                         <h3 className="font-medium">{req.title}</h3>
                         <p>{req.description}</p>
                       </div>
@@ -178,7 +289,43 @@ export default async function Page({ params: { locale } }: PageProps) {
             </div>
           </div>
         </section>
-        <Software locale={locale} />
+
+        {/* Nueva sección: Información específica de instalación */}
+        <section className="bg-neutral-50 py-12 dark:bg-neutral-900/50">
+          <div>
+            <h2 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
+              {t('installationGuideTitle')}
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="mb-4 text-xl font-semibold">{t('beforeInstallTitle')}</h3>
+                <ul className="space-y-3">
+                  {(t('beforeInstallSteps', { returnObjects: true }) as any[]).map(
+                    (step, index) => (
+                      <li key={index} className="flex gap-3">
+                        <CheckIcon className="mt-1 h-4 w-4 shrink-0 text-green-500" />
+                        <span>{step}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+              <div>
+                <h3 className="mb-4 text-xl font-semibold">{t('installStepsTitle')}</h3>
+                <ol className="space-y-3">
+                  {(t('installationSteps', { returnObjects: true }) as any[]).map((step, index) => (
+                    <li key={index} className="flex gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-medium text-white">
+                        {index + 1}
+                      </span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
         <section className="bg-muted w-full py-12 ">
           <div>
             <div>
@@ -196,13 +343,13 @@ export default async function Page({ params: { locale } }: PageProps) {
                         <h3>{faq.section}</h3>
                       </AccordionTrigger>
                       <AccordionContent>
-                        <ul className="text-base">
+                        <div className="text-base">
                           {faq.content.map((item, index) => (
-                            <li key={index} className="list-disc py-2">
+                            <p key={index} className="mb-3 last:mb-0">
                               {item}
-                            </li>
+                            </p>
                           ))}
-                        </ul>
+                        </div>
                       </AccordionContent>
                     </AccordionItem>
                   ))}

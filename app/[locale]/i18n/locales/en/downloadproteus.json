@@ -1,15 +1,66 @@
 {
-  "title": "Download Proteus Design Suite 8 for Free for PC",
-  "mainHeading": "Download Proteus 8",
-  "description": "Proteus 8 is a design and simulation tool for electronic circuits that allows you to create and test your projects easily and efficiently.",
-  "downloadNowButton": "Download Now",
+  "title": "Download Proteus 8.8 Professional Free for Windows 10/11 - Circuit Simulator",
+  "mainHeading": "Download Proteus 8 Professional Free",
+  "description": "Download Proteus 8.8 Professional free for Windows 10 and 11. Electronic circuit simulation software with complete Arduino support. Includes all libraries and components.",
+  "keywords": "proteus 8, proteus download, proteus professional, proteus free download, proteus 8.8, proteus simulator, proteus design suite, proteus 8 professional download, proteus windows 11, proteus windows 10",
+  "aboutProteusTitle": "Why download Proteus 8 Professional?",
+  "aboutProteusDescription1": "Proteus 8 Professional is the most complete electronic circuit simulation tool on the market. Compatible with Windows 10 and Windows 11, this version includes all unlocked features for professional circuit and PCB design.",
+  "aboutProteusDescription2": "Version 8.8 offers significant performance improvements, an expanded component library, better support for Arduino and modern microcontrollers, plus a more intuitive interface for beginners and professionals.",
+  "keyFeaturesTitle": "Key Features",
+  "keyFeaturesList": [
+    "Real-time simulation of analog and digital circuits",
+    "Complete PCB design with 3D visualization",
+    "Native support for Arduino, PIC, AVR and ARM",
+    "Library with over 40,000 components",
+    "Compatible with Windows 7, 8, 10 and 11",
+    "Spanish interface available",
+    "Automatic code generation",
+    "Export to multiple industrial formats"
+  ],
+  "downloadNowButton": "Download Proteus 8.8 Free",
   "systemRequirementsButton": "System Requirements",
   "imageSrc": "/static/images/proteus/3.png",
-  "imageAlt": "Proteus 8",
+  "imageAlt": "Download Proteus 8 Professional - Electronic Circuit Simulator",
   "imageWidth": 800,
   "imageHeight": 800,
-  "gallery": "Gallery",
+  "gallery": "Gallery - Proteus 8 Screenshots",
   "id": "requirements",
+  "versionsTitle": "Available Proteus Versions for Download",
+  "availableVersions": [
+    {
+      "name": "Proteus 8.8 Professional",
+      "description": "The latest version with all features unlocked",
+      "features": [
+        "Complete circuit simulation",
+        "Advanced PCB design",
+        "Arduino and PIC support",
+        "Complete component library",
+        "Windows 11 compatible"
+      ]
+    },
+    {
+      "name": "Proteus 8.0 Professional",
+      "description": "Stable version with all essential functionalities",
+      "features": [
+        "Real-time simulation",
+        "PCB design",
+        "Microcontroller support",
+        "Windows 10 compatible",
+        "Improved interface"
+      ]
+    },
+    {
+      "name": "Proteus Design Suite",
+      "description": "Complete suite for professional electronic design",
+      "features": [
+        "Integrated ISIS and ARES",
+        "3D visualization",
+        "Automatic code generation",
+        "Mixed analog/digital simulation",
+        "Export to multiple formats"
+      ]
+    }
+  ],
   "requirementsHeader": "System Requirements",
   "requirementsList": [
     {
@@ -33,8 +84,27 @@
   "downloadDescription": "Start designing and simulating your electronic projects with Proteus today! Click the download button to get the latest version.",
   "downloadLink": {
     "url": "https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r",
-    "text": "Download Proteus"
+    "text": "Download Proteus 8 Professional"
   },
+  "installationGuideTitle": "Proteus 8 Professional Installation Guide",
+  "beforeInstallTitle": "Before Installing Proteus",
+  "beforeInstallSteps": [
+    "Temporarily disable antivirus to avoid false positives",
+    "Close all running programs",
+    "Make sure you have administrator permissions",
+    "Verify you have at least 2 GB of free space",
+    "Temporarily disconnect internet connection (optional)"
+  ],
+  "installStepsTitle": "Installation Steps",
+  "installationSteps": [
+    "Run proteus.exe as administrator",
+    "Select installation language (English recommended)",
+    "Accept the license terms and conditions",
+    "Choose installation folder (default is fine)",
+    "Wait for installation to complete",
+    "Run Proteus as administrator for the first time",
+    "Ready! You can now use Proteus 8 Professional"
+  ],
   "faqTitle": "Frequently Asked Questions",
   "faqDescription": "Here you will find answers to the most common questions about Proteus.",
   "accordionItems": [

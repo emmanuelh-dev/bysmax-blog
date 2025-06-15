@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useCallback, useMemo } from 'react'
-import { usePathname, useParams, useRouter } from 'next/navigation'
+import { usePathname, useParams } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
 import { LocaleTypes, locales } from '@/app/[locale]/i18n/settings'
@@ -19,7 +19,6 @@ const LangSwitch = () => {
   const pathname = usePathname()
   const params = useParams()
   const locale = (params.locale as string) || ''
-  const router = useRouter()
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const menubarRef = useRef<HTMLDivElement>(null)
@@ -44,10 +43,11 @@ const LangSwitch = () => {
     (newLocale: string) => {
       setSelectedTag('')
       const resolvedUrl = handleLocaleChange(newLocale)
-      router.push(resolvedUrl)
+      // Navegación tradicional con recarga de página
+      window.location.href = resolvedUrl
       setIsMenuOpen(false)
     },
-    [handleLocaleChange, router, setSelectedTag]
+    [handleLocaleChange, setSelectedTag]
   )
 
   const currentLocale = useMemo(() => locale.charAt(0).toUpperCase() + locale.slice(1), [locale])

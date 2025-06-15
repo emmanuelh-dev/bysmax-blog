@@ -5,8 +5,28 @@ import { usePathname } from 'next/navigation'
 
 import { ArrowLeft, Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+
+// Helper function to extract locale and path
+function extractLocaleAndPath(fullPath: string) {
+  const segments = fullPath.split('/').filter(Boolean)
+  const possibleLocales = ['es', 'en', 'pt', 'fr']
+
+  if (segments.length > 0 && possibleLocales.includes(segments[0])) {
+    const locale = segments[0]
+    const pathWithoutLocale = '/' + segments.slice(1).join('/')
+    return { locale, pathWithoutLocale }
+  }
+
+  // Default locale (es) - no locale prefix in URL
+  return { locale: 'es', pathWithoutLocale: fullPath }
+}
+
+// Helper function to normalize path for comparison
+function normalizePath(path: string): string {
+  return path === '' ? '/' : path
+}
 
 export function SoftwareLayout({
   children,
@@ -18,8 +38,53 @@ export function SoftwareLayout({
   toc,
   slug,
 }) {
-  const router = usePathname()
+  const fullPathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  // Extract current locale and path without locale
+  const { locale, pathWithoutLocale } = useMemo(
+    () => extractLocaleAndPath(fullPathname),
+    [fullPathname]
+  )
+
+  // Helper function to check if a link is active
+  const isLinkActive = (linkPath: string) => {
+    // Normalize the link path
+    const normalizedLinkPath = normalizePath(linkPath)
+
+    // Case 1: linkPath already includes a locale (e.g., /en/software/proteus)
+    const linkSegments = normalizedLinkPath.split('/').filter(Boolean)
+    if (linkSegments.length > 0 && ['es', 'en', 'pt', 'fr'].includes(linkSegments[0])) {
+      return fullPathname === normalizedLinkPath
+    }
+
+    // Case 2: linkPath is without locale (e.g., /software/proteus)
+    // Compare with the current path without locale
+    const normalizedCurrentPath = normalizePath(pathWithoutLocale)
+    return normalizedCurrentPath === normalizedLinkPath
+  }
+
+  // Helper function to get localized path link
+  const getLocalizedPathLink = (pathHref: string) => {
+    return getLocalizedLink(pathHref)
+  }
+  const getLocalizedLink = (linkPath: string) => {
+    const normalizedLinkPath = normalizePath(linkPath)
+
+    // If link already has a locale prefix, return as is
+    const linkSegments = normalizedLinkPath.split('/').filter(Boolean)
+    if (linkSegments.length > 0 && ['es', 'en', 'pt', 'fr'].includes(linkSegments[0])) {
+      return normalizedLinkPath
+    }
+
+    // For default locale (es), don't add prefix
+    if (locale === 'es') {
+      return normalizedLinkPath
+    }
+
+    // For other locales, add prefix
+    return `/${locale}${normalizedLinkPath}`
+  }
   return (
     <div>
       <div className="min-h-screen bg-white dark:bg-dark">
@@ -29,7 +94,7 @@ export function SoftwareLayout({
         <div className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/80 lg:hidden">
           <div className="flex h-14 items-center justify-between px-4">
             <a
-              href={path.href}
+              href={getLocalizedPathLink(path.href)}
               className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -58,11 +123,12 @@ export function SoftwareLayout({
                       </h3>
                       <div className="space-y-0.5">
                         {item.sections.map((section) => {
-                          const active = router === section.link
+                          const active = isLinkActive(section.link)
+                          const localizedLink = getLocalizedLink(section.link)
                           return (
                             <a
                               key={section.title}
-                              href={section.link}
+                              href={localizedLink}
                               onClick={() => setIsMenuOpen(false)}
                               className={`block rounded-md px-3 py-2 text-sm transition-colors ${
                                 active
@@ -96,11 +162,12 @@ export function SoftwareLayout({
                       </h3>
                       <div className="space-y-0.5">
                         {item.sections.map((section) => {
-                          const active = router === section.link
+                          const active = isLinkActive(section.link)
+                          const localizedLink = getLocalizedLink(section.link)
                           return (
                             <a
                               key={section.title}
-                              href={section.link}
+                              href={localizedLink}
                               className={`block rounded-md px-3 py-2 text-sm transition-colors ${
                                 active
                                   ? 'bg-neutral-100 font-medium text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
@@ -123,7 +190,7 @@ export function SoftwareLayout({
                 {/* Back Navigation - Hidden on mobile (shown in mobile header) */}
                 <div className="mb-8 hidden lg:block">
                   <Link
-                    href={path.href}
+                    href={getLocalizedPathLink(path.href)}
                     className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
                   >
                     <ArrowLeft className="h-4 w-4" />
@@ -131,13 +198,11 @@ export function SoftwareLayout({
                   </Link>
                 </div>
                 {/* Content */}
-                <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20">
-                  {children}
-                </div>
+                <div className="max-w-none ">{children}</div>
 
                 {/* Comments */}
                 <div className="mt-16 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-                  <SupabaseCommentsWrapper slug={router} />
+                  <SupabaseCommentsWrapper slug={fullPathname} />
                 </div>
               </div>
             </main>
@@ -149,15 +214,20 @@ export function SoftwareLayout({
                     Tabla de contenido
                   </h3>
                   <div className="space-y-1">
-                    {toc.map((item) => (
-                      <Link
-                        key={item.value}
-                        href={item.url}
-                        className="block rounded-md px-3 py-1.5 text-sm text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
-                      >
-                        {item.value}
-                      </Link>
-                    ))}
+                    {toc.map((item) => {
+                      const tocLink = item.url.startsWith('#')
+                        ? `${fullPathname}${item.url}`
+                        : item.url
+                      return (
+                        <Link
+                          key={item.value}
+                          href={tocLink}
+                          className="block rounded-md px-3 py-1.5 text-sm text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+                        >
+                          {item.value}
+                        </Link>
+                      )
+                    })}
                   </div>
                 </nav>
               </div>

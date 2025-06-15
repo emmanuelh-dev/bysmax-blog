@@ -42,11 +42,6 @@ const Recommended = dynamic(() => import('@/layouts/components/Recomended'), {
   ssr: false,
 })
 
-const Software = dynamic(() => import('@/components/software/Software'), {
-  loading: () => <Loading />,
-  ssr: false,
-})
-
 const Gallery = dynamic(() => import('@/components/Gallery'), {
   ssr: false,
 })
@@ -158,7 +153,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </div>
       </section>
-      <Software locale={locale} />
+
       <section className="bg-muted w-full py-12 md:py-24 lg:py-32">
         <div>
           <div className="space-y-4">

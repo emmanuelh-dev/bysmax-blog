@@ -1,47 +1,153 @@
 {
-  "title": "Descargar Proteus Design Suite 8 gratis para PC",
-  "mainHeading": "Descargar Proteus 8",
-  "description": "Proteus 8 es una herramienta de diseño y simulación de circuitos electrónicos que te permite crear y probar tus proyectos de manera sencilla y eficiente.",
-  "downloadNowButton": "Descargar Ahora",
+  "title": "Descargar Proteus 8.8 Professional Gratis para Windows 10/11 - Simulador de Circuitos",
+  "mainHeading": "Descargar Proteus 8 Professional Gratis",
+  "description": "Descarga Proteus 8.8 Professional gratis para Windows 10 y 11. Software de simulación de circuitos electrónicos con soporte completo para Arduino. Incluye todas las librerías y componentes.",
+  "keywords": "proteus 8, descargar proteus, proteus professional, proteus gratis, proteus 8.8, simulador proteus, proteus design suite, descargar proteus 8 professional, proteus 8 professional download, proteus windows 11, proteus windows 10",
+  "aboutProteusTitle": "¿Por qué descargar Proteus 8 Professional?",
+  "aboutProteusDescription1": "Proteus 8 Professional es la herramienta de simulación de circuitos electrónicos más completa del mercado. Compatible con Windows 10 y Windows 11, esta versión incluye todas las características desbloqueadas para el diseño profesional de circuitos y PCB.",
+  "aboutProteusDescription2": "La versión 8.8 ofrece mejoras significativas en rendimiento, una biblioteca ampliada de componentes, mejor soporte para Arduino y microcontroladores modernos, además de una interfaz más intuitiva para principiantes y profesionales.",
+  "keyFeaturesTitle": "Características Principales",
+  "keyFeaturesList": [
+    "Simulación en tiempo real de circuitos analógicos y digitales",
+    "Diseño completo de PCB con visualización 3D",
+    "Soporte nativo para Arduino, PIC, AVR y ARM",
+    "Biblioteca con más de 40,000 componentes",
+    "Compatible con Windows 7, 8, 10 y 11",
+    "Interfaz en español disponible",
+    "Generación automática de código",
+    "Exportación a múltiples formatos industriales"
+  ],
+  "downloadNowButton": "Descargar Proteus 8.8 Gratis",
   "systemRequirementsButton": "Requisitos del sistema",
   "imageSrc": "/static/images/proteus/3.png",
-  "imageAlt": "Proteus 8",
+  "imageAlt": "Descargar Proteus 8 Professional - Simulador de Circuitos Electrónicos",
   "imageWidth": 800,
   "imageHeight": 800,
-  "gallery": "Galeria",
+  "gallery": "Galería - Capturas de Proteus 8",
   "id": "requisitos",
-  "requirementsHeader": "Requisitos del sistema",
-  "requirementsList": [
+  "versionsTitle": "Versiones de Proteus Disponibles para Descarga",
+  "availableVersions": [
     {
-      "title": "Sistema operativo",
-      "description": "Proteus es compatible con Windows 7, 8, 10 y 11."
+      "name": "Proteus 8.8 Professional",
+      "description": "La versión más reciente con todas las características desbloqueadas",
+      "features": [
+        "Simulación completa de circuitos",
+        "Diseño de PCB avanzado",
+        "Soporte para Arduino y PIC",
+        "Librería completa de componentes",
+        "Compatible con Windows 11"
+      ]
     },
     {
-      "title": "Procesador",
-      "description": "Se recomienda un procesador de 2 GHz o superior."
+      "name": "Proteus 8.0 Professional",
+      "description": "Versión estable con todas las funcionalidades esenciales",
+      "features": [
+        "Simulación en tiempo real",
+        "Diseño de circuitos impresos",
+        "Soporte para microcontroladores",
+        "Compatible con Windows 10",
+        "Interfaz mejorada"
+      ]
     },
     {
-      "title": "Memoria RAM",
-      "description": "Se recomienda al menos 4 GB de RAM."
-    },
-    {
-      "title": "Espacio en disco",
-      "description": "Se necesitan al menos 2 GB de espacio libre en disco."
+      "name": "Proteus Design Suite",
+      "description": "Suite completa para diseño electrónico profesional",
+      "features": [
+        "ISIS y ARES integrados",
+        "Visualización 3D",
+        "Generación automática de código",
+        "Simulación mixta analógica/digital",
+        "Exportación a múltiples formatos"
+      ]
     }
   ],
-  "downloadHeader": "Descarga Proteus ahora",
-  "downloadDescription": "¡Comienza a diseñar y simular tus proyectos electrónicos con Proteus hoy mismo! Haz clic en el botón de descarga para obtener la última versión.",
+  "requirementsHeader": "Requisitos del Sistema para Proteus 8",
+  "requirementsList": [
+    {
+      "title": "Sistema Operativo Compatible",
+      "description": "Proteus 8 Professional es compatible con Windows 7, Windows 8, Windows 10 y Windows 11 (32 y 64 bits)."
+    },
+    {
+      "title": "Procesador Recomendado",
+      "description": "Se recomienda un procesador Intel Core i3 de 2 GHz o superior, o AMD equivalente para un rendimiento óptimo."
+    },
+    {
+      "title": "Memoria RAM Necesaria",
+      "description": "Mínimo 4 GB de RAM (se recomienda 8 GB para proyectos complejos y simulaciones extensas)."
+    },
+    {
+      "title": "Espacio en Disco Requerido",
+      "description": "Se necesitan al menos 2 GB de espacio libre en disco para la instalación completa con todas las librerías."
+    },
+    {
+      "title": "Tarjeta Gráfica",
+      "description": "Tarjeta gráfica compatible con DirectX 9.0c o superior para visualización 3D de PCB."
+    }
+  ],
+  "downloadHeader": "Descarga Proteus 8 Professional Gratis Ahora",
+  "downloadDescription": "¡Comienza a diseñar y simular tus proyectos electrónicos con Proteus 8 Professional hoy mismo! Descarga la versión completa con todas las características desbloqueadas, compatible con Windows 10 y 11.",
   "downloadLink": {
     "url": "https://drive.google.com/drive/u/0/folders/1RZ3G9JXHu8lDZnKep8JWQYhilmPvsR-r",
-    "text": "Descargar Proteus"
+    "text": "Descargar Proteus 8 Professional"
   },
-  "faqTitle": "Preguntas Frecuentes",
-  "faqDescription": "Aquí encontrarás las respuestas a las preguntas más comunes sobre Proteus.",
+  "installationGuideTitle": "Guía de Instalación de Proteus 8 Professional",
+  "beforeInstallTitle": "Antes de Instalar Proteus",
+  "beforeInstallSteps": [
+    "Desactiva temporalmente el antivirus para evitar falsos positivos",
+    "Cierra todos los programas en ejecución",
+    "Asegúrate de tener permisos de administrador",
+    "Verifica que tienes al menos 2 GB de espacio libre",
+    "Desconecta temporalmente la conexión a internet (opcional)"
+  ],
+  "installStepsTitle": "Pasos de Instalación",
+  "installationSteps": [
+    "Ejecuta proteus.exe como administrador",
+    "Selecciona el idioma de instalación (English recomendado)",
+    "Acepta los términos y condiciones de licencia",
+    "Elige la carpeta de instalación (por defecto está bien)",
+    "Espera a que se complete la instalación",
+    "Ejecuta Proteus como administrador la primera vez",
+    "¡Listo! Ya puedes usar Proteus 8 Professional"
+  ],
+  "faqTitle": "Preguntas Frecuentes sobre Proteus 8 Professional",
+  "faqDescription": "Encuentra respuestas a las preguntas más comunes sobre la descarga, instalación y uso de Proteus 8.",
   "accordionItems": [
     {
-      "section": "¿Qué es Proteus?",
+      "section": "¿Qué es Proteus 8 Professional?",
       "content": [
-        "Proteus es un software de diseño y simulación de circuitos electrónicos desarrollado por Labcenter Electronics. Es ampliamente utilizado por ingenieros, técnicos y estudiantes para crear y probar circuitos de manera virtual. Con Proteus, puedes diseñar y simular circuitos electrónicos en tu computadora, lo que te permite verificar su funcionamiento antes de construirlos físicamente. Esto no solo ahorra tiempo, sino también recursos al evitar errores en la etapa de diseño."
+        "Proteus 8 Professional es un software de diseño y simulación de circuitos electrónicos desarrollado por Labcenter Electronics. Es la versión más completa del Proteus Design Suite, ampliamente utilizada por ingenieros, técnicos y estudiantes para crear y probar circuitos de manera virtual.",
+        "Con Proteus 8 Professional puedes diseñar y simular circuitos electrónicos en tu computadora, verificar su funcionamiento antes de construirlos físicamente, y diseñar placas de circuito impreso (PCB) profesionales.",
+        "Esta versión incluye todas las características desbloqueadas: simulación en tiempo real, biblioteca completa de componentes, soporte para microcontroladores (PIC, AVR, ARM, Arduino), diseño de PCB con visualización 3D, y mucho más."
+      ]
+    },
+    {
+      "section": "¿Cómo descargar Proteus 8 gratis para Windows 11?",
+      "content": [
+        "Para descargar Proteus 8 Professional gratis para Windows 11, sigue estos pasos:",
+        "1. Haz clic en el botón 'Descargar Proteus 8.8 Gratis' en esta página",
+        "2. Serás redirigido a nuestro enlace de descarga en Google Drive",
+        "3. Descarga el archivo proteus.exe (aproximadamente 688 MB)",
+        "4. Asegúrate de que tu Windows 11 esté actualizado para mejor compatibilidad",
+        "5. Ejecuta el instalador como administrador para evitar problemas de permisos"
+      ]
+    },
+    {
+      "section": "¿Es compatible Proteus 8 con Windows 10 y Windows 11?",
+      "content": [
+        "Sí, Proteus 8 Professional es totalmente compatible con Windows 10 y Windows 11, tanto en versiones de 32 como de 64 bits.",
+        "La versión 8.8 ha sido optimizada específicamente para funcionar sin problemas en los sistemas operativos más recientes de Microsoft.",
+        "También es compatible con versiones anteriores como Windows 7 y Windows 8, pero recomendamos usar Windows 10 o 11 para el mejor rendimiento.",
+        "Para Windows 11, asegúrate de ejecutar el programa como administrador la primera vez para evitar problemas de compatibilidad."
+      ]
+    },
+    {
+      "section": "Diferencias entre Proteus 8.0, 8.8 y otras versiones",
+      "content": [
+        "Proteus 8.0: Versión estable con funcionalidades básicas de simulación y diseño de PCB",
+        "Proteus 8.8: La versión más reciente con mejoras en rendimiento, nueva biblioteca de componentes, mejor soporte para Arduino y microcontroladores modernos",
+        "Proteus 8.13 y versiones superiores: Incluyen características avanzadas como simulación de IoT, mejor integración con Python, y herramientas de análisis mejoradas",
+        "Todas las versiones Professional incluyen: ISIS (diseño de circuitos), ARES (diseño de PCB), simulación SPICE, y biblioteca completa de componentes",
+        "Recomendamos la versión 8.8 por su equilibrio entre estabilidad y características modernas"
       ]
     },
     {

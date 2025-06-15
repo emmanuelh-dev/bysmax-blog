@@ -24,6 +24,19 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(targetPath, request.url), 301)
   }
   
+  // Redirección específica para Proteus
+  if (pathname === '/blog/proteus/como-descargar-e-instalar-proteus' || 
+      pathname === '/es/blog/proteus/como-descargar-e-instalar-proteus' ||
+      pathname === '/en/blog/proteus/como-descargar-e-instalar-proteus') {
+    let targetPath = '/software/proteus'
+    if (pathname.startsWith('/es/')) {
+      targetPath = '/es/software/proteus'
+    } else if (pathname.startsWith('/en/')) {
+      targetPath = '/en/software/proteus'
+    }
+    return NextResponse.redirect(new URL(targetPath, request.url), 301)
+  }
+  
   // Comprobación rápida usando el objeto en caché
   if (pathname.startsWith(`/${fallbackLng}/`) || pathname === `/${fallbackLng}`) {
     const newPath = pathname === `/${fallbackLng}` ? '/' : pathname.replace(`/${fallbackLng}`, '')
@@ -58,6 +71,11 @@ export const config = {
     '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
     '/es/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
     '/en/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
+    
+    // Redirección específica para Proteus
+    '/blog/proteus/como-descargar-e-instalar-proteus',
+    '/es/blog/proteus/como-descargar-e-instalar-proteus',
+    '/en/blog/proteus/como-descargar-e-instalar-proteus',
     
     // Sitemap y archivos específicos que necesitan locale
     '/sitemap.xml',
