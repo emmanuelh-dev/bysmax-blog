@@ -91,7 +91,7 @@ export default function ArduinoSidebar({ children }: Props) {
                         : 'Comparativas'}
                   </a>
                   <a
-                    href={`${locale}/compuertas-logicas`}
+                    href={`/${locale}/compuertas-logicas`}
                     onClick={() => setIsOpen(false)}
                     className={`flex h-9 items-center rounded-md px-2 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 `}
                   >

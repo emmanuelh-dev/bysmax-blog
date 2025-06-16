@@ -236,18 +236,18 @@ export default function ArduinoComparisonsPage({ params: { locale } }: Props) {
                       : 'Placas com maior velocidade de processamento e arquiteturas avançadas'}
                 </p>
                 <div className="space-y-2">
-                  <Link
+                  <a
                     href={`/${locale}/arduino/comparisons/due-vs-portenta-h7`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     Arduino Due vs Portenta H7
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={`/${locale}/arduino/comparisons/uno-vs-due`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     Arduino Uno vs Due
-                  </Link>
+                  </a>
                 </div>
               </div>
 
@@ -271,18 +271,18 @@ export default function ArduinoComparisonsPage({ params: { locale } }: Props) {
                       : 'Placas pequenas ideais para projetos com espaço limitado'}
                 </p>
                 <div className="space-y-2">
-                  <Link
+                  <a
                     href={`/${locale}/arduino/comparisons/nano-vs-nano_every`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     Arduino Nano vs Nano Every
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={`/${locale}/arduino/comparisons/leonardo-vs-micro`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     Arduino Leonardo vs Micro
-                  </Link>
+                  </a>
                 </div>
               </div>
 
@@ -306,18 +306,18 @@ export default function ArduinoComparisonsPage({ params: { locale } }: Props) {
                       : 'Placas com conectividade sem fio integrada'}
                 </p>
                 <div className="space-y-2">
-                  <Link
+                  <a
                     href={`/${locale}/arduino/comparisons/mkr_wifi_1010-vs-mkr_zero`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     MKR WiFi 1010 vs MKR Zero
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     href={`/${locale}/arduino/comparisons/uno-vs-mkr_wifi_1010`}
                     className="block text-sm text-[#0070f3] hover:underline"
                   >
                     Arduino Uno vs MKR WiFi
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>

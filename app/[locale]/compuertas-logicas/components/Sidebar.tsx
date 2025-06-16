@@ -84,7 +84,7 @@ export default function Sidebar({ children }: Props) {
                     {ui.labels.allGates}
                   </a>
                   <a
-                    href={`${locale}/arduino`}
+                    href={`/${locale}/arduino`}
                     onClick={() => setIsOpen(false)}
                     className={`flex h-9  items-center rounded-md px-2 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 `}
                   >
