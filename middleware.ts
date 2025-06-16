@@ -11,6 +11,20 @@ locales.forEach(locale => {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
+  // Redirección específica para diferencia ESP32 y Arduino
+  if (pathname === '/blog/es/diferencia-entre-un-esp32-y-un-arduino') {
+    return NextResponse.redirect(new URL('/es/blog/diferencia-entre-un-esp32-y-un-arduino', request.url), 301)
+  }
+  
+  // Redirección general para blog/{locale} -> {locale}/blog
+  const blogLocaleMatch = pathname.match(/^\/blog\/([a-z]{2})\/(.*)$/)
+  if (blogLocaleMatch) {
+    const [, locale, restOfPath] = blogLocaleMatch
+    if (locales.includes(locale)) {
+      return NextResponse.redirect(new URL(`/${locale}/blog/${restOfPath}`, request.url), 301)
+    }
+  }
+  
   // Redirección específica para compuertas lógicas
   if (pathname === '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' || 
       pathname === '/es/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' ||
@@ -66,6 +80,12 @@ export const config = {
     // Incluir solo las rutas principales que necesitan procesamiento de locale
     '/',
     '/(blog|about|servicios|cursos)/:path*',
+    
+    // Redirección específica para diferencia ESP32 y Arduino
+    '/blog/es/diferencia-entre-un-esp32-y-un-arduino',
+    
+    // Redirección general para blog/{locale}
+    '/blog/:locale/:path*',
     
     // Redirección específica para compuertas lógicas
     '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486',
