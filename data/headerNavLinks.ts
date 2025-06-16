@@ -75,8 +75,8 @@ export const nav: Nav[] = [
         href: '/compuertas-logicas',
       },
       {
-        title: 'Tutoriales de Arduino',
-        href: '/arduino/tutoriales',
+        title: 'Comparativa de Placas Arduino',
+        href: '/arduino',
       },
     ],
   },
