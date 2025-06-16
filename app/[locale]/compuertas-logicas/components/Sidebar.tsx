@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { LOGICGATES, getLogicGateTranslation } from '@/data/logic-gates'
 import { getUITranslation } from '@/data/logic-gates-ui'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import AdComponent from '@/data/AdComponent'
 import { SLOTS } from '@/data/ad-slots'
 
@@ -83,7 +83,13 @@ export default function Sidebar({ children }: Props) {
                   >
                     {ui.labels.allGates}
                   </a>
-
+                  <a
+                    href={`${locale}/arduino`}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex h-9  items-center rounded-md px-2 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 `}
+                  >
+                    Guia Arduinos <ArrowLeft size={15} className="ml-5" />
+                  </a>
                   {LOGICGATES.map((gate) => {
                     const gatePath = `${baseLogicGatesPath}/${gate.url}`
                     const gateTranslation = getLogicGateTranslation(

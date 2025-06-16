@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { ARDUINO_BOARDS } from '@/data/arduinos'
 import { getArduinoUITranslation } from '@/data/arduino-ui'
-import { Menu, X } from 'lucide-react'
+import { ArrowLeft, Menu, X } from 'lucide-react'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
 interface Props {
@@ -26,30 +26,30 @@ export default function ArduinoSidebar({ children }: Props) {
   const toggleSidebar = () => setIsOpen(!isOpen)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
+    <div className="min-h-screen bg-white dark:bg-dark">
       <div className="lg:container">
         <button
           onClick={toggleSidebar}
-          className="fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-[#0a0a0a] md:hidden"
+          className="fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-dark md:hidden"
           aria-label={isOpen ? ui.labels.closeMenu : ui.labels.openMenu}
         >
           {isOpen ? (
-            <X size={20} className="text-[#0a0a0a] dark:text-white" />
+            <X size={20} className="text-dark dark:text-white" />
           ) : (
-            <Menu size={20} className="text-[#0a0a0a] dark:text-white" />
+            <Menu size={20} className="text-dark dark:text-white" />
           )}
         </button>
 
         <div className="flex">
           <aside
-            className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-[#0a0a0a] md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-dark md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <nav
               aria-label="Navegación de Arduino"
               className="flex h-full flex-col overflow-hidden"
             >
               <div className="flex h-16 items-center justify-between border-b border-[#e5e5e5] dark:border-[#333333] max-sm:px-6 md:justify-start">
-                <h2 className="text-lg font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+                <h2 className="text-lg font-semibold tracking-tight text-dark dark:text-white">
                   {ui.pageTitle.split(' - ')[0]}
                 </h2>
                 <button
@@ -70,12 +70,33 @@ export default function ArduinoSidebar({ children }: Props) {
                     className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                       pathname === baseArduinoPath
                         ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                        : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                        : 'text-[#737373] hover:text-dark dark:hover:text-white'
                     }`}
                   >
                     {ui.labels.allBoards}
                   </a>
-
+                  <a
+                    href={`${baseArduinoPath}/comparisons`}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
+                      pathname === `${baseArduinoPath}/comparisons`
+                        ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
+                        : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                    }`}
+                  >
+                    {locale === 'en'
+                      ? 'Comparisons'
+                      : locale === 'pt'
+                        ? 'Comparações'
+                        : 'Comparativas'}
+                  </a>
+                  <a
+                    href={`${locale}/compuertas-logicas`}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex h-9 items-center rounded-md px-2 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 `}
+                  >
+                    Compuertas Logicas <ArrowLeft size={15} className="ml-5" />
+                  </a>
                   {ARDUINO_BOARDS.map((board) => {
                     const boardPath = `${baseArduinoPath}/${board.id}`
 
@@ -87,7 +108,7 @@ export default function ArduinoSidebar({ children }: Props) {
                         className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                           pathname === boardPath
                             ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                            : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                            : 'text-[#737373] hover:text-dark dark:hover:text-white'
                         }`}
                       >
                         {board.name}
@@ -109,7 +130,7 @@ export default function ArduinoSidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'es'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
                       }`}
                       title="Español"
                       onClick={() => setIsOpen(false)}
@@ -121,7 +142,7 @@ export default function ArduinoSidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'en'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
                       }`}
                       title="English"
                       onClick={() => setIsOpen(false)}
@@ -133,7 +154,7 @@ export default function ArduinoSidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'pt'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
+                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
                       }`}
                       title="Português"
                       onClick={() => setIsOpen(false)}

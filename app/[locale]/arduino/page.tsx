@@ -256,7 +256,7 @@ export default function ArduinoPage({ params: { locale } }: Props) {
 
                     {/* Action Buttons */}
                     <div className="mt-6 flex flex-wrap gap-3">
-                      <Link
+                      <a
                         href={`/${locale}/arduino/${board.id}`}
                         className="inline-flex items-center rounded-lg border border-[#e5e5e5] bg-white px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:bg-[#0a0a0a] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
                       >
@@ -274,7 +274,7 @@ export default function ArduinoPage({ params: { locale } }: Props) {
                             d="M9 5l7 7-7 7"
                           />
                         </svg>
-                      </Link>
+                      </a>
 
                       <a
                         href={board.officialLink}

@@ -78,6 +78,16 @@ export const nav: Nav[] = [
         title: 'Comparativa de Placas Arduino',
         href: '/arduino',
       },
+      {
+        title: 'Arduino Uno vs Arduino Nano',
+        description: 'Comparativa completa entre las dos placas más populares',
+        href: '/arduino/comparisons/uno-vs-nano',
+      },
+      {
+        title: 'Arduino Uno vs Arduino Mega',
+        description: 'Diferencias entre potencia y versatilidad',
+        href: '/arduino/comparisons/uno-vs-mega2560',
+      },
     ],
   },
   {
