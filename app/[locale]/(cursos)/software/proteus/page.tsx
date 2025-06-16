@@ -147,7 +147,6 @@ export default async function Page({ params: { locale } }: PageProps) {
                 {t('description')}
               </p>
             </div>
-            <AdComponent slot={SLOTS[0]} />
             <div className="flex flex-col justify-center gap-3 pt-8 sm:flex-row">
               <a
                 className={buttonVariants({ variant: 'default', size: 'lg' })}
@@ -165,6 +164,7 @@ export default async function Page({ params: { locale } }: PageProps) {
               </Link>
             </div>
           </div>
+          <AdComponent slot={SLOTS[0]} />
 
           <div className="mt-16 flex justify-center">
             <div className="relative">

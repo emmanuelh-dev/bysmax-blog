@@ -7,6 +7,8 @@ import { ArrowLeft, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useMemo } from 'react'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+import AdComponent from '@/data/AdComponent'
+import { SLOTS } from '@/data/ad-slots'
 
 // Helper function to extract locale and path
 function extractLocaleAndPath(fullPath: string) {
@@ -228,6 +230,9 @@ export function SoftwareLayout({
                         </Link>
                       )
                     })}
+                  </div>
+                  <div className="hidden xl:block">
+                    <AdComponent slot={SLOTS[3]} />
                   </div>
                 </nav>
               </div>
