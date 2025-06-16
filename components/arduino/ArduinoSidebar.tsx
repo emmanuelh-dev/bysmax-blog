@@ -2,18 +2,16 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { LOGICGATES, getLogicGateTranslation } from '@/data/logic-gates'
-import { getUITranslation } from '@/data/logic-gates-ui'
-import Link from 'next/link'
+import { ARDUINO_BOARDS } from '@/data/arduinos'
+import { getArduinoUITranslation } from '@/data/arduino-ui'
 import { Menu, X } from 'lucide-react'
-import AdComponent from '@/data/AdComponent'
 import { SLOTS } from '@/data/ad-slots'
-
+import AdComponent from '@/data/AdComponent'
 interface Props {
   children: React.ReactNode
 }
 
-export default function Sidebar({ children }: Props) {
+export default function ArduinoSidebar({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
@@ -22,43 +20,37 @@ export default function Sidebar({ children }: Props) {
   const locale =
     pathSegments[0] && ['es', 'en', 'pt'].includes(pathSegments[0]) ? pathSegments[0] : 'es'
 
-  const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
-  const baseLogicGatesPath = `/${locale}/compuertas-logicas`
+  const ui = getArduinoUITranslation(locale as 'es' | 'en' | 'pt')
+  const baseArduinoPath = `/${locale}/arduino`
 
   const toggleSidebar = () => setIsOpen(!isOpen)
 
-  // Verificación de seguridad para ui
-  if (!ui || !ui.labels) {
-    console.error('UI translations not found for locale:', locale)
-    return <div>Error loading translations</div>
-  }
-
   return (
-    <div className="contan min-h-screen bg-white dark:bg-dark">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
       <div className="lg:container">
         <button
           onClick={toggleSidebar}
-          className="dark:text-wh text- fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#a1a1a1] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-dark md:hidden"
+          className="fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#e5e5e5] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-[#0a0a0a] md:hidden"
           aria-label={isOpen ? ui.labels.closeMenu : ui.labels.openMenu}
         >
           {isOpen ? (
-            <X size={20} className="text-black dark:text-white" />
+            <X size={20} className="text-[#0a0a0a] dark:text-white" />
           ) : (
-            <Menu size={20} className="text-black dark:text-white" />
+            <Menu size={20} className="text-[#0a0a0a] dark:text-white" />
           )}
         </button>
 
         <div className="flex">
           <aside
-            className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-dark md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-[#0a0a0a] md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <nav
-              aria-label="Navegación de la barra lateral"
+              aria-label="Navegación de Arduino"
               className="flex h-full flex-col overflow-hidden"
             >
               <div className="flex h-16 items-center justify-between border-b border-[#e5e5e5] dark:border-[#333333] max-sm:px-6 md:justify-start">
-                <h2 className="text-lg font-semibold tracking-tight text-dark dark:text-white">
-                  {ui.pageTitle}
+                <h2 className="text-lg font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+                  {ui.pageTitle.split(' - ')[0]}
                 </h2>
                 <button
                   onClick={toggleSidebar}
@@ -73,41 +65,35 @@ export default function Sidebar({ children }: Props) {
               <div className="flex-1 overflow-y-auto px-3 py-4">
                 <div className="space-y-1">
                   <a
-                    href={baseLogicGatesPath}
+                    href={baseArduinoPath}
                     onClick={() => setIsOpen(false)}
-                    className={`flex h-9 items-center rounded-md text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 ${
-                      pathname === baseLogicGatesPath
+                    className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
+                      pathname === baseArduinoPath
                         ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                        : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                        : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
                     }`}
                   >
-                    {ui.labels.allGates}
+                    {ui.labels.allBoards}
                   </a>
 
-                  {LOGICGATES.map((gate) => {
-                    const gatePath = `${baseLogicGatesPath}/${gate.url}`
-                    const gateTranslation = getLogicGateTranslation(
-                      gate.url,
-                      locale as 'es' | 'en' | 'pt'
-                    )
-
-                    if (!gateTranslation) return null
+                  {ARDUINO_BOARDS.map((board) => {
+                    const boardPath = `${baseArduinoPath}/${board.id}`
 
                     return (
                       <a
-                        key={gate.url}
-                        href={gatePath}
+                        key={board.id}
+                        href={boardPath}
                         onClick={() => setIsOpen(false)}
-                        className={`flex h-9 items-center rounded-md text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] max-sm:px-3 ${
-                          pathname.split('/').pop() === gatePath.split('/').pop()
+                        className={`flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
+                          pathname === boardPath
                             ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                            : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                            : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
                         }`}
                       >
-                        {gateTranslation.label}
+                        {board.name}
                       </a>
                     )
-                  }).filter(Boolean)}
+                  })}
                 </div>
 
                 {/* Language switcher */}
@@ -123,7 +109,7 @@ export default function Sidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'es'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
                       }`}
                       title="Español"
                       onClick={() => setIsOpen(false)}
@@ -135,7 +121,7 @@ export default function Sidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'en'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
                       }`}
                       title="English"
                       onClick={() => setIsOpen(false)}
@@ -147,7 +133,7 @@ export default function Sidebar({ children }: Props) {
                       className={`flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium transition-colors hover:bg-[#f9f9f9] dark:hover:bg-[#1a1a1a] ${
                         locale === 'pt'
                           ? 'bg-[#f9f9f9] text-[#0070f3] dark:bg-[#1a1a1a] dark:text-[#0070f3]'
-                          : 'text-[#737373] hover:text-dark dark:hover:text-white'
+                          : 'text-[#737373] hover:text-[#0a0a0a] dark:hover:text-white'
                       }`}
                       title="Português"
                       onClick={() => setIsOpen(false)}
