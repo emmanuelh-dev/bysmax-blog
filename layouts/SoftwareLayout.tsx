@@ -154,7 +154,7 @@ export function SoftwareLayout({
         <div className="container mx-auto">
           <div className="flex min-h-screen">
             {/* Left Sidebar - Navigation */}
-            <aside className="hidden w-64 shrink-0 border-r border-neutral-200 dark:border-neutral-800 lg:block">
+            <aside className="hidden w-80 shrink-0 border-r border-neutral-200 dark:border-neutral-800 lg:block">
               <div className="sticky top-0 h-screen overflow-y-auto">
                 <nav className="space-y-1 p-6 pt-8">
                   {sidebar.map((item, index) => (
@@ -209,7 +209,7 @@ export function SoftwareLayout({
               </div>
             </main>
             {/* Right Sidebar - Table of Contents */}
-            <aside className="hidden w-64 shrink-0 border-l border-neutral-200 dark:border-neutral-800 xl:block">
+            <aside className="hidden w-80 shrink-0 border-l border-neutral-200 dark:border-neutral-800 xl:block">
               <div className="sticky top-0 h-screen overflow-y-auto">
                 <nav className="space-y-3 p-6 pt-8">
                   <h3 className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
