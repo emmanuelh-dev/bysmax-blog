@@ -11,6 +11,10 @@ locales.forEach(locale => {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
+  // Crear response con header personalizado para la ruta
+  const response = NextResponse.next()
+  response.headers.set('x-pathname', pathname)
+  
   // Redirección específica para diferencia ESP32 y Arduino
   if (pathname === '/blog/es/diferencia-entre-un-esp32-y-un-arduino') {
     return NextResponse.redirect(new URL('/es/blog/diferencia-entre-un-esp32-y-un-arduino', request.url), 301)
@@ -54,7 +58,9 @@ export function middleware(request: NextRequest) {
   // Comprobación rápida usando el objeto en caché
   if (pathname.startsWith(`/${fallbackLng}/`) || pathname === `/${fallbackLng}`) {
     const newPath = pathname === `/${fallbackLng}` ? '/' : pathname.replace(`/${fallbackLng}`, '')
-    return NextResponse.redirect(new URL(newPath, request.url))
+    const redirectResponse = NextResponse.redirect(new URL(newPath, request.url))
+    redirectResponse.headers.set('x-pathname', pathname)
+    return redirectResponse
   }
 
   // Verificación rápida de locale usando el objeto en caché
@@ -68,8 +74,13 @@ export function middleware(request: NextRequest) {
 
   // Solo reescribir si no tiene locale
   if (!hasLocale) {
-    return NextResponse.rewrite(new URL(`/${fallbackLng}${pathname}`, request.url))
+    const rewriteResponse = NextResponse.rewrite(new URL(`/${fallbackLng}${pathname}`, request.url))
+    rewriteResponse.headers.set('x-pathname', pathname)
+    return rewriteResponse
   }
+  
+  // Retornar la respuesta con el header
+  return response
 }
 
 export const config = {

@@ -12,6 +12,7 @@ import Script from 'next/script'
 import { LocaleTypes } from './i18n/settings'
 import Footer from '@/components/Footer'
 import MicrosoftClarity from './metrics/MicrosoftClarity'
+import AlternateLinks from '@/components/AlternateLinks'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     url: './',
     siteName: siteMetadata.title,
     images: [siteMetadata.socialBanner],
-    locale: 'en_US',
+    locale: 'es_MX',
     type: 'website',
   },
   alternates: {
@@ -73,6 +74,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <AlternateLinks currentLocale={locale} />
         <link rel="preload" href="/static/favicons/favicon-32x32.png" as="image" type="image/png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
