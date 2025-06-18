@@ -1,24 +1,38 @@
 ---
-title: Circuito sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404
+title: Cómo hacer un circuito sumador de 4 bits con displays de 7 segmentos en Proteus (Usando 7408, 7432 y 7404)
 date: 2024-08-04
 tags: ['proteus', '7408', '7432', '7404']
 draft: false
 authors: ['emmanuelhdev']
 language: es
-summary: Bienvenido a nuestro tutorial interactivo donde te enseñaremos a construir un sumador de 4 bits utilizando displays de 7 segmentos en Proteus Si eres un entusiasta de la electrónica o un estudiante buscando profundizar tus conocimientos en circuitos digitales, este video es perfecto para ti.
+summary: Aprende a construir paso a paso un sumador de 4 bits con compuertas lógicas y displays de 7 segmentos usando Proteus. Incluye simulación, materiales, video y archivos descargables.
 ---
 
-Que onda banda, bienvenidos a este nuevo tutorial para construir un circuito sumador o también conocido como circuito contador de 4 bits utilizando un display de 7 segmentos en Proteus!. Este tutorial lo trate de hacer lo más sencillo posible y si quieres ir directo al grano, puedes descargar el material más abajo.
+## 👋 Bienvenida
 
-![Sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404](/static/images/sumador-4-bits.png)
+¿Qué onda, banda?
 
-## Materiales
+En este tutorial te voy a enseñar cómo construir un **sumador de 4 bits** usando **displays de 7 segmentos**, simulándolo en **Proteus** con los integrados **7408, 7432 y 7404**.
 
-### Descarga los archivos usados aqui
+Si eres estudiante o apasionado de la electrónica digital, este proyecto es para ti. Lo hice lo más claro y directo posible.
 
-[Link de Google Drive](https://drive.google.com/drive/folders/15vm5RnMBhR3c7m7_NNBq7Qb1luCpFRiP?usp=sharing)
+---
 
-### Video de YouTube
+## 🎯 ¿Qué vas a lograr?
+
+- Entender cómo se construye un circuito sumador binario.
+- Ver cómo interactúan las compuertas lógicas básicas.
+- Simular en Proteus paso a paso.
+
+---
+
+## 📥 Archivos y video
+
+### 🔗 Descarga los archivos
+
+[Ver archivos del proyecto en Google Drive](https://drive.google.com/drive/folders/15vm5RnMBhR3c7m7_NNBq7Qb1luCpFRiP?usp=sharing)
+
+### 🎥 Video del tutorial
 
 <div className="h-[315px] max-h-[500px] max-w-full lg:w-[560px]">
   <iframe
@@ -32,60 +46,95 @@ Que onda banda, bienvenidos a este nuevo tutorial para construir un circuito sum
   ></iframe>
 </div>
 
-Un sumador o un contador es un circuito lógico que calcula la operación suma. En los computadores modernos se encuentra en lo que se denomina Unidad aritmética lógica (ALU). Generalmente realizan las operaciones aritméticas en código binario decimal o BCD exceso 3, por regla general los sumadores emplean el sistema binario. En los casos en los que se esté empleando un complemento a dos para representar números negativos el sumador se convertirá en un sumador- substractor (Adder-subtracter).
+---
 
-## Tipos de sumadores:
+## 🧠 ¿Qué es un sumador?
 
-- Half-adder.
+Un sumador binario es un circuito lógico que realiza la operación de suma entre bits.
 
-- Full-Adder.
+Normalmente se encuentra dentro de la ALU (Unidad Aritmética Lógica) de cualquier procesador. Y sí, estos conceptos se usan incluso en la arquitectura moderna de computadoras.
 
-- Metodo Ripple
+---
 
-- Carry-Look-Ahead.
+## 🔌 Tipos de sumadores
 
-- Carry-select
+- Half-Adder
+- Full-Adder
+- Ripple Carry
+- Carry-Look-Ahead
+- Carry-Select
 
-## Materiales Necesarios
+En este proyecto usamos la lógica más básica para entender bien cómo se comportan los bits.
 
-Para este proyecto, necesitarás los siguientes componentes:
+---
 
-- 4 x 7490
-- 13 x LEDs y resistencias de 220/330Ω
-- 4 x 7447/7448
-- 4 x Displays de 7 segmentos (ánodo común o cátodo común)
-- 1 x 7408 (AND)
-- Botones pulsadores y resistencias de 10kΩ
+## 🧰 Materiales
 
-## Paso a Paso: Construcción del Sumador de 4 Bits
+- 4 x **7490** (Contadores)
+- 4 x **Displays de 7 segmentos**
+- 4 x **7447/7448** (Decodificadores)
+- 1 x [**7408 - AND**](https://electronica.bysmax.com/compuertas-logicas/7408)
+- 1 x [**7432 - OR**](https://electronica.bysmax.com/compuertas-logicas/7432)
+- 1 x [**7404 - NOT**](https://electronica.bysmax.com/compuertas-logicas/7404)
+- 13 x LEDs y resistencias 220Ω o 330Ω
+- Pulsadores y resistencias de 10kΩ
 
-1. **Configuración del Contador**:
+---
 
-   - Utiliza los circuitos integrados 7490 para configurar tu contador que contará desde 0 hasta 15. Conecta cada IC de manera que cada uno represente un bit en tu sumador.
+## 🛠️ Paso a paso
 
-2. **Conexión de los Displays de 7 Segmentos**:
+### 1. Configura los contadores
 
-   - Utiliza los decodificadores 7447 para conectar los displays de 7 segmentos. Estos decodificadores convertirán las señales binarias en señales que puedan interpretar los displays, permitiendo la visualización de los números.
+Usa los integrados **7490** para representar cada bit (4 en total). Cada uno cuenta desde 0 a 15 en binario.
 
-3. **Uso de Compuertas Lógicas**:
+### 2. Conecta los displays
 
-   - Conecta las compuertas AND (7408), OR (7432), y NOT (7404) según el diseño del sumador. Estas compuertas te ayudarán a manejar las operaciones lógicas necesarias para sumar los bits correctamente.
+Conecta los **7447/7448** a los displays para decodificar la salida binaria en números visibles del 0 al 9.
 
-4. **Interacción Manual con Botones Pulsadores**:
-   - Reemplaza los estados lógicos con botones pulsadores y resistencias de 10kΩ para una interacción más dinámica y manual, proporcionando una comprensión más profunda de cómo funcionan las operaciones lógicas en tu sumador.
+### 3. Añade compuertas lógicas
 
-## Depuración y Simulación
+Integra las compuertas [7408](https://electronica.bysmax.com/compuertas-logicas/7408), [7432](https://electronica.bysmax.com/compuertas-logicas/7432) y [7404](https://electronica.bysmax.com/compuertas-logicas/7404) para realizar las operaciones lógicas necesarias para el sumador.
 
-- **Depuración en Proteus**: Usa las herramientas de simulación de Proteus para verificar que tu circuito esté funcionando correctamente. Prueba cada bit y observa cómo los resultados se muestran en los displays de 7 segmentos.
-- **Consejos de Depuración**:
-  - Verifica las conexiones de cada componente.
-  - Asegúrate de que las compuertas lógicas estén conectadas correctamente según la tabla de verdad del sumador.
-  - Utiliza las herramientas de monitoreo en Proteus para rastrear señales y detectar posibles errores.
+### 4. Interacción manual
 
-## Resultado Final
+Usa pulsadores y resistencias para interactuar con los estados lógicos de entrada. Esto te permite ver directamente cómo se comporta cada bit.
+
+---
+
+## 🧪 Simulación y depuración
+
+- **Simula en Proteus**: Asegúrate que los bits se suman correctamente.
+- **Verifica las conexiones**: Usa herramientas de monitoreo para identificar errores.
+- **Consulta las tablas de verdad** de cada compuerta.
+
+---
+
+## ✅ Resultado Final
 
 ![Sumador de 4 Bits con Displays de 7 Segmentos Tutorial de Proteus con 7408, 7432, 7404](/static/images/sumador-4-bits.png)
 
-## Conclusión
+Debes ver una cuenta binaria del 0 al 15, correctamente representada en los displays de 7 segmentos.
 
-Y eso sería todo. Espero te sea de ayuda y si notas algo mal puedes dejarlo en la sección de comentarios y con mucho gusto lo revisamos. Con este tutorial deberías poder contar desde 0 hasta 15 en los displays de 7 segmentos. Cada número se visualizará correctamente gracias a la configuración de los decodificadores 7447, garantizando una transición suave y precisa entre los dígitos.
+---
+
+## 📌 Conclusión
+
+Con este proyecto entendiste cómo se construye un **sumador digital real**, no solo teórico. Además, practicaste Proteus, analizaste señales y te acercaste un paso más a dominar los circuitos digitales.
+
+---
+
+## 👉 ¿Y ahora qué?
+
+Si este proyecto te gustó, échale un ojo a estas otras guías:
+
+- [Guía completa de compuertas lógicas](https://electronica.bysmax.com/compuertas-logicas)
+- [Simulación de Proteus: cómo instalarlo y configurarlo](https://electronica.bysmax.com/software/proteus)
+- [Tutorial de compuerta XOR (7486)](https://electronica.bysmax.com/compuertas-logicas/7486)
+
+O si tienes dudas, **déjalas en los comentarios o escríbeme**. Aquí estamos para compartir conocimiento.
+
+---
+
+> 💡 *¿Te gustaría recibir más proyectos como este en tu correo?*  
+> Próximamente activaremos el boletín exclusivo. ¡Mantente al tanto!
+
