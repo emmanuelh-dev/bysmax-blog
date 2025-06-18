@@ -106,53 +106,78 @@ export default function page({ params: { locale } }: Props) {
             {/* Ad Section - Primera vista */}
             <AdComponent slot={SLOTS[0]} />
 
-            {/* Logic Gates Grid */}
+            {/* Electronic Components Grid */}
             <section className="mb-16">
               <h2 className="mb-8 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                {ui.sections.availableGates}
+                Componentes Electrónicos Disponibles
               </h2>
               <div className="grid gap-8">
                 {electronicComponents
-                  .getComponentsByCategory('logic-gates')
-                  .map((gate, index) => {
-                    const gateTranslation = getLogicGateTranslation(
-                      gate.url,
-                      locale as 'es' | 'en' | 'pt'
-                    )
+                  .getAllComponents()
+                  .map((component, index) => {
+                    // Función genérica para obtener traducciones
+                    const getComponentTranslation = (comp: any, locale: string) => {
+                      switch (comp.category) {
+                        case 'logic-gates':
+                          return getLogicGateTranslation(comp.url, locale as 'es' | 'en' | 'pt')
+                        case 'decoders':
+                        case 'counters':
+                        case 'multiplexers':
+                        case 'displays':
+                        default:
+                          // Para otros tipos, usar directamente las traducciones
+                          return {
+                            ...comp.translations[locale],
+                            datasheet: comp.datasheet,
+                            pdf: comp.pdf,
+                            url: comp.url,
+                            partNumber: comp.partNumber,
+                            manufacturer: comp.manufacturer,
+                            alternatives: comp.alternatives,
+                          }
+                      }
+                    }
 
-                    if (!gateTranslation) return null
+                    const componentTranslation = getComponentTranslation(component, locale)
+
+                    if (!componentTranslation) return null
 
                     return (
-                      <div key={gate.url}>
+                      <div key={component.url}>
                         <article className="rounded-lg border border-[#e5e5e5] bg-white p-6 transition-all duration-200 hover:border-[#0070f3] hover:shadow-sm dark:border-[#333333] dark:bg-[#0a0a0a] dark:hover:border-[#0070f3]">
-                          {/* Gate Header */}
+                          {/* Component Header */}
                           <header className="mb-6">
                             <h3 className="mb-3 text-xl font-semibold text-[#0a0a0a] dark:text-white">
                               <a
-                                href={`/${locale}/compuertas-logicas/${gate.url}`}
+                                href={`/${locale}/compuertas-logicas/${component.url}`}
                                 className="transition-colors hover:text-[#0070f3]"
                               >
-                                {gateTranslation.heading}
+                                {componentTranslation.heading}
                               </a>
                             </h3>
-                            <p className="mb-4 text-[#737373]">{gateTranslation.description}</p>
+                            <p className="mb-4 text-[#737373]">
+                              {componentTranslation.description}
+                            </p>
 
-                            {/* Gate Info */}
+                            {/* Component Info */}
                             <div className="grid gap-4 md:grid-cols-3">
                               <div>
                                 <span className="text-sm font-medium text-[#737373]">
                                   {ui.labels.configuration}
                                 </span>
                                 <p className="font-medium text-[#0a0a0a] dark:text-white">
-                                  {gateTranslation.configuration}
+                                  {componentTranslation.configuration}
                                 </p>
                               </div>
                               <div>
                                 <span className="text-sm font-medium text-[#737373]">
-                                  {ui.sections.booleanFunction}
+                                  {componentTranslation.booleanFunction
+                                    ? ui.sections.booleanFunction
+                                    : 'Tipo'}
                                 </span>
                                 <code className="block rounded bg-[#f9f9f9] px-2 py-1 text-sm font-medium text-[#0a0a0a] dark:bg-[#1a1a1a] dark:text-white">
-                                  {gateTranslation.booleanFunction}
+                                  {componentTranslation.booleanFunction ||
+                                    componentTranslation.type}
                                 </code>
                               </div>
                               <div>
@@ -160,8 +185,8 @@ export default function page({ params: { locale } }: Props) {
                                   {ui.sections.applications}
                                 </span>
                                 <p className="text-sm text-[#0a0a0a] dark:text-white">
-                                  {gateTranslation.applications.slice(0, 2).join(', ')}
-                                  {gateTranslation.applications.length > 2 && '...'}
+                                  {componentTranslation.applications.slice(0, 2).join(', ')}
+                                  {componentTranslation.applications.length > 2 && '...'}
                                 </p>
                               </div>
                             </div>
@@ -170,8 +195,8 @@ export default function page({ params: { locale } }: Props) {
                           {/* Content Grid */}
                           <div className="grid gap-6 lg:grid-cols-2">
                             {/* Truth Table */}
-                            {gateTranslation.truthTable &&
-                              gateTranslation.truthTable.length > 0 && (
+                            {componentTranslation.truthTable &&
+                              componentTranslation.truthTable.length > 0 && (
                                 <div>
                                   <h4 className="mb-3 text-sm font-medium text-[#737373]">
                                     {ui.sections.truthTable}
@@ -192,7 +217,7 @@ export default function page({ params: { locale } }: Props) {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        {gateTranslation.truthTable.map((row, rowIndex) => (
+                                        {componentTranslation.truthTable.map((row, rowIndex) => (
                                           <tr
                                             key={rowIndex}
                                             className="border-b border-[#e5e5e5] last:border-0 dark:border-[#333333]"
@@ -227,27 +252,27 @@ export default function page({ params: { locale } }: Props) {
                             <div>
                               <h4 className="mb-3 text-sm font-medium text-[#737373]">
                                 {ui.labels.datasheetAndDiagram}
-                              </h4>
+                              </h4>{' '}
                               <figure>
                                 <Image
-                                  src={gateTranslation.datasheet}
+                                  src={componentTranslation.datasheet}
                                   width={400}
                                   height={250}
-                                  alt={`Datasheet ${gateTranslation.heading}`}
+                                  alt={`Datasheet ${componentTranslation.heading}`}
                                   className="h-auto w-full object-cover"
                                   style={{ width: '100%', height: 'auto' }}
                                 />
                                 <figcaption className="mt-2 text-center text-sm text-[#737373]">
-                                  Datasheet {gateTranslation.heading}
+                                  Datasheet {componentTranslation.heading}
                                 </figcaption>
                               </figure>
                             </div>
                           </div>
 
-                          {/* View Details a */}
+                          {/* View Details */}
                           <div className="mt-6 flex justify-end">
                             <a
-                              href={`/${locale}/compuertas-logicas/${gate.url}`}
+                              href={`/${locale}/compuertas-logicas/${component.url}`}
                               className="inline-flex items-center rounded-lg border border-[#e5e5e5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
                             >
                               {ui.labels.viewDetails}
