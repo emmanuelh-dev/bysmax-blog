@@ -9,13 +9,13 @@ interface HrefLangLinksProps {
 
 export default function HrefLangLinks({ currentLocale }: HrefLangLinksProps) {
   const pathname = usePathname()
-  
+
   // Remove current locale from pathname to get the base path
   const basePath = pathname.replace(/^\/(es|en|pt|fr)/, '') || '/'
-  
+
   // Define all supported locales
   const locales = ['es', 'en', 'pt', 'fr']
-  
+
   return (
     <>
       {locales.map((locale) => (
