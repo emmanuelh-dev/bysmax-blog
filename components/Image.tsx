@@ -66,6 +66,7 @@ export default function ImageViewer({ className, alt, ...rest }: ImageProps) {
       <div className="relative flex h-full w-full items-center justify-center">
         <NextImage
           {...rest}
+          style={{ width: '100%', height: 'auto' }}
           alt={alt}
           className="h-auto max-h-[calc(100vh-6rem)] w-auto max-w-[calc(100vw-6rem)] rounded-lg object-contain shadow-2xl"
         />

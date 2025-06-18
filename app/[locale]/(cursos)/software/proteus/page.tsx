@@ -8,7 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import NextImage from 'next/image'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
@@ -17,6 +16,7 @@ import Loading from '@/components/software/Loading'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import AdComponent from '@/data/AdComponent'
 import { SLOTS } from '@/data/ad-slots'
+import ImageViewer from '@/components/Image'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -168,7 +168,7 @@ export default async function Page({ params: { locale } }: PageProps) {
 
           <div className="mt-16 flex justify-center">
             <div className="relative">
-              <NextImage
+              <ImageViewer
                 src="/static/images/proteus/3.png"
                 alt={t('imageAlt')}
                 width={600}

@@ -8,11 +8,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import NextImage from 'next/image'
 import { LocaleTypes } from '@/app/[locale]/i18n/settings'
 import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
+import ImageViewer from '@/components/Image'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -141,7 +141,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
 
           <div className="flex justify-center">
-            <NextImage
+            <ImageViewer
               src="/static/images/multisim/3.jpg"
               alt={t('imageAlt')}
               width={600}

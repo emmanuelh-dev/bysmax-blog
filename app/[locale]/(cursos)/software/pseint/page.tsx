@@ -14,6 +14,7 @@ import SuspencePosts from '@/layouts/components/SuspencePosts'
 import dynamic from 'next/dynamic'
 import { createTranslation } from '@/app/[locale]/i18n/server'
 import Loading from '@/components/software/Loading'
+import ImageViewer from '@/components/Image'
 
 interface PageProps {
   params: { locale: LocaleTypes }
@@ -96,7 +97,7 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </div>
         <div className="flex aspect-video justify-center">
-          <NextImage
+          <ImageViewer
             src={'/static/images/pseint/1.png'}
             alt={t('imageAlt')}
             width={800}
