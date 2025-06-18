@@ -11,6 +11,7 @@ import { Metadata } from 'next'
 import Script from 'next/script'
 import { LocaleTypes } from './i18n/settings'
 import Footer from '@/components/Footer'
+import MicrosoftClarity from './metrics/MicrosoftClarity'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -86,6 +87,7 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
+        <MicrosoftClarity />
       </head>
       <body className="min-h-screen bg-bg-light text-neutral-900 antialiased dark:bg-bg-dark dark:text-neutral-100">
         <ThemeProviders>
