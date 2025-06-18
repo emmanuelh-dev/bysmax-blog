@@ -16,22 +16,52 @@ interface Props {
 }
 
 export async function generateMetadata({ params: { locale } }: Props) {
-  const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
+  // SEO específico para componentes electrónicos
+  const title =
+    locale === 'en'
+      ? 'Electronic Components Guide - Datasheets, Truth Tables & Applications'
+      : locale === 'pt'
+        ? 'Guia de Componentes Eletrônicos - Datasheets, Tabelas Verdade e Aplicações'
+        : 'Guía de Componentes Electrónicos - Datasheets, Tablas de Verdad y Aplicaciones'
+
+  const description =
+    locale === 'en'
+      ? 'Complete guide to electronic components including logic gates, decoders, counters, multiplexers and displays. Datasheets, truth tables, pinouts and practical applications.'
+      : locale === 'pt'
+        ? 'Guia completo de componentes eletrônicos incluindo portas lógicas, decodificadores, contadores, multiplexadores e displays. Datasheets, tabelas verdade, pinouts e aplicações práticas.'
+        : 'Guía completa de componentes electrónicos incluyendo compuertas lógicas, decodificadores, contadores, multiplexores y displays. Datasheets, tablas de verdad, pinouts y aplicaciones prácticas.'
+
+  const keywords =
+    locale === 'en'
+      ? 'electronic components, logic gates, decoders, counters, multiplexers, displays, datasheets, truth tables, IC, integrated circuits, 74xx series, digital electronics, TTL, CMOS'
+      : locale === 'pt'
+        ? 'componentes eletrônicos, portas lógicas, decodificadores, contadores, multiplexadores, displays, datasheets, tabelas verdade, CI, circuitos integrados, série 74xx, eletrônica digital, TTL, CMOS'
+        : 'componentes electronicos, compuertas logicas, decodificadores, contadores, multiplexores, displays, datasheets, tablas de verdad, CI, circuitos integrados, serie 74xx, electronica digital, TTL, CMOS'
 
   return genPageMetadata({
-    title: ui.pageTitle,
-    description: ui.pageDescription,
+    title,
+    description,
+    keywords,
     openGraph: {
-      title: ui.pageTitle,
-      description: ui.pageDescription,
+      title,
+      description,
       images: '/static/images/compuertas.png',
       locale: locale === 'es' ? 'es_MX' : locale === 'en' ? 'en_US' : 'pt_BR',
       type: 'website',
+      url: `https://bysmax.com/${locale}/componentes-electronicos`,
     },
     twitter: {
-      title: ui.pageTitle,
-      card: '/static/images/compuertas.png',
+      title,
+      card: 'summary_large_image',
       images: '/static/images/compuertas.png',
+    },
+    alternates: {
+      canonical: `https://bysmax.com/${locale}/componentes-electronicos`,
+      languages: {
+        es: 'https://bysmax.com/es/componentes-electronicos',
+        en: 'https://bysmax.com/en/componentes-electronicos',
+        pt: 'https://bysmax.com/pt/componentes-electronicos',
+      },
     },
   })
 }
@@ -39,35 +69,79 @@ export async function generateMetadata({ params: { locale } }: Props) {
 export default function page({ params: { locale } }: Props) {
   const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
 
+  // Contenido específico para componentes electrónicos
+  const pageTitle =
+    locale === 'en'
+      ? 'Electronic Components Guide'
+      : locale === 'pt'
+        ? 'Guia de Componentes Eletrônicos'
+        : 'Guía de Componentes Electrónicos'
+
+  const pageDescription =
+    locale === 'en'
+      ? 'Comprehensive collection of electronic components including logic gates, decoders, counters, multiplexers and displays. Each component includes detailed datasheets, truth tables, pinouts and practical applications for engineers and students.'
+      : locale === 'pt'
+        ? 'Coleção abrangente de componentes eletrônicos incluindo portas lógicas, decodificadores, contadores, multiplexadores e displays. Cada componente inclui datasheets detalhados, tabelas verdade, pinouts e aplicações práticas para engenheiros e estudantes.'
+        : 'Colección completa de componentes electrónicos incluyendo compuertas lógicas, decodificadores, contadores, multiplexores y displays. Cada componente incluye datasheets detallados, tablas de verdad, pinouts y aplicaciones prácticas para ingenieros y estudiantes.'
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: pageDescription,
+    url: `https://bysmax.com/${locale}/componentes-electronicos`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Bysmax',
+      url: 'https://bysmax.com',
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      name: pageTitle,
+      description: pageDescription,
+      numberOfItems: electronicComponents.getAllComponents().length,
+      itemListElement: electronicComponents.getAllComponents().map((component, index) => ({
         '@type': 'ListItem',
-        position: 1,
-        name: locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio',
-        item: `https://bysmax.com/${locale}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name:
-          locale === 'en'
-            ? 'Logic Gates'
-            : locale === 'pt'
-              ? 'Portas Lógicas'
-              : 'Compuertas Lógicas',
-        item: `https://bysmax.com/${locale}/compuertas-logicas`,
-      },
-    ],
+        position: index + 1,
+        item: {
+          '@type': 'TechArticle',
+          name: component.partNumber,
+          url: `https://bysmax.com/${locale}/componentes-electronicos/${component.url}`,
+          description:
+            component.translations[locale]?.description || component.translations.es?.description,
+          category: component.category,
+        },
+      })),
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio',
+          item: `https://bysmax.com/${locale}`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name:
+            locale === 'en'
+              ? 'Electronic Components'
+              : locale === 'pt'
+                ? 'Componentes Eletrônicos'
+                : 'Componentes Electrónicos',
+          item: `https://bysmax.com/${locale}/componentes-electronicos`,
+        },
+      ],
+    },
   }
 
   return (
     <SectionContainerWithAds>
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
         <Script
-          id="breadcrumb-schema"
+          id="electronic-components-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLd),
@@ -78,9 +152,9 @@ export default function page({ params: { locale } }: Props) {
             {/* Hero Section */}
             <header className="mb-12">
               <h1 className="mb-6 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                {ui.pageTitle}
+                {pageTitle}
               </h1>
-              <p className="mb-8 text-lg leading-relaxed text-[#737373]">{ui.pageDescription}</p>
+              <p className="mb-8 text-lg leading-relaxed text-[#737373]">{pageDescription}</p>
 
               {/* Featured Images */}
               <div className="grid gap-6 md:grid-cols-2">
@@ -90,7 +164,13 @@ export default function page({ params: { locale } }: Props) {
                   height={720}
                   className="h-auto w-full object-cover"
                   style={{ width: '100%', height: 'auto' }}
-                  alt={ui.imageAlts?.featuredImage || 'Logic Gates Guide'}
+                  alt={
+                    locale === 'en'
+                      ? 'Electronic Components Guide'
+                      : locale === 'pt'
+                        ? 'Guia de Componentes Eletrônicos'
+                        : 'Guía de Componentes Electrónicos'
+                  }
                 />
                 <Image
                   src="/static/images/datashet-compuertas.jpg"
@@ -98,7 +178,13 @@ export default function page({ params: { locale } }: Props) {
                   height={720}
                   className="h-auto w-full object-cover"
                   style={{ width: '100%', height: 'auto' }}
-                  alt={ui.imageAlts?.datasheetImage || 'Logic Gates Datasheet Guide'}
+                  alt={
+                    locale === 'en'
+                      ? 'Electronic Components Datasheet Guide'
+                      : locale === 'pt'
+                        ? 'Guia de Datasheet de Componentes Eletrônicos'
+                        : 'Guía de Datasheet de Componentes Electrónicos'
+                  }
                 />
               </div>
             </header>
@@ -109,7 +195,11 @@ export default function page({ params: { locale } }: Props) {
             {/* Electronic Components Grid */}
             <section className="mb-16">
               <h2 className="mb-8 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                Componentes Electrónicos Disponibles
+                {locale === 'en'
+                  ? 'Available Electronic Components'
+                  : locale === 'pt'
+                    ? 'Componentes Eletrônicos Disponíveis'
+                    : 'Componentes Electrónicos Disponibles'}
               </h2>
               <div className="grid gap-8">
                 {electronicComponents
@@ -149,7 +239,7 @@ export default function page({ params: { locale } }: Props) {
                           <header className="mb-6">
                             <h3 className="mb-3 text-xl font-semibold text-[#0a0a0a] dark:text-white">
                               <a
-                                href={`/${locale}/compuertas-logicas/${component.url}`}
+                                href={`/${locale}/componentes-electronicos/${component.url}`}
                                 className="transition-colors hover:text-[#0070f3]"
                               >
                                 {componentTranslation.heading}
@@ -272,7 +362,7 @@ export default function page({ params: { locale } }: Props) {
                           {/* View Details */}
                           <div className="mt-6 flex justify-end">
                             <a
-                              href={`/${locale}/compuertas-logicas/${component.url}`}
+                              href={`/${locale}/componentes-electronicos/${component.url}`}
                               className="inline-flex items-center rounded-lg border border-[#e5e5e5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
                             >
                               {ui.labels.viewDetails}
@@ -305,7 +395,7 @@ export default function page({ params: { locale } }: Props) {
 
             {/* Comments and Navigation */}
             <div className="space-y-8">
-              <SupabaseCommentsWrapper slug="/compuertas-logicas" />
+              <SupabaseCommentsWrapper slug="/componentes-electronicos" />
               <ScrollTopAndComment />
             </div>
 
