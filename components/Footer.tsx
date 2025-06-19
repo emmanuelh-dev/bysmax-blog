@@ -32,9 +32,9 @@ const Footer = async () => {
                     key={linkIndex}
                     className="hover:font-bold hover:text-black dark:hover:text-white"
                   >
-                    <Link href={link.href} className="text-sm ">
+                    <a href={link.href} className="text-sm ">
                       {link.title}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
