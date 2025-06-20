@@ -102,9 +102,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
     return notFound()
   }
 
-  if (!post.wpBlog) {
-    post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
-  }
+  post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
 
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
 
@@ -115,7 +113,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       .find((a) => a.slug.includes(author))
     return coreContent(authorResults as Authors)
   })
-  const mainContent = !post.wpBlog ? coreContent(post) : post
+  const mainContent = coreContent(post)
   const jsonLd = post.structuredData
   jsonLd['author'] = authorDetails.map((author) => {
     return {
@@ -140,11 +138,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
         prev={prev}
         params={{ locale: locale }}
       >
-        {!post.wpBlog ? (
-          <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
-        )}
+        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
     </>
   )

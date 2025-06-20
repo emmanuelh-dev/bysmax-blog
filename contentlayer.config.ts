@@ -149,7 +149,6 @@ export const Blog = defineDocumentType(() => ({
     images: { type: 'json' },
     authors: { type: 'list', of: { type: 'string' }, required: true },
     layout: { type: 'string' },
-    wpBlog: { type: 'boolean', default: false },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
     content: { type: 'string' },
