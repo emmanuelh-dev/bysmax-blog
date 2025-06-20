@@ -34,6 +34,62 @@ export interface ArduinoBoard {
   }
 }
 
+// Helper functions for comparisons
+export function getBoardById(id: string): ArduinoBoard | undefined {
+  return ARDUINO_BOARDS.find(board => board.id === id)
+}
+
+export function getComparisonById(id: string): MicrocontrollerComparison | undefined {
+  return MICROCONTROLLER_COMPARISONS.find(comparison => comparison.id === id)
+}
+
+export function getBoardsByCategory(category: 'arduino' | 'esp' | 'arm' | 'educational'): ArduinoBoard[] {
+  switch (category) {
+    case 'arduino':
+      return ARDUINO_BOARDS.filter(board => 
+        board.id.includes('uno') || board.id.includes('mega') || board.id.includes('nano') || 
+        board.id.includes('leonardo') || board.id.includes('micro') || board.id.includes('due')
+      )
+    case 'esp':
+      return ARDUINO_BOARDS.filter(board => 
+        board.id.includes('esp32') || board.id.includes('esp8266')
+      )
+    case 'arm':
+      return ARDUINO_BOARDS.filter(board => 
+        board.architecture.includes('ARM') || board.architecture.includes('Cortex')
+      )
+    case 'educational':
+      return ARDUINO_BOARDS.filter(board => 
+        board.id.includes('micro-bit') || board.id.includes('uno') || board.id.includes('nano')
+      )
+    default:
+      return ARDUINO_BOARDS
+  }
+}
+
+export const BOARD_CATEGORIES = {
+  arduino: {
+    es: 'Placas Arduino Oficiales',
+    en: 'Official Arduino Boards',
+    pt: 'Placas Arduino Oficiais'
+  },
+  esp: {
+    es: 'Microcontroladores ESP',
+    en: 'ESP Microcontrollers',
+    pt: 'Microcontroladores ESP'
+  },
+  arm: {
+    es: 'Procesadores ARM',
+    en: 'ARM Processors',
+    pt: 'Processadores ARM'
+  },
+  educational: {
+    es: 'Placas Educativas',
+    en: 'Educational Boards',
+    pt: 'Placas Educacionais'
+  }
+}
+
 export const ARDUINO_BOARDS: ArduinoBoard[] = [
   {
     id: "uno",
@@ -380,6 +436,385 @@ export const ARDUINO_BOARDS: ArduinoBoard[] = [
       es: ["Dual-core", "480MHz", "18MB memoria", "Ethernet", "Nivel industrial"],
       en: ["Dual-core", "480MHz", "18MB memory", "Ethernet", "Industrial grade"],
       pt: ["Dual-core", "480MHz", "18MB memória", "Ethernet", "Grau industrial"]
+    }
+  },
+  {
+    id: "esp32-devkit",
+    name: "ESP32 DevKit V1",
+    microcontroller: "ESP32-WROOM-32",
+    architecture: "Xtensa dual-core LX6",
+    flashMemory: "4 MB",
+    sram: "520 KB",
+    eeprom: "0 (EEPROM emulada)",
+    clockSpeed: "240 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "5 V (USB), 3.3-3.6 V (VIN)",
+    digitalIO: "34 (16 PWM)",
+    analogIO: "18 (2 DAC)",
+    communication: "UART, SPI, I2C, Wi-Fi, Bluetooth",
+    usb: "Micro USB",
+    dimensions: "55 x 28 mm",
+    officialLink: "https://www.espressif.com/en/products/devkits/esp32-devkitc",
+    pdf: "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+    image: "/static/images/esp32-devkit.jpg",
+    description: {
+      es: "Microcontrolador de doble núcleo con Wi-Fi y Bluetooth integrados. Más potente que Arduino con conectividad inalámbrica nativa, ideal para proyectos IoT avanzados.",
+      en: "Dual-core microcontroller with integrated Wi-Fi and Bluetooth. More powerful than Arduino with native wireless connectivity, ideal for advanced IoT projects.",
+      pt: "Microcontrolador dual-core com Wi-Fi e Bluetooth integrados. Mais poderoso que Arduino com conectividade sem fio nativa, ideal para projetos IoT avançados."
+    },
+    applications: {
+      es: ["IoT WiFi", "Bluetooth mesh", "Web servers", "Smart devices", "Sensores remotos", "Control domótico"],
+      en: ["WiFi IoT", "Bluetooth mesh", "Web servers", "Smart devices", "Remote sensors", "Home automation"],
+      pt: ["IoT WiFi", "Malha Bluetooth", "Servidores web", "Dispositivos inteligentes", "Sensores remotos", "Automação residencial"]
+    },
+    features: {
+      es: ["Wi-Fi integrado", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Bajo costo", "Compatible con Arduino IDE"],
+      en: ["Integrated Wi-Fi", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Low cost", "Arduino IDE compatible"],
+      pt: ["Wi-Fi integrado", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Baixo custo", "Compatível com Arduino IDE"]
+    }
+  },
+  {
+    id: "esp8266-nodemcu",
+    name: "ESP8266 NodeMCU",
+    microcontroller: "ESP8266EX",
+    architecture: "Xtensa LX106",
+    flashMemory: "4 MB",
+    sram: "160 KB",
+    eeprom: "0 (EEPROM emulada)",
+    clockSpeed: "80/160 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "5 V (USB), 3.3 V (VIN)",
+    digitalIO: "17 (8 PWM)",
+    analogIO: "1 (0 DAC)",
+    communication: "UART, SPI, I2C, Wi-Fi",
+    usb: "Micro USB",
+    dimensions: "58 x 31 mm",
+    officialLink: "https://www.espressif.com/en/products/socs/esp8266",
+    pdf: "https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf",
+    image: "/static/images/esp8266-nodemcu.jpg",
+    description: {
+      es: "Microcontrolador económico con Wi-Fi integrado. Más limitado que ESP32 pero perfecto para proyectos IoT simples que requieren conectividad web.",
+      en: "Economical microcontroller with integrated Wi-Fi. More limited than ESP32 but perfect for simple IoT projects requiring web connectivity.",
+      pt: "Microcontrolador econômico com Wi-Fi integrado. Mais limitado que ESP32 mas perfeito para projetos IoT simples que requerem conectividade web."
+    },
+    applications: {
+      es: ["Sensores WiFi", "Web servers básicos", "IoT económico", "Monitoreo remoto", "Switches inteligentes"],
+      en: ["WiFi sensors", "Basic web servers", "Budget IoT", "Remote monitoring", "Smart switches"],
+      pt: ["Sensores WiFi", "Servidores web básicos", "IoT econômico", "Monitoramento remoto", "Interruptores inteligentes"]
+    },
+    features: {
+      es: ["Wi-Fi integrado", "Muy económico", "Compatible Arduino IDE", "17 GPIO", "Modo deep sleep", "OTA updates"],
+      en: ["Integrated Wi-Fi", "Very economical", "Arduino IDE compatible", "17 GPIO", "Deep sleep mode", "OTA updates"],
+      pt: ["Wi-Fi integrado", "Muito econômico", "Compatível Arduino IDE", "17 GPIO", "Modo deep sleep", "Atualizações OTA"]
+    }
+  },
+  {
+    id: "raspberry-pi-pico",
+    name: "Raspberry Pi Pico",
+    microcontroller: "RP2040",
+    architecture: "ARM Cortex-M0+",
+    flashMemory: "2 MB",
+    sram: "264 KB",
+    eeprom: "0",
+    clockSpeed: "133 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "5 V (USB), 1.8-5.5 V (VSYS)",
+    digitalIO: "30 (16 PWM)",
+    analogIO: "4 (0 DAC)",
+    communication: "UART, SPI, I2C, USB",
+    usb: "Micro USB",
+    dimensions: "51 x 21 mm",
+    officialLink: "https://www.raspberrypi.org/products/raspberry-pi-pico/",
+    pdf: "https://datasheets.raspberrypi.org/pico/pico-datasheet.pdf",
+    image: "/static/images/raspberry-pi-pico.jpg",
+    description: {
+      es: "Microcontrolador de bajo costo de Raspberry Pi con arquitectura ARM dual-core. Excelente rendimiento y características únicas como PIO para protocolos personalizados.",
+      en: "Low-cost microcontroller from Raspberry Pi with dual-core ARM architecture. Excellent performance and unique features like PIO for custom protocols.",
+      pt: "Microcontrolador de baixo custo da Raspberry Pi com arquitetura ARM dual-core. Excelente desempenho e recursos únicos como PIO para protocolos personalizados."
+    },
+    applications: {
+      es: ["Robótica educativa", "Protocolos personalizados", "Control de motores", "Interfaces HID", "Procesamiento de señales"],
+      en: ["Educational robotics", "Custom protocols", "Motor control", "HID interfaces", "Signal processing"],
+      pt: ["Robótica educacional", "Protocolos personalizados", "Controle de motores", "Interfaces HID", "Processamento de sinais"]
+    },
+    features: {
+      es: ["Dual-core ARM", "PIO state machines", "133MHz", "30 GPIO", "Muy económico", "MicroPython/C++"],
+      en: ["Dual-core ARM", "PIO state machines", "133MHz", "30 GPIO", "Very affordable", "MicroPython/C++"],
+      pt: ["ARM dual-core", "Máquinas de estado PIO", "133MHz", "30 GPIO", "Muito acessível", "MicroPython/C++"]
+    }
+  },
+  {
+    id: "stm32-blue-pill",
+    name: "STM32F103C8T6 (Blue Pill)",
+    microcontroller: "STM32F103C8T6",
+    architecture: "ARM Cortex-M3",
+    flashMemory: "64 KB",
+    sram: "20 KB",
+    eeprom: "0 (EEPROM emulada)",
+    clockSpeed: "72 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "3.3-5 V",
+    digitalIO: "37 (20 PWM)",
+    analogIO: "16 (0 DAC)",
+    communication: "UART, SPI, I2C, USB, CAN",
+    usb: "Micro USB (con bootloader)",
+    dimensions: "52 x 22 mm",
+    officialLink: "https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html",
+    pdf: "https://www.st.com/resource/en/datasheet/stm32f103c8.pdf",
+    image: "/static/images/stm32-blue-pill.jpg",
+    description: {
+      es: "Microcontrolador ARM de 32 bits muy económico con excelente rendimiento. Popular en la comunidad maker por su bajo costo y alta capacidad de procesamiento.",
+      en: "Very economical 32-bit ARM microcontroller with excellent performance. Popular in the maker community for its low cost and high processing capacity.",
+      pt: "Microcontrolador ARM de 32 bits muito econômico com excelente desempenho. Popular na comunidade maker por seu baixo custo e alta capacidade de processamento."
+    },
+    applications: {
+      es: ["Proyectos ARM económicos", "Control industrial", "Comunicación CAN", "Procesamiento rápido", "Sistemas embebidos"],
+      en: ["Budget ARM projects", "Industrial control", "CAN communication", "Fast processing", "Embedded systems"],
+      pt: ["Projetos ARM econômicos", "Controle industrial", "Comunicação CAN", "Processamento rápido", "Sistemas embarcados"]
+    },
+    features: {
+      es: ["ARM 32-bit", "72MHz", "Muy económico", "37 GPIO", "Comunicación CAN", "ST-Link compatible"],
+      en: ["32-bit ARM", "72MHz", "Very economical", "37 GPIO", "CAN communication", "ST-Link compatible"],
+      pt: ["ARM 32-bit", "72MHz", "Muito econômico", "37 GPIO", "Comunicação CAN", "Compatível ST-Link"]
+    }
+  },
+  {
+    id: "teensy-4",
+    name: "Teensy 4.0",
+    microcontroller: "IMXRT1062",
+    architecture: "ARM Cortex-M7",
+    flashMemory: "2 MB",
+    sram: "1024 KB",
+    eeprom: "1080 bytes (emulada)",
+    clockSpeed: "600 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "3.6-5.5 V",
+    digitalIO: "40 (35 PWM)",
+    analogIO: "14 (2 DAC)",
+    communication: "UART, SPI, I2C, USB",
+    usb: "Micro USB",
+    dimensions: "35.6 x 17.8 mm",
+    officialLink: "https://www.pjrc.com/store/teensy40.html",
+    pdf: "https://www.pjrc.com/teensy/pinout.html",
+    image: "/static/images/teensy-4.jpg",
+    description: {
+      es: "El microcontrolador más rápido compatible con Arduino IDE. Diseñado para aplicaciones de alto rendimiento que requieren velocidad extrema y procesamiento en tiempo real.",
+      en: "The fastest microcontroller compatible with Arduino IDE. Designed for high-performance applications requiring extreme speed and real-time processing.",
+      pt: "O microcontrolador mais rápido compatível com Arduino IDE. Projetado para aplicações de alto desempenho que requerem velocidade extrema e processamento em tempo real."
+    },
+    applications: {
+      es: ["Audio profesional", "Procesamiento DSP", "Control de alta velocidad", "Instrumentación", "Sistemas críticos"],
+      en: ["Professional audio", "DSP processing", "High-speed control", "Instrumentation", "Critical systems"],
+      pt: ["Áudio profissional", "Processamento DSP", "Controle de alta velocidade", "Instrumentação", "Sistemas críticos"]
+    },
+    features: {
+      es: ["600MHz ARM", "1MB SRAM", "USB nativo", "Audio library", "Floating point", "DMA avanzado"],
+      en: ["600MHz ARM", "1MB SRAM", "Native USB", "Audio library", "Floating point", "Advanced DMA"],
+      pt: ["ARM 600MHz", "1MB SRAM", "USB nativo", "Biblioteca de áudio", "Ponto flutuante", "DMA avançado"]
+    }
+  },
+  {
+    id: "micro-bit",
+    name: "BBC micro:bit v2",
+    microcontroller: "nRF52833",
+    architecture: "ARM Cortex-M4",
+    flashMemory: "512 KB",
+    sram: "128 KB",
+    eeprom: "0",
+    clockSpeed: "64 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "3.3 V (batería), 5 V (USB)",
+    digitalIO: "25 (3 PWM)",
+    analogIO: "6 (0 DAC)",
+    communication: "UART, SPI, I2C, Bluetooth, Radio",
+    usb: "Micro USB",
+    dimensions: "52 x 42 mm",
+    officialLink: "https://microbit.org/",
+    pdf: "https://tech.microbit.org/hardware/schematic/",
+    image: "/static/images/microbit-v2.jpg",
+    description: {
+      es: "Microcontrolador educativo con pantalla LED integrada, sensores y Bluetooth. Diseñado específicamente para enseñanza de programación a niños y principiantes.",
+      en: "Educational microcontroller with integrated LED display, sensors, and Bluetooth. Specifically designed for teaching programming to children and beginners.",
+      pt: "Microcontrolador educacional com display LED integrado, sensores e Bluetooth. Projetado especificamente para ensinar programação a crianças e iniciantes."
+    },
+    applications: {
+      es: ["Educación STEM", "Juegos interactivos", "Wearables simples", "Sensores básicos", "Robótica educativa"],
+      en: ["STEM education", "Interactive games", "Simple wearables", "Basic sensors", "Educational robotics"],
+      pt: ["Educação STEM", "Jogos interativos", "Wearables simples", "Sensores básicos", "Robótica educacional"]
+    },
+    features: {
+      es: ["Pantalla LED 5x5", "Bluetooth", "Sensores integrados", "Botones", "Programación visual", "Radio 2.4GHz"],
+      en: ["5x5 LED display", "Bluetooth", "Integrated sensors", "Buttons", "Visual programming", "2.4GHz radio"],
+      pt: ["Display LED 5x5", "Bluetooth", "Sensores integrados", "Botões", "Programação visual", "Rádio 2.4GHz"]
+    }
+  }
+]
+
+// Comparaciones y diferencias entre microcontroladores
+export interface MicrocontrollerComparison {
+  id: string
+  title: {
+    es: string
+    en: string
+    pt: string
+  }
+  boards: string[] // IDs de las placas a comparar
+  categories: {
+    performance: {
+      es: string
+      en: string
+      pt: string
+    }
+    connectivity: {
+      es: string
+      en: string
+      pt: string
+    }
+    cost: {
+      es: string
+      en: string
+      pt: string
+    }
+    usability: {
+      es: string
+      en: string
+      pt: string
+    }
+    applications: {
+      es: string
+      en: string
+      pt: string
+    }
+  }
+  conclusion: {
+    es: string
+    en: string
+    pt: string
+  }
+}
+
+export const MICROCONTROLLER_COMPARISONS: MicrocontrollerComparison[] = [
+  {
+    id: "esp32-vs-arduino-uno",
+    title: {
+      es: "Diferencia entre ESP32 y Arduino Uno",
+      en: "Difference between ESP32 and Arduino Uno",
+      pt: "Diferença entre ESP32 e Arduino Uno"
+    },
+    boards: ["esp32-devkit", "uno"],
+    categories: {
+      performance: {
+        es: "ESP32 es significativamente superior con procesador dual-core a 240MHz vs 16MHz del Arduino Uno, más memoria RAM (520KB vs 2KB) y flash (4MB vs 32KB).",
+        en: "ESP32 is significantly superior with dual-core processor at 240MHz vs Arduino Uno's 16MHz, more RAM (520KB vs 2KB) and flash memory (4MB vs 32KB).",
+        pt: "ESP32 é significativamente superior com processador dual-core a 240MHz vs 16MHz do Arduino Uno, mais RAM (520KB vs 2KB) e memória flash (4MB vs 32KB)."
+      },
+      connectivity: {
+        es: "ESP32 incluye Wi-Fi y Bluetooth nativos, mientras Arduino Uno requiere módulos externos para conectividad inalámbrica.",
+        en: "ESP32 includes native Wi-Fi and Bluetooth, while Arduino Uno requires external modules for wireless connectivity.",
+        pt: "ESP32 inclui Wi-Fi e Bluetooth nativos, enquanto Arduino Uno requer módulos externos para conectividade sem fio."
+      },
+      cost: {
+        es: "Ambos tienen precios similares, pero ESP32 ofrece mucho más valor por el dinero con sus características adicionales.",
+        en: "Both have similar prices, but ESP32 offers much more value for money with its additional features.",
+        pt: "Ambos têm preços similares, mas ESP32 oferece muito mais valor pelo dinheiro com suas características adicionais."
+      },
+      usability: {
+        es: "Arduino Uno es más fácil para principiantes con documentación extensa. ESP32 requiere más conocimiento pero es compatible con Arduino IDE.",
+        en: "Arduino Uno is easier for beginners with extensive documentation. ESP32 requires more knowledge but is compatible with Arduino IDE.",
+        pt: "Arduino Uno é mais fácil para iniciantes com documentação extensa. ESP32 requer mais conhecimento mas é compatível com Arduino IDE."
+      },
+      applications: {
+        es: "Arduino Uno ideal para aprendizaje y proyectos básicos. ESP32 perfecto para IoT, aplicaciones web y proyectos avanzados.",
+        en: "Arduino Uno ideal for learning and basic projects. ESP32 perfect for IoT, web applications and advanced projects.",
+        pt: "Arduino Uno ideal para aprendizado e projetos básicos. ESP32 perfeito para IoT, aplicações web e projetos avançados."
+      }
+    },
+    conclusion: {
+      es: "Elige Arduino Uno para aprender programación básica y proyectos educativos. Elige ESP32 para proyectos IoT, aplicaciones con conectividad y cuando necesites mayor potencia de procesamiento.",
+      en: "Choose Arduino Uno for learning basic programming and educational projects. Choose ESP32 for IoT projects, connectivity applications and when you need more processing power.",
+      pt: "Escolha Arduino Uno para aprender programação básica e projetos educacionais. Escolha ESP32 para projetos IoT, aplicações com conectividade e quando precisar de mais poder de processamento."
+    }
+  },
+  {
+    id: "esp32-vs-esp8266",
+    title: {
+      es: "ESP32 vs ESP8266: ¿Cuál elegir?",
+      en: "ESP32 vs ESP8266: Which to choose?",
+      pt: "ESP32 vs ESP8266: Qual escolher?"
+    },
+    boards: ["esp32-devkit", "esp8266-nodemcu"],
+    categories: {
+      performance: {
+        es: "ESP32 tiene procesador dual-core a 240MHz vs single-core 160MHz del ESP8266. ESP32 tiene más RAM (520KB vs 160KB) y más GPIO (34 vs 17).",
+        en: "ESP32 has dual-core processor at 240MHz vs ESP8266's single-core 160MHz. ESP32 has more RAM (520KB vs 160KB) and more GPIO (34 vs 17).",
+        pt: "ESP32 tem processador dual-core a 240MHz vs single-core 160MHz do ESP8266. ESP32 tem mais RAM (520KB vs 160KB) e mais GPIO (34 vs 17)."
+      },
+      connectivity: {
+        es: "Ambos tienen Wi-Fi, pero ESP32 adiciona Bluetooth Classic y BLE. ESP32 es más versátil para diferentes tipos de conectividad.",
+        en: "Both have Wi-Fi, but ESP32 adds Bluetooth Classic and BLE. ESP32 is more versatile for different types of connectivity.",
+        pt: "Ambos têm Wi-Fi, mas ESP32 adiciona Bluetooth Classic e BLE. ESP32 é mais versátil para diferentes tipos de conectividade."
+      },
+      cost: {
+        es: "ESP8266 es más económico (~$3-5) vs ESP32 (~$5-8). Para proyectos con presupuesto limitado, ESP8266 es mejor opción.",
+        en: "ESP8266 is more economical (~$3-5) vs ESP32 (~$5-8). For budget-limited projects, ESP8266 is the better option.",
+        pt: "ESP8266 é mais econômico (~$3-5) vs ESP32 (~$5-8). Para projetos com orçamento limitado, ESP8266 é a melhor opção."
+      },
+      usability: {
+        es: "ESP8266 consume menos energía en modo sleep. ESP32 tiene más periféricos y capacidades, pero es más complejo de usar.",
+        en: "ESP8266 consumes less power in sleep mode. ESP32 has more peripherals and capabilities, but is more complex to use.",
+        pt: "ESP8266 consome menos energia em modo sleep. ESP32 tem mais periféricos e capacidades, mas é mais complexo de usar."
+      },
+      applications: {
+        es: "ESP8266 ideal para sensores IoT simples y aplicaciones de bajo consumo. ESP32 mejor para aplicaciones complejas, Bluetooth y múltiples sensores.",
+        en: "ESP8266 ideal for simple IoT sensors and low-power applications. ESP32 better for complex applications, Bluetooth and multiple sensors.",
+        pt: "ESP8266 ideal para sensores IoT simples e aplicações de baixo consumo. ESP32 melhor para aplicações complexas, Bluetooth e múltiplos sensores."
+      }
+    },
+    conclusion: {
+      es: "Usa ESP8266 para proyectos IoT simples, económicos y de bajo consumo. Usa ESP32 cuando necesites Bluetooth, más GPIO, mayor potencia de procesamiento o aplicaciones complejas.",
+      en: "Use ESP8266 for simple, economical and low-power IoT projects. Use ESP32 when you need Bluetooth, more GPIO, higher processing power or complex applications.",
+      pt: "Use ESP8266 para projetos IoT simples, econômicos e de baixo consumo. Use ESP32 quando precisar de Bluetooth, mais GPIO, maior poder de processamento ou aplicações complexas."
+    }
+  },
+  {
+    id: "raspberry-pi-pico-vs-arduino-nano",
+    title: {
+      es: "Raspberry Pi Pico vs Arduino Nano",
+      en: "Raspberry Pi Pico vs Arduino Nano",
+      pt: "Raspberry Pi Pico vs Arduino Nano"
+    },
+    boards: ["raspberry-pi-pico", "nano"],
+    categories: {
+      performance: {
+        es: "Pico superior con ARM dual-core 133MHz y 264KB RAM vs Nano con 16MHz y 2KB RAM. Pico tiene características únicas como PIO state machines.",
+        en: "Pico superior with dual-core ARM 133MHz and 264KB RAM vs Nano with 16MHz and 2KB RAM. Pico has unique features like PIO state machines.",
+        pt: "Pico superior com ARM dual-core 133MHz e 264KB RAM vs Nano com 16MHz e 2KB RAM. Pico tem características únicas como máquinas de estado PIO."
+      },
+      connectivity: {
+        es: "Nano tiene conectividad básica (UART, SPI, I2C). Pico igual conectividad básica pero con USB nativo más robusto.",
+        en: "Nano has basic connectivity (UART, SPI, I2C). Pico same basic connectivity but with more robust native USB.",
+        pt: "Nano tem conectividade básica (UART, SPI, I2C). Pico mesma conectividade básica mas com USB nativo mais robusto."
+      },
+      cost: {
+        es: "Precios similares (~$4-6), pero Pico ofrece mejor relación precio-rendimiento con características ARM modernas.",
+        en: "Similar prices (~$4-6), but Pico offers better price-performance ratio with modern ARM features.",
+        pt: "Preços similares (~$4-6), mas Pico oferece melhor relação preço-desempenho com características ARM modernas."
+      },
+      usability: {
+        es: "Nano más maduro con ecosistema Arduino establecido. Pico soporta MicroPython y C++, más flexible en lenguajes de programación.",
+        en: "Nano more mature with established Arduino ecosystem. Pico supports MicroPython and C++, more flexible in programming languages.",
+        pt: "Nano mais maduro com ecossistema Arduino estabelecido. Pico suporta MicroPython e C++, mais flexível em linguagens de programação."
+      },
+      applications: {
+        es: "Nano ideal para proyectos compactos tradicionales. Pico mejor para aplicaciones que requieren procesamiento rápido, protocolos personalizados o MicroPython.",
+        en: "Nano ideal for traditional compact projects. Pico better for applications requiring fast processing, custom protocols or MicroPython.",
+        pt: "Nano ideal para projetos compactos tradicionais. Pico melhor para aplicações que requerem processamento rápido, protocolos personalizados ou MicroPython."
+      }
+    },
+    conclusion: {
+      es: "Elige Nano si prefieres el ecosistema Arduino tradicional y shields compatibles. Elige Pico para mayor rendimiento, MicroPython o aplicaciones que requieran protocolos personalizados.",
+      en: "Choose Nano if you prefer traditional Arduino ecosystem and compatible shields. Choose Pico for higher performance, MicroPython or applications requiring custom protocols.",
+      pt: "Escolha Nano se preferir o ecossistema Arduino tradicional e shields compatíveis. Escolha Pico para maior desempenho, MicroPython ou aplicações que requeiram protocolos personalizados."
     }
   }
 ]
