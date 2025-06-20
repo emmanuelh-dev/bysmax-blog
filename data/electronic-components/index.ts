@@ -4,6 +4,7 @@ import { DECODERS } from './decoders';
 import { COUNTERS } from './counters';
 import { MULTIPLEXERS } from './multiplexers';
 import { DISPLAYS } from './displays';
+import { VOLTAGE_REGULATORS } from './voltage-regulators';
 // Importar otros módulos cuando se creen...
 // import { FLIP_FLOPS } from './flip-flops';
 // import { COMPARATORS } from './comparators';
@@ -12,7 +13,6 @@ import { DISPLAYS } from './displays';
 // import { RELAYS } from './relays';
 // import { SHIFT_REGISTERS } from './shift-registers';
 // import { MICROCONTROLLERS } from './microcontrollers';
-// import { VOLTAGE_REGULATORS } from './voltage-regulators';
 
 /**
  * Orquestador principal que combina todos los componentes electrónicos
@@ -20,13 +20,13 @@ import { DISPLAYS } from './displays';
  */
 export class ElectronicComponentsOrchestrator {
   private components: ElectronicComponent[];
-
   constructor() {    this.components = [
       ...LOGIC_GATES,
       ...DECODERS,
       ...COUNTERS,
       ...MULTIPLEXERS,
       ...DISPLAYS,
+      ...VOLTAGE_REGULATORS,
       // ...FLIP_FLOPS,
       // ...COMPARATORS,
       // ...BUFFERS,
@@ -34,7 +34,6 @@ export class ElectronicComponentsOrchestrator {
       // ...RELAYS,
       // ...SHIFT_REGISTERS,
       // ...MICROCONTROLLERS,
-      // ...VOLTAGE_REGULATORS,
     ];
   }
 
@@ -225,6 +224,26 @@ export function getCounterTranslation(url: string, locale: LocaleTypes = 'es') {
     partNumber: component.partNumber,
     manufacturer: component.manufacturer,
     alternatives: component.alternatives
+  };
+}
+
+export function getVoltageRegulatorTranslation(url: string, locale: LocaleTypes = 'es') {
+  const component = electronicComponents.getComponentByUrl(url);
+  if (!component || component.category !== 'voltage-regulators') return undefined;
+  
+  return {
+    ...component.translations[locale],
+    datasheet: component.datasheet,
+    pdf: component.pdf,
+    url: component.url,
+    partNumber: component.partNumber,
+    manufacturer: component.manufacturer,
+    alternatives: component.alternatives,
+    outputVoltage: (component as any).outputVoltage,
+    maxCurrent: (component as any).maxCurrent,
+    regulatorType: (component as any).regulatorType,
+    packageType: (component as any).packageType,
+    dropout: (component as any).dropout
   };
 }
 

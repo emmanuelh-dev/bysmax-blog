@@ -112,7 +112,6 @@ export async function generateMetadata({
 }
 
 export const generateStaticParams = async () => {
-  // Generar rutas para TODOS los componentes electrónicos, incluyendo las compuertas lógicas
   const paths = electronicComponents.getAllComponents().map((p) => ({ slug: p.url.split('/') }))
   return paths
 }
@@ -201,6 +200,54 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 {page.heading}
               </h1>
               <p className="mb-6 text-lg leading-relaxed text-[#737373]">{page.description}</p>
+              <AdComponent slot={SLOTS[1]} />
+
+              <section className="mb-12">
+                <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
+                  {ui.sections.datasheet}
+                </h2>
+                <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
+                  <p className="mb-6 text-[#737373]">
+                    The{' '}
+                    <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
+                    {ui.descriptions.datasheet}
+                  </p>
+                  <figure>
+                    <div className="w-full overflow-hidden rounded-lg">
+                      <Image
+                        src={page.datasheet}
+                        alt={ui.metadata.altText(page.heading)}
+                        width={1200}
+                        height={800}
+                        className="h-auto w-full object-cover"
+                        style={{ width: '100%', height: 'auto' }}
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-center text-sm text-[#737373]">
+                      {ui.descriptions.datasheetOfficial}
+                    </figcaption>
+                  </figure>
+                  {page.pdf && (
+                    <div className="mt-6 text-center">
+                      <a
+                        href={page.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center rounded-lg bg-[#0070f3] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#0061d5] focus:outline-none focus:ring-2 focus:ring-[#0070f3] focus:ring-offset-2"
+                      >
+                        <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            fillRule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {ui.labels.downloadPdf}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </section>
               <div className="rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-6 dark:border-[#333333] dark:bg-[#1a1a1a]">
                 <p className="leading-relaxed text-[#737373]">
                   {ui.descriptions.heroIntro(page.label, page.configuration)}{' '}
@@ -216,52 +263,6 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
               <AdComponent slot={SLOTS[0]} />
             </header>
             {/* Featured Datasheet */}
-            <section className="mb-12">
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                {ui.sections.datasheet}
-              </h2>
-              <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
-                <p className="mb-6 text-[#737373]">
-                  The <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
-                  {ui.descriptions.datasheet}
-                </p>
-                <figure>
-                  <div className="w-full overflow-hidden rounded-lg">
-                    <Image
-                      src={page.datasheet}
-                      alt={ui.metadata.altText(page.heading)}
-                      width={1200}
-                      height={800}
-                      className="h-auto w-full object-cover"
-                      style={{ width: '100%', height: 'auto' }}
-                    />
-                  </div>
-                  <figcaption className="mt-3 text-center text-sm text-[#737373]">
-                    {ui.descriptions.datasheetOfficial}
-                  </figcaption>
-                </figure>
-                {page.pdf && (
-                  <div className="mt-6 text-center">
-                    <a
-                      href={page.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-lg bg-[#0070f3] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#0061d5] focus:outline-none focus:ring-2 focus:ring-[#0070f3] focus:ring-offset-2"
-                    >
-                      <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fillRule="evenodd"
-                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      {ui.labels.downloadPdf}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </section>
-            <AdComponent slot={SLOTS[1]} />
 
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">

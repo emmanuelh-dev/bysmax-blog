@@ -25,7 +25,7 @@ const AdComponent = ({ slot }: { slot: AdSlot }) => {
       )}
       {slot.format === 'auto' && (
         <ins
-          className="adsbygoogle"
+          className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
           data-ad-layout="in-article"
           style={{ display: 'block', textAlign: 'center' }}
           data-ad-format="fluid"

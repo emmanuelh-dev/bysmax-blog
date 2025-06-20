@@ -11,7 +11,7 @@ export const DISPLAYS: DisplayComponent[] = [
     commonType: 'common-cathode',
     partNumber: 'SC56-11EWA',
     manufacturer: 'Kingbright',
-    datasheet: '/static/images/SC56-11EWA.jpg',
+    datasheet: '/static/images/SC56-11EWA.png',
     pdf: 'https://www.kingbrightusa.com/images/catalog/SPEC/SC56-11EWA.pdf',
     alternatives: ['SC56-11SRWA', 'LTS-4801JR'],
     translations: {

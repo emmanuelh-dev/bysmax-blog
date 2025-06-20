@@ -18,7 +18,7 @@ export default function ComparisonSelector({
 
   const handleComparisonSelect = (selectedBoardId: string) => {
     if (selectedBoardId) {
-      router.push(`/${locale}/arduino/comparisons/${currentBoardId}-vs-${selectedBoardId}`)
+      window.location.href = `/${locale}/arduino/comparisons/${currentBoardId}-vs-${selectedBoardId}`
     }
   }
 

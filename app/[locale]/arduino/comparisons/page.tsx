@@ -10,7 +10,6 @@ import { LocaleTypes } from '../../i18n/settings'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
 import { Trophy, ArrowRight, Zap, HardDrive } from 'lucide-react'
-import Link from 'next/link'
 import Image from '@/components/Image'
 
 interface Props {

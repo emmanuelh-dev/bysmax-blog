@@ -34,11 +34,11 @@ export default function Sidebar({ children }: Props) {
   }
 
   return (
-    <div className="contan min-h-screen bg-white dark:bg-dark">
+    <div className="contan min-h-screen bg-light dark:bg-dark">
       <div className="lg:container">
         <button
           onClick={toggleSidebar}
-          className="dark:text-wh text- fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#a1a1a1] bg-white shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-dark md:hidden"
+          className="dark:text-wh text- fixed bottom-6 left-6 z-50 flex h-12 w-12 items-center justify-center rounded-lg border border-[#a1a1a1] bg-light shadow-sm transition-all duration-200 hover:border-[#0070f3] dark:border-[#333333] dark:bg-dark md:hidden"
           aria-label={isOpen ? ui.labels.closeMenu : ui.labels.openMenu}
         >
           {isOpen ? (
