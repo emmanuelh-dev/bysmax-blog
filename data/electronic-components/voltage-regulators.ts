@@ -350,7 +350,7 @@ export const VOLTAGE_REGULATORS: VoltageRegulatorComponent[] = [
     partNumber: 'LM7812',
     manufacturer: 'Texas Instruments',
     series: '78xx',
-    datasheet: '/static/images/LM7812.jpg',
+    datasheet: '/static/images/lm7812-pinout-equivalent.jpg',
     pdf: 'https://www.ti.com/lit/ds/symlink/lm7812.pdf',
     outputVoltage: '12V (fixed)',
     maxCurrent: '1A',

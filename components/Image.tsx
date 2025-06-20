@@ -79,13 +79,13 @@ export default function ImageViewer({ className, alt, ...rest }: ImageProps) {
       {/* Thumbnail image */}
       <button
         onClick={openModal}
-        className={`group relative cursor-zoom-in overflow-hidden rounded-lg border border-[#e5e5e5] transition-all duration-200 hover:border-[#0070f3] hover:shadow-sm dark:border-[#333333] dark:hover:border-[#0070f3] ${className?.includes('w-full') ? 'block w-full' : 'inline-block'}`}
+        className={`group relative w-full cursor-zoom-in overflow-hidden rounded-lg border border-[#e5e5e5] transition-all duration-200 hover:border-[#0070f3] hover:shadow-sm dark:border-[#333333] dark:hover:border-[#0070f3] ${className?.includes('w-full') ? 'block w-full' : 'inline-block'}`}
         aria-label={`View full size: ${alt}`}
       >
         <NextImage
           {...rest}
           alt={alt}
-          className={`transition-transform duration-200 group-hover:scale-[1.02] ${
+          className={`w-full transition-transform duration-200 group-hover:scale-[1.02] ${
             className?.includes('w-full')
               ? 'h-auto w-full object-cover'
               : 'h-auto w-auto object-contain'
