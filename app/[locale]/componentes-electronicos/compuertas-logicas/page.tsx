@@ -8,7 +8,7 @@ import { SectionContainerWithAds } from '@/components/SectionContainer'
 import Script from 'next/script'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import { LocaleTypes } from '../i18n/settings'
+import { LocaleTypes } from '../../i18n/settings'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
 interface Props {
