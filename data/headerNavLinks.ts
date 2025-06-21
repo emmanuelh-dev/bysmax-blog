@@ -72,7 +72,13 @@ export const nav: Nav[] = [
     links: [
       {
         title: 'Compuertas Lógicas',
+        description: 'Aprende sobre compuertas lógicas y su funcionamiento',
         href: '/compuertas-logicas',
+      },
+      {
+        title: 'Componentes Electronicos',
+        description: 'Guía completa de componentes electrónicos',
+        href: '/componentes-electronicos',
       },
       {
         title: 'Comparativa de Placas Arduino',
