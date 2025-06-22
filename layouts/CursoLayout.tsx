@@ -28,7 +28,7 @@ export function CursoLayout({
 
       {/* Mobile Navigation Header - Sticky */}
       <div className="sticky top-0 z-40 lg:hidden">
-        <div className="border-b border-neutral-200 bg-white/95 backdrop-blur-md dark:border-neutral-800 dark:bg-dark">
+        <div className="border-b border-neutral-200 bg-light/95 backdrop-blur-md dark:border-neutral-800 dark:bg-dark">
           <div className="flex items-center justify-between p-4">
             <h2 className="text-base font-semibold text-black dark:text-white">
               Contenido del curso
@@ -94,7 +94,7 @@ export function CursoLayout({
         </div>
       </div>
 
-      <div className="my-8 grid grid-cols-1 rounded-lg bg-white dark:bg-dark lg:my-12 lg:grid-cols-[20%_60%_20%]">
+      <div className="my-8 grid grid-cols-1 rounded-lg bg-light dark:bg-dark lg:my-12 lg:grid-cols-[20%_60%_20%]">
         <SectionContainerWithAds>
           {/* Left Sidebar - Desktop Only */}
           <div className="hidden lg:block">
@@ -144,14 +144,14 @@ export function CursoLayout({
               {/* Back Link */}
               <Link
                 href={path.href}
-                className="inline-flex items-center rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm text-neutral-600 transition-all duration-200 hover:border-blue-500 hover:text-black dark:border-neutral-800 dark:bg-black dark:text-neutral-400 dark:hover:border-blue-400 dark:hover:text-white"
+                className="inline-flex items-center rounded-lg border border-neutral-200 bg-light px-4 py-2 text-sm text-neutral-600 transition-all duration-200 hover:border-blue-500 hover:text-black dark:border-neutral-800 dark:bg-dark dark:text-neutral-400 dark:hover:border-blue-400 dark:hover:text-white"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 {path.title}
               </Link>
 
               {/* Author Info */}
-              <div className="space-y-3 rounded-lg border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-black">
+              <div className="space-y-3 rounded-lg border border-neutral-200 bg-light p-6 dark:border-neutral-800 dark:bg-dark">
                 <h2 className="text-base font-semibold text-black dark:text-white">
                   Emmanuel Díaz Leal Hernández
                 </h2>
@@ -180,7 +180,7 @@ export function CursoLayout({
 
             <div className="rounded-lg border border-neutral-200 dark:border-neutral-800">
               <ins
-                className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
+                className="adsbygoogle h-[280px] w-full bg-light dark:bg-dark"
                 style={{ display: 'block' }}
                 data-ad-client="ca-pub-3646138644530578"
                 data-ad-slot="6395288197"
@@ -205,7 +205,7 @@ export function CursoLayout({
               </nav>
               <div className="p-6">
                 <ins
-                  className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full rounded-lg border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-black"
+                  className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full rounded-lg border border-neutral-200 bg-light dark:border-neutral-800 dark:bg-dark"
                   style={{ display: 'block' }}
                   data-ad-client="ca-pub-3646138644530578"
                   data-ad-slot="9734184827"
