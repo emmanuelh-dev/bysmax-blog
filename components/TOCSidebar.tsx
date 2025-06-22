@@ -23,7 +23,7 @@ export default function TOCSidebar({ toc, className = '' }: TOCSidebarProps) {
     return null
   }
   return (
-    <div className={`bg-light dark:bg-neutral-950 ${className}`}>
+    <div className={`bg-light dark:bg-dark ${className}`}>
       <div className="mb-3 flex items-center gap-2">
         <FileText className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
         <h2 className="text-sm font-semibold text-neutral-900 dark:text-white">
