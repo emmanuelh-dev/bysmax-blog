@@ -1,6 +1,5 @@
 import { allBlogs } from 'contentlayer/generated'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { buttonVariants } from '@/components/ui/button'
@@ -30,12 +29,12 @@ export default async function Page({ params: { locale } }) {
               {t('description')}
             </p>
             <div className="flex justify-center gap-4">
-              <Link href="/blog" className={buttonVariants({ variant: 'default' })}>
+              <a href="/blog" className={buttonVariants({ variant: 'default' })}>
                 Blog y Tutoriales
-              </Link>
-              <Link href="/servicios" className={buttonVariants({ variant: 'outline' })}>
+              </a>
+              <a href="/servicios" className={buttonVariants({ variant: 'outline' })}>
                 Nuestros Servicios
-              </Link>
+              </a>
             </div>
           </div>
         </header>

@@ -1,4 +1,6 @@
-import { ReactNode } from 'react'
+'use client'
+
+import { ReactNode, useState } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
@@ -9,8 +11,12 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import { ArrowLeft, Clock } from 'lucide-react'
+import { ArrowLeft, Clock, FileText, Menu, X } from 'lucide-react'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
+import TOCSidebar from '@/components/TOCSidebar'
+import AdComponent from '@/data/AdComponent'
+import { SLOTS } from '@/data/ad-slots'
+import { useActiveHeading } from '@/components/util/useActiveHeading'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -32,166 +38,288 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
+  const { filePath, path, slug, date, title, tags, toc } = content
   const basePath = path.split('/')[0]
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const activeId = useActiveHeading()
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
 
   return (
-    <SectionContainerWithAds>
+    <div className="min-h-screen bg-light dark:bg-dark">
       <ScrollTopAndComment />
 
-      {/* Fondo con cuadrados */}
-      <div className="mt-20 h-full min-h-screen w-full bg-[linear-gradient(to_right,_#88888839_1px,_transparent_1px),_linear-gradient(to_bottom,_#88888839_1px,_transparent_1px)] bg-[length:50%_33%] dark:bg-dark dark:bg-[linear-gradient(to_right,_#5e5e5e3c_1px,_transparent_1px),_linear-gradient(to_bottom,_#5e5e5e3c_1px,_transparent_1px)] dark:text-white lg:bg-[length:33%_33%]">
-        <article className="relative z-10 mx-auto max-w-4xl px-6 py-20">
-          <div className="mb-12 flex justify-center">
-            <a
-              href="/"
-              className="flex items-center text-sm text-neutral-400 hover:text-black dark:hover:text-white"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Blog / Engineering
-            </a>
-          </div>
-          <h1 className="mb-12 text-balance text-center text-3xl font-medium leading-tight md:text-6xl lg:text-5xl">
-            {title}
-          </h1>
-          <div className="flex items-center justify-center space-x-1">
-            <dl>
-              <dt className="sr-only">Authors</dt>
-              <dd>
-                <ul className="mb-4 flex items-center space-x-1">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 px-4 pt-20 xl:grid-cols-[1fr_300px] xl:gap-8">
+          {/* Main Content Column */}
+          <main className="min-w-0">
+            <article>
+              {/* Article Header */}
+              <header className="mb-16 space-y-8">
+                <h1 className="text-4xl font-semibold tracking-tight text-neutral-900 dark:text-white lg:text-5xl">
+                  {title}
+                </h1>
+
+                {/* Author Info */}
+                <div className="flex items-center gap-4">
                   {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
+                    <div key={author.name} className="flex items-center gap-3">
                       {author.avatar && (
                         <Image
                           src={author.avatar}
-                          width={24}
-                          height={24}
-                          alt="avatar"
-                          className="h-6 w-6 rounded-full bg-neutral-600"
+                          width={40}
+                          height={40}
+                          alt={author.name}
+                          className="h-10 w-10 rounded-full"
                         />
                       )}
-                      <dl className="sr-only">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-neutral-900 dark:text-neutral-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
-                        <dd>
-                          {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            >
-                              {author.twitter
-                                .replace('https://twitter.com/', '@')
-                                .replace('https://x.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium text-neutral-900 dark:text-white">
+                          {author.name}
+                        </span>
+                        {author.twitter && (
+                          <Link
+                            href={author.twitter}
+                            className="text-sm text-neutral-600 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-blue-400"
+                          >
+                            {author.twitter
+                              .replace('https://twitter.com/', '@')
+                              .replace('https://x.com/', '@')}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
                   ))}
-                </ul>
-              </dd>
-            </dl>
-          </div>
-          <div className="mb-12 flex items-center justify-between text-sm text-neutral-400">
-            <div className="flex items-center">
-              <Clock className="mr-2 h-4 w-4" />
-              <span>14 min read</span>
-            </div>
-            <span className="mx-8 text-neutral-600">·</span>
-            <dt className="sr-only">Published on</dt>
-            <dd className="leading-6 text-neutral-500 dark:text-neutral-400">
-              <time dateTime={date}>
-                {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-              </time>
-            </dd>
-          </div>
-          <div>
-            <ins
-              className="adsbygoogle h-[280px] w-full bg-white dark:bg-black"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-3646138644530578"
-              data-ad-slot="6395288197"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-          </div>
-          <div>
-            <div className="prose max-w-5xl text-pretty pb-8 pt-10 text-lg dark:prose-invert">
-              {children}
-            </div>
-            <SupabaseCommentsWrapper slug={path} />
-          </div>
-          {/* Footer */}
-          <footer className="border-t border-neutral-200 pt-8 dark:border-neutral-700">
-            <div className="text-md divide-neutral-200 font-medium leading-5 dark:divide-neutral-700 xl:divide-y">
-              <div className="flex items-center justify-center py-4 xl:py-6">
-                <a href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
-                  <Image
-                    width={200}
-                    height={200}
-                    src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
-                    alt="DigitalOcean Referral Badge"
-                  />
-                </a>
+                </div>
+
+                {/* Meta Information */}
+                <div className="flex items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400">
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>14 min read</span>
+                  </div>
+                  <time dateTime={date}>
+                    {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                  </time>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-neutral-200 dark:bg-neutral-800" />
+              </header>
+
+              {/* Ad Space - Después del header, antes del contenido */}
+              <div className="mb-16">
+                <AdComponent slot={SLOTS[0]} />
               </div>
-              {tags && (
-                <div className="py-4 xl:py-6">
-                  <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                    Tags
-                  </h2>
-                  <div className="flex flex-wrap">
-                    {tags.map((tag) => (
-                      <Tag key={tag} text={tag} />
-                    ))}
+
+              {/* Article Content */}
+              <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:text-neutral-900 prose-pre:bg-neutral-100 dark:prose-a:text-blue-400 dark:prose-code:text-neutral-100 dark:prose-pre:bg-neutral-900">
+                {children}
+              </div>
+
+              {/* Comments */}
+              <div className="mt-16 border-t border-neutral-200 pt-16 dark:border-neutral-800">
+                <SupabaseCommentsWrapper slug={path} />
+              </div>
+
+              {/* Article Footer */}
+              <footer className="mt-16 space-y-8 border-t border-neutral-200 pt-16 dark:border-neutral-800">
+                {/* Tags */}
+                {tags && tags.length > 0 && (
+                  <div className="space-y-4">
+                    <h3 className="text-sm font-medium text-neutral-900 dark:text-white">Tags</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {tags.map((tag) => (
+                        <Tag key={tag} text={tag} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Navigation */}
+                {(next || prev) && (
+                  <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    {prev && prev.path && (
+                      <div className="space-y-2">
+                        <div className="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                          Previous Article
+                        </div>
+                        <Link
+                          href={`/${prev.path}`}
+                          className="block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                        >
+                          {prev.title}
+                        </Link>
+                      </div>
+                    )}
+                    {next && next.path && (
+                      <div className="space-y-2 md:text-right">
+                        <div className="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                          Next Article
+                        </div>
+                        <Link
+                          href={`/${next.path}`}
+                          className="block text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                        >
+                          {next.title}
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Back to Blog */}
+                <div className="pt-8">
+                  <Link
+                    href={`/${basePath}`}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                    aria-label="Back to the blog"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to the blog
+                  </Link>
+                </div>
+
+                {/* Bottom Ad - Solo uno al final */}
+                <AdComponent slot={SLOTS[1]} />
+
+                {/* Digital Ocean Badge */}
+                <div className="flex justify-center pt-8">
+                  <a
+                    href="https://www.digitalocean.com/?refcode=bcd15eddc0aa&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    <Image
+                      width={200}
+                      height={200}
+                      src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
+                      alt="DigitalOcean Referral Badge"
+                    />
+                  </a>
+                </div>
+              </footer>
+            </article>
+          </main>
+
+          {/* Table of Contents Sidebar */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-8">
+              {/* TOC - Con altura limitada para mostrar ad */}
+              {toc && toc.length > 0 && (
+                <div className="mb-8">
+                  <TOCSidebar toc={toc} />
+                </div>
+              )}
+
+              {/* Ad Sidebar - Visible después del TOC */}
+              <div className="sticky top-[calc(100vh-320px)]">
+                <AdComponent slot={SLOTS[2]} />
+              </div>
+            </div>
+          </aside>
+
+          {/* Mobile TOC Sticky Button - Mejorado */}
+          {toc && toc.length > 0 && (
+            <div className="fixed bottom-6 right-6 z-30 xl:hidden">
+              <button
+                onClick={toggleMobileMenu}
+                className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-neutral-900 text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl dark:bg-white dark:text-neutral-900"
+                aria-label="Abrir tabla de contenido"
+              >
+                {/* Icono principal */}
+                <div
+                  className={`transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-45 scale-0' : 'rotate-0 scale-100'}`}
+                >
+                  <FileText className="h-6 w-6" />
+                </div>
+
+                {/* Icono cuando está abierto */}
+                <div
+                  className={`absolute transition-transform duration-200 ${isMobileMenuOpen ? 'rotate-0 scale-100' : 'rotate-45 scale-0'}`}
+                >
+                  <X className="h-6 w-6" />
+                </div>
+
+                {/* Tooltip */}
+                <div className="absolute bottom-full right-0 mb-2 hidden w-max rounded-lg bg-neutral-800 px-3 py-2 text-xs text-white shadow-lg group-hover:block dark:bg-neutral-200 dark:text-neutral-800">
+                  {isMobileMenuOpen ? 'Cerrar' : 'Tabla de contenido'}
+                  <div className="absolute left-3/4 top-full h-0 w-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-800 dark:border-t-neutral-200"></div>
+                </div>
+              </button>
+            </div>
+          )}
+
+          {/* Mobile TOC Sidebar */}
+          {toc && toc.length > 0 && (
+            <>
+              {/* Overlay */}
+              {isMobileMenuOpen && (
+                <div
+                  className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm xl:hidden"
+                  onClick={toggleMobileMenu}
+                />
+              )}
+
+              {/* Mobile Sidebar */}
+              <aside
+                className={`fixed right-0 top-0 z-50 h-full w-80 transform border-l border-neutral-200 bg-white transition-transform duration-300 ease-out dark:border-neutral-800 dark:bg-neutral-950 xl:hidden ${
+                  isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                }`}
+              >
+                <div className="flex h-full flex-col">
+                  {/* Header */}
+                  <div className="flex items-center justify-between border-b border-neutral-200 p-6 dark:border-neutral-800">
+                    <div className="flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
+                      <h2 className="text-sm font-semibold text-neutral-900 dark:text-white">
+                        Tabla de Contenido
+                      </h2>
+                    </div>
+                    <button
+                      onClick={toggleMobileMenu}
+                      className="rounded-md p-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  {/* TOC Content */}
+                  <nav className="flex-1 overflow-y-auto p-6">
+                    <div className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-600 max-h-[calc(100vh-200px)] space-y-1 overflow-y-auto">
+                      {toc.map((item, index) => {
+                        const isActive = activeId === item.url.replace('#', '')
+                        const indentLevel = Math.max(0, item.depth - 1) * 16
+                        return (
+                          <Link
+                            key={index}
+                            href={item.url}
+                            onClick={toggleMobileMenu}
+                            className={`block rounded-md px-2 py-1.5 text-sm transition-colors ${
+                              isActive
+                                ? 'bg-blue-50 font-medium text-blue-600 dark:bg-blue-950 dark:text-blue-400'
+                                : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100'
+                            }`}
+                            style={{ paddingLeft: `${8 + indentLevel}px` }}
+                          >
+                            <span className="line-clamp-2">{item.value}</span>
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </nav>
+
+                  {/* Ad Section for Mobile */}
+                  <div className="border-t border-neutral-200 p-6 dark:border-neutral-800">
+                    <AdComponent slot={SLOTS[3]} />
                   </div>
                 </div>
-              )}
-              {(next || prev) && (
-                <div className="flex justify-between py-4 text-sm xl:block xl:space-y-6 xl:py-6">
-                  {prev && prev.path && (
-                    <div>
-                      <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                        Previous Article
-                      </h2>
-                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link href={`/${prev.path}`}>{prev.title}</Link>
-                      </div>
-                    </div>
-                  )}
-                  {next && next.path && (
-                    <div>
-                      <h2 className="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-                        Next Article
-                      </h2>
-                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link href={`/${next.path}`}>{next.title}</Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="pt-4 xl:pt-8">
-              <Link
-                href={`/${basePath}`}
-                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label="Back to the blog"
-              >
-                &larr; Back to the blog
-              </Link>
-            </div>
-            <ins
-              className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full bg-white dark:bg-black"
-              style={{ display: 'block' }}
-              data-ad-client="ca-pub-3646138644530578"
-              data-ad-slot="9734184827"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-          </footer>
-        </article>
+              </aside>
+            </>
+          )}
+        </div>
       </div>
-    </SectionContainerWithAds>
+    </div>
   )
 }

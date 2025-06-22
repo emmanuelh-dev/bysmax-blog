@@ -1,4 +1,3 @@
-import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
@@ -37,12 +36,12 @@ export default function Home({ posts, locale, title = '', service = false, curso
                     <div>
                       <div className="rounded-md bg-black/50 px-4 py-2.5 text-white">
                         <h3>
-                          <Link
+                          <a
                             className="font-medium uppercase"
                             href={`/${locale}/${service ? 'servicios' : curso ? 'cursos' : 'blog'}/${slug}`}
                           >
                             {title}
-                          </Link>
+                          </a>
                         </h3>
                       </div>
                       <p className="mt-6 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-200">

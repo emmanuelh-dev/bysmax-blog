@@ -47,7 +47,7 @@ export default function Header() {
   if (!isMounted) return <header className="h-16" />
 
   return (
-    <header className="container mx-auto flex items-center justify-between px-6 py-4">
+    <header className="mx-auto flex w-full items-center justify-between px-4 py-4 xl:container">
       <div>
         <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
@@ -59,7 +59,7 @@ export default function Header() {
           </div>
         </Link>
       </div>
-      <nav className="flex items-center space-x-4 leading-5 sm:space-x-6" role="navigation">
+      <nav className="flex items-center  space-x-4 leading-5 sm:space-x-6" role="navigation">
         {!isMobile && (
           <>
             <Suspense fallback={<LoadingButton />}>
