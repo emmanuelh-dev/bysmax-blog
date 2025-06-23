@@ -9,6 +9,8 @@ import { useState } from 'react'
 import Contribuye from './components/Contribuye'
 import SupabaseCommentsWrapper from '@/components/comments/SupabaseCommentsWrapper'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import AdComponent from '@/data/AdComponent'
+import { SLOTS } from '@/data/ad-slots'
 
 export function CursoLayout({
   children,
@@ -110,7 +112,7 @@ export function CursoLayout({
                         {item.sections.map((section) => {
                           const active = slug === section.link
                           return (
-                            <Link
+                            <a
                               className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all duration-200 hover:bg-neutral-100 dark:hover:bg-neutral-900 ${
                                 active
                                   ? 'border border-blue-200 bg-blue-50 font-medium text-blue-600 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-400'
@@ -127,7 +129,7 @@ export function CursoLayout({
                                 }`}
                               />
                               <span className="leading-5">{section.title}</span>
-                            </Link>
+                            </a>
                           )
                         })}
                       </div>
@@ -178,16 +180,7 @@ export function CursoLayout({
               </div>
             </div>
 
-            <div className="rounded-lg border border-neutral-200 dark:border-neutral-800">
-              <ins
-                className="adsbygoogle h-[280px] w-full bg-light dark:bg-dark"
-                style={{ display: 'block' }}
-                data-ad-client="ca-pub-3646138644530578"
-                data-ad-slot="6395288197"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-            </div>
+            <AdComponent slot={SLOTS[0]} />
 
             <div className="prose prose-gray max-w-none dark:prose-invert">{children}</div>
 
@@ -204,14 +197,8 @@ export function CursoLayout({
                 <Contribuye url="https://github.com/emmanuelh-dev/bysmax-blog/tree/main/data/cursos/es/traccar" />
               </nav>
               <div className="p-6">
-                <ins
-                  className="adsbygoogle sticky top-10 mt-6 h-[600px] w-full rounded-lg border border-neutral-200 bg-light dark:border-neutral-800 dark:bg-dark"
-                  style={{ display: 'block' }}
-                  data-ad-client="ca-pub-3646138644530578"
-                  data-ad-slot="9734184827"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
+                <AdComponent slot={SLOTS[1]} />
+
               </div>
             </aside>
           </div>
