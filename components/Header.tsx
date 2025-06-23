@@ -1,3 +1,7 @@
+/**
+ * @deprecated Use HeaderServer instead for better performance
+ * This component is kept for backwards compatibility
+ */
 'use client'
 
 import { useEffect, useState, Suspense, lazy } from 'react'
@@ -12,13 +16,12 @@ import headerNavLinks from '@/data/headerNavLinks'
 // Lazy load componentes no esenciales
 const ThemeSwitch = lazy(() => import('./ThemeSwitch'))
 const LangSwitch = lazy(() => import('./langswitch'))
-const Navigation = lazy(() => import('./NavigationMenu'))
-const MobileNav = lazy(() => import('./MobileNav'))
 const SearchButton = lazy(() => import('./search/SearchButton'))
 const NotificationBell = lazy(() => import('./NotificationBell'))
+const MobileNav = lazy(() => import('./MobileNav'))
 
 // Loading fallback simple
-const LoadingButton = () => <Button variant="ghost" size="icon" />
+const LoadingButton = () => <Button variant="ghost" size="icon" className="h-9 w-9" />
 
 export default function Header() {
   const locale = useParams()?.locale as LocaleTypes
@@ -48,6 +51,7 @@ export default function Header() {
 
   return (
     <header className="mx-auto flex w-full items-center justify-between px-4 py-4 xl:container">
+      {/* Logo - Estático */}
       <div>
         <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
@@ -59,12 +63,11 @@ export default function Header() {
           </div>
         </Link>
       </div>
-      <nav className="flex items-center  space-x-4 leading-5 sm:space-x-6" role="navigation">
+
+      <nav className="flex items-center space-x-4 leading-5 sm:space-x-6" role="navigation">
+        {/* Enlaces principales - Solo desktop */}
         {!isMobile && (
-          <>
-            <Suspense fallback={<LoadingButton />}>
-              <Navigation />
-            </Suspense>
+          <div className="flex items-center space-x-4 sm:space-x-6">
             {headerNavLinks
               .filter((link) => link.href !== '/')
               .map((link) => (
@@ -76,25 +79,29 @@ export default function Header() {
                   {t(link.title)}
                 </Link>
               ))}
-          </>
+          </div>
         )}
-        <Suspense fallback={<LoadingButton />}>
-          <SearchButton />
-        </Suspense>
-        <Suspense fallback={<LoadingButton />}>
-          <ThemeSwitch />
-        </Suspense>
-        <Suspense fallback={<LoadingButton />}>
-          <LangSwitch />
-        </Suspense>
-        <Suspense fallback={<LoadingButton />}>
-          <NotificationBell />
-        </Suspense>
-        {isMobile && (
+
+        {/* Componentes interactivos */}
+        <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           <Suspense fallback={<LoadingButton />}>
-            <MobileNav />
+            <SearchButton />
           </Suspense>
-        )}
+          <Suspense fallback={<LoadingButton />}>
+            <ThemeSwitch />
+          </Suspense>
+          <Suspense fallback={<LoadingButton />}>
+            <LangSwitch />
+          </Suspense>
+          <Suspense fallback={<LoadingButton />}>
+            <NotificationBell />
+          </Suspense>
+          {isMobile && (
+            <Suspense fallback={<LoadingButton />}>
+              <MobileNav />
+            </Suspense>
+          )}
+        </div>
       </nav>
     </header>
   )

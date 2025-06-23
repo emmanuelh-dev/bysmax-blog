@@ -4,7 +4,7 @@ import 'pliny/search/algolia.css'
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
-import Header from '@/components/Header'
+import HeaderServer from '@/components/HeaderServer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
@@ -95,7 +95,7 @@ export default function RootLayout({
         <ThemeProviders>
           <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
             <div className="flex min-h-screen flex-col">
-              <Header />
+              <HeaderServer locale={locale} />
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
