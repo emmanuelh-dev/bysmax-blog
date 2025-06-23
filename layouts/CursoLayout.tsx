@@ -198,7 +198,6 @@ export function CursoLayout({
               </nav>
               <div className="p-6">
                 <AdComponent slot={SLOTS[1]} />
-
               </div>
             </aside>
           </div>
