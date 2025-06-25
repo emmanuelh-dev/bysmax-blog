@@ -337,6 +337,198 @@ export default function ArduinoComparisonPage({ params: { locale, comparisons } 
           <div className="mb-16">
             <AdComponent slot={SLOTS[0]} />
           </div>
+
+          {/* Comparison Table */}
+          <section className="mb-16">
+            <h2 className="mb-8 text-2xl font-semibold text-[#0a0a0a] dark:text-white">
+              Tabla de Especificaciones Técnicas
+            </h2>
+
+            <div className="overflow-x-auto">
+              <table className="w-full rounded-lg border border-[#e5e5e5] bg-white dark:border-[#333333] dark:bg-[#0a0a0a]">
+                <thead className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-[#0a0a0a] dark:text-white">
+                      Característica
+                    </th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-[#0a0a0a] dark:text-white">
+                      {board1.name}
+                    </th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-[#0a0a0a] dark:text-white">
+                      {board2.name}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#333333]">
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Microcontrolador
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.microcontroller}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.microcontroller}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Frecuencia de reloj
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.clockSpeed}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.clockSpeed}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Arquitectura
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.architecture}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.architecture}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Memoria Flash
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.flashMemory}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.flashMemory}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      SRAM
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">{board1.sram}</td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">{board2.sram}</td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      EEPROM
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.eeprom}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.eeprom}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Pines digitales I/O
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.digitalIO}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.digitalIO}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Pines analógicos
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.analogIO}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.analogIO}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Voltaje de operación
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.operatingVoltage}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.operatingVoltage}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Voltaje de entrada
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.inputVoltage}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.inputVoltage}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Comunicación
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      <div className="flex flex-wrap justify-center gap-1">
+                        {board1.communication.split(', ').map((comm, idx) => (
+                          <span
+                            key={idx}
+                            className="rounded-md border border-[#e5e5e5] bg-white px-2 py-1 text-xs font-medium dark:border-[#333333] dark:bg-[#0a0a0a]"
+                          >
+                            {comm}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      <div className="flex flex-wrap justify-center gap-1">
+                        {board2.communication.split(', ').map((comm, idx) => (
+                          <span
+                            key={idx}
+                            className="rounded-md border border-[#e5e5e5] bg-white px-2 py-1 text-xs font-medium dark:border-[#333333] dark:bg-[#0a0a0a]"
+                          >
+                            {comm}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Dimensiones
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board1.dimensions}
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">
+                      {board2.dimensions}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      USB
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">{board1.usb}</td>
+                    <td className="px-6 py-4 text-center text-sm text-[#737373]">{board2.usb}</td>
+                  </tr>
+                  <tr className="bg-[#f9f9f9] dark:bg-[#1a1a1a]">
+                    <td className="px-6 py-4 text-sm font-medium text-[#0a0a0a] dark:text-white">
+                      Precio aproximado
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm font-semibold text-[#0070f3]">
+                      $25-35 USD
+                    </td>
+                    <td className="px-6 py-4 text-center text-sm font-semibold text-[#0070f3]">
+                      $20-30 USD
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           {/* Detailed Comparison */}
           <section className="mb-16">
             <h2 className="mb-8 text-2xl font-semibold text-[#0a0a0a] dark:text-white">
