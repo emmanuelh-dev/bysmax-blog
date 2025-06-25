@@ -439,73 +439,108 @@ export const ARDUINO_BOARDS: ArduinoBoard[] = [
     }
   },
   {
-    id: "esp32-devkit",
+    id: "esp32",
     name: "ESP32 DevKit V1",
-    microcontroller: "ESP32-WROOM-32",
-    architecture: "Xtensa dual-core LX6",
+    microcontroller: "ESP32",
+    architecture: "Xtensa Dual Core LX6 32-bit",
     flashMemory: "4 MB",
     sram: "520 KB",
-    eeprom: "0 (EEPROM emulada)",
+    eeprom: "N/A (Flash emulation)",
     clockSpeed: "240 MHz",
     operatingVoltage: "3.3 V",
-    inputVoltage: "5 V (USB), 3.3-3.6 V (VIN)",
-    digitalIO: "34 (16 PWM)",
+    inputVoltage: "5 V (USB), 3.3-5 V (Vin)",
+    digitalIO: "36",
     analogIO: "18 (2 DAC)",
-    communication: "UART, SPI, I2C, Wi-Fi, Bluetooth",
-    usb: "Micro USB",
+    communication: "UART, SPI, I2C, Wi-Fi, Bluetooth, CAN",
+    usb: "USB Micro-B",
     dimensions: "55 x 28 mm",
     officialLink: "https://www.espressif.com/en/products/devkits/esp32-devkitc",
     pdf: "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
     image: "/static/images/esp32-devkit.jpg",
     description: {
-      es: "Microcontrolador de doble núcleo con Wi-Fi y Bluetooth integrados. Más potente que Arduino con conectividad inalámbrica nativa, ideal para proyectos IoT avanzados.",
-      en: "Dual-core microcontroller with integrated Wi-Fi and Bluetooth. More powerful than Arduino with native wireless connectivity, ideal for advanced IoT projects.",
-      pt: "Microcontrolador dual-core com Wi-Fi e Bluetooth integrados. Mais poderoso que Arduino com conectividade sem fio nativa, ideal para projetos IoT avançados."
+      es: "Microcontrolador potente con Wi-Fi y Bluetooth integrados. Ideal para proyectos IoT avanzados con conectividad inalámbrica. Ofrece dual core y gran capacidad de procesamiento para aplicaciones complejas.",
+      en: "Powerful microcontroller with integrated Wi-Fi and Bluetooth. Ideal for advanced IoT projects with wireless connectivity. Features dual core and high processing capacity for complex applications.",
+      pt: "Microcontrolador poderoso com Wi-Fi e Bluetooth integrados. Ideal para projetos IoT avançados com conectividade sem fio. Oferece dual core e grande capacidade de processamento para aplicações complexas."
     },
     applications: {
-      es: ["IoT WiFi", "Bluetooth mesh", "Web servers", "Smart devices", "Sensores remotos", "Control domótico"],
-      en: ["WiFi IoT", "Bluetooth mesh", "Web servers", "Smart devices", "Remote sensors", "Home automation"],
-      pt: ["IoT WiFi", "Malha Bluetooth", "Servidores web", "Dispositivos inteligentes", "Sensores remotos", "Automação residencial"]
+      es: ["IoT y domótica", "Estaciones meteorológicas", "Control remoto WiFi", "Sistemas de monitoreo", "Drones y robótica avanzada"],
+      en: ["IoT and home automation", "Weather stations", "WiFi remote control", "Monitoring systems", "Drones and advanced robotics"],
+      pt: ["IoT e domótica", "Estações meteorológicas", "Controle remoto WiFi", "Sistemas de monitoramento", "Drones e robótica avançada"]
     },
     features: {
-      es: ["Wi-Fi integrado", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Bajo costo", "Compatible con Arduino IDE"],
-      en: ["Integrated Wi-Fi", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Low cost", "Arduino IDE compatible"],
-      pt: ["Wi-Fi integrado", "Bluetooth Classic/LE", "Dual-core 240MHz", "34 GPIO", "Baixo custo", "Compatível com Arduino IDE"]
+      es: ["Wi-Fi integrado", "Bluetooth integrado", "Dual core", "Gran memoria", "Múltiples protocolos", "Precio económico"],
+      en: ["Integrated Wi-Fi", "Integrated Bluetooth", "Dual core", "Large memory", "Multiple protocols", "Economic price"],
+      pt: ["Wi-Fi integrado", "Bluetooth integrado", "Dual core", "Grande memória", "Múltiplos protocolos", "Preço econômico"]
     }
   },
   {
-    id: "esp8266-nodemcu",
-    name: "ESP8266 NodeMCU",
-    microcontroller: "ESP8266EX",
-    architecture: "Xtensa LX106",
-    flashMemory: "4 MB",
-    sram: "160 KB",
-    eeprom: "0 (EEPROM emulada)",
-    clockSpeed: "80/160 MHz",
+    id: "esp32_s3",
+    name: "ESP32-S3 DevKit",
+    microcontroller: "ESP32-S3",
+    architecture: "Xtensa Dual Core LX7 32-bit",
+    flashMemory: "8 MB",
+    sram: "512 KB",
+    eeprom: "N/A (Flash emulation)",
+    clockSpeed: "240 MHz",
     operatingVoltage: "3.3 V",
-    inputVoltage: "5 V (USB), 3.3 V (VIN)",
-    digitalIO: "17 (8 PWM)",
-    analogIO: "1 (0 DAC)",
-    communication: "UART, SPI, I2C, Wi-Fi",
-    usb: "Micro USB",
+    inputVoltage: "5 V (USB), 3.3-5 V (Vin)",
+    digitalIO: "45",
+    analogIO: "20 (2 DAC)",
+    communication: "UART, SPI, I2C, Wi-Fi, Bluetooth 5.0, USB OTG",
+    usb: "USB-C",
     dimensions: "58 x 31 mm",
-    officialLink: "https://www.espressif.com/en/products/socs/esp8266",
-    pdf: "https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf",
-    image: "/static/images/esp8266-nodemcu.jpg",
+    officialLink: "https://www.espressif.com/en/products/devkits/esp32-s3-devkitc-1",
+    pdf: "https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf",
+    image: "/static/images/esp32-s3.jpg",
     description: {
-      es: "Microcontrolador económico con Wi-Fi integrado. Más limitado que ESP32 pero perfecto para proyectos IoT simples que requieren conectividad web.",
-      en: "Economical microcontroller with integrated Wi-Fi. More limited than ESP32 but perfect for simple IoT projects requiring web connectivity.",
-      pt: "Microcontrolador econômico com Wi-Fi integrado. Mais limitado que ESP32 mas perfeito para projetos IoT simples que requerem conectividade web."
+      es: "Versión mejorada del ESP32 con mejor rendimiento y más memoria. Incluye soporte para USB OTG y Bluetooth 5.0. Ideal para aplicaciones que requieren procesamiento intensivo y conectividad avanzada.",
+      en: "Improved version of ESP32 with better performance and more memory. Includes USB OTG and Bluetooth 5.0 support. Ideal for applications requiring intensive processing and advanced connectivity.",
+      pt: "Versão melhorada do ESP32 com melhor desempenho e mais memória. Inclui suporte para USB OTG e Bluetooth 5.0. Ideal para aplicações que requerem processamento intensivo e conectividade avançada."
     },
     applications: {
-      es: ["Sensores WiFi", "Web servers básicos", "IoT económico", "Monitoreo remoto", "Switches inteligentes"],
-      en: ["WiFi sensors", "Basic web servers", "Budget IoT", "Remote monitoring", "Smart switches"],
-      pt: ["Sensores WiFi", "Servidores web básicos", "IoT econômico", "Monitoramento remoto", "Interruptores inteligentes"]
+      es: ["IA en el borde", "Visión por computadora", "Audio de alta calidad", "IoT avanzado", "Interfaces touch"],
+      en: ["Edge AI", "Computer vision", "High-quality audio", "Advanced IoT", "Touch interfaces"],
+      pt: ["IA na borda", "Visão computacional", "Áudio de alta qualidade", "IoT avançado", "Interfaces touch"]
     },
     features: {
-      es: ["Wi-Fi integrado", "Muy económico", "Compatible Arduino IDE", "17 GPIO", "Modo deep sleep", "OTA updates"],
-      en: ["Integrated Wi-Fi", "Very economical", "Arduino IDE compatible", "17 GPIO", "Deep sleep mode", "OTA updates"],
-      pt: ["Wi-Fi integrado", "Muito econômico", "Compatível Arduino IDE", "17 GPIO", "Modo deep sleep", "Atualizações OTA"]
+      es: ["Mejor rendimiento", "Más memoria", "USB OTG", "Bluetooth 5.0", "AI acelerado", "Pantalla LCD/OLED"],
+      en: ["Better performance", "More memory", "USB OTG", "Bluetooth 5.0", "Accelerated AI", "LCD/OLED display"],
+      pt: ["Melhor desempenho", "Mais memória", "USB OTG", "Bluetooth 5.0", "IA acelerada", "Display LCD/OLED"]
+    }
+  },
+  {
+    id: "esp32_c3",
+    name: "ESP32-C3 DevKit",
+    microcontroller: "ESP32-C3",
+    architecture: "RISC-V Single Core 32-bit",
+    flashMemory: "4 MB",
+    sram: "400 KB",
+    eeprom: "N/A (Flash emulation)",
+    clockSpeed: "160 MHz",
+    operatingVoltage: "3.3 V",
+    inputVoltage: "5 V (USB), 3.3-5 V (Vin)",
+    digitalIO: "22",
+    analogIO: "6 (0 DAC)",
+    communication: "UART, SPI, I2C, Wi-Fi, Bluetooth 5.0",
+    usb: "USB-C",
+    dimensions: "52 x 25 mm",
+    officialLink: "https://www.espressif.com/en/products/devkits/esp32-c3-devkitm-1",
+    pdf: "https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf",
+    image: "/static/images/esp32-c3.jpg",
+    description: {
+      es: "ESP32 económico basado en arquitectura RISC-V. Mantiene Wi-Fi y Bluetooth pero en un factor de forma más pequeño y precio reducido. Perfecto para aplicaciones IoT de bajo costo.",
+      en: "Economic ESP32 based on RISC-V architecture. Maintains Wi-Fi and Bluetooth but in a smaller form factor and reduced price. Perfect for low-cost IoT applications.",
+      pt: "ESP32 econômico baseado em arquitetura RISC-V. Mantém Wi-Fi e Bluetooth mas em fator de forma menor e preço reduzido. Perfeito para aplicações IoT de baixo custo."
+    },
+    applications: {
+      es: ["IoT de bajo costo", "Sensores inalámbricos", "Automatización simple", "Wearables", "Beacon Bluetooth"],
+      en: ["Low-cost IoT", "Wireless sensors", "Simple automation", "Wearables", "Bluetooth beacon"],
+      pt: ["IoT de baixo custo", "Sensores sem fio", "Automação simples", "Wearables", "Beacon Bluetooth"]
+    },
+    features: {
+      es: ["Arquitectura RISC-V", "Bajo costo", "Pequeño tamaño", "Wi-Fi + Bluetooth", "Bajo consumo", "USB-C nativo"],
+      en: ["RISC-V architecture", "Low cost", "Small size", "Wi-Fi + Bluetooth", "Low power", "Native USB-C"],
+      pt: ["Arquitetura RISC-V", "Baixo custo", "Tamanho pequeno", "Wi-Fi + Bluetooth", "Baixo consumo", "USB-C nativo"]
     }
   },
   {
@@ -750,7 +785,7 @@ export const MICROCONTROLLER_COMPARISONS: MicrocontrollerComparison[] = [
         pt: "ESP32 tem processador dual-core a 240MHz vs single-core 160MHz do ESP8266. ESP32 tem mais RAM (520KB vs 160KB) e mais GPIO (34 vs 17)."
       },
       connectivity: {
-        es: "Ambos tienen Wi-Fi, pero ESP32 adiciona Bluetooth Classic y BLE. ESP32 es más versátil para diferentes tipos de conectividad.",
+        es: "Ambos tienen Wi-Fi, pero ESP32 adiciona Bluetooth Classic e BLE. ESP32 es más versátil para diferentes tipos de conectividad.",
         en: "Both have Wi-Fi, but ESP32 adds Bluetooth Classic and BLE. ESP32 is more versatile for different types of connectivity.",
         pt: "Ambos têm Wi-Fi, mas ESP32 adiciona Bluetooth Classic e BLE. ESP32 é mais versátil para diferentes tipos de conectividade."
       },

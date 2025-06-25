@@ -3,13 +3,15 @@ import { ARDUINO_BOARDS } from '@/data/arduinos'
 import { getComparisonUITranslation, POPULAR_COMPARISONS } from '@/data/arduino-comparison'
 import ArduinoSidebar from '@/components/arduino/ArduinoSidebar'
 import ComparisonSelector from '@/components/arduino/ComparisonSelector'
+import DualComparisonSelector from '@/components/arduino/DualComparisonSelector'
+import QuickComparisonButtons from '@/components/arduino/QuickComparisonButtons'
 import { genPageMetadata } from '@/app/[locale]/seo'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import Script from 'next/script'
 import { LocaleTypes } from '../../i18n/settings'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
-import { Trophy, ArrowRight, Zap, HardDrive } from 'lucide-react'
+import { Trophy, ArrowRight, Zap, HardDrive, Wifi } from 'lucide-react'
 import Image from '@/components/Image'
 
 interface Props {
@@ -111,16 +113,10 @@ export default function ArduinoComparisonsPage({ params: { locale } }: Props) {
               {pageTitle}
             </h1>
             <p className="mx-auto mb-8 max-w-3xl text-lg text-[#737373]">{pageDescription}</p>
-
-            <div className="flex justify-center">
-              <Image
-                src="/static/images/arduino-comparison.png"
-                width={600}
-                height={300}
-                alt="Arduino Comparisons"
-                className="rounded-lg"
-              />
-            </div>
+            {/* Quick Comparison Selector */}
+            <section className="mb-16">
+              <QuickComparisonButtons locale={locale} />
+            </section>
           </header>
 
           {/* Ad Section */}
