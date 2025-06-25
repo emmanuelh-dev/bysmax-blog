@@ -27,6 +27,7 @@ interface HeaderLink {
 }
 
 const headerNavLinks: HeaderLink[] = [
+  { href: '/sitemap', title: 'Mapa del sitio', icon: BookOpen },
   { href: '/help', title: 'Ayúdanos', icon: GraduationCap },
   { href: '/blog', title: 'Blog', icon: BookMarked },
   { href: '/contacto', title: 'Contacto', icon: Lightbulb },
