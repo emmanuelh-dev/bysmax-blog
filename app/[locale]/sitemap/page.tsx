@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { nav } from '@/data/headerNavLinks'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -104,7 +103,7 @@ export default async function SitemapPage({ params: { locale } }: SitemapPagePro
                   <div className="space-y-3">
                     {section.links.map((link, linkIndex) => (
                       <div key={linkIndex} className="group">
-                        <Link
+                        <a
                           href={link.href}
                           className="flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
@@ -126,7 +125,7 @@ export default async function SitemapPage({ params: { locale } }: SitemapPagePro
                               </Badge>
                             </div>
                           </div>
-                        </Link>
+                        </a>
                       </div>
                     ))}
                   </div>
@@ -168,7 +167,7 @@ export default async function SitemapPage({ params: { locale } }: SitemapPagePro
                 icon: Search,
               },
             ].map((page, index) => (
-              <Link
+              <a
                 key={index}
                 href={page.href}
                 className="group block rounded-lg border border-gray-200 p-6 transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow-md dark:border-gray-700 dark:hover:border-blue-600 dark:hover:bg-blue-950/20"
@@ -180,7 +179,7 @@ export default async function SitemapPage({ params: { locale } }: SitemapPagePro
                   {page.title}
                 </h3>
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{page.description}</p>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
