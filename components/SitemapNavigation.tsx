@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { nav } from '@/data/headerNavLinks'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, ExternalLink } from 'lucide-react'
@@ -32,7 +31,7 @@ export default function SitemapNavigation({ currentSection }: SitemapNavigationP
 
               <div className="space-y-2">
                 {section.links.slice(0, 3).map((link, linkIndex) => (
-                  <Link
+                  <a
                     key={linkIndex}
                     href={link.href}
                     className="group flex items-center justify-between rounded p-2 text-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -50,7 +49,7 @@ export default function SitemapNavigation({ currentSection }: SitemapNavigationP
                     ) : (
                       <ArrowRight className="h-3 w-3 text-gray-400 opacity-0 group-hover:opacity-100" />
                     )}
-                  </Link>
+                  </a>
                 ))}
 
                 {section.links.length > 3 && (
