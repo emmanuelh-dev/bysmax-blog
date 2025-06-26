@@ -44,13 +44,63 @@ export async function generateMetadata({
 
   if (!page) return
 
-  const title = `${page.heading} ${ui.metadata.titleSuffix}`
-  const description = ui.metadata.description(
-    page.heading,
-    page.truthTable.length,
-    page.booleanFunction,
-    page.applications
-  )
+  // Enhanced title with circuit number for better SEO
+  const circuitNumber = slug.match(/\d{4}/)?.[0] || ''
+  const title =
+    params.locale === 'es'
+      ? `${page.heading} ${circuitNumber} - Datasheet, Tabla de Verdad y Diagrama | Compuerta ${page.type.toUpperCase()}`
+      : params.locale === 'pt'
+        ? `${page.heading} ${circuitNumber} - Datasheet, Tabela de Verdade e Diagrama | Porta ${page.type.toUpperCase()}`
+        : `${page.heading} ${circuitNumber} - Datasheet, Truth Table and Diagram | ${page.type.toUpperCase()} Gate`
+
+  const description =
+    params.locale === 'es'
+      ? `${page.heading} ${circuitNumber}: Datasheet completo con tabla de verdad, diagrama, características eléctricas y aplicaciones. Compuerta ${page.type.toUpperCase()} ${page.configuration}. Función booleana: ${page.booleanFunction}`
+      : params.locale === 'pt'
+        ? `${page.heading} ${circuitNumber}: Datasheet completo com tabela de verdade, diagrama, características elétricas e aplicações. Porta ${page.type.toUpperCase()} ${page.configuration}. Função booleana: ${page.booleanFunction}`
+        : `${page.heading} ${circuitNumber}: Complete datasheet with truth table, diagram, electrical characteristics and applications. ${page.type.toUpperCase()} gate ${page.configuration}. Boolean function: ${page.booleanFunction}`
+
+  const keywords =
+    params.locale === 'es'
+      ? [
+          `${page.heading.toLowerCase()}`,
+          `compuerta ${page.type.toLowerCase()} ${circuitNumber}`,
+          `${circuitNumber} compuerta`,
+          `${circuitNumber} tabla de verdad`,
+          `compuerta ${page.type.toLowerCase()}`,
+          `datasheet ${circuitNumber}`,
+          `circuito integrado ${circuitNumber}`,
+          `compuerta ${page.type.toLowerCase()} datasheet`,
+          `tabla de verdad compuerta ${page.type.toLowerCase()}`,
+          `${circuitNumber} diagrama`,
+          'compuertas logicas',
+          'circuitos integrados',
+          ...page.applications.slice(0, 3),
+        ]
+      : params.locale === 'pt'
+        ? [
+            `${page.heading.toLowerCase()}`,
+            `porta ${page.type.toLowerCase()} ${circuitNumber}`,
+            `${circuitNumber} porta`,
+            `${circuitNumber} tabela de verdade`,
+            `porta ${page.type.toLowerCase()}`,
+            `datasheet ${circuitNumber}`,
+            `circuito integrado ${circuitNumber}`,
+            'portas logicas',
+            'circuitos integrados',
+          ]
+        : [
+            `${page.heading.toLowerCase()}`,
+            `${page.type.toLowerCase()} gate ${circuitNumber}`,
+            `${circuitNumber} gate`,
+            `${circuitNumber} truth table`,
+            `${page.type.toLowerCase()} gate`,
+            `datasheet ${circuitNumber}`,
+            `integrated circuit ${circuitNumber}`,
+            'logic gates',
+            'integrated circuits',
+          ]
+
   const imageUrl = page.datasheet.startsWith('http')
     ? page.datasheet
     : `https://bysmax.com${page.datasheet}`
@@ -58,19 +108,7 @@ export async function generateMetadata({
   return {
     title: title,
     description: description,
-    keywords: [
-      page.heading,
-      'logic gate',
-      'integrated circuit',
-      'datasheet',
-      'truth table',
-      'boolean function',
-      'diagram',
-      'pins',
-      'applications',
-      'digital electronics',
-      ...page.applications,
-    ],
+    keywords: keywords,
     openGraph: {
       title: title,
       description: description,
@@ -83,7 +121,12 @@ export async function generateMetadata({
           url: imageUrl,
           width: 1100,
           height: 400,
-          alt: ui.metadata.altText(page.heading),
+          alt:
+            params.locale === 'es'
+              ? `${page.heading} ${circuitNumber} - Datasheet completo con tabla de verdad y diagrama`
+              : params.locale === 'pt'
+                ? `${page.heading} ${circuitNumber} - Datasheet completo com tabela de verdade e diagrama`
+                : `${page.heading} ${circuitNumber} - Complete datasheet with truth table and diagram`,
         },
       ],
     },
@@ -116,30 +159,55 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
     ? page.datasheet
     : `${siteBaseUrl}${page.datasheet}`
 
+  const circuitNumber = decodeSlug.match(/\d{4}/)?.[0] || ''
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `All about the ${page.heading}`,
-    description: ui.metadata.description(
-      page.heading,
-      page.truthTable.length,
-      page.booleanFunction,
-      page.applications
-    ),
+    headline:
+      locale === 'es'
+        ? `${page.heading} ${circuitNumber} - Datasheet, Tabla de Verdad y Características`
+        : locale === 'pt'
+          ? `${page.heading} ${circuitNumber} - Datasheet, Tabela de Verdade e Características`
+          : `${page.heading} ${circuitNumber} - Datasheet, Truth Table and Characteristics`,
+    description:
+      locale === 'es'
+        ? `Datasheet completo del ${page.heading} ${circuitNumber} con tabla de verdad, diagrama, función booleana ${page.booleanFunction} y aplicaciones en electrónica digital`
+        : locale === 'pt'
+          ? `Datasheet completo do ${page.heading} ${circuitNumber} com tabela de verdade, diagrama, função booleana ${page.booleanFunction} e aplicações em eletrônica digital`
+          : `Complete datasheet for ${page.heading} ${circuitNumber} with truth table, diagram, boolean function ${page.booleanFunction} and digital electronics applications`,
     image: imageUrl,
-    keywords: [
-      page.heading,
-      'logic gate',
-      'integrated circuit',
-      'datasheet',
-      'truth table',
-      'boolean function',
-      'diagram',
-      'pins',
-      'applications',
-      'digital electronics',
-      ...page.applications,
-    ].join(', '),
+    keywords:
+      locale === 'es'
+        ? [
+            `${page.heading.toLowerCase()}`,
+            `compuerta ${page.type.toLowerCase()} ${circuitNumber}`,
+            `${circuitNumber} compuerta`,
+            `${circuitNumber} tabla de verdad`,
+            `datasheet ${circuitNumber}`,
+            'compuertas logicas',
+            'circuitos integrados',
+            ...page.applications.slice(0, 5),
+          ].join(', ')
+        : locale === 'pt'
+          ? [
+              `${page.heading.toLowerCase()}`,
+              `porta ${page.type.toLowerCase()} ${circuitNumber}`,
+              `${circuitNumber} porta`,
+              `${circuitNumber} tabela de verdade`,
+              `datasheet ${circuitNumber}`,
+              'portas logicas',
+              'circuitos integrados',
+            ].join(', ')
+          : [
+              `${page.heading.toLowerCase()}`,
+              `${page.type.toLowerCase()} gate ${circuitNumber}`,
+              `${circuitNumber} gate`,
+              `${circuitNumber} truth table`,
+              `datasheet ${circuitNumber}`,
+              'logic gates',
+              'integrated circuits',
+            ].join(', '),
     author: {
       '@type': 'Organization',
       name: 'Bysmax',
@@ -157,6 +225,45 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio',
+          item: `${siteBaseUrl}/${locale}`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name:
+            locale === 'en'
+              ? 'Logic Gates'
+              : locale === 'pt'
+                ? 'Portas Lógicas'
+                : 'Compuertas Lógicas',
+          item: `${siteBaseUrl}/${locale}/compuertas-logicas`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: `${page.heading} ${circuitNumber}`,
+          item: pageUrl,
+        },
+      ],
+    },
+    about: {
+      '@type': 'Thing',
+      name:
+        locale === 'es' ? 'Compuertas Lógicas' : locale === 'pt' ? 'Portas Lógicas' : 'Logic Gates',
+      description:
+        locale === 'es'
+          ? 'Componentes fundamentales de la electrónica digital que realizan operaciones lógicas básicas'
+          : locale === 'pt'
+            ? 'Componentes fundamentais da eletrônica digital que realizam operações lógicas básicas'
+            : 'Fundamental components of digital electronics that perform basic logical operations',
     },
   }
 
@@ -179,23 +286,55 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
             {/* Hero Section */}
             <header className="mb-12">
               <h1 className="mb-4 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
-                {page.heading}
+                {page.heading} {circuitNumber}
               </h1>
+              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4 dark:border-[#333333] dark:bg-[#1a1a1a]">
+                <p className="text-sm text-[#737373]">
+                  {locale === 'es' ? 'Compuerta' : locale === 'pt' ? 'Porta' : 'Gate'}:{' '}
+                  <span className="font-medium text-[#0a0a0a] dark:text-white">
+                    {page.type.toUpperCase()}
+                  </span>{' '}
+                  | {locale === 'es' ? 'Circuito' : locale === 'pt' ? 'Circuito' : 'Circuit'}:{' '}
+                  <span className="font-medium text-[#0a0a0a] dark:text-white">
+                    {circuitNumber}
+                  </span>{' '}
+                  |{' '}
+                  {locale === 'es'
+                    ? 'Configuración'
+                    : locale === 'pt'
+                      ? 'Configuração'
+                      : 'Configuration'}
+                  :{' '}
+                  <span className="font-medium text-[#0a0a0a] dark:text-white">
+                    {page.configuration}
+                  </span>
+                </p>
+              </div>
               <section className="mb-12">
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
                   {ui.sections.datasheet}
                 </h2>
                 <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
                   <p className="mb-6 text-[#737373]">
-                    The{' '}
+                    {locale === 'es' ? 'El' : locale === 'pt' ? 'O' : 'The'}{' '}
                     <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
-                    {ui.descriptions.datasheet}
+                    {locale === 'es'
+                      ? `del ${page.heading} ${circuitNumber} proporciona información técnica completa incluyendo diagrama de pines, características eléctricas, tabla de verdad y aplicaciones típicas del circuito integrado.`
+                      : locale === 'pt'
+                        ? `do ${page.heading} ${circuitNumber} fornece informações técnicas completas incluindo diagrama de pinos, características elétricas, tabela de verdade e aplicações típicas do circuito integrado.`
+                        : `for ${page.heading} ${circuitNumber} provides complete technical information including pin diagram, electrical characteristics, truth table and typical applications of the integrated circuit.`}
                   </p>
                   <figure>
                     <div className="w-full overflow-hidden rounded-lg">
                       <Image
                         src={page.datasheet}
-                        alt={ui.metadata.altText(page.heading)}
+                        alt={
+                          locale === 'es'
+                            ? `Datasheet ${page.heading} ${circuitNumber} - Compuerta ${page.type.toUpperCase()} con tabla de verdad, diagrama de pines y características eléctricas`
+                            : locale === 'pt'
+                              ? `Datasheet ${page.heading} ${circuitNumber} - Porta ${page.type.toUpperCase()} com tabela de verdade, diagrama de pinos e características elétricas`
+                              : `Datasheet ${page.heading} ${circuitNumber} - ${page.type.toUpperCase()} gate with truth table, pin diagram and electrical characteristics`
+                        }
                         width={1200}
                         height={800}
                         className="h-auto w-full object-cover"
@@ -203,7 +342,11 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                       />
                     </div>
                     <figcaption className="mt-3 text-center text-sm text-[#737373]">
-                      {ui.descriptions.datasheetOfficial}
+                      {locale === 'es'
+                        ? `Datasheet oficial ${page.heading} ${circuitNumber} - Circuito integrado ${page.type.toUpperCase()}`
+                        : locale === 'pt'
+                          ? `Datasheet oficial ${page.heading} ${circuitNumber} - Circuito integrado ${page.type.toUpperCase()}`
+                          : `Official datasheet ${page.heading} ${circuitNumber} - ${page.type.toUpperCase()} integrated circuit`}
                     </figcaption>
                   </figure>
                   {page.pdf && (

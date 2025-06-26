@@ -18,19 +18,81 @@ interface Props {
 export async function generateMetadata({ params: { locale } }: Props) {
   const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
 
+  const title =
+    locale === 'es'
+      ? 'Compuertas Lógicas: Guía Completa con Datasheet y Tabla de Verdad - AND 7408, OR 7432, NOT 7404'
+      : locale === 'pt'
+        ? 'Portas Lógicas: Guia Completo com Datasheet e Tabela de Verdade - AND 7408, OR 7432, NOT 7404'
+        : 'Logic Gates: Complete Guide with Datasheet and Truth Table - AND 7408, OR 7432, NOT 7404'
+
+  const description =
+    locale === 'es'
+      ? 'Guía completa de compuertas lógicas con datasheet y tabla de verdad. Aprende sobre circuitos integrados 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Características eléctricas y aplicaciones.'
+      : locale === 'pt'
+        ? 'Guia completo de portas lógicas com datasheet e tabela de verdade. Aprenda sobre circuitos integrados 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Características elétricas e aplicações.'
+        : 'Complete guide to logic gates with datasheet and truth table. Learn about integrated circuits 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Electrical characteristics and applications.'
+
+  const keywords =
+    locale === 'es'
+      ? [
+          'compuertas logicas',
+          'compuerta and 7408',
+          'compuerta or 7432',
+          'compuerta not 7404',
+          'compuerta nand 7400',
+          'compuerta xor 7486',
+          'tabla de verdad compuertas logicas',
+          'datasheet compuertas logicas',
+          'circuitos integrados compuertas',
+          'compuertas logicas digitales',
+          'compuerta and datasheet',
+          'compuerta or datasheet',
+          'compuerta not datasheet',
+          'compuertas logicas basicas',
+          'todas las compuertas logicas',
+          'tabla compuertas logicas',
+        ]
+      : locale === 'pt'
+        ? [
+            'portas logicas',
+            'porta and 7408',
+            'porta or 7432',
+            'porta not 7404',
+            'porta nand 7400',
+            'porta xor 7486',
+            'tabela de verdade portas logicas',
+            'datasheet portas logicas',
+            'circuitos integrados portas',
+            'portas logicas digitais',
+          ]
+        : [
+            'logic gates',
+            'and gate 7408',
+            'or gate 7432',
+            'not gate 7404',
+            'nand gate 7400',
+            'xor gate 7486',
+            'truth table logic gates',
+            'datasheet logic gates',
+            'integrated circuits gates',
+            'digital logic gates',
+          ]
+
   return genPageMetadata({
-    title: ui.pageTitle,
-    description: ui.pageDescription,
+    title: title,
+    description: description,
+    keywords: keywords,
     openGraph: {
-      title: ui.pageTitle,
-      description: ui.pageDescription,
+      title: title,
+      description: description,
       images: '/static/images/compuertas.png',
       locale: locale === 'es' ? 'es_MX' : locale === 'en' ? 'en_US' : 'pt_BR',
       type: 'website',
     },
     twitter: {
-      title: ui.pageTitle,
-      card: '/static/images/compuertas.png',
+      title: title,
+      card: 'summary_large_image',
+      description: description,
       images: '/static/images/compuertas.png',
     },
   })
@@ -41,33 +103,72 @@ export default function page({ params: { locale } }: Props) {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio',
-        item: `https://bysmax.com/${locale}`,
+    '@type': 'Article',
+    headline:
+      locale === 'es'
+        ? 'Compuertas Lógicas: Guía Completa con Datasheet y Tabla de Verdad'
+        : locale === 'pt'
+          ? 'Portas Lógicas: Guia Completo com Datasheet e Tabela de Verdade'
+          : 'Logic Gates: Complete Guide with Datasheet and Truth Table',
+    description:
+      locale === 'es'
+        ? 'Guía completa de compuertas lógicas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 con datasheet, tabla de verdad y aplicaciones'
+        : locale === 'pt'
+          ? 'Guia completo de portas lógicas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 com datasheet, tabela de verdade e aplicações'
+          : 'Complete guide to logic gates AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 with datasheet, truth table and applications',
+    keywords:
+      locale === 'es'
+        ? 'compuertas logicas, compuerta and 7408, compuerta or 7432, compuerta not 7404, tabla de verdad, datasheet compuertas logicas, circuitos integrados'
+        : locale === 'pt'
+          ? 'portas logicas, porta and 7408, porta or 7432, porta not 7404, tabela de verdade, datasheet portas logicas, circuitos integrados'
+          : 'logic gates, and gate 7408, or gate 7432, not gate 7404, truth table, datasheet logic gates, integrated circuits',
+    image: 'https://bysmax.com/static/images/compuertas.png',
+    author: {
+      '@type': 'Organization',
+      name: 'Bysmax',
+      url: 'https://bysmax.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Bysmax',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://bysmax.com/static/images/logo.png',
       },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name:
-          locale === 'en'
-            ? 'Logic Gates'
-            : locale === 'pt'
-              ? 'Portas Lógicas'
-              : 'Compuertas Lógicas',
-        item: `https://bysmax.com/${locale}/compuertas-logicas`,
-      },
-    ],
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://bysmax.com/${locale}/compuertas-logicas`,
+    },
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio',
+          item: `https://bysmax.com/${locale}`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name:
+            locale === 'en'
+              ? 'Logic Gates'
+              : locale === 'pt'
+                ? 'Portas Lógicas'
+                : 'Compuertas Lógicas',
+          item: `https://bysmax.com/${locale}/compuertas-logicas`,
+        },
+      ],
+    },
   }
 
   return (
     <SectionContainerWithAds>
       <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
         <Script
-          id="breadcrumb-schema"
+          id="logic-gates-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLd),
@@ -90,7 +191,13 @@ export default function page({ params: { locale } }: Props) {
                   height={720}
                   className="h-auto w-full object-cover"
                   style={{ width: '100%', height: 'auto' }}
-                  alt={ui.imageAlts?.featuredImage || 'Logic Gates Guide'}
+                  alt={
+                    locale === 'es'
+                      ? 'Compuertas Lógicas - Guía completa de compuertas AND, OR, NOT, NAND, NOR, XOR - Circuitos integrados 7408, 7432, 7404, 7400'
+                      : locale === 'pt'
+                        ? 'Portas Lógicas - Guia completo de portas AND, OR, NOT, NAND, NOR, XOR - Circuitos integrados 7408, 7432, 7404, 7400'
+                        : 'Logic Gates - Complete guide to AND, OR, NOT, NAND, NOR, XOR gates - Integrated circuits 7408, 7432, 7404, 7400'
+                  }
                 />
                 <Image
                   src="/static/images/datashet-compuertas.jpg"
@@ -98,7 +205,13 @@ export default function page({ params: { locale } }: Props) {
                   height={720}
                   className="h-auto w-full object-cover"
                   style={{ width: '100%', height: 'auto' }}
-                  alt={ui.imageAlts?.datasheetImage || 'Logic Gates Datasheet Guide'}
+                  alt={
+                    locale === 'es'
+                      ? 'Datasheet de Compuertas Lógicas - Tabla de verdad compuertas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486'
+                      : locale === 'pt'
+                        ? 'Datasheet de Portas Lógicas - Tabela de verdade portas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486'
+                        : 'Logic Gates Datasheet - Truth table for AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 gates'
+                  }
                 />
               </div>
             </header>
@@ -233,12 +346,22 @@ export default function page({ params: { locale } }: Props) {
                                   src={gateTranslation.datasheet}
                                   width={400}
                                   height={250}
-                                  alt={`Datasheet ${gateTranslation.heading}`}
+                                  alt={
+                                    locale === 'es'
+                                      ? `Datasheet ${gateTranslation.heading} - Compuerta ${gate.url.toUpperCase()} tabla de verdad, diagrama y características eléctricas`
+                                      : locale === 'pt'
+                                        ? `Datasheet ${gateTranslation.heading} - Porta ${gate.url.toUpperCase()} tabela de verdade, diagrama e características elétricas`
+                                        : `Datasheet ${gateTranslation.heading} - ${gate.url.toUpperCase()} gate truth table, diagram and electrical characteristics`
+                                  }
                                   className="h-auto w-full object-cover"
                                   style={{ width: '100%', height: 'auto' }}
                                 />
                                 <figcaption className="mt-2 text-center text-sm text-[#737373]">
-                                  Datasheet {gateTranslation.heading}
+                                  {locale === 'es'
+                                    ? `Datasheet ${gateTranslation.heading} - Circuito integrado ${gate.url.toUpperCase()}`
+                                    : locale === 'pt'
+                                      ? `Datasheet ${gateTranslation.heading} - Circuito integrado ${gate.url.toUpperCase()}`
+                                      : `Datasheet ${gateTranslation.heading} - Integrated circuit ${gate.url.toUpperCase()}`}
                                 </figcaption>
                               </figure>
                             </div>
