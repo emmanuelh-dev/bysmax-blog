@@ -23,7 +23,7 @@ export default function Sidebar({ children }: Props) {
     pathSegments[0] && ['es', 'en', 'pt'].includes(pathSegments[0]) ? pathSegments[0] : 'es'
 
   const ui = getUITranslation(locale as 'es' | 'en' | 'pt')
-  const baseLogicGatesPath = `/${locale}/componentes-electronicos`
+  const baseLogicGatesPath = `/${locale}/compuertas-logicas`
 
   const toggleSidebar = () => setIsOpen(!isOpen)
 
