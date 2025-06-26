@@ -67,76 +67,76 @@ export interface UITranslations {
 }
 
 export const UI_TRANSLATIONS: Record<LocaleTypes, UITranslations> = {  es: {
-    pageTitle: "Guía Completa sobre las Compuertas Lógicas",
-    pageDescription: "Explora los componentes fundamentales de la electrónica digital. Aprende sobre las series más comunes: 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND) y 7486 (XOR).",
+    pageTitle: "Compuertas Lógicas: Guía Completa con Datasheet y Tabla de Verdad",
+    pageDescription: "Guía completa de compuertas lógicas con datasheet, tabla de verdad y aplicaciones. Circuitos integrados 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Características eléctricas y diagramas.",
     imageAlts: {
-      featuredImage: "Guía Completa sobre las Series 7408, 7432, 7404, 7400 y 7486",
-      datasheetImage: "Guía Completa con datasheet las Series 7408, 7432, 7404, 7400 y 7486"
+      featuredImage: "Compuertas Lógicas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 - Datasheet y tabla de verdad",
+      datasheetImage: "Datasheet compuertas lógicas - Circuitos integrados 7408, 7432, 7404, 7400, 7486 con tabla de verdad y diagrama"
     },
     metadata: {
-      titleSuffix: "- Datasheet, Tabla de Verdad y Diagrama",
+      titleSuffix: "- Datasheet, Tabla de Verdad y Características Eléctricas",
       description: (heading, truthTableLength, booleanFunction, applications) => 
-        `Información completa sobre la ${heading}. Encuentra su datasheet, tabla de verdad (${truthTableLength} combinaciones), función booleana (${booleanFunction}), diagrama de pines y aplicaciones como ${applications.join(', ')}. Ideal para estudiantes y profesionales de electrónica.`,
-      altText: (heading) => `Datasheet y diagrama de pines de la ${heading}`,
+        `${heading}: Datasheet completo con tabla de verdad (${truthTableLength} combinaciones), función booleana ${booleanFunction}, diagrama de pines y características eléctricas. Aplicaciones: ${applications.slice(0,3).join(', ')}. Circuito integrado para electrónica digital.`,
+      altText: (heading) => `Datasheet ${heading} - Tabla de verdad, diagrama de pines y características eléctricas del circuito integrado`,
     },
     sections: {
-      datasheet: "Datasheet y Diagrama de Pines",
-      booleanFunction: "Función Booleana",
-      applications: "Aplicaciones",
-      truthTable: "Tabla de Verdad",
-      technicalSpecs: "Especificaciones Técnicas",
-      generalInfo: "Información General",
+      datasheet: "Datasheet y Diagrama - Circuito Integrado",
+      booleanFunction: "Función Booleana y Operación Lógica",
+      applications: "Aplicaciones en Electrónica Digital",
+      truthTable: "Tabla de Verdad Completa",
+      technicalSpecs: "Especificaciones Técnicas y Eléctricas",
+      generalInfo: "Información General del CI",
       electricalChars: "Características Eléctricas",
-      packageInfo: "Información del Encapsulado",
-      additionalInfo: "Información Adicional",
-      relatedProjects: "Proyectos Relacionados con",
-      availableGates: "Compuertas Lógicas Disponibles",
-      howTheyWork: "Cómo Funcionan las Compuertas Lógicas",
-      mainApplications: "Aplicaciones Principales"
+      packageInfo: "Encapsulado y Pines",
+      additionalInfo: "Información Técnica Adicional",
+      relatedProjects: "Proyectos con Compuertas Lógicas",
+      availableGates: "Circuitos Integrados de Compuertas Lógicas",
+      howTheyWork: "Funcionamiento de las Compuertas Lógicas",
+      mainApplications: "Aplicaciones Principales en Electrónica"
     },    labels: {
-      downloadPdf: "Descargar Datasheet PDF",
-      gateType: "Tipo de Compuerta",
-      configuration: "Configuración",
+      downloadPdf: "Descargar Datasheet PDF Completo",
+      gateType: "Tipo de Compuerta Lógica",
+      configuration: "Configuración del Circuito",
       operatingVoltage: "Voltaje de Operación",
-      maxCurrent: "Corriente Máx.",
+      maxCurrent: "Corriente Máxima",
       propagationDelay: "Retardo de Propagación",
-      temperature: "Temperatura",
-      packageType: "Tipo",
-      pinSpacing: "Espaciado",
-      viewDetails: "Ver detalles completos",
+      temperature: "Rango de Temperatura",
+      packageType: "Tipo de Encapsulado",
+      pinSpacing: "Espaciado de Pines",
+      viewDetails: "Ver datasheet y especificaciones completas",
       inputA: "Entrada A",
       inputB: "Entrada B",
       output: "Salida",
-      datasheetAndDiagram: "Datasheet y Diagrama",
-      allGates: "Todas las compuertas",
-      openMenu: "Abrir menú",
-      closeMenu: "Cerrar menú",
+      datasheetAndDiagram: "Datasheet y Diagrama del Circuito Integrado",
+      allGates: "Todas las compuertas lógicas",
+      openMenu: "Abrir menú de compuertas",
+      closeMenu: "Cerrar menú de compuertas",
       closeSidebar: "Cerrar barra lateral"
     },
     descriptions: {
-      datasheet: "proporciona información técnica crucial sobre este circuito integrado, incluyendo el diagrama de pines, características eléctricas y encapsulado.",
-      datasheetOfficial: "Datasheet oficial del circuito integrado",
-      booleanFunction: (label) => `Esta expresión matemática define cómo la salida (Y o Q) de la ${label} depende de sus entradas (A, B, etc.).`,
-      applications: "Este circuito integrado se utiliza en diversas aplicaciones de lógica digital y sistemas embebidos.",
-      truthTable: (label) => `La tabla de verdad ilustra la salida de la ${label} para cada combinación posible de sus entradas lógicas.`,
-      additionalInfo: (label) => `Para profundizar en el funcionamiento y las aplicaciones de la ${label}, puedes consultar recursos adicionales sobre álgebra booleana y diseño de circuitos digitales. Experimentar con simuladores de circuitos o montar circuitos físicos te ayudará a consolidar tu comprensión.`,
-      heroIntro: (label, configuration) => `La ${label} es un componente fundamental en la electrónica digital. Su configuración es ${configuration}. Su operación se basa en la función lógica`,
-      howTheyWorkIntro: "Las compuertas lógicas son dispositivos electrónicos que realizan operaciones lógicas básicas basadas en el álgebra de Boole. Operan con señales binarias (0 y 1, bajo y alto voltaje) y son los bloques de construcción esenciales de todos los sistemas digitales.",
+      datasheet: "del circuito integrado contiene información técnica esencial incluyendo diagrama de pines, características eléctricas, tabla de verdad y especificaciones del encapsulado.",
+      datasheetOfficial: "Datasheet oficial del circuito integrado - Especificaciones técnicas completas",
+      booleanFunction: (label) => `La función booleana de la ${label} define matemáticamente cómo la salida (Y o Q) depende de las entradas (A, B, etc.). Esta expresión es fundamental para el diseño de circuitos lógicos.`,
+      applications: "Los circuitos integrados de compuertas lógicas se utilizan en sistemas digitales, microcontroladores, procesadores y aplicaciones de electrónica digital.",
+      truthTable: (label) => `La tabla de verdad de la ${label} muestra todas las combinaciones posibles de entradas y sus correspondientes salidas lógicas. Es esencial para entender el comportamiento del circuito integrado.`,
+      additionalInfo: (label) => `Para dominar el uso de la ${label}, es recomendable estudiar álgebra booleana, diseño de circuitos digitales y practicar con simuladores. El datasheet proporciona las especificaciones técnicas completas del circuito integrado.`,
+      heroIntro: (label, configuration) => `La ${label} es un circuito integrado fundamental en electrónica digital. Su configuración es ${configuration}. El funcionamiento se basa en la función lógica`,
+      howTheyWorkIntro: "Las compuertas lógicas son circuitos integrados que ejecutan operaciones lógicas básicas del álgebra de Boole. Funcionan con señales binarias (0 y 1, niveles de voltaje bajo y alto) siendo los componentes fundamentales de todos los sistemas digitales modernos.",
       activeLevels: {
-        title: "Activo Alto y Activo Bajo",
-        description: "Un pin bajo activo debe conectarse a un nivel lógico bajo (0 voltios) para activarse, mientras que un pin alto activo debe conectarse a un nivel lógico alto (3 o 5 voltios)."
+        title: "Niveles Lógicos: Activo Alto y Activo Bajo",
+        description: "En circuitos integrados, un pin activo bajo requiere conexión a nivel lógico bajo (0V) para activarse, mientras que un pin activo alto necesita nivel lógico alto (3V o 5V) según las especificaciones del datasheet."
       },
       integratedCircuits: {
-        title: "Circuitos Integrados",
-        description: "Se implementan en ICs como los de la familia TTL o CMOS, para ahorrar espacio y aumentar la eficiencia."
+        title: "Circuitos Integrados TTL y CMOS",
+        description: "Las compuertas lógicas se implementan en circuitos integrados de las familias TTL (como 74LS) y CMOS (como 74HC) para optimizar espacio, consumo y rendimiento en aplicaciones digitales."
       }
     },
   },  en: {
-    pageTitle: "Complete Guide to Logic Gates",
-    pageDescription: "Explore the fundamental components of digital electronics. Learn about the most common series: 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND) and 7486 (XOR).",
+    pageTitle: "Logic Gates: Complete Guide with Datasheet and Truth Table",
+    pageDescription: "Complete guide to logic gates with datasheet, truth table and applications. Integrated circuits 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Electrical characteristics and diagrams.",
     imageAlts: {
-      featuredImage: "Complete Guide to Series 7408, 7432, 7404, 7400 and 7486",
-      datasheetImage: "Complete Guide with datasheets for Series 7408, 7432, 7404, 7400 and 7486"
+      featuredImage: "Logic Gates AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 - Datasheet and truth table",
+      datasheetImage: "Logic gates datasheet - Integrated circuits 7408, 7432, 7404, 7400, 7486 with truth table and diagram"
     },
     metadata: {
       titleSuffix: "- Datasheet, Truth Table and Diagram",
@@ -197,11 +197,11 @@ export const UI_TRANSLATIONS: Record<LocaleTypes, UITranslations> = {  es: {
       }
     },
   },  pt: {
-    pageTitle: "Guia Completo sobre Portas Lógicas",
-    pageDescription: "Explore os componentes fundamentais da eletrônica digital. Aprenda sobre as séries mais comuns: 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND) e 7486 (XOR).",
+    pageTitle: "Portas Lógicas: Guia Completo com Datasheet e Tabela Verdade",
+    pageDescription: "Guia completo de portas lógicas com datasheet, tabela verdade e aplicações. Circuitos integrados 7408 (AND), 7432 (OR), 7404 (NOT), 7400 (NAND), 7486 (XOR). Características elétricas e diagramas.",
     imageAlts: {
-      featuredImage: "Guia Completo sobre as Séries 7408, 7432, 7404, 7400 e 7486",
-      datasheetImage: "Guia Completo com folha de dados das Séries 7408, 7432, 7404, 7400 e 7486"
+      featuredImage: "Portas Lógicas AND 7408, OR 7432, NOT 7404, NAND 7400, XOR 7486 - Datasheet e tabela verdade",
+      datasheetImage: "Datasheet portas lógicas - Circuitos integrados 7408, 7432, 7404, 7400, 7486 com tabela verdade e diagrama"
     },
     metadata: {
       titleSuffix: "- Folha de Dados, Tabela Verdade e Diagrama",
