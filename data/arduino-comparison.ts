@@ -347,7 +347,10 @@ function comparePrice(board1: ArduinoBoard, board2: ArduinoBoard): 'board1' | 'b
     'mkr_wifi_1010': 35,
     'mkr_zero': 40,
     'nano_every': 15,
-    'portenta-h7': 120
+    'portenta-h7': 120,
+    'esp32': 8,
+    'esp32_s3': 12,
+    'esp32_c3': 6
   }
   
   const price1 = prices[board1.id] || 30
@@ -383,10 +386,119 @@ function parseMemory(memoryStr: string): number {
 export const POPULAR_COMPARISONS = [
   { board1: 'uno', board2: 'nano' },
   { board1: 'uno', board2: 'mega2560' },
+  { board1: 'uno', board2: 'esp32' },
+  { board1: 'nano', board2: 'esp32' },
   { board1: 'nano', board2: 'nano_every' },
   { board1: 'leonardo', board2: 'micro' },
   { board1: 'due', board2: 'portenta-h7' },
-  { board1: 'mkr_wifi_1010', board2: 'mkr_zero' },
+  { board1: 'esp32', board2: 'esp32_s3' },
+  { board1: 'mkr_wifi_1010', board2: 'esp32' },
+  { board1: 'mkr_zero', board2: 'esp32_c3' },
   { board1: 'uno', board2: 'due' },
-  { board1: 'nano', board2: 'leonardo' }
+  { board1: 'nano', board2: 'leonardo' },
+  { board1: 'esp32', board2: 'due' },
+  { board1: 'esp32_s3', board2: 'portenta-h7' },
+  { board1: 'mega2560', board2: 'esp32' },
+  { board1: 'esp32_c3', board2: 'uno' }
 ]
+
+// Función específica para comparar ESP32 vs Arduino
+export function compareESP32vsArduino(esp32Board: ArduinoBoard, arduinoBoard: ArduinoBoard): ComparisonData & {
+  advantages: {
+    esp32: string[]
+    arduino: string[]
+  }
+  recommendations: {
+    esp32: string[]
+    arduino: string[]
+  }
+} {
+  const basicComparison = calculateComparison(esp32Board, arduinoBoard)
+  
+  return {
+    ...basicComparison,
+    advantages: {
+      esp32: [
+        'Wi-Fi y Bluetooth integrados',
+        'Mayor velocidad de procesamiento (240 MHz)',
+        'Más memoria (4MB Flash, 520KB SRAM)',
+        'Dual core para multitarea',
+        'Más pines GPIO (36)',
+        'Precio más económico',
+        'Soporte para Python y Lua'
+      ],
+      arduino: [
+        'Mayor simplicidad de uso',
+        'Ecosistema más maduro',
+        'Mejor documentación educativa',
+        'Voltaje de 5V (mayor compatibilidad)',
+        'Menor consumo en reposo',
+        'Comunidad más grande',
+        'Shields disponibles'
+      ]
+    },
+    recommendations: {
+      esp32: [
+        'Proyectos IoT y domótica',
+        'Aplicaciones con conectividad inalámbrica',
+        'Sistemas con múltiples sensores',
+        'Proyectos con procesamiento intensivo',
+        'Aplicaciones con presupuesto limitado'
+      ],
+      arduino: [
+        'Proyectos educativos',
+        'Prototipos rápidos',
+        'Sistemas simples de control',
+        'Proyectos donde la conectividad no es necesaria',
+        'Aplicaciones que requieren 5V'
+      ]
+    }
+  }
+}
+
+// Traducciones específicas para ESP32
+const ESP32_TRANSLATIONS = {
+  es: {
+    esp32Advantages: 'Ventajas del ESP32',
+    arduinoAdvantages: 'Ventajas de Arduino',
+    esp32Recommendations: 'Cuándo usar ESP32',
+    arduinoRecommendations: 'Cuándo usar Arduino',
+    connectivity: 'Conectividad inalámbrica integrada',
+    performance: 'Mayor rendimiento y velocidad',
+    memory: 'Más memoria disponible',
+    price: 'Precio más económico',
+    simplicity: 'Mayor simplicidad de uso',
+    ecosystem: 'Ecossistema más maduro',
+    compatibility: 'Mayor compatibilidad de voltaje'
+  },
+  en: {
+    esp32Advantages: 'ESP32 Advantages',
+    arduinoAdvantages: 'Arduino Advantages',
+    esp32Recommendations: 'When to use ESP32',
+    arduinoRecommendations: 'When to use Arduino',
+    connectivity: 'Built-in wireless connectivity',
+    performance: 'Higher performance and speed',
+    memory: 'More available memory',
+    price: 'More economical price',
+    simplicity: 'Greater ease of use',
+    ecosystem: 'More mature ecosystem',
+    compatibility: 'Higher voltage compatibility'
+  },
+  pt: {
+    esp32Advantages: 'Vantagens do ESP32',
+    arduinoAdvantages: 'Vantagens do Arduino',
+    esp32Recommendations: 'Quando usar ESP32',
+    arduinoRecommendations: 'Quando usar Arduino',
+    connectivity: 'Conectividade sem fio integrada',
+    performance: 'Maior desempenho e velocidade',
+    memory: 'Mais memória disponível',
+    price: 'Preço mais econômico',
+    simplicity: 'Maior facilidade de uso',
+    ecosystem: 'Ecossistema mais maduro',
+    compatibility: 'Maior compatibilidade de voltagem'
+  }
+}
+
+export function getESP32Translations(locale: 'es' | 'en' | 'pt') {
+  return ESP32_TRANSLATIONS[locale] || ESP32_TRANSLATIONS.es
+}
