@@ -29,19 +29,6 @@ export function middleware(request: NextRequest) {
     }
   }
   
-  // Redirección específica para compuertas lógicas
-  if (pathname === '/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' || 
-      pathname === '/es/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486' ||
-      pathname === '/en/blog/guia-completa-sobre-las-compuertas-logicas-7408-7432-7404-7400-y-7486') {
-    let targetPath = '/compuertas-logicas'
-    if (pathname.startsWith('/es/')) {
-      targetPath = '/es/compuertas-logicas'
-    } else if (pathname.startsWith('/en/')) {
-      targetPath = '/en/compuertas-logicas'
-    }
-    return NextResponse.redirect(new URL(targetPath, request.url), 301)
-  }
-  
   // Redirección específica para Proteus
   if (pathname === '/blog/proteus/como-descargar-e-instalar-proteus' || 
       pathname === '/es/blog/proteus/como-descargar-e-instalar-proteus' ||
