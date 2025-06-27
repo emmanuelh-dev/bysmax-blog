@@ -69,10 +69,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   </time>
                 </div>
               </header>
-              <AdComponent slot={SLOTS[0]} />
 
               {/* Article Content - Directo al grano */}
-              <div className="px-8">
+              <div className="mx-auto max-w-4xl px-8">
+                <AdComponent slot={SLOTS[0]} />
                 <div className="prose prose-neutral mx-auto max-w-none dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:text-neutral-900 prose-pre:bg-neutral-100 prose-img:rounded-lg dark:prose-a:text-blue-400 dark:prose-code:text-neutral-100 dark:prose-pre:bg-neutral-900">
                   {children}
                 </div>

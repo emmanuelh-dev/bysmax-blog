@@ -181,7 +181,6 @@ export default function page({ params: { locale } }: Props) {
               <h1 className="mb-6 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
                 {ui.pageTitle}
               </h1>
-              <p className="mb-8 text-lg leading-relaxed text-[#737373]">{ui.pageDescription}</p>
               {/* Ad Section - Primera vista */}
               <AdComponent slot={SLOTS[0]} />
               {/* Featured Images */}
@@ -215,6 +214,7 @@ export default function page({ params: { locale } }: Props) {
                   }
                 />
               </div>
+              <p className="mb-8 text-lg leading-relaxed text-[#737373]">{ui.pageDescription}</p>
             </header>
 
             {/* Ad Section - Primera vista */}
