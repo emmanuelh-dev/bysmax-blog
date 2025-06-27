@@ -50,7 +50,7 @@ export default function Sidebar({ children }: Props) {
 
         <div className="flex">
           <aside
-            className={`fixed inset-y-0 left-0 z-40 w-[280px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-dark md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`fixed inset-y-0 left-0 z-40 w-[300px] transform border-r border-[#e5e5e5] bg-white transition-transform duration-200 ease-out dark:border-[#333333] dark:bg-dark md:sticky md:top-0 md:h-screen md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <nav
               aria-label="Navegación de la barra lateral"
