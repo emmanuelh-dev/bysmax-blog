@@ -43,7 +43,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
     <div className="min-h-screen bg-light dark:bg-dark">
       <ScrollTopAndComment />
 
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto xl:container">
         <div className="grid grid-cols-1 px-4 pt-20 xl:grid-cols-[1fr_300px] xl:gap-8">
           {/* Main Content Column */}
           <main className="min-w-0">
@@ -107,7 +107,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </div>
 
               {/* Article Content */}
-              <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:text-neutral-900 prose-pre:bg-neutral-100 dark:prose-a:text-blue-400 dark:prose-code:text-neutral-100 dark:prose-pre:bg-neutral-900">
+              <div className="prose prose-neutral mx-auto max-w-none dark:prose-invert prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-code:text-neutral-900 prose-pre:bg-neutral-100 dark:prose-a:text-blue-400 dark:prose-code:text-neutral-100 dark:prose-pre:bg-neutral-900">
                 {children}
               </div>
 

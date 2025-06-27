@@ -54,8 +54,17 @@ export default function QuickComparisonButtons({ locale }: QuickComparisonButton
 
   return (
     <div className="space-y-8">
-      {/* Quick Comparison Buttons */}
+      {/* Interactive Selector */}
       <DualComparisonSelector locale={locale} />
+
+      {/* Popular Comparisons CTA */}
+      <div className="rounded-lg bg-gray-50 p-4 text-center dark:bg-gray-800/50">
+        <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          {locale === 'es'
+            ? '💡 Comparaciones más buscadas: ESP32 vs Arduino Uno, Arduino Mega vs ESP32, Arduino Nano vs ESP32'
+            : '💡 Most searched comparisons: ESP32 vs Arduino Uno, Arduino Mega vs ESP32, Arduino Nano vs ESP32'}
+        </p>
+      </div>
     </div>
   )
 }
