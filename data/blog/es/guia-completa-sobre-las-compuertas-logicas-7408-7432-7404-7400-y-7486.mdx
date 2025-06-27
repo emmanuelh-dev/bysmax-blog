@@ -20,7 +20,9 @@ summary: ¿Alguna vez te has preguntado cómo funcionan los dispositivos electr�
   </div>
 </div>
 
-¿Alguna vez te has preguntado cómo funcionan los dispositivos electrónicos que usas diariamente? La respuesta radica en las **compuertas lógicas**, los componentes fundamentales en cualquier circuito digital. En este artículo, exploraremos algunas de las compuertas lógicas más comunes: 7408, 7432, 7404, 7400 y 7486. Comprender estos componentes es crucial para cualquier entusiasta de la electrónica.
+¿Alguna vez te has preguntado cómo funcionan los dispositivos electrónicos que usas diariamente? La respuesta radica en las **[compuertas lógicas](/es/compuertas-logicas)**, los componentes fundamentales en cualquier circuito digital. En este artículo, exploraremos algunas de las compuertas lógicas más comunes: 7408, 7432, 7404, 7400 y 7486. Comprender estos componentes es crucial para cualquier entusiasta de la electrónica.
+
+Además de estas compuertas principales, también existen otras como la [NOR (7402)](/es/compuertas-logicas/7402), [XNOR (74266)](/es/compuertas-logicas/74266) y [Buffer (7407)](/es/compuertas-logicas/7407), todas disponibles en nuestro simulador interactivo.
 
 ## ¿Qué son las Compuertas Lógicas?
 
@@ -30,7 +32,9 @@ Las **compuertas lógicas** son bloques básicos de la electrónica digital que 
 
 ### Compuerta AND (7408)
 
-La **compuerta 7408** es una compuerta AND de 2 entradas. Para que la salida de esta compuerta sea alta (1), ambas entradas deben ser altas (1).
+![Datasheet Compuerta AND 7408 - Circuito Integrado 74LS08](/static/images/74LS08.jpg)
+
+La **[compuerta 7408](/es/compuertas-logicas/7408)** es una compuerta AND de 2 entradas. Para que la salida de esta compuerta sea alta (1), ambas entradas deben ser altas (1).
 
 - **Configuración**: 2 entradas y 1 salida.
 - **Tabla de verdad**:
@@ -44,7 +48,9 @@ La **compuerta 7408** es una compuerta AND de 2 entradas. Para que la salida de 
 
 ### Compuerta OR (7432)
 
-La **compuerta 7432** es una compuerta OR de 2 entradas. La salida será alta (1) si al menos una de las entradas es alta (1).
+![Datasheet Compuerta OR 7432 - Circuito Integrado 74LS32](/static/images/74LS32.jpg)
+
+La **[compuerta 7432](/es/compuertas-logicas/7432)** es una compuerta OR de 2 entradas. La salida será alta (1) si al menos una de las entradas es alta (1).
 
 - **Configuración**: 2 entradas y 1 salida.
 - **Tabla de verdad**:
@@ -58,7 +64,9 @@ La **compuerta 7432** es una compuerta OR de 2 entradas. La salida será alta (1
 
 ### Compuerta NOT (7404)
 
-La **compuerta 7404** es una compuerta NOT, también conocida como inversor. Tiene una sola entrada y una salida, invirtiendo el estado lógico de la entrada.
+![Datasheet Compuerta NOT 7404 - Circuito Integrado 74LS04](/static/images/74LS04.jpg)
+
+La **[compuerta 7404](/es/compuertas-logicas/7404)** es una compuerta NOT, también conocida como inversor. Tiene una sola entrada y una salida, invirtiendo el estado lógico de la entrada.
 
 - **Configuración**: 1 entrada y 1 salida.
 - **Tabla de verdad**:
@@ -70,7 +78,9 @@ La **compuerta 7404** es una compuerta NOT, también conocida como inversor. Tie
 
 ### Compuerta NAND (7400)
 
-La **compuerta 7400** es una compuerta NAND de 2 entradas. Es una combinación de las compuertas AND y NOT. La salida será baja (0) solo cuando ambas entradas sean altas (1).
+![Datasheet Compuerta NAND 7400 - Circuito Integrado 74LS00](/static/images/74LS00.jpg)
+
+La **[compuerta 7400](/es/compuertas-logicas/7400)** es una compuerta NAND de 2 entradas. Es una combinación de las compuertas AND y NOT. La salida será baja (0) solo cuando ambas entradas sean altas (1).
 
 - **Configuración**: 2 entradas y 1 salida.
 - **Tabla de verdad**:
@@ -84,7 +94,9 @@ La **compuerta 7400** es una compuerta NAND de 2 entradas. Es una combinación d
 
 ### Compuerta XOR (7486)
 
-La **compuerta 7486** es una compuerta XOR de 2 entradas. La salida será alta (1) si solo una de las entradas es alta (1).
+![Datasheet Compuerta XOR 7486 - Circuito Integrado 74LS86](/static/images/74LS86.jpg)
+
+La **[compuerta 7486](/es/compuertas-logicas/7486)** es una compuerta XOR de 2 entradas. La salida será alta (1) si solo una de las entradas es alta (1).
 
 - **Configuración**: 2 entradas y 1 salida.
 - **Tabla de verdad**:
@@ -100,12 +112,14 @@ La **compuerta 7486** es una compuerta XOR de 2 entradas. La salida será alta (
 
 ### Activo Alto y Activo Bajo
 
-Entender el concepto de **activo alto y activo bajo** es esencial para trabajar con compuertas lógicas. Un pin bajo activo debe conectarse a un nivel lógico bajo (0 voltios) para activarse, mientras que un pin alto activo debe conectarse a un nivel lógico alto (3 o 5 voltios).
+Entender el concepto de **activo alto y activo bajo** es esencial para trabajar con [compuertas lógicas](/es/compuertas-logicas). Un pin bajo activo debe conectarse a un nivel lógico bajo (0 voltios) para activarse, mientras que un pin alto activo debe conectarse a un nivel lógico alto (3 o 5 voltios).
 
 ### Implementación en Circuitos Integrados (ICs)
 
-Las compuertas lógicas se implementan en **circuitos integrados** para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro compuertas AND de dos entradas en un solo chip.
+Las [compuertas lógicas](/es/compuertas-logicas) se implementan en **circuitos integrados** para ahorrar espacio y aumentar la eficiencia. Por ejemplo, el IC 7408 contiene cuatro [compuertas AND](/es/compuertas-logicas/7408) de dos entradas en un solo chip.
 
 ### Operaciones Complejas
 
-Combinando diferentes compuertas lógicas, se pueden realizar operaciones complejas. Por ejemplo, un flip-flop, que se utiliza para almacenar datos, puede construirse combinando compuertas NAND.
+Combinando diferentes [compuertas lógicas](/es/compuertas-logicas), se pueden realizar operaciones complejas. Por ejemplo, un flip-flop, que se utiliza para almacenar datos, puede construirse combinando [compuertas NAND](/es/compuertas-logicas/7400).
+
+Si quieres **experimentar con estas compuertas** y ver cómo funcionan en la práctica, puedes utilizar nuestro [simulador interactivo de compuertas lógicas](/es/compuertas-logicas) donde podrás construir circuitos virtuales y observar el comportamiento de cada compuerta en tiempo real.
