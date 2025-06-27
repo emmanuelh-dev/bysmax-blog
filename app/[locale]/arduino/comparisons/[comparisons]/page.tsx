@@ -29,7 +29,7 @@ import {
   MinusCircle,
 } from 'lucide-react'
 import { notFound } from 'next/navigation'
-import QuickComparisonButtons from '@/components/arduino/QuickComparisonButtons'
+import DualComparisonSelector from '@/components/arduino/DualComparisonSelector'
 
 interface Props {
   params: {
@@ -172,173 +172,16 @@ export default function ArduinoComparisonPage({ params: { locale, comparisons } 
 
         <div className="mx-auto max-w-4xl">
           <nav className="mb-8" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-sm text-[#737373]">
-              <li>
-                <a href={`/${locale}`} className="transition-colors hover:text-[#0070f3]">
-                  {locale === 'en' ? 'Home' : locale === 'pt' ? 'Início' : 'Inicio'}
-                </a>
-              </li>
-              <li className="mx-2">/</li>
-              <li>
-                <a href={`/${locale}/arduino`} className="transition-colors hover:text-[#0070f3]">
-                  Arduino
-                </a>
-              </li>
-              <li className="mx-2">/</li>
-              <li className="font-medium text-[#0a0a0a] dark:text-white">Comparaciones</li>
-            </ol>
-
             {/* Hero Section */}
             <header className="mb-16 text-center">
               <h1 className="mb-6 text-4xl font-semibold leading-tight tracking-tight text-[#0a0a0a] dark:text-white">
-                {board1.name} <span className="text-[#0070f3]">vs</span> {board2.name}
+                {board1.name} <span className="text-[#0070f3]">vs</span> {board2.name} Diferencias y
+                Características
               </h1>
-              <p className="mb-2 text-lg font-medium text-[#0a0a0a] dark:text-white">
-                Diferencias y Características
-              </p>
-              <p className="mx-auto max-w-2xl leading-relaxed text-[#737373]">
-                Comparativa completa entre {board1.name} y {board2.name}. Analizamos
-                especificaciones técnicas, rendimiento, conectividad y te ayudamos a elegir el mejor
-                microcontrolador para tu proyecto.
-              </p>
             </header>
-            <QuickComparisonButtons locale={locale} />
+            <DualComparisonSelector locale={locale} />
           </nav>
-          {/* Quick Comparison Cards */}
-          <div className="mb-16 grid gap-8 md:grid-cols-2">
-            {/* Board 1 */}
-            <div
-              className={`rounded-lg border p-8 transition-all duration-200 ${
-                comparisonData.winner.overall === 'board1'
-                  ? 'border-[#0070f3] bg-white shadow-sm dark:bg-[#0a0a0a]'
-                  : 'border-[#e5e5e5] bg-white dark:border-[#333333] dark:bg-[#0a0a0a]'
-              }`}
-            >
-              <div className="mb-6 flex items-center gap-4">
-                <div className="relative">
-                  <Image
-                    src={board1.image || '/static/images/arduino-placeholder.png'}
-                    width={80}
-                    height={60}
-                    alt={board1.name}
-                    className="rounded-md"
-                  />
-                  {comparisonData.winner.overall === 'board1' && (
-                    <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#0070f3]">
-                      <Trophy className="h-3 w-3 text-white" />
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h2 className="mb-1 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    {board1.name}
-                  </h2>
-                  <p className="text-sm text-[#737373]">{board1.microcontroller}</p>
-                </div>
-              </div>
-
-              <p className="mb-6 text-sm leading-relaxed text-[#737373]">
-                {board1.description[locale as keyof typeof board1.description]}
-              </p>
-
-              <div className="flex gap-3">
-                <a
-                  href={`/${locale}/arduino/${board1.id}`}
-                  className="flex-1 rounded-md border border-[#e5e5e5] px-4 py-2.5 text-center text-sm font-medium transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:hover:border-[#0070f3]"
-                >
-                  Ver detalles
-                </a>
-                <a
-                  href={board1.officialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 rounded-md bg-[#0070f3] px-4 py-2.5 text-center text-sm font-medium text-white transition-all duration-200 hover:bg-[#0060df]"
-                >
-                  Comprar ahora
-                </a>
-              </div>
-            </div>
-
-            {/* Board 2 */}
-            <div
-              className={`rounded-lg border p-8 transition-all duration-200 ${
-                comparisonData.winner.overall === 'board2'
-                  ? 'border-[#0070f3] bg-white shadow-sm dark:bg-[#0a0a0a]'
-                  : 'border-[#e5e5e5] bg-white dark:border-[#333333] dark:bg-[#0a0a0a]'
-              }`}
-            >
-              <div className="mb-6 flex items-center gap-4">
-                <div className="relative">
-                  <Image
-                    src={board2.image || '/static/images/arduino-placeholder.png'}
-                    width={80}
-                    height={60}
-                    alt={board2.name}
-                    className="rounded-md"
-                  />
-                  {comparisonData.winner.overall === 'board2' && (
-                    <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#0070f3]">
-                      <Trophy className="h-3 w-3 text-white" />
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h2 className="mb-1 text-xl font-semibold text-[#0a0a0a] dark:text-white">
-                    {board2.name}
-                  </h2>
-                  <p className="text-sm text-[#737373]">{board2.microcontroller}</p>
-                </div>
-              </div>
-
-              <p className="mb-6 text-sm leading-relaxed text-[#737373]">
-                {board2.description[locale as keyof typeof board2.description]}
-              </p>
-
-              <div className="flex gap-3">
-                <a
-                  href={`/${locale}/arduino/${board2.id}`}
-                  className="flex-1 rounded-md border border-[#e5e5e5] px-4 py-2.5 text-center text-sm font-medium transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:hover:border-[#0070f3]"
-                >
-                  Ver detalles
-                </a>
-                <a
-                  href={board2.officialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 rounded-md bg-[#0070f3] px-4 py-2.5 text-center text-sm font-medium text-white transition-all duration-200 hover:bg-[#0060df]"
-                >
-                  Comprar ahora
-                </a>
-              </div>
-            </div>
-          </div>
-          {/* Score Summary */}
-          <div className="mb-16 rounded-lg border border-[#e5e5e5] bg-white p-8 text-center dark:border-[#333333] dark:bg-[#0a0a0a]">
-            <h3 className="mb-6 text-lg font-semibold text-[#0a0a0a] dark:text-white">
-              Resultado de la Comparativa
-            </h3>
-            <div className="flex items-center justify-center gap-12">
-              <div className="text-center">
-                <div className="mb-1 text-3xl font-semibold text-[#0a0a0a] dark:text-white">
-                  {comparisonData.scores.board1}
-                </div>
-                <div className="text-sm text-[#737373]">{board1.name}</div>
-              </div>
-              <div className="h-12 w-px bg-[#e5e5e5] dark:bg-[#333333]"></div>
-              <div className="text-center">
-                <div className="mb-1 text-3xl font-semibold text-[#0a0a0a] dark:text-white">
-                  {comparisonData.scores.board2}
-                </div>
-                <div className="text-sm text-[#737373]">{board2.name}</div>
-              </div>
-            </div>
-          </div>
-          {/* Ad Section */}
-          <div className="mb-16">
-            <AdComponent slot={SLOTS[0]} />
-          </div>
-
-          {/* Comparison Table */}
+          <AdComponent slot={SLOTS[0]} />
           <section className="mb-16">
             <h2 className="mb-8 text-2xl font-semibold text-[#0a0a0a] dark:text-white">
               Tabla de Especificaciones Técnicas
@@ -528,6 +371,141 @@ export default function ArduinoComparisonPage({ params: { locale, comparisons } 
               </table>
             </div>
           </section>
+          <AdComponent slot={SLOTS[2]} />
+
+          {/* Quick Comparison Cards */}
+          <div className="mb-16 grid gap-8 md:grid-cols-2">
+            {/* Board 1 */}
+            <div
+              className={`rounded-lg border p-8 transition-all duration-200 ${
+                comparisonData.winner.overall === 'board1'
+                  ? 'border-[#0070f3] bg-white shadow-sm dark:bg-[#0a0a0a]'
+                  : 'border-[#e5e5e5] bg-white dark:border-[#333333] dark:bg-[#0a0a0a]'
+              }`}
+            >
+              <div className="mb-6 flex items-center gap-4">
+                <div className="relative">
+                  <Image
+                    src={board1.image || '/static/images/arduino-placeholder.png'}
+                    width={80}
+                    height={60}
+                    alt={board1.name}
+                    className="rounded-md"
+                  />
+                  {comparisonData.winner.overall === 'board1' && (
+                    <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#0070f3]">
+                      <Trophy className="h-3 w-3 text-white" />
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h2 className="mb-1 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                    {board1.name}
+                  </h2>
+                  <p className="text-sm text-[#737373]">{board1.microcontroller}</p>
+                </div>
+              </div>
+
+              <p className="mb-6 text-sm leading-relaxed text-[#737373]">
+                {board1.description[locale as keyof typeof board1.description]}
+              </p>
+
+              <div className="flex gap-3">
+                <a
+                  href={`/${locale}/arduino/${board1.id}`}
+                  className="flex-1 rounded-md border border-[#e5e5e5] px-4 py-2.5 text-center text-sm font-medium transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:hover:border-[#0070f3]"
+                >
+                  Ver detalles
+                </a>
+                <a
+                  href={board1.officialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 rounded-md bg-[#0070f3] px-4 py-2.5 text-center text-sm font-medium text-white transition-all duration-200 hover:bg-[#0060df]"
+                >
+                  Comprar ahora
+                </a>
+              </div>
+            </div>
+
+            {/* Board 2 */}
+            <div
+              className={`rounded-lg border p-8 transition-all duration-200 ${
+                comparisonData.winner.overall === 'board2'
+                  ? 'border-[#0070f3] bg-white shadow-sm dark:bg-[#0a0a0a]'
+                  : 'border-[#e5e5e5] bg-white dark:border-[#333333] dark:bg-[#0a0a0a]'
+              }`}
+            >
+              <div className="mb-6 flex items-center gap-4">
+                <div className="relative">
+                  <Image
+                    src={board2.image || '/static/images/arduino-placeholder.png'}
+                    width={80}
+                    height={60}
+                    alt={board2.name}
+                    className="rounded-md"
+                  />
+                  {comparisonData.winner.overall === 'board2' && (
+                    <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#0070f3]">
+                      <Trophy className="h-3 w-3 text-white" />
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <h2 className="mb-1 text-xl font-semibold text-[#0a0a0a] dark:text-white">
+                    {board2.name}
+                  </h2>
+                  <p className="text-sm text-[#737373]">{board2.microcontroller}</p>
+                </div>
+              </div>
+
+              <p className="mb-6 text-sm leading-relaxed text-[#737373]">
+                {board2.description[locale as keyof typeof board2.description]}
+              </p>
+
+              <div className="flex gap-3">
+                <a
+                  href={`/${locale}/arduino/${board2.id}`}
+                  className="flex-1 rounded-md border border-[#e5e5e5] px-4 py-2.5 text-center text-sm font-medium transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:hover:border-[#0070f3]"
+                >
+                  Ver detalles
+                </a>
+                <a
+                  href={board2.officialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 rounded-md bg-[#0070f3] px-4 py-2.5 text-center text-sm font-medium text-white transition-all duration-200 hover:bg-[#0060df]"
+                >
+                  Comprar ahora
+                </a>
+              </div>
+            </div>
+          </div>
+          {/* Score Summary */}
+          <div className="mb-16 rounded-lg border border-[#e5e5e5] bg-white p-8 text-center dark:border-[#333333] dark:bg-[#0a0a0a]">
+            <h3 className="mb-6 text-lg font-semibold text-[#0a0a0a] dark:text-white">
+              Resultado de la Comparativa
+            </h3>
+            <div className="flex items-center justify-center gap-12">
+              <div className="text-center">
+                <div className="mb-1 text-3xl font-semibold text-[#0a0a0a] dark:text-white">
+                  {comparisonData.scores.board1}
+                </div>
+                <div className="text-sm text-[#737373]">{board1.name}</div>
+              </div>
+              <div className="h-12 w-px bg-[#e5e5e5] dark:bg-[#333333]"></div>
+              <div className="text-center">
+                <div className="mb-1 text-3xl font-semibold text-[#0a0a0a] dark:text-white">
+                  {comparisonData.scores.board2}
+                </div>
+                <div className="text-sm text-[#737373]">{board2.name}</div>
+              </div>
+            </div>
+          </div>
+          {/* Ad Section */}
+          <div className="mb-16">
+            <AdComponent slot={SLOTS[0]} />
+          </div>
 
           {/* Detailed Comparison */}
           <section className="mb-16">

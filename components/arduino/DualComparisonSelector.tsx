@@ -20,7 +20,7 @@ export default function DualComparisonSelector({ locale }: DualComparisonSelecto
 
   const translations = {
     es: {
-      title: 'Comparador de Placas',
+      title: 'Selecciona las Placas',
       subtitle: 'Selecciona dos placas para compararlas',
       selectBoard1: 'Selecciona primera placa',
       selectBoard2: 'Selecciona segunda placa',
@@ -38,7 +38,7 @@ export default function DualComparisonSelector({ locale }: DualComparisonSelecto
       yes: 'Sí',
     },
     en: {
-      title: 'Board Comparator',
+      title: 'Board Selector',
       subtitle: 'Select two boards to compare them',
       selectBoard1: 'Select first board',
       selectBoard2: 'Select second board',
@@ -56,7 +56,7 @@ export default function DualComparisonSelector({ locale }: DualComparisonSelecto
       yes: 'Yes',
     },
     pt: {
-      title: 'Comparador de Placas',
+      title: 'Seletor de Placas',
       subtitle: 'Selecione duas placas para compará-las',
       selectBoard1: 'Selecione primeira placa',
       selectBoard2: 'Selecione segunda placa',
