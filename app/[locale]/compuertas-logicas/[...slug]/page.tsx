@@ -332,9 +332,9 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                       : locale === 'pt'
                         ? `do ${page.heading} ${circuitNumber} fornece informações técnicas completas incluindo diagrama de pinos, características elétricas, tabela de verdade e aplicações típicas do circuito integrado.`
                         : `for ${page.heading} ${circuitNumber} provides complete technical information including pin diagram, electrical characteristics, truth table and typical applications of the integrated circuit.`}
-                  </p>{' '}
+                  </p>
                   <div className="flex items-center justify-center gap-4 text-center">
-                  {page.pdf && (
+                    {page.pdf && (
                       <a
                         href={page.pdf}
                         target="_blank"
@@ -350,13 +350,13 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                         </svg>
                         {ui.labels.downloadPdf}
                       </a>
-                  )}
-                  <BuyButton
-                    href="https://mercadolibre.com/sec/33P5StH"
-                    eventName={`buy-${page.type.toLowerCase()}-${circuitNumber}`}
-                    text={ui.labels.buy}
+                    )}
+                    <BuyButton
+                      href="https://mercadolibre.com/sec/33P5StH"
+                      eventName={`buy-${page.type.toLowerCase()}-${circuitNumber}`}
+                      text={ui.labels.buy}
                     />
-                    </div>
+                  </div>
                 </div>
                 <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4 dark:border-[#333333] dark:bg-[#1a1a1a]">
                   <p className="text-sm text-[#737373]">
