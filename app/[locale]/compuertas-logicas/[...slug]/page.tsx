@@ -310,20 +310,13 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                   </span>
                 </p>
               </div>
+              <AdComponent slot={SLOTS[0]} />
+
               <section className="mb-12">
                 <h2 className="mb-6 text-2xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
                   {ui.sections.datasheet}
                 </h2>
                 <div className="rounded-lg border border-[#e5e5e5] bg-white p-6 dark:border-[#333333] dark:bg-[#0a0a0a]">
-                  <p className="mb-6 text-[#737373]">
-                    {locale === 'es' ? 'El' : locale === 'pt' ? 'O' : 'The'}{' '}
-                    <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
-                    {locale === 'es'
-                      ? `del ${page.heading} ${circuitNumber} proporciona información técnica completa incluyendo diagrama de pines, características eléctricas, tabla de verdad y aplicaciones típicas del circuito integrado.`
-                      : locale === 'pt'
-                        ? `do ${page.heading} ${circuitNumber} fornece informações técnicas completas incluindo diagrama de pinos, características elétricas, tabela de verdade e aplicações típicas do circuito integrado.`
-                        : `for ${page.heading} ${circuitNumber} provides complete technical information including pin diagram, electrical characteristics, truth table and typical applications of the integrated circuit.`}
-                  </p>
                   <figure>
                     <div className="w-full overflow-hidden rounded-lg">
                       <Image
@@ -349,6 +342,15 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                           : `Official datasheet ${page.heading} ${circuitNumber} - ${page.type.toUpperCase()} integrated circuit`}
                     </figcaption>
                   </figure>
+                  <p className="mb-6 text-[#737373]">
+                    {locale === 'es' ? 'El' : locale === 'pt' ? 'O' : 'The'}{' '}
+                    <span className="font-medium text-[#0a0a0a] dark:text-white">datasheet</span>{' '}
+                    {locale === 'es'
+                      ? `del ${page.heading} ${circuitNumber} proporciona información técnica completa incluyendo diagrama de pines, características eléctricas, tabla de verdad y aplicaciones típicas del circuito integrado.`
+                      : locale === 'pt'
+                        ? `do ${page.heading} ${circuitNumber} fornece informações técnicas completas incluindo diagrama de pinos, características elétricas, tabela de verdade e aplicações típicas do circuito integrado.`
+                        : `for ${page.heading} ${circuitNumber} provides complete technical information including pin diagram, electrical characteristics, truth table and typical applications of the integrated circuit.`}
+                  </p>{' '}
                   {page.pdf && (
                     <div className="mt-6 text-center">
                       <a

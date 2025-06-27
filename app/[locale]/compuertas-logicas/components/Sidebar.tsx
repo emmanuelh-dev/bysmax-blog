@@ -58,7 +58,7 @@ export default function Sidebar({ children }: Props) {
             >
               <div className="flex h-16 items-center justify-between border-b border-[#e5e5e5] dark:border-[#333333] max-sm:px-6 md:justify-start">
                 <h2 className="text-lg font-semibold tracking-tight text-dark dark:text-white">
-                  {ui.pageTitle}
+                  {ui.pageTitle.split(' ').splice(0, 2).join(' ')}
                 </h2>
                 <button
                   onClick={toggleSidebar}

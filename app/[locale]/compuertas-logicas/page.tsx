@@ -182,7 +182,8 @@ export default function page({ params: { locale } }: Props) {
                 {ui.pageTitle}
               </h1>
               <p className="mb-8 text-lg leading-relaxed text-[#737373]">{ui.pageDescription}</p>
-
+              {/* Ad Section - Primera vista */}
+              <AdComponent slot={SLOTS[0]} />
               {/* Featured Images */}
               <div className="grid gap-6 md:grid-cols-2">
                 <Image
