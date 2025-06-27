@@ -11,6 +11,7 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-neutral-900 text-neutral-50 hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-200 no-underline',
+        mercadolibre: 'bg-[#FFE600] text-black hover:bg-[#FFE600] no-underline',
         destructive:
           'bg-red-500 text-neutral-50 hover:bg-red-600 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-800 no-underline',
         outline:

@@ -11,6 +11,7 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { LocaleTypes } from '../i18n/settings'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
+import BuyButton from '@/components/BuyButton'
 interface Props {
   params: { locale: LocaleTypes }
 }
@@ -215,6 +216,11 @@ export default function page({ params: { locale } }: Props) {
                 />
               </div>
               <p className="mb-8 text-lg leading-relaxed text-[#737373]">{ui.pageDescription}</p>
+              <BuyButton
+                href="https://mercadolibre.com/sec/33P5StH"
+                eventName="Comprar desde compuertas"
+                text={ui.labels.buy}
+              />
             </header>
 
             {/* Ad Section - Primera vista */}
@@ -369,7 +375,7 @@ export default function page({ params: { locale } }: Props) {
                           </div>
 
                           {/* View Details a */}
-                          <div className="mt-6 flex justify-end">
+                          <div className="mt-6 flex justify-end gap-4">
                             <a
                               href={`/${locale}/compuertas-logicas/${gate.url}`}
                               className="inline-flex items-center rounded-lg border border-[#e5e5e5] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all duration-200 hover:border-[#0070f3] hover:text-[#0070f3] dark:border-[#333333] dark:text-white dark:hover:border-[#0070f3] dark:hover:text-[#0070f3]"
@@ -389,6 +395,11 @@ export default function page({ params: { locale } }: Props) {
                                 />
                               </svg>
                             </a>
+                            <BuyButton
+                              href="https://mercadolibre.com/sec/33P5StH"
+                              eventName={`Comprar desde ${gate.url}`}
+                              text={ui.labels.buy}
+                            />
                           </div>
                         </article>
 

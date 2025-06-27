@@ -45,6 +45,7 @@ export interface UITranslations {
     openMenu: string;
     closeMenu: string;
     closeSidebar: string;
+    buy: string;
   };
   descriptions: {
     datasheet: string;
@@ -111,7 +112,8 @@ export const UI_TRANSLATIONS: Record<LocaleTypes, UITranslations> = {  es: {
       allGates: "Todas las compuertas lógicas",
       openMenu: "Abrir menú de compuertas",
       closeMenu: "Cerrar menú de compuertas",
-      closeSidebar: "Cerrar barra lateral"
+      closeSidebar: "Cerrar barra lateral",
+      buy: "Comprar Ahora"
     },
     descriptions: {
       datasheet: "del circuito integrado contiene información técnica esencial incluyendo diagrama de pines, características eléctricas, tabla de verdad y especificaciones del encapsulado.",
@@ -176,7 +178,8 @@ export const UI_TRANSLATIONS: Record<LocaleTypes, UITranslations> = {  es: {
       allGates: "All gates",
       openMenu: "Open menu",
       closeMenu: "Close menu",
-      closeSidebar: "Close sidebar"
+      closeSidebar: "Close sidebar",
+      buy: "Buy Now"
     },
     descriptions: {
       datasheet: "provides crucial technical information about this integrated circuit, including pin diagram, electrical characteristics and package information.",
@@ -241,7 +244,8 @@ export const UI_TRANSLATIONS: Record<LocaleTypes, UITranslations> = {  es: {
       allGates: "Todas as portas",
       openMenu: "Abrir menu",
       closeMenu: "Fechar menu",
-      closeSidebar: "Fechar barra lateral"
+      closeSidebar: "Fechar barra lateral",
+      buy: "Comprar Ahora"
     },
     descriptions: {
       datasheet: "fornece informações técnicas cruciais sobre este circuito integrado, incluindo diagrama de pinos, características elétricas e informações do encapsulamento.",

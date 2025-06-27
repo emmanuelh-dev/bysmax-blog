@@ -18,6 +18,9 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { SectionContainerWithAds } from '@/components/SectionContainer'
 import { SLOTS } from '@/data/ad-slots'
 import AdComponent from '@/data/AdComponent'
+import BuyButton from '@/components/BuyButton'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const Recommended = dynamic(() => import('@/app/[locale]/Recommended'), {
   ssr: false,
@@ -288,28 +291,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
               <h1 className="mb-4 text-4xl font-semibold tracking-tight text-[#0a0a0a] dark:text-white">
                 {page.heading} {circuitNumber}
               </h1>
-              <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4 dark:border-[#333333] dark:bg-[#1a1a1a]">
-                <p className="text-sm text-[#737373]">
-                  {locale === 'es' ? 'Compuerta' : locale === 'pt' ? 'Porta' : 'Gate'}:{' '}
-                  <span className="font-medium text-[#0a0a0a] dark:text-white">
-                    {page.type.toUpperCase()}
-                  </span>{' '}
-                  | {locale === 'es' ? 'Circuito' : locale === 'pt' ? 'Circuito' : 'Circuit'}:{' '}
-                  <span className="font-medium text-[#0a0a0a] dark:text-white">
-                    {circuitNumber}
-                  </span>{' '}
-                  |{' '}
-                  {locale === 'es'
-                    ? 'Configuración'
-                    : locale === 'pt'
-                      ? 'Configuração'
-                      : 'Configuration'}
-                  :{' '}
-                  <span className="font-medium text-[#0a0a0a] dark:text-white">
-                    {page.configuration}
-                  </span>
-                </p>
-              </div>
+
               <AdComponent slot={SLOTS[0]} />
 
               <section className="mb-12">
@@ -351,13 +333,13 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                         ? `do ${page.heading} ${circuitNumber} fornece informações técnicas completas incluindo diagrama de pinos, características elétricas, tabela de verdade e aplicações típicas do circuito integrado.`
                         : `for ${page.heading} ${circuitNumber} provides complete technical information including pin diagram, electrical characteristics, truth table and typical applications of the integrated circuit.`}
                   </p>{' '}
+                  <div className="flex items-center justify-center gap-4 text-center">
                   {page.pdf && (
-                    <div className="mt-6 text-center">
                       <a
                         href={page.pdf}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-lg bg-[#0070f3] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#0061d5] focus:outline-none focus:ring-2 focus:ring-[#0070f3] focus:ring-offset-2"
+                        className={cn(buttonVariants({ variant: 'default', size: 'default' }))}
                       >
                         <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                           <path
@@ -368,13 +350,40 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                         </svg>
                         {ui.labels.downloadPdf}
                       </a>
-                    </div>
                   )}
+                  <BuyButton
+                    href="https://mercadolibre.com/sec/33P5StH"
+                    eventName={`buy-${page.type.toLowerCase()}-${circuitNumber}`}
+                    text={ui.labels.buy}
+                    />
+                    </div>
+                </div>
+                <div className="mb-6 rounded-lg border border-[#e5e5e5] bg-[#f9f9f9] p-4 dark:border-[#333333] dark:bg-[#1a1a1a]">
+                  <p className="text-sm text-[#737373]">
+                    {locale === 'es' ? 'Compuerta' : locale === 'pt' ? 'Porta' : 'Gate'}:{' '}
+                    <span className="font-medium text-[#0a0a0a] dark:text-white">
+                      {page.type.toUpperCase()}
+                    </span>{' '}
+                    | {locale === 'es' ? 'Circuito' : locale === 'pt' ? 'Circuito' : 'Circuit'}:{' '}
+                    <span className="font-medium text-[#0a0a0a] dark:text-white">
+                      {circuitNumber}
+                    </span>{' '}
+                    |{' '}
+                    {locale === 'es'
+                      ? 'Configuración'
+                      : locale === 'pt'
+                        ? 'Configuração'
+                        : 'Configuration'}
+                    :{' '}
+                    <span className="font-medium text-[#0a0a0a] dark:text-white">
+                      {page.configuration}
+                    </span>
+                  </p>
                 </div>
               </section>
 
               {/* Anuncio después del datasheet */}
-              <AdComponent slot={SLOTS[0]} />
+              <AdComponent slot={SLOTS[1]} />
             </header>
             {/* Featured Datasheet */}
             <section>
@@ -389,7 +398,7 @@ export default async function Page({ params: { locale, slug: slugArray } }: Prop
                 </p>
               </div>
             </section>
-            <AdComponent slot={SLOTS[1]} />
+            <AdComponent slot={SLOTS[2]} />
 
             {/* Main Content Grid */}
             <div className="grid gap-8 lg:grid-cols-2">
