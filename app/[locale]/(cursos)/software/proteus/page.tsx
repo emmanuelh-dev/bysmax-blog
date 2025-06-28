@@ -157,6 +157,12 @@ export default async function Page({ params: { locale } }: PageProps) {
                 {t('downloadNowButton')}
               </a>
               <Link
+                className={buttonVariants({ variant: 'mercadolibre', size: 'lg' })}
+                href="#comment"
+              >
+                Deja tu Comentario
+              </Link>
+              <Link
                 className={buttonVariants({ variant: 'outline', size: 'lg' })}
                 href="#requisitos"
               >
@@ -179,6 +185,25 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </section>
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'VideoObject',
+              name: 'Cómo descargar Proteus 8.12, 8.13 y 8.14 - Instalación paso a paso para estudiantes',
+              description:
+                'Tutorial completo para descargar e instalar Proteus 8.12, 8.13 y 8.14 gratis desde el sitio oficial para estudiantes. Incluye instrucciones claras y sin crack.',
+              thumbnailUrl: 'https://electronica.bysmax.com/path/to/imagen-thumbnail.jpg',
+              uploadDate: '2025-06-28',
+              duration: 'PT2M0S',
+              contentUrl:
+                'https://srbamfyaqxnmjktdaqaq.supabase.co/storage/v1/object/public/cuts-images/descargar-proteus-8-12-13-14-instalacion-tutorial.mp4',
+              embedUrl: 'https://electronica.bysmax.com/software/proteus',
+            }),
+          }}
+        />
+
         <section>
           <div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Galeria</h2>
@@ -186,6 +211,16 @@ export default async function Page({ params: { locale } }: PageProps) {
           </div>
         </section>
         <AdComponent slot={SLOTS[1]} />
+        <video
+          src="https://srbamfyaqxnmjktdaqaq.supabase.co/storage/v1/object/public/cuts-images/descargar-proteus-8-12-13-14-instalacion-tutorial.mp4"
+          controls
+          preload="metadata"
+          title="Cómo descargar Proteus 8.12, 8.13 y 8.14 - Instalación paso a paso para estudiantes"
+          width="100%"
+          style={{ maxWidth: '720px', borderRadius: '12px' }}
+        >
+          Tu navegador no soporta video HTML5.
+        </video>
 
         <section>
           {/* Nueva sección: Contenido rico en palabras clave */}
