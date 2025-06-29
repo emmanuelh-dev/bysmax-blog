@@ -1,26 +1,28 @@
 ---
-title: Complete Guide on Logic Gates 7408, 7432, 7404, 7400, and 7486
+title: Complete Datasheet Guide on Logic Gates 7408, 7432, 7404, 7400, and 7486
 date: 2024-05-27
 tags: ['electronics']
 draft: false
 authors: ['emmanuelhdev']
 language: en
 images: ['/static/images/compuertas.png']
-summary: Have you ever wondered how the electronic devices you use every day work? The answer lies in logic gates.
+summary: Have you ever wondered how the electronic devices you use every day work? The answer lies in logic gates. Complete datasheet guide with specifications.
 ---
 
-## Logic Gate: A Complete Guide on Logic Gates 7408, 7432, 7404, 7400, and 7486
+## Logic Gates: Complete Datasheet Guide for 7408, 7432, 7404, 7400, and 7486
 
-<div className="flex flex-col gap-4 md:flex-row">
+<div className="flex flex-col md:flex-row gap-4">
   <div>
-    ![Complete Guide on Logic Gates 7408, 7432, 7404, 7400, and 7486](/static/images/logic-gates.png)
+    ![Complete Datasheet Guide for Logic Gates 7408, 7432, 7404, 7400, and 7486](/static/images/compuertas.png)
   </div>
   <div>
-   ![Datasheet 7408, 7432, 7404, 7400, and 7486](/static/images/datashet-compuertas.jpg)
+    ![Datasheet 7408, 7432, 7404, 7400, and 7486](/static/images/datashet-compuertas.jpg)
   </div>
 </div>
 
-Have you ever wondered how the electronic devices you use daily work? The answer lies in **logic gates**, the fundamental components in any digital circuit. In this article, we will explore some of the most common logic gates: 7408, 7432, 7404, 7400, and 7486. Understanding these components is crucial for any electronics enthusiast.
+Have you ever wondered how the electronic devices you use daily work? The answer lies in **[logic gates](/en/compuertas-logicas)**, the fundamental components in any digital circuit. In this article, we will explore some of the most common logic gates: 7408, 7432, 7404, 7400, and 7486. Understanding these components is crucial for any electronics enthusiast.
+
+In addition to these main gates, there are also others such as [NOR (7402)](/en/compuertas-logicas/7402), [XNOR (74266)](/en/compuertas-logicas/74266), and [Buffer (7407)](/en/compuertas-logicas/7407), all available in our interactive simulator.
 
 ## What are Logic Gates?
 
@@ -30,7 +32,9 @@ Have you ever wondered how the electronic devices you use daily work? The answer
 
 ### AND Gate (7408)
 
-The **7408 gate** is a 2-input AND gate. For the output of this gate to be high (1), both inputs must be high (1).
+![Datasheet AND Gate 7408 - Integrated Circuit 74LS08](/static/images/74LS08.jpg)
+
+The **[7408 gate](/en/compuertas-logicas/7408)** is a 2-input AND gate. For the output of this gate to be high (1), both inputs must be high (1).
 
 - **Configuration**: 2 inputs and 1 output.
 - **Truth Table**:
@@ -44,7 +48,9 @@ The **7408 gate** is a 2-input AND gate. For the output of this gate to be high 
 
 ### OR Gate (7432)
 
-The **7432 gate** is a 2-input OR gate. The output will be high (1) if at least one of the inputs is high (1).
+![Datasheet OR Gate 7432 - Integrated Circuit 74LS32](/static/images/74LS32.jpg)
+
+The **[7432 gate](/en/compuertas-logicas/7432)** is a 2-input OR gate. The output will be high (1) if at least one of the inputs is high (1).
 
 - **Configuration**: 2 inputs and 1 output.
 - **Truth Table**:
@@ -58,7 +64,9 @@ The **7432 gate** is a 2-input OR gate. The output will be high (1) if at least 
 
 ### NOT Gate (7404)
 
-The **7404 gate** is a NOT gate, also known as an inverter. It has a single input and a single output, inverting the logical state of the input.
+![Datasheet NOT Gate 7404 - Integrated Circuit 74LS04](/static/images/74LS04.jpg)
+
+The **[7404 gate](/en/compuertas-logicas/7404)** is a NOT gate, also known as an inverter. It has a single input and a single output, inverting the logical state of the input.
 
 - **Configuration**: 1 input and 1 output.
 - **Truth Table**:
@@ -70,7 +78,9 @@ The **7404 gate** is a NOT gate, also known as an inverter. It has a single inpu
 
 ### NAND Gate (7400)
 
-The **7400 gate** is a 2-input NAND gate. It is a combination of the AND and NOT gates. The output will be low (0) only when both inputs are high (1).
+![Datasheet NAND Gate 7400 - Integrated Circuit 74LS00](/static/images/74LS00.jpg)
+
+The **[7400 gate](/en/compuertas-logicas/7400)** is a 2-input NAND gate. It is a combination of the AND and NOT gates. The output will be low (0) only when both inputs are high (1).
 
 - **Configuration**: 2 inputs and 1 output.
 - **Truth Table**:
@@ -84,7 +94,9 @@ The **7400 gate** is a 2-input NAND gate. It is a combination of the AND and NOT
 
 ### XOR Gate (7486)
 
-The **7486 gate** is a 2-input XOR gate. The output will be high (1) if only one of the inputs is high (1).
+![Datasheet XOR Gate 7486 - Integrated Circuit 74LS86](/static/images/74LS86.jpg)
+
+The **[7486 gate](/en/compuertas-logicas/7486)** is a 2-input XOR gate. The output will be high (1) if only one of the inputs is high (1).
 
 - **Configuration**: 2 inputs and 1 output.
 - **Truth Table**:
@@ -100,12 +112,14 @@ The **7486 gate** is a 2-input XOR gate. The output will be high (1) if only one
 
 ### Active High and Active Low
 
-Understanding the concept of **active high and active low** is essential when working with logic gates. An active low pin must be connected to a low logic level (0 volts) to be activated, while an active high pin must be connected to a high logic level (3 or 5 volts).
+Understanding the concept of **active high and active low** is essential when working with [logic gates](/en/compuertas-logicas). An active low pin must be connected to a low logic level (0 volts) to be activated, while an active high pin must be connected to a high logic level (3 or 5 volts).
 
 ### Implementation in Integrated Circuits (ICs)
 
-Logic gates are implemented in **integrated circuits (ICs)** to save space and increase efficiency. For example, the 7408 IC contains four 2-input AND gates on a single chip.
+[Logic gates](/en/compuertas-logicas) are implemented in **integrated circuits (ICs)** to save space and increase efficiency. For example, the 7408 IC contains four [AND gates](/en/compuertas-logicas/7408) with two inputs on a single chip.
 
 ### Complex Operations
 
-By combining different logic gates, complex operations can be performed. For example, a flip-flop, which is used to store data, can be built by combining NAND gates.
+By combining different [logic gates](/en/compuertas-logicas), complex operations can be performed. For example, a flip-flop, which is used to store data, can be built by combining [NAND gates](/en/compuertas-logicas/7400).
+
+If you want to **experiment with these gates** and see how they work in practice, you can use our [interactive logic gates simulator](/en/compuertas-logicas) where you can build virtual circuits and observe the behavior of each gate in real time.

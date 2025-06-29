@@ -1,0 +1,125 @@
+---
+title: Guia Completo de Datasheet sobre Portas Lógicas 7408, 7432, 7404, 7400 e 7486
+date: 2024-05-27
+tags: ['eletronica']
+draft: false
+authors: ['emmanuelhdev']
+language: pt
+images: ['/static/images/compuertas.png']
+summary: Você já se perguntou como funcionam os dispositivos eletrônicos que usa todos os dias? A resposta está nas portas lógicas. Guia completo de datasheet com especificações.
+---
+
+## Portas Lógicas: Guia Completo de Datasheet para 7408, 7432, 7404, 7400 e 7486
+
+<div className="flex flex-col md:flex-row gap-4">
+  <div>
+    ![Guia Completo de Datasheet sobre Portas Lógicas 7408, 7432, 7404, 7400 e 7486](/static/images/compuertas.png)
+  </div>
+  <div>
+    ![Datasheet 7408, 7432, 7404, 7400 e 7486](/static/images/datashet-compuertas.jpg)
+  </div>
+</div>
+
+Você já se perguntou como funcionam os dispositivos eletrônicos que usa diariamente? A resposta está nas **[portas lógicas](/pt/compuertas-logicas)**, os componentes fundamentais em qualquer circuito digital. Neste artigo, exploraremos algumas das portas lógicas mais comuns: 7408, 7432, 7404, 7400 e 7486. Compreender estes componentes é crucial para qualquer entusiasta da eletrônica.
+
+Além dessas portas principais, também existem outras como a [NOR (7402)](/pt/compuertas-logicas/7402), [XNOR (74266)](/pt/compuertas-logicas/74266) e [Buffer (7407)](/pt/compuertas-logicas/7407), todas disponíveis em nosso simulador interativo.
+
+## O que são Portas Lógicas?
+
+As **portas lógicas** são blocos básicos da eletrônica digital que realizam operações booleanas sobre uma ou mais entradas binárias para produzir uma saída binária. Estes componentes são essenciais na criação de circuitos digitais complexos e são usados para construir tudo, desde calculadoras até computadores e sistemas de comunicação.
+
+## Portas Lógicas Comuns e suas Características
+
+### Porta AND (7408)
+
+![Datasheet Porta AND 7408 - Circuito Integrado 74LS08](/static/images/74LS08.jpg)
+
+A **[porta 7408](/pt/compuertas-logicas/7408)** é uma porta AND de 2 entradas. Para que a saída desta porta seja alta (1), ambas as entradas devem ser altas (1).
+
+- **Configuração**: 2 entradas e 1 saída.
+- **Tabela de Verdade**:
+
+| Entrada A | Entrada B | Saída |
+| --------- | --------- | ----- |
+| 0         | 0         | 0     |
+| 0         | 1         | 0     |
+| 1         | 0         | 0     |
+| 1         | 1         | 1     |
+
+### Porta OR (7432)
+
+![Datasheet Porta OR 7432 - Circuito Integrado 74LS32](/static/images/74LS32.jpg)
+
+A **[porta 7432](/pt/compuertas-logicas/7432)** é uma porta OR de 2 entradas. A saída será alta (1) se pelo menos uma das entradas for alta (1).
+
+- **Configuração**: 2 entradas e 1 saída.
+- **Tabela de Verdade**:
+
+| Entrada A | Entrada B | Saída |
+| --------- | --------- | ----- |
+| 0         | 0         | 0     |
+| 0         | 1         | 1     |
+| 1         | 0         | 1     |
+| 1         | 1         | 1     |
+
+### Porta NOT (7404)
+
+![Datasheet Porta NOT 7404 - Circuito Integrado 74LS04](/static/images/74LS04.jpg)
+
+A **[porta 7404](/pt/compuertas-logicas/7404)** é uma porta NOT, também conhecida como inversor. Tem uma única entrada e uma saída, invertendo o estado lógico da entrada.
+
+- **Configuração**: 1 entrada e 1 saída.
+- **Tabela de Verdade**:
+
+| Entrada | Saída |
+| ------- | ----- |
+| 0       | 1     |
+| 1       | 0     |
+
+### Porta NAND (7400)
+
+![Datasheet Porta NAND 7400 - Circuito Integrado 74LS00](/static/images/74LS00.jpg)
+
+A **[porta 7400](/pt/compuertas-logicas/7400)** é uma porta NAND de 2 entradas. É uma combinação das portas AND e NOT. A saída será baixa (0) apenas quando ambas as entradas forem altas (1).
+
+- **Configuração**: 2 entradas e 1 saída.
+- **Tabela de Verdade**:
+
+| Entrada A | Entrada B | Saída |
+| --------- | --------- | ----- |
+| 0         | 0         | 1     |
+| 0         | 1         | 1     |
+| 1         | 0         | 1     |
+| 1         | 1         | 0     |
+
+### Porta XOR (7486)
+
+![Datasheet Porta XOR 7486 - Circuito Integrado 74LS86](/static/images/74LS86.jpg)
+
+A **[porta 7486](/pt/compuertas-logicas/7486)** é uma porta XOR de 2 entradas. A saída será alta (1) se apenas uma das entradas for alta (1).
+
+- **Configuração**: 2 entradas e 1 saída.
+- **Tabela de Verdade**:
+
+| Entrada A | Entrada B | Saída |
+| --------- | --------- | ----- |
+| 0         | 0         | 0     |
+| 0         | 1         | 1     |
+| 1         | 0         | 1     |
+| 1         | 1         | 0     |
+
+## Como Funcionam as Portas Lógicas
+
+### Ativo Alto e Ativo Baixo
+
+Compreender o conceito de **ativo alto e ativo baixo** é essencial ao trabalhar com [portas lógicas](/pt/compuertas-logicas). Um pino ativo baixo deve ser conectado a um nível lógico baixo (0 volts) para ser ativado, enquanto um pino ativo alto deve ser conectado a um nível lógico alto (3 ou 5 volts).
+
+### Implementação em Circuitos Integrados (CIs)
+
+As [portas lógicas](/pt/compuertas-logicas) são implementadas em **circuitos integrados (CIs)** para economizar espaço e aumentar a eficiência. Por exemplo, o CI 7408 contém quatro [portas AND](/pt/compuertas-logicas/7408) de duas entradas em um único chip.
+
+### Operações Complexas
+
+Combinando diferentes [portas lógicas](/pt/compuertas-logicas), operações complexas podem ser realizadas. Por exemplo, um flip-flop, que é usado para armazenar dados, pode ser construído combinando [portas NAND](/pt/compuertas-logicas/7400).
+
+Se você quiser **experimentar com essas portas** e ver como funcionam na prática, pode usar nosso [simulador interativo de portas lógicas](/pt/compuertas-logicas) onde você pode construir circuitos virtuais e observar o comportamento de cada porta em tempo real.
